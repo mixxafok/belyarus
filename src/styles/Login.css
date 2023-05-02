@@ -1,0 +1,29 @@
+@media screen and (min-width: 320px) {
+  #child-container{
+    max-width: 320px;
+  }
+}
+
+@media screen and (min-width: 384px) {
+  #child-container{
+    max-width: 380px;
+  }
+}
+
+@media screen and (min-width: 448px) {
+  #child-container{
+    max-width: 444px;
+  }
+}
+
+@media screen and (min-width: 576px) {
+  #child-container{
+    max-width: 572px;
+  }
+}
+
+@media screen and (min-width: 672px) {
+  #child-container{
+    max-width: 668px;
+  }
+}
