@@ -1,9 +1,9 @@
 import React from "react";
 
-export function AdminNodePage(){
+export function OperatorPage(){
   return (
       <div>
-        <h1>AdminNodePage</h1>
+        <h1>OperatorPage</h1>
       </div>
   )
 }

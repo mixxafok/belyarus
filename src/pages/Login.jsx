@@ -3,19 +3,30 @@ import { useNavigate } from 'react-router-dom';
 import "../styles/Login.css";
 
 
-export default function Login() {
+
+export  function Login() {
+  
   const navigateTo = useNavigate();
+
   const [formInput, setFormInput] = useState({
     login: "",
     password: ""
   })
+
   const handleForm = () =>{
     console.log(formInput);
     setFormInput({
       login: "",
       password: ""
     })
-    navigateTo('/UserPage')
+    
+    if (formInput.login === "admin" && formInput.password === "admin") {
+      navigateTo('/AdminSystemPage')
+    }
+    else if (formInput.login === "user" && formInput.password === "user") {
+      navigateTo('/UserPage')
+      }
+      else alert('Неверный логин или пароль')
   }
 
 
@@ -38,6 +49,7 @@ export default function Login() {
                       type="text"
                       className="block w-full px-4 py-2 mt-2  bg-white border rounded-md focus:border-red-600 focus:ring-red-600 focus:outline-none focus:ring-0 focus:ring-opacity-20"
                   />
+               
               </div>
               <div className="mb-2">
                   <label

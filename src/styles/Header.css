@@ -1,0 +1,214 @@
+.user_page{
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  width: 100%;
+  background-image: url('../img/fon1.jpg');
+  box-shadow: inset 100px 50px 50px 100px rgba(168, 165, 165, 0.2);
+  background-size: 100%;
+  
+}
+
+.Header__nav {
+  font-family: Noto sans;
+  margin-left: 1%;
+  margin-top: 3px;
+  float:left;
+  cursor:default;
+ /* border: 1px solid blue;*/
+}
+
+.Header__exit{
+  position: absolute;
+  font-family: Noto sans;
+  font-weight: bold;
+  text-align: end;
+  top: 0;
+  right: 2%;
+  width: 6%;
+  font-size: 3px;
+  transition-duration: 200ms;
+  text-decoration: underline;
+  /* border: 1px solid blue;*/
+}
+
+.Header__exit:hover{
+  cursor:pointer;
+  letter-spacing: 0.025em;
+  transition-duration: 200ms;
+  color: rgba(12, 12, 12, 0.9);
+
+}
+
+.Header__nameUser{
+  font-size: 4px;
+  font-weight: bold;
+}
+
+.Header__ruleUser{
+  font-size: 3px;
+  font-weight:300;
+}
+
+
+.Header__text {
+  position: relative;
+  width: 130px;
+  text-align: center;
+  margin: 0 auto;
+  font-size: 11px;
+  font-family: Montserrat-SemiBold;
+  cursor:default;
+ /* border: 1px solid yellow;*/
+}
+
+
+@media screen and (min-width: 320px) {
+
+.Header__text{
+  font-size: 12px;
+  width: 150px;
+}
+
+  .Header__nameUser{
+    font-size: 7px;
+    font-weight: bold;
+  }
+  
+  .Header__ruleUser{
+    font-size: 6px;
+    font-weight:300;
+  }
+
+  .Header__exit{
+  font-size: 7px;
+  }
+}
+
+@media screen and (min-width: 384px) {
+  .Header__text{
+    font-size: 13px;
+    width: 160px;
+  }
+
+  .Header__nameUser{
+    font-size: 8px;
+    font-weight: bold;
+  }
+  
+  .Header__ruleUser{
+    font-size: 7px;
+    font-weight:300;
+  }
+
+  .Header__exit{
+    font-size: 8px;
+    }
+}
+
+@media screen and (min-width: 448px) {
+  .Header__text{
+    font-size: 14px;
+    width: 200px;
+  }
+
+  .Header__nameUser{
+    font-size: 9px;
+    font-weight: bold;
+  }
+  
+  .Header__ruleUser{
+    font-size: 7px;
+    font-weight:300;
+  }
+
+  .Header__exit{
+    font-size: 9px;
+    }
+}
+
+@media screen and (min-width: 576px) {
+  .Header__text{
+    font-size: 20px;
+    width: 45%;
+  }
+
+  .Header__nameUser{
+    font-size: 12px;
+    font-weight: bold;
+  }
+  
+  .Header__ruleUser{
+    font-size: 10px;
+    font-weight:300;
+  }
+
+  .Header__exit{
+    font-size: 12px;
+    }
+}
+
+@media screen and (min-width: 672px) {
+  .Header__text{
+    font-size: 22px;
+    width: 40%;
+  }
+
+  .Header__nameUser{
+    font-size: 12px;
+    font-weight: bold;
+  }
+  
+  .Header__ruleUser{
+    font-size: 10px;
+    font-weight:300;
+  }
+
+  .Header__exit{
+    font-size: 12px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+  .Header__text{
+    font-size: 24px;
+    width: 35%;
+  }
+
+  .Header__nameUser{
+    font-size: 13px;
+    font-weight: bold;
+  }
+  
+  .Header__ruleUser{
+    font-size: 10px;
+    font-weight:300;
+  }
+
+  .Header__exit{
+    font-size: 13px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+  .Header__text{
+    font-size: 30px;
+    width: 350px;
+  }
+
+  .Header__nameUser{
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .Header__ruleUser{
+    font-size: 12px;
+    font-weight:300;
+  }
+
+  .Header__exit{
+    font-size: 16px;
+    }
+}
