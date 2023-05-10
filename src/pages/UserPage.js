@@ -12,6 +12,7 @@ export default function UserPage(){
   const [col_3, setcol_3] = useState(false)
   const [col_4, setcol_4] = useState(false)
   const [tablehidePOO, setTableHidePOO] = useState(true)
+  const [tablefindfilter, setTableFindFilter] = useState(true)
   const [tablehidePause, setTableHidePause] = useState(true)
   const [tablehideNO, setTableHideNO] = useState(true)
 
@@ -22,6 +23,7 @@ export default function UserPage(){
         setcol_3(false); 
         setcol_4(false);
         setTableHidePOO(!tablehidePOO);
+        setTableFindFilter(true);
         setTableHidePause(true);
         setTableHideNO(true);
   }
@@ -30,6 +32,10 @@ export default function UserPage(){
         setcol_2(!col_2); 
         setcol_3(false); 
         setcol_4(false);
+        setTableHidePOO(true);
+        setTableFindFilter(!tablefindfilter);
+        setTableHidePause(true);
+        setTableHideNO(true);
       }
   else if (cols == 'col3'){
         setcol_1(false); 
@@ -37,6 +43,7 @@ export default function UserPage(){
         setcol_3(!col_3); 
         setcol_4(false);
         setTableHidePOO(true);
+        setTableFindFilter(true);
         setTableHidePause(!tablehidePause);
         setTableHideNO(true);
       }
@@ -46,6 +53,7 @@ export default function UserPage(){
         setcol_3(false); 
         setcol_4(!col_4);
         setTableHidePOO(true);
+        setTableFindFilter(true);
         setTableHidePause(true);
         setTableHideNO(!tablehideNO);
       }

@@ -17,14 +17,14 @@
   transition-duration: 300ms;
   &.act {
   color:green;
-  letter-spacing: 0.010em;
+  letter-spacing: 0.020em;
 }
 }
 
 
 
 .main__span:hover{
-  letter-spacing: 0.010em;
+  letter-spacing: 0.020em;
   transition-duration: 300ms;
 }
 
