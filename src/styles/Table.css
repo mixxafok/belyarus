@@ -1,0 +1,46 @@
+.tablePOO {
+  counter-reset: rowNumber;
+  margin: 0%;
+  margin-top: 1%;
+  border-collapse: collapse;
+  text-align: center;
+  width: 100%;
+  cursor: default;
+  &.hide{
+    display:none;
+  }
+}
+
+ thead td{
+  
+  font-size: 16px;
+  font-family: Montserrat-SemiBold;
+  padding: 8px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #04AA6D;
+  color: white;
+  
+}
+
+.table_span__surname:hover {
+  cursor: pointer;
+  color: rgb(13, 114, 239);
+  text-decoration: underline;
+}
+
+tbody td {
+  counter-increment: rowNumber;
+  content: counter(rowNumber);
+  border: 1px solid #ddd;
+  padding: 8px;
+
+}
+ 
+table tr:nth-child(even){background-color: #f2f2f2;}
+
+table tr:hover {background-color: #ddd;}
+
+
+

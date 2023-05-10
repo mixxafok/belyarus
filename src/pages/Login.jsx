@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "../styles/Login.css";
-
+import {fio} from '../components/FIO.js';
 
 
 export  function Login() {
@@ -16,14 +16,16 @@ export  function Login() {
   const handleForm = () =>{
     console.log(formInput);
     setFormInput({
-      login: "",
-      password: ""
+      login: '',
+      password: ''
     })
-    
+
+  
     if (formInput.login === "admin" && formInput.password === "admin") {
       navigateTo('/AdminSystemPage')
     }
-    else if (formInput.login === "user" && formInput.password === "user") {
+    else if (formInput.login === fio[0].name && formInput.password === fio[0].surname) {
+      
       navigateTo('/UserPage')
       }
       else alert('Неверный логин или пароль')
