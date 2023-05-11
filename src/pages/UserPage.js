@@ -4,7 +4,7 @@ import '../styles/Header.css';
 import '../styles/Table.css';
 import { useNavigate } from 'react-router-dom';
 import {fio} from '../components/FIO.js';
-
+import { FindFilter } from "../components/Filter.js";
 
 export default function UserPage(){
   const [col_1, setcol_1] = useState(false)
@@ -46,6 +46,7 @@ export default function UserPage(){
         setTableFindFilter(true);
         setTableHidePause(!tablehidePause);
         setTableHideNO(true);
+      
       }
  else if ( cols == 'col4') {
         setcol_1(false); 
@@ -179,7 +180,11 @@ let tablePause = fio.map(function(item,index) {
    </table>
         {/*Сформировать отчет в Word*/} 
         {/*Сформировать отчет в Excel*/} 
+
+  { (col_2) ? <FindFilter/> : null}
+
         </main>
+
 
         <footer></footer>
         
