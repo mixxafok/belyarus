@@ -2,12 +2,11 @@ import React, {useState} from "react";
 import {fio} from './FIO.js';
 import '../styles/Table.css';
 import '../styles/Findfilter.css';
+import DatePicker from "react-widgets/DatePicker";
 
 export function FindFilter(){
 
   const [name, setName] = useState('');
-
-  // the search result
   const [foundUsers, setFoundUsers] = useState(fio);
 
   let filt = foundUsers && foundUsers.length > 0 ? (
@@ -59,8 +58,8 @@ export function FindFilter(){
         <label>Имя</label>
         <input
           type="search"
-          value={name}
-          onChange={filter}
+          
+          
           className="input"
           placeholder=""
         />
@@ -70,155 +69,134 @@ export function FindFilter(){
         <label>Отчество</label>
         <input
           type="search"
-          value={name}
-          onChange={filter}
+          
+          
           className="input"
           placeholder=""
         />
         </div>
 
-        <div className="form_input">
+        <div className="form_input_1">
         <label>Номер билета</label>
         <input
           type="search"
-          value={name}
-          onChange={filter}
+          
+          
           className="input"
           placeholder=""
         />
         </div>
 
-        <div className="form_input">
+        <div className="form_input_1">
         <label>Статус билета</label>
         <input
           type="search"
-          value={name}
-          onChange={filter}
+          
+          
           className="input"
           placeholder=""
         />
         </div>
 
-        <div className="form_input">
+        <div className="form_input_combobox">
         <label>Пол</label>
-        <input
-          type="search"
-          value={name}
-          onChange={filter}
-          className="input"
-          placeholder=""
-        />
+        <select  > 
+          <option >Мужской</option>
+          <option>Женский</option>
+        </select>
         </div>
         
-        <div className="form_input">
+        <div className="form_input_date" >
         <label>Дата рождения</label>
-        <input
-          type="search"
-          value={name}
-          onChange={filter}
-          className="input"
-          placeholder=""
-        />
+        <input type="date" min="1923-01-01"/>
         </div>
 
-        <div className="form_input">
+        <div className="form_input_date">
         <label>Дата вступления</label>
-        <input
-          type="search"
-          value={name}
-          onChange={filter}
-          className="input"
-          placeholder=""
-        />
+        <input type="date" min="2023-01-01"/>
         </div>
 
-        <div className="form_input">
+        <div className="form_input_combobox">
         <label>Место вступления</label>
-        <input
-          type="search"
-          value={name}
-          onChange={filter}
-          className="input"
-          placeholder=""
-        />
+        <select   > 
+          <option >Места</option>
+          <option>дополнят</option>
+          <option>...</option>
+        </select>
         </div>
 
-        <div className="form_input">
+        <div className="form_input_combobox">
         <label>Статус членства</label>
-        <input
-          type="search"
-          value={name}
-          onChange={filter}
-          className="input"
-          placeholder=""
-        />
+        <select  > 
+          <option >Действующий член</option>
+          <option>Членство приостановлено</option>
+          <option>Снят с учета</option>
+        </select>
         </div>
 
-        <div className="form_input">
+        <div className="form_input_combobox">
         <label>Место постановки на учет</label>
-        <input
-          type="search"
-          value={name}
-          onChange={filter}
-          className="input"
-          placeholder=""
-        />
+        <select   > 
+          <option >Отделение</option>
+          <option>дополнят</option>
+          <option>...</option>
+        </select>
         </div>
 
-        <div className="form_input">
+        <div className="form_input_combobox">
         <label>Образование</label>
-        <input
-          type="search"
-          value={name}
-          onChange={filter}
-          className="input"
-          placeholder=""
-        />
+        <select > 
+          <option>Общее среднее</option>
+          <option>Профессионально-техническое</option>
+          <option>Среднее специальное</option>
+          <option>Высшее</option>
+        </select>
         </div>
       
-        <div className="form_input">
+        <div className="form_input_combobox">
         <label>Социальная категория</label>
-        <input
-          type="search"
-          value={name}
-          onChange={filter}
-          className="input"
-          placeholder=""
-        />
+        <select  > 
+          <option>Рабочий</option>
+          <option>Служащий</option>
+          <option>Предприниматель</option>
+          <option>Студент</option>
+          <option>Пенсионер</option>
+          <option>Временно неработающий</option>
+        </select>
         </div>
-        <div className="form_input">
+
+        <div className="form_input_combobox">
         <label>Сфера деятельности</label>
-        <input
-          type="search"
-          value={name}
-          onChange={filter}
-          className="input"
-          placeholder=""
-        />
+        <select >
+        <option>Агропромышленный комплекс</option>
+          <option>Архитектура и строительство</option>
+          <option>Государственное управление</option>
+          <option>Жилищно-коммунальное хозяйство</option>
+          <option>...</option>
+        </select>
         </div>
 
-        <div className="form_input">
+        <div className="form_input_combobox">
         <label>Статус в партии</label>
-        <input
-          type="search"
-          value={name}
-          onChange={filter}
-          className="input"
-          placeholder=""
-        />
+        <select >
+          <option>Член БП «Белая Русь»,</option>
+          <option>Председатель первичного отделения БП «Белая Русь»</option>
+          <option>Председатель местного отделения БП «Белая Русь»,</option>
+          <option>Председатель областного/Минского городского отделения БП «Белая Русь»,</option>
+          <option>...</option>
+        </select>
         </div>
 
-        <div className="form_input">
+        <div className="form_input_combobox">
         <label>Избирался ли депутатом</label>
-        <input
-          type="search"
-          value={name}
-          onChange={filter}
-          className="input"
-          placeholder=""
-        />
+        <select >
+          <option>Да</option>
+          <option>Нет</option>
+        </select>
         </div>
     </div>
+
+
 
     <table className={`tablePOO `}> 
     <thead>
