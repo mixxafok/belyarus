@@ -6,8 +6,42 @@ import DatePicker from "react-widgets/DatePicker";
 
 export function FindFilter(){
 
-  const [name, setName] = useState('');
+  const [sidebar, setSidebar]= useState(false);
+  const ShowSidebar = () => setSidebar(!sidebar);
+  
   const [foundUsers, setFoundUsers] = useState(fio);
+  
+  const [formInput, setFormInput] = useState({
+    Surname: '',
+    Name: '',
+    Parent: '',
+    NumBilet: ''
+  })
+
+    const handleForm = () =>{
+      console.log(formInput)
+  
+      if (formInput.Name !== '' || formInput.Surname !== '' || formInput.Parent !== '' || formInput.NumBilet !== '') {
+        const results = fio.filter((result) => {
+         return(result.name.toLowerCase().startsWith(formInput.Name.toLowerCase()) 
+            && result.surname.toLowerCase().startsWith(formInput.Surname.toLowerCase())
+            && result.parent.toLowerCase().startsWith(formInput.Parent.toLowerCase())
+            && result.numBilet.toLowerCase().startsWith(formInput.NumBilet.toLowerCase())
+        )
+        });
+        setFoundUsers(results);
+      } else {
+        setFoundUsers(fio);
+      }
+      setFormInput({
+        Surname: '',
+        Name: '',
+        Parent: '',
+        NumBilet: ''
+      })
+  
+    }
+
 
   let filt = foundUsers && foundUsers.length > 0 ? (
     foundUsers.map((user,index) => (
@@ -25,30 +59,23 @@ export function FindFilter(){
     <h1>No results found!</h1>
   )
 
-  const filter = (e) => {
-    const keyword = e.target.value;
-    if (keyword !== '') {
-      const results = fio.filter((user) => {
-        return (user.surname.toLowerCase().startsWith(keyword.toLowerCase()) 
-        )
-      });
-      setFoundUsers(results);
-    } else {
-      setFoundUsers(fio);
-    }
-    setName(keyword);
-  };
 
   return (
     
-  <div className="">
+  <div className="filter">
+
     <div className="form">
       <div className="form_input_1">
+
+        <div className="Button">
+           <button >Найти</button>
+        </div>
+
       <label>Фамилия</label>
         <input
           type="search"
-          value={name}
-          onChange={filter}
+          onChange={(e) => setFormInput({ ...formInput, Surname: e.target.value })}
+          value={formInput.Surname }
           className="input"
           placeholder=""
         />
@@ -58,8 +85,8 @@ export function FindFilter(){
         <label>Имя</label>
         <input
           type="search"
-          
-          
+          onChange={(e) => setFormInput({ ...formInput, Name: e.target.value })}
+          value={formInput.Name }
           className="input"
           placeholder=""
         />
@@ -69,8 +96,8 @@ export function FindFilter(){
         <label>Отчество</label>
         <input
           type="search"
-          
-          
+          onChange={(e) => setFormInput({ ...formInput, Parent: e.target.value })}
+          value={formInput.parent }
           className="input"
           placeholder=""
         />
@@ -80,8 +107,8 @@ export function FindFilter(){
         <label>Номер билета</label>
         <input
           type="search"
-          
-          
+          onChange={(e) => setFormInput({ ...formInput, NumBilet: e.target.value })}
+          value={formInput.NumBilet }
           className="input"
           placeholder=""
         />
@@ -101,6 +128,7 @@ export function FindFilter(){
         <div className="form_input_combobox">
         <label>Пол</label>
         <select  > 
+          <option ></option>
           <option >Мужской</option>
           <option>Женский</option>
         </select>
@@ -119,6 +147,7 @@ export function FindFilter(){
         <div className="form_input_combobox">
         <label>Место вступления</label>
         <select   > 
+          <option ></option>
           <option >Места</option>
           <option>дополнят</option>
           <option>...</option>
@@ -127,7 +156,8 @@ export function FindFilter(){
 
         <div className="form_input_combobox">
         <label>Статус членства</label>
-        <select  > 
+        <select  >
+          <option ></option> 
           <option >Действующий член</option>
           <option>Членство приостановлено</option>
           <option>Снят с учета</option>
@@ -136,7 +166,8 @@ export function FindFilter(){
 
         <div className="form_input_combobox">
         <label>Место постановки на учет</label>
-        <select   > 
+        <select   >
+          <option ></option>
           <option >Отделение</option>
           <option>дополнят</option>
           <option>...</option>
@@ -145,7 +176,8 @@ export function FindFilter(){
 
         <div className="form_input_combobox">
         <label>Образование</label>
-        <select > 
+        <select >
+          <option ></option> 
           <option>Общее среднее</option>
           <option>Профессионально-техническое</option>
           <option>Среднее специальное</option>
@@ -156,6 +188,7 @@ export function FindFilter(){
         <div className="form_input_combobox">
         <label>Социальная категория</label>
         <select  > 
+          <option ></option>
           <option>Рабочий</option>
           <option>Служащий</option>
           <option>Предприниматель</option>
@@ -168,7 +201,8 @@ export function FindFilter(){
         <div className="form_input_combobox">
         <label>Сфера деятельности</label>
         <select >
-        <option>Агропромышленный комплекс</option>
+          <option ></option>
+          <option>Агропромышленный комплекс</option>
           <option>Архитектура и строительство</option>
           <option>Государственное управление</option>
           <option>Жилищно-коммунальное хозяйство</option>
@@ -179,6 +213,7 @@ export function FindFilter(){
         <div className="form_input_combobox">
         <label>Статус в партии</label>
         <select >
+          <option ></option>
           <option>Член БП «Белая Русь»,</option>
           <option>Председатель первичного отделения БП «Белая Русь»</option>
           <option>Председатель местного отделения БП «Белая Русь»,</option>
@@ -190,6 +225,7 @@ export function FindFilter(){
         <div className="form_input_combobox">
         <label>Избирался ли депутатом</label>
         <select >
+          <option ></option>
           <option>Да</option>
           <option>Нет</option>
         </select>
@@ -197,7 +233,7 @@ export function FindFilter(){
     </div>
 
 
-
+    <div className="table">
     <table className={`tablePOO `}> 
     <thead>
        <tr>
@@ -213,7 +249,8 @@ export function FindFilter(){
     <tbody>
        {filt}
     </tbody>
-    </table> 
+    </table>
+    </div>
   </div>
   )
 }

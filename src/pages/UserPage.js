@@ -129,22 +129,28 @@ let tablePause = fio.map(function(item,index) {
             onClick={()=>{col('col4')}}>Список снятых с учета</span></li>
           </ul>
 
+          <div className={`Otchet ${(tablehidePOO && tablehidePause && tablehideNO) ? 'hide' : ''}`}>
+            <p>Отчет в Word</p>
+            <p>Отчет в Excel</p>
+          </div>
+
+        <div className="tables">
           <table className={`tablePOO ${tablehidePOO ? 'hide' : ''}`}> 
-      <thead>
-         <tr>
-            <td>Номер</td>
-            <td>Фамилия</td>
-            <td>Имя</td>
-            <td>Отчество</td>
-            <td>Номер билета</td>
-            <td>Дата вступления</td>
-            <td>Место постановки на учет</td>
-         </tr>
-      </thead>
-      <tbody>
-         {tablePOO}
-      </tbody>
-   </table>
+            <thead>
+            <tr>
+              <td>Номер</td>
+              <td>Фамилия</td>
+              <td>Имя</td>
+              <td>Отчество</td>
+              <td>Номер билета</td>
+              <td>Дата вступления</td>
+              <td>Место постановки на учет</td>
+            </tr>
+            </thead>
+            <tbody>
+              {tablePOO}
+            </tbody>
+          </table>
 
    <table className={`tablePOO ${tablehidePause ? 'hide' : ''}`}> 
       <thead>
@@ -178,6 +184,7 @@ let tablePause = fio.map(function(item,index) {
          {tableNO}
       </tbody>
    </table>
+   </div>
         {/*Сформировать отчет в Word*/} 
         {/*Сформировать отчет в Excel*/} 
 
