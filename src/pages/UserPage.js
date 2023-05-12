@@ -16,6 +16,8 @@ export default function UserPage(){
   const [tablehidePause, setTableHidePause] = useState(true)
   const [tablehideNO, setTableHideNO] = useState(true)
 
+  const[personcard, setPersoncard] = useState(false)
+
  function col (cols){
   if (cols == 'col1') {
         setcol_1(!col_1); 
@@ -69,7 +71,7 @@ export default function UserPage(){
   let tablePOO = fio.map(function(item,index) {
     return <tr key={item.id}>
       <td> {index+1}</td>
-       <td className="table__surname"><span className="table_span__surname">{item.surname}</span></td>
+       <td className="table__surname"><p onClick={()=>navigateTo('/PersonalCard')} className="table_span__surname">{item.surname}</p></td>
        <td>{item.name}</td>
        <td>{item.parent}</td>
        <td>{item.numBilet}</td>
@@ -105,7 +107,7 @@ let tablePause = fio.map(function(item,index) {
         <header className="Header">
           <div className="Header__nav">
             <p className="Header__nameUser">Темошенко Кирилл Викторович</p> 
-            <p className="Header__ruleUser">Информационный пользователь</p>
+            <p className="Header__ruleUser" >Информационный пользователь</p>
           </div>
          
           <div className="Header__text">
@@ -120,11 +122,11 @@ let tablePause = fio.map(function(item,index) {
         <main>
           <ul className="main__ul">
             <li className="main__li_1"><span className={`main__span ${col_1 ? 'act' : ''}`} 
-            onClick={()=>{col('col1')}}>Список членов РОО "Белая Русь"</span></li>
+            onClick={()=>{col('col1')}}>Список членов партии "Белая Русь"</span></li>
             <li className="main__li_2"><span className={`main__span ${col_2 ? 'act' : ''}`} 
             onClick={()=>{col('col2')}}>Поиск и фильтрация</span></li>
             <li className="main__li_2"><span className={`main__span ${col_3 ? 'act' : ''}`} 
-            onClick={()=>{col('col3')}}>Список приостанвленных членов</span></li>
+            onClick={()=>{col('col3')}}>Список приостановленных членов</span></li>
             <li className="main__li_3"><span className={`main__span ${col_4 ? 'act' : ''}`} 
             onClick={()=>{col('col4')}}>Список снятых с учета</span></li>
           </ul>
@@ -189,7 +191,6 @@ let tablePause = fio.map(function(item,index) {
         {/*Сформировать отчет в Excel*/} 
 
   { (col_2) ? <FindFilter/> : null}
-
         </main>
 
 

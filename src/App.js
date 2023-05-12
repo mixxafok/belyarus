@@ -6,6 +6,7 @@ import { AdminNodePage } from './pages/AdminNodePage';
 import  UserPage  from './pages/UserPage';
 import { OperatorPage } from './pages/OperatorPage';
 import './App.css';
+import { PersonalCard } from './pages/PersonalCard';
 
  const App = () => {
   return (
@@ -17,6 +18,7 @@ import './App.css';
           <Route path='/AdminNodePage' element={<AdminNodePage/>} />
           <Route  path='/UserPage' element={<UserPage/>} />
           <Route path='/OperatorPage' element={<OperatorPage/>} />
+          <Route path='/PersonalCard' element={<PersonalCard/>} />
         </Routes>
       </BrowserRouter>
     </div>

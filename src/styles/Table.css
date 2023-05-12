@@ -1,6 +1,6 @@
 .tablePOO {
   counter-reset: rowNumber;
-  margin: 0%;
+  margin: auto;
   margin-top: 1%;
   border-collapse: collapse;
   text-align: center;
