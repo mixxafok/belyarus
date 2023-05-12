@@ -38,7 +38,7 @@ export function PersonalCard( ){
 
   return (
     <div className="personalCard">
-        <header className="Header">
+        <header className="Header_personal">
           <div className="Header__nav">
             <p className="Header__nameUser">Темошенко Кирилл Викторович</p> 
             <p className="Header__ruleUser" >Информационный пользователь</p>

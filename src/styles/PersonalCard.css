@@ -1,6 +1,7 @@
 .personalCard{
   display: flex;
   flex-direction: column;
+
 }
 
 .PersonalCard_main {
@@ -14,9 +15,14 @@
 }
 
 .div_1{
-  height: 600px;
+  height: 590px;
   width: 50%;
   background-color:black;
+/*  margin-bottom: 3%;
+  margin-left: 5%;
+  margin-right: -3%;*/
+  margin-top: 2%;
+ /* border-radius: 50px;*/
 }
 
 .div_1__Avatar{
@@ -42,6 +48,11 @@
   background-color:rgb(150,170,255);
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
+ /* border-radius: 50px;
+  margin-bottom: 3%;
+  margin-right: 5%;
+    margin-left: -3%;
+  margin-top: 2%;*/
 }
 
 .div_2__ul{

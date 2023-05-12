@@ -3,10 +3,20 @@
   flex-direction: column;
 }
 
-header {
+.header_UserPage {
   width: 100%;
   background-image: url('../img/fon1.jpg');
-  box-shadow: inset 100px 50px 50px 100px rgba(168, 165, 165, 0.4);
+  box-shadow: inset 100px 50px 50px 100px rgba(168, 165, 165, 0.3);
+  background-size: 100%;
+  
+}
+
+.Header_personal {
+  width: 100%;
+ /* background-image: url('../img/fon1.jpg');
+  box-shadow: inset 100px 50px 50px 100px rgba(168, 165, 165, 0.3);*/
+  background-color:rgb(150,170,255);
+  box-shadow: inset 100px 50px 50px 100px rgba(168, 165, 165, 0.9);
   background-size: 100%;
   
 }

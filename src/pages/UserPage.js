@@ -104,7 +104,7 @@ let tablePause = fio.map(function(item,index) {
 
   return (
       <div className="user_page">
-        <header className="Header">
+        <header className="header_UserPage">
           <div className="Header__nav">
             <p className="Header__nameUser">Темошенко Кирилл Викторович</p> 
             <p className="Header__ruleUser" >Информационный пользователь</p>
