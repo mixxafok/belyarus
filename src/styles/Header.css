@@ -6,7 +6,7 @@
 header {
   width: 100%;
   background-image: url('../img/fon1.jpg');
-  box-shadow: inset 100px 50px 50px 100px rgba(168, 165, 165, 0.2);
+  box-shadow: inset 100px 50px 50px 100px rgba(168, 165, 165, 0.4);
   background-size: 100%;
   
 }

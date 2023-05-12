@@ -30,3 +30,8 @@ code {
   font-family: Noto sans-italic;
   src: url("../src/fonts/NotoSans-Italic.ttf");
 }
+
+@font-face {
+  font-family: NeueMachina-Bold;
+  src: url("../src/fonts/NeueMachina-Bold.ttf");
+}

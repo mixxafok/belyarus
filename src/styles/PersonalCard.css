@@ -1,3 +1,54 @@
 .personalCard{
   display: flex;
+  flex-direction: column;
+}
+
+.PersonalCard_main {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  background-color:black;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+}
+
+.div_1{
+  height: 600px;
+  width: 50%;
+  background-color:black;
+}
+
+.div_1__Avatar{
+  border: 1px solid white;
+  margin:  auto ;
+  margin-top: 30%;
+  width: 23.3mm;
+  height: 31mm;
+  object-fit: cover;
+
+}
+
+.div_1__FIO{
+  color: white;
+  text-align: center;
+  font-family: Montserrat-SemiBold;
+  font-size: 16px;
+}
+
+.div_2{
+  height: 590px;
+  width: 50%;
+  background-color:rgb(150,170,255);
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+}
+
+.div_2__ul{
+  font-family: Montserrat-SemiBold;
+  margin-left: 2%;
+}
+
+.span1 {
+color: white;
 }
