@@ -42,7 +42,8 @@
   height: 590px;
   width: 50%;
   background-color:rgb(83,159,97);
-  background-color:rgb(244,244,244);
+  background-color:rgb(0, 0, 0);
+  background-color:rgb(159, 131, 83);
   margin-bottom: 3%;
   margin-left: 5%;
   margin-right: -3%;
@@ -61,7 +62,7 @@
 }
 
 .div_1__FIO{
-  color: black;
+  color: White;
   text-align: center;
   font-family: Montserrat-SemiBold;
   font-size: 16px;
@@ -70,8 +71,9 @@
 .div_2{
   height: 590px;
   width: 50%;
-  background-color:rgb(244,244,244);
   background-color:rgb(83,159,97);
+  background-color:rgb(189, 155, 97)rgb(189, 155, 97);
+   background-color:black; 
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
   border-radius: 50px;
@@ -79,14 +81,16 @@
   margin-right: 5%;
   margin-left: -3%;
   margin-top: 1%;
+  
 }
 
 .div_2__ul{
   font-family: Montserrat-SemiBold;
   margin-left: 3%;
   margin-top: 5%;
+  color:rgb(244,244,244);
 }
 
 .span1 {
-color: rgb(244,244,244);
+color: rgb(159, 131, 83);
 }

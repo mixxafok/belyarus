@@ -6,8 +6,8 @@
   text-align: center;
   align-items:center;
   font-family: Montserrat-SemiBold;
-  color: rgba(0, 0, 255, 0.745);
-  border: 1px solid rgba(4, 4, 211, 0.462);
+  color: black;
+  border: 1px solid rgb(189, 155, 97);
   height: 20px;
   font-size: 5px;
 }
@@ -16,7 +16,7 @@
   cursor:pointer;
   transition-duration: 300ms;
   &.act {
-  color:green;
+  color:rgb(175, 98, 3);
   letter-spacing: 0.020em;
 }
 }
@@ -28,7 +28,7 @@
 
 .main__span:active{
   letter-spacing: 0.020em;
-  color: green;
+  color: rgb(50, 43, 30);
 }
 
 .main__ul li:first-child {

@@ -5,7 +5,7 @@
 
 .header_UserPage {
   width: 100%;
-  background-image: url('../img/fon1.jpg');
+ /* background-image: url('../img/fon3.jpg');*/
   box-shadow: inset 100px 50px 50px 100px rgba(168, 165, 165, 0.3);
   background-size: 100%;
   
@@ -23,9 +23,9 @@
 
 .Header__nav {
   font-family: Noto sans;
-  margin-left: 1%;
-  margin-top: 3px;
-  float:left;
+  margin-right: 1%;
+  margin-top:2px;
+  float:right;
   cursor:default;
  /* border: 1px solid blue;*/
 }
@@ -34,10 +34,12 @@
   position: absolute;
   font-family: Noto sans;
   font-weight: bold;
-  text-align: end;
+  text-align: start;
   top: 0;
-  right: 2%;
+  margin-top: 3%;
   width: 6%;
+  right: -2%;
+  margin-top: 4%;
   font-size: 3px;
   transition-duration: 200ms;
   text-decoration: underline;

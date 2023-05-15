@@ -67,7 +67,7 @@ export function FindFilter(){
     <div className="form">
       <div className="form_input_1">
 
-        <div className="Button">
+        <div className="Button" onClick={()=>handleForm()}>
            <button >Найти</button>
         </div>
 
