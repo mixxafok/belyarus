@@ -4,10 +4,10 @@ function Icon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="158.766"
-      height="163.17"
+      width="100"
+      height="100"
       version="1.1"
-      viewBox="0 0 158.766 163.17"
+      viewBox="0 0 160 160"
     >
       <defs>
         <clipPath id="clipPath1140" clipPathUnits="userSpaceOnUse">

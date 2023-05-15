@@ -7,6 +7,8 @@ import {fio} from '../components/FIO.js';
 import { FindFilter } from "../components/Filter.js";
 import '../styles/PersonalCard.css';
 import {PersonalCard} from '../pages/PersonalCard';
+import Icon from '../icons/partIcon.js';
+
 
 export default function UserPage(){
   const [col_1, setcol_1] = useState(false)
@@ -109,18 +111,22 @@ let tablePause = fio.map(function(item,index) {
   return (
       <div className="user_page">
         <header className="header_UserPage">
-          <div className="Header__nav">
-            <p className="Header__nameUser">Темошенко Кирилл Викторович</p> 
-            <p className="Header__ruleUser" >Информационный пользователь</p>
-          </div>
-         
+
+        <div className="ICON"> <Icon height="20px" width="20px"/></div>
+
+          
+
           <div className="Header__text">
            <p className="Header__text_2">Белорусская партия «Белая Русь»</p> 
           </div>
 
-          <div className="Header__exit" onClick={()=> Exit()}>
-           Выход 
+          <div className="Header__nav">
+            <p className="Header__nameUser">Темошенко Кирилл Викторович</p> 
+            <p className="Header__ruleUser" >Информационный пользователь</p>
+            <p className="Header__exit" onClick={()=> Exit()}>Выход  </p>
           </div>
+      
+          
         </header>
 
         <main>

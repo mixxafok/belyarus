@@ -3,7 +3,11 @@
   flex-direction: column;
 }
 
+
+
 .header_UserPage {
+  display: flex;
+  flex-direction: row;
   width: 100%;
  /* background-image: url('../img/fon3.jpg');*/
   box-shadow: inset 100px 50px 50px 100px rgba(168, 165, 165, 0.3);
@@ -21,28 +25,31 @@
   
 }
 
+.ICON{
+  margin-top: 2px;
+  margin-left: 1%;
+
+}
+
 .Header__nav {
   font-family: Noto sans;
   margin-right: 1%;
   margin-top:2px;
-  float:right;
+
   cursor:default;
  /* border: 1px solid blue;*/
+
 }
 
 .Header__exit{
-  position: absolute;
-  font-family: Noto sans;
+  display: flex;
+
   font-weight: bold;
-  text-align: start;
-  top: 0;
-  margin-top: 3%;
-  width: 6%;
-  right: -2%;
-  margin-top: 4%;
-  font-size: 3px;
   transition-duration: 200ms;
   text-decoration: underline;
+  margin-top: 10%;
+
+  justify-content: end;
   /* border: 1px solid blue;*/
 }
 
@@ -75,6 +82,7 @@
   cursor:default;
  /* border: 1px solid yellow;*/
 }
+
 
 
 @media screen and (min-width: 320px) {
