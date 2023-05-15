@@ -114,8 +114,6 @@ let tablePause = fio.map(function(item,index) {
 
         <div className="ICON"> <Icon height="20px" width="20px"/></div>
 
-          
-
           <div className="Header__text">
            <p className="Header__text_2">Белорусская партия «Белая Русь»</p> 
           </div>
