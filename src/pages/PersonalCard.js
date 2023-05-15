@@ -5,13 +5,7 @@ import {fio} from '../components/FIO.js';
 import '../styles/PersonalCard.css';
 import '../styles/Header.css';
 
-export function PersonalCard( ){
-
-  const navigateTo = useNavigate();
-  function Exit(){
-    if (window.confirm('Вы точно хотите выйти?'))
-      navigateTo('/UserPage');
-  };
+export function PersonalCard({setPersoncard} ){
 
 
   let uli = fio.filter((tem) => {return tem.id == 1 }).map((item) => {
@@ -37,35 +31,17 @@ export function PersonalCard( ){
 
 
   return (
-    <div className="personalCard">
-        <header className="Header_personal">
-          <div className="Header__nav">
-            <p className="Header__nameUser">Темошенко Кирилл Викторович</p> 
-            <p className="Header__ruleUser" >Информационный пользователь</p>
-          </div>
-         
-          <div className="Header__text">
-           <p className="Header__text_2">Белорусская партия «Белая Русь»</p> 
-          </div>
-
-          <div className="Header__exit" onClick={()=> Exit()}>
-           Выход 
-          </div>
-        </header>
-
-        <main className="PersonalCard_main">
-          <div className="div_1">
-          
+      <main className="PersonalCard_main">
+        <div className="div_1">
+          <p className="cancel" onClick={()=>setPersoncard()}>X</p>
           <img src={Avatar} className="div_1__Avatar" alt="no img" width='23.3mm' height='31mm'></img>
           <div className="div_1__FIO">ТЕМОШЕНКО Кирилл Викторович</div>
-          </div>
+        </div>
 
-          <div className="div_2">
-          <h1>2</h1>
+        <div className="div_2">
           {uli}
-          </div>
+        </div>
 
-        </main>
-    </div>
+      </main>
   )
 }

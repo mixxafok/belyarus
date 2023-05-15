@@ -5,9 +5,8 @@ import '../styles/Table.css';
 import { useNavigate } from 'react-router-dom';
 import {fio} from '../components/FIO.js';
 import { FindFilter } from "../components/Filter.js";
-import Avatar from '../img/ava.png';
 import '../styles/PersonalCard.css';
-import { withTheme } from "@emotion/react";
+import {PersonalCard} from '../pages/PersonalCard';
 
 export default function UserPage(){
   const [col_1, setcol_1] = useState(false)
@@ -20,29 +19,6 @@ export default function UserPage(){
   const [tablehideNO, setTableHideNO] = useState(true)
 
   const[personcard, setPersoncard] = useState(false)
-
-  let uli = fio.filter((tem) => {return tem.id == 1 }).map((item) => {
-    return <ul className="div_2__ul">
-       <li>Номер партийного билета: <span className="span1">{item.numBilet}</span> </li>
-       <li>Дата выдачи билета: {item.dateStart}</li>
-       <li>Статус билета: {item.statusBilet}</li>
-       <li>Пол: {item.sex}</li>
-       <li>Дата рождения: {item.dateBirth}</li>
-       <li>Дата вступления: {item.dateStart}</li>
-       <li>Место вступления: {item.placeIssue}</li>
-       <li>Статус членства: {item.statusMember}</li>
-       <li>Место постановки на учет: {item.place}</li>
-       <li>Образование: {item.education}</li>
-       <li>Социальная категория: {item.socialGroup}</li>
-       <li>Сфера деятельности: {item.sphereActivity}</li>
-       <li>Место работы, должность: {item.placeJob}</li>
-       <li>Статус в партии: {item.statusPart}</li>
-       <li>Избирался ли депутатом: {item.deputat}</li>
-       <li>Контактная информация: {item.contact}</li>
-    </ul>
-  });
-
-
 
 
  function col (cols){
@@ -98,7 +74,7 @@ export default function UserPage(){
   let tablePOO = fio.map(function(item,index) {
     return <tr key={item.id}>
       <td> {index+1}</td>
-       <td className="table__surname"><p  onClick={()=>{ setPersoncard(!personcard) /*navigateTo('/PersonalCard')*/}} className="table_span__surname">{item.surname}</p></td>
+       <td className="table__surname"><p  onClick={()=>{ setPersoncard(!personcard) }} className="table_span__surname">{item.surname}</p></td>
        <td>{item.name}</td>
        <td>{item.parent}</td>
        <td>{item.numBilet}</td>
@@ -110,7 +86,7 @@ export default function UserPage(){
  let tableNO = fio.map(function(item,index) {
   return <tr key={item.id}>
     <td> {index+1}</td>
-     <td className="table__surname"><span className="table_span__surname">{item.surname}</span></td>
+     <td className="table__surname"><p onClick={()=>{ setPersoncard(!personcard)}} className="table_span__surname">{item.surname}</p></td>
      <td>{item.name}</td>
      <td>{item.parent}</td>
      <td>{item.dateFinish}</td>
@@ -120,7 +96,7 @@ export default function UserPage(){
 let tablePause = fio.map(function(item,index) {
   return <tr key={item.id}>
     <td> {index+1}</td>
-     <td className="table__surname"><span className="table_span__surname">{item.surname}</span></td>
+     <td className="table__surname"><p onClick={()=>{ setPersoncard(!personcard)}} className="table_span__surname">{item.surname}</p></td>
      <td>{item.name}</td>
        <td>{item.parent}</td>
        <td>{item.numBilet}</td>
@@ -128,6 +104,7 @@ let tablePause = fio.map(function(item,index) {
        <td>{item.datePause}</td>
   </tr>
 });
+
 
   return (
       <div className="user_page">
@@ -163,20 +140,7 @@ let tablePause = fio.map(function(item,index) {
             <p>Отчет в Excel</p>
           </div>
 
-
-          <div className={`PersonalCard_main ${personcard ? '' : 'hide' }`}>
-              <div className="div_1">
-              <p  onClick={()=>{setPersoncard(!personcard)}} className="cancel">X</p>
-              <img src={Avatar} className="div_1__Avatar" alt="no img" width='23.3mm' height='31mm'></img>
-              <div className="div_1__FIO">ТЕМОШЕНКО Кирилл Викторович</div>
-              </div>
-
-              <div className="div_2">
-              <h1>2</h1>
-              {uli}
-              </div>
-          </div>
-
+        {personcard ? <PersonalCard setPersoncard={setPersoncard}/> : null}
 
         <div className="tables">
           <table className={`tablePOO ${tablehidePOO ? 'hide' : ''}`}> 
@@ -196,47 +160,43 @@ let tablePause = fio.map(function(item,index) {
             </tbody>
           </table>
 
-   <table className={`tablePOO ${tablehidePause ? 'hide' : ''}`}> 
-      <thead>
-         <tr>
-            <td>Номер</td>
-            <td>Фамилия</td>
-            <td>Имя</td>
-            <td>Отчество</td>
-            <td>Номер билета</td>
-            <td>Дата вступления</td>
-            <td>Дата приостановления</td>
-         </tr>
-      </thead>
-      <tbody>
-         {tablePause}
-      </tbody>
-   </table>
+         <table className={`tablePOO ${tablehidePause ? 'hide' : ''}`}> 
+            <thead>
+               <tr>
+                  <td>Номер</td>
+                  <td>Фамилия</td>
+                  <td>Имя</td>
+                  <td>Отчество</td>
+                  <td>Номер билета</td>
+                  <td>Дата вступления</td>
+                  <td>Дата приостановления</td>
+               </tr>
+            </thead>
+            <tbody>
+               {tablePause}
+            </tbody>
+         </table>
 
 
-   <table className={`tablePOO ${tablehideNO ? 'hide' : ''}`}> 
-      <thead>
-         <tr>
-            <td>Номер</td>
-            <td>Фамилия</td>
-            <td>Имя</td>
-            <td>Отчество</td>
-            <td>Дата снятия с учета</td>
-         </tr>
-      </thead>
-      <tbody>
-         {tableNO}
-      </tbody>
-   </table>
-   </div>
-        {/*Сформировать отчет в Word*/} 
-        {/*Сформировать отчет в Excel*/} 
+         <table className={`tablePOO ${tablehideNO ? 'hide' : ''}`}> 
+            <thead>
+               <tr>
+                  <td>Номер</td>
+                  <td>Фамилия</td>
+                  <td>Имя</td>
+                  <td>Отчество</td>
+                  <td>Дата снятия с учета</td>
+               </tr>
+            </thead>
+            <tbody>
+               {tableNO}
+            </tbody>
+         </table>
+         </div>
 
-  { (col_2) ? <FindFilter/> : null}
+          { (col_2) ? <FindFilter/> : null}
+
         </main>
-
-
-        <footer></footer>
         
       </div>
   )
