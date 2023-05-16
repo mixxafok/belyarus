@@ -24,6 +24,9 @@ export  function Login() {
     if (formInput.login === "admin" && formInput.password === "admin") {
       navigateTo('/AdminSystemPage')
     }
+    if (formInput.login === "oper" && formInput.password === "oper") {
+      navigateTo('/OperatorPage')
+    }
     else if (formInput.login === fio[0].name && formInput.password === fio[0].surname) {
       
       navigateTo('/UserPage')

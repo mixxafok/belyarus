@@ -82,6 +82,7 @@
   margin-left: -3%;
   margin-top: 1%;
   color:aquamarine;
+  
 }
 
 .div_2__ul{
@@ -89,8 +90,26 @@
   margin-left: 3%;
   margin-top: 5%;
   color:rgb(244,244,244);
+  cursor: default;
 }
 
+.div_2__edit {
+  font-family: Montserrat-SemiBold;
+  font-size: 14px;
+  margin-left: 3%;
+  margin-top: 20%;
+  text-align: center;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: 200ms;
+}
+
+.div_2__edit:hover {
+  transition: 200ms;
+  color:rgb(218, 173, 83);
+  font-size: 15px;
+  
+}
 .span1 {
 color: rgb(218, 173, 83);
 }

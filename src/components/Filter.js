@@ -2,13 +2,12 @@ import React, {useState} from "react";
 import {fio} from './FIO.js';
 import '../styles/Table.css';
 import '../styles/Findfilter.css';
-import DatePicker from "react-widgets/DatePicker";
+import {PersonalCard} from '../pages/PersonalCard';
 
 export function FindFilter(){
 
-  const [sidebar, setSidebar]= useState(false);
-  const ShowSidebar = () => setSidebar(!sidebar);
-  
+
+  const[personcard, setPersoncard] = useState(false)
   const [foundUsers, setFoundUsers] = useState(fio);
   
   const [formInput, setFormInput] = useState({
@@ -47,7 +46,7 @@ export function FindFilter(){
     foundUsers.map((user,index) => (
       <tr key={user.id}>
       <td> {index+1}</td>
-       <td className="table__surname"><span className="table_span__surname">{user.surname}</span></td>
+       <td className="table__surname"><p onClick={()=>{ setPersoncard(!personcard)}} className="table_span__surname">{user.surname}</p></td>
        <td>{user.name}</td>
          <td>{user.parent}</td>
          <td>{user.numBilet}</td>
@@ -97,7 +96,7 @@ export function FindFilter(){
         <input
           type="search"
           onChange={(e) => setFormInput({ ...formInput, Parent: e.target.value })}
-          value={formInput.parent }
+          value={formInput.Parent }
           className="input"
           placeholder=""
         />
@@ -231,7 +230,7 @@ export function FindFilter(){
         </select>
         </div>
     </div>
-
+    {personcard ? <PersonalCard setPersoncard={setPersoncard}/> : null}
 
     <div className="table">
     <table className={`tablePOO `}> 
@@ -250,6 +249,7 @@ export function FindFilter(){
        {filt}
     </tbody>
     </table>
+
     </div>
   </div>
   )
