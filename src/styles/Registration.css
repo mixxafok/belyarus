@@ -1,37 +1,21 @@
+.registration {
 
-.filter {
-  display: flex;
-  flex-flow: row-reverse ;
-  flex-grow: 1;
-  flex-shrink: 0;
-  width: 100%;
-  height: 100%;
-  margin-bottom: 2%;
-  
+  width: 70%;
+  margin: auto;
+ margin-left: 2%;
+ padding: 0 0 2% 5%;
+ backdrop-filter: blur(2px);
 }
 
-.form {
-  width: 25%;
-  border-left: 1px solid rgb(88, 85, 85);
-  padding-right: 1%;
-  padding-bottom: 1%;
-  padding-left: 0.5%;
-  background-color: rgba(215, 211, 211, 0.435);
-  backdrop-filter: blur(2px);
-  flex-grow: 1;
-  flex-shrink: 0;
+.file {
+  font-size: 12px;
 }
 
-.table {
-  width: 75%;
-  margin-top: 0.5%;
-  margin-right: 1%;
-  padding-left: 1%;
-}
-
-.input {
+.reg__input {
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
+  width: 50%;
   height: calc(1.8rem + 2px);
   padding: 0.375rem 0.75rem;
   font-family: inherit;
@@ -40,11 +24,11 @@
   line-height: 1.5;
   color: #212529;
   background-color: #fff;
- background-clip: padding-box;
+  background-clip: padding-box;
   border: 1px solid #bdbdbd;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  width: 100%;
+  
 }
 
 .input:focus {
@@ -62,34 +46,20 @@ label {
   margin-bottom: 0.25rem;
 }
 
-/*
-.form_input{
 
-  display: flex;
-  flex-direction: row;
-  justify-content:baseline;
-  margin-left: 1%;
-  padding-top: 0;
-  margin-top: 1%;
-  background-color: #fff;
-  outline-color: #bdbdba;
-}
-*/
-
-.form_input_1{
-  
+.reg__form_input_1{
+  width: 100%;
   display: flex;
   flex-direction: column;
-
-  width: 100%;
+  justify-content:baseline;
   margin-left: 1%;
   padding-top: 0;
   margin-top: 1%;
   border-color: #bdbdba;
 }
 
-.form_input_combobox{
-  width: 100%;
+.reg__form_input_combobox{
+  width: 50%;
   display: flex;
   flex-direction: column;
   justify-content:baseline;
@@ -135,8 +105,8 @@ input[type=date]{
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-.form_input_date {
-  width: 50%;
+.reg__form_input_date {
+  width: 30%;
   display: flex;
   flex-direction: column;
   justify-content:baseline;
@@ -145,7 +115,7 @@ input[type=date]{
   margin-top: 1%;
 }
 
-.Button{
+.reg__Button{
   background-color:rgba(218, 173, 83, 0.746);
   width: 25%;
   border-radius: 8px;
@@ -154,7 +124,7 @@ input[type=date]{
   text-align: center;
 }
 
-.Button:active {
+.reg__Button:active {
   box-shadow:0px 0px 2px 1px black;
     opacity: 1;
     transition: 30ms;

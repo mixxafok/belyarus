@@ -1,18 +1,25 @@
 
 .oper_page{
   background-image: url('../img/back4.jpg');
+
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
+  background-size:cover;
 
-  box-shadow: inset 220px 100px 100px 100px rgba(168, 165, 165, 0.6);
+ /* box-shadow: inset 220px 20px 90px 60px rgba(168, 165, 165, 0.6);*/
   background-repeat: no-repeat;
 }
 
 .oper_page main {
   display: flex;
+ /* backdrop-filter: blur(0.8px);*/
+}
 
+.reg__img{
+  width: 23.3mm;
+  height: 31mm;
+  object-fit: cover;
 }
 
 .oper_page .main__ul {
@@ -45,6 +52,9 @@
   color:rgb(175, 98, 3);
   letter-spacing: 0.020em;
 }
+  &.hide {
+    display: none;
+  }
 }
 
 .oper_page .main__span:hover{
@@ -82,6 +92,12 @@
  .oper_page  .main__ul li:nth-child(5) {
   width: 100%;
   margin-top: 5%;
+  /* border: 1px solid green;*/
+ }
+ .oper_page  .main__ul li:nth-child(6) {
+  width: 100%;
+  margin-top: 5%;
+  color:brown;
   /* border: 1px solid green;*/
  }
 

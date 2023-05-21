@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import {fio} from '../components/FIO.js';
-import { FindFilter } from "../components/Filter.js";
-import {PersonalCardEdit} from '../pages/PersonalCardEdit';
+import { FindFilter } from "../components/FindFilter.js";
+import {PersonalCardEdit} from '../components/PersonalCardEdit';
 import Icon from '../icons/partIcon.js';
+import {Registration} from '../components/Registration.js';
+import {EditCard} from '../components/EditCard.js';
 import '../styles/OperatorPage.css';
 import '../styles/Header.css';
 import '../styles/Table.css';
@@ -16,6 +18,7 @@ export function OperatorPage(){
   const [col_3, setcol_3] = useState(false)
   const [col_4, setcol_4] = useState(false)
   const [col_5, setcol_5] = useState(false)
+  const [col_6, setcol_6] = useState(false)
   const [tablehidePOO, setTableHidePOO] = useState(true)
   const [tablefindfilter, setTableFindFilter] = useState(true)
   const [tablehidePause, setTableHidePause] = useState(true)
@@ -30,10 +33,12 @@ export function OperatorPage(){
           setcol_3(false); 
           setcol_4(false);
           setcol_5(false);
+          setcol_6(false);
           setTableHidePOO(!tablehidePOO);
           setTableFindFilter(true);
           setTableHidePause(true);
           setTableHideNO(true);
+          fetchPOO();
     }
    else if (cols == 'col2'){
           setcol_1(false); 
@@ -41,10 +46,12 @@ export function OperatorPage(){
           setcol_3(false); 
           setcol_4(false);
           setcol_5(false);
+          setcol_6(false);
           setTableHidePOO(true);
           setTableFindFilter(!tablefindfilter);
           setTableHidePause(true);
           setTableHideNO(true);
+          fetchPOO(); // подгрузка таблицы РОО
         }
     else if (cols == 'col3'){
           setcol_1(false); 
@@ -52,10 +59,12 @@ export function OperatorPage(){
           setcol_3(!col_3); 
           setcol_4(false);
           setcol_5(false);
+          setcol_6(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(!tablehidePause);
           setTableHideNO(true);
+          fetchPause();
         
         }
     else if ( cols == 'col4') {
@@ -64,10 +73,12 @@ export function OperatorPage(){
           setcol_3(false); 
           setcol_4(!col_4);
           setcol_5(false);
+          setcol_6(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(true);
           setTableHideNO(!tablehideNO);
+          fetchNO();
         }
     else if ( cols == 'col5') {
       setcol_1(false); 
@@ -75,6 +86,19 @@ export function OperatorPage(){
       setcol_3(false); 
       setcol_4(false);
       setcol_5(!col_5);
+      setcol_6(false);
+      setTableHidePOO(true);
+      setTableFindFilter(true);
+      setTableHidePause(true);
+      setTableHideNO(true);
+    }
+    else if ( cols == 'col6') {
+      setcol_1(false); 
+      setcol_2(false); 
+      setcol_3(false); 
+      setcol_4(false);
+      setcol_5(false);
+      setcol_6(!col_6);
       setTableHidePOO(true);
       setTableFindFilter(true);
       setTableHidePause(true);
@@ -88,7 +112,36 @@ export function OperatorPage(){
        navigateTo('/');
    };
  
-   let tablePOO = fio.map(function(item,index) {
+
+   const [b,setb] = useState([])
+   //добавил
+   const fetchPOO = async ()=>{
+     const response = await fetch("http://localhost:5140/UserPage/tablePOO/", {
+       method: "get",
+     });
+     let q = await response.json();
+     await setb(q);
+   };
+
+   const fetchNO = async ()=>{
+     const response = await fetch("http://localhost:5140/UserPage/tableNO/", {
+       method: "get",
+     });
+     let q = await response.json();
+     await setb(q);
+   };
+
+   const fetchPause = async ()=>{
+     const response = await fetch("http://localhost:5140/UserPage/tablePause/", {
+       method: "get",
+     });
+     let q = await response.json();
+     await setb(q);
+   };
+//добавил
+
+
+   let tablePOO = b.map(function(item,index) {
      return <tr key={item.id}>
        <td> {index+1}</td>
         <td className="table__surname"><p  onClick={()=>{ setPersoncardEdit(!personcardEdit) }} className="table_span__surname">{item.surname}</p></td>
@@ -100,7 +153,7 @@ export function OperatorPage(){
      </tr>
   });
  
-  let tableNO = fio.map(function(item,index) {
+  let tableNO = b.map(function(item,index) {
    return <tr key={item.id}>
      <td> {index+1}</td>
       <td className="table__surname"><p onClick={()=>{ setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
@@ -110,7 +163,7 @@ export function OperatorPage(){
    </tr>
  });
  
- let tablePause = fio.map(function(item,index) {
+ let tablePause = b.map(function(item,index) {
    return <tr key={item.id}>
      <td> {index+1}</td>
       <td className="table__surname"><p onClick={()=>{ setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
@@ -147,18 +200,20 @@ export function OperatorPage(){
         onClick={()=>{col('col1')}}>Список членов партии "Белая Русь"</span></li>
         <li className="main__li_2"><span className={`main__span ${col_2 ? 'act' : ''}`} 
         onClick={()=>{col('col2')}}>Поиск и фильтрация</span></li>
-        <li className="main__li_2"><span className={`main__span ${col_3 ? 'act' : ''}`} 
+        <li className="main__li_3"><span className={`main__span ${col_3 ? 'act' : ''}`} 
         onClick={()=>{col('col3')}}>Список приостановленных членов</span></li>
-        <li className="main__li_3"><span className={`main__span ${col_4 ? 'act' : ''}`} 
+        <li className="main__li_4"><span className={`main__span ${col_4 ? 'act' : ''}`} 
         onClick={()=>{col('col4')}}>Список снятых с учета</span></li>
-        <li className="main__li_4"><span className={`main__span ${col_5 ? 'act' : ''}`} 
+        <li className="main__li_5"><span className={`main__span ${col_5 ? 'act' : ''}`} 
         onClick={()=>{col('col5')}}>Зарегистрировать члена партии</span></li>
+        <li className="main__li_6"><span className={`main__span ${col_6 ? '' : 'hide'}`} 
+        onClick={()=>{col('col6')}}>Режим редактирования учетной карточки</span></li>
       </ul>
       </div>
 
 
 
-    {personcardEdit ? <PersonalCardEdit setPersoncardEdit ={setPersoncardEdit}/> : null}
+    {personcardEdit ? <PersonalCardEdit setPersoncardEdit ={setPersoncardEdit} col={col} /> : null}
 
     <div className="tables">
 
@@ -216,7 +271,9 @@ export function OperatorPage(){
            {tableNO}
         </tbody>
      </table>
-     { (col_2) ? <FindFilter/> : null}
+     { (col_2) ? <FindFilter b={b}/> : null}
+     { (col_5) ? <Registration/> : null}
+     { (col_6) ? <EditCard/> : null}
      </div>
 
 

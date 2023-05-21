@@ -4,9 +4,9 @@ import '../styles/Header.css';
 import '../styles/Table.css';
 import { useNavigate } from 'react-router-dom';
 import {fio} from '../components/FIO.js';
-import { FindFilter } from "../components/Filter.js";
+import { FindFilter } from "../components/FindFilter.js";
 import '../styles/PersonalCard.css';
-import {PersonalCard} from '../pages/PersonalCard';
+import {PersonalCard} from '../components/PersonalCard';
 import Icon from '../icons/partIcon.js';
 
 

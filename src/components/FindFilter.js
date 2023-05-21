@@ -2,13 +2,13 @@ import React, {useState} from "react";
 import {fio} from './FIO.js';
 import '../styles/Table.css';
 import '../styles/Findfilter.css';
-import {PersonalCard} from '../pages/PersonalCard';
+import {PersonalCard} from './PersonalCard.js';
 
-export function FindFilter(){
+export function FindFilter({b}){
 
 
   const[personcard, setPersoncard] = useState(false)
-  const [foundUsers, setFoundUsers] = useState(fio);
+  const [foundUsers, setFoundUsers] = useState(b);
   
   const [formInput, setFormInput] = useState({
     Surname: '',
@@ -21,7 +21,7 @@ export function FindFilter(){
       console.log(formInput)
   
       if (formInput.Name !== '' || formInput.Surname !== '' || formInput.Parent !== '' || formInput.NumBilet !== '') {
-        const results = fio.filter((result) => {
+        const results = b.filter((result) => {
          return(result.name.toLowerCase().startsWith(formInput.Name.toLowerCase()) 
             && result.surname.toLowerCase().startsWith(formInput.Surname.toLowerCase())
             && result.parent.toLowerCase().startsWith(formInput.Parent.toLowerCase())
@@ -30,7 +30,7 @@ export function FindFilter(){
         });
         setFoundUsers(results);
       } else {
-        setFoundUsers(fio);
+        setFoundUsers(b);
       }
       setFormInput({
         Surname: '',
@@ -55,7 +55,7 @@ export function FindFilter(){
     </tr>
     ))
   ) : (
-    <h1>No results found!</h1>
+    <h1>Результаты не найдены!</h1>
   )
 
 

@@ -1,9 +1,13 @@
 import React, {useState} from "react";
 import Avatar from '../img/ava.png';
-import {fio} from '../components/FIO.js';
-import '../styles/PersonalCard.css';
+import {fio} from './FIO.js';
+import '../styles/PersonalCardEdit.css';
 
-export function PersonalCard({setPersoncard} ){
+
+export function PersonalCardEdit({setPersoncardEdit,col, chosenUser} ){
+
+
+
 
   let uli = fio.filter((tem) => {return tem.id == 1 }).map((item) => {
     return <ul className="div_2__ul">
@@ -22,7 +26,12 @@ export function PersonalCard({setPersoncard} ){
        <li>Место работы, должность: {item.placeJob}</li>
        <li>Статус в партии: {item.statusPart}</li>
        <li>Избирался ли депутатом: {item.deputat}</li>
-       <li>Контактная информация: {item.contact}</li>
+       <li>Контактная информация: 
+        {/*<input style={{color: "black"}} 
+        type="text" 
+        onChange={(e) => setFoundUsers({ ...foundUsers, contact: e.target.value })} 
+        value={foundUsers.contact}/>*/} 
+        {item.contact} </li>
     </ul>
   });
 
@@ -30,14 +39,14 @@ export function PersonalCard({setPersoncard} ){
   return (
       <main className="PersonalCard_main">
         <div className="div_1">
-          <p className="cancel" onClick={()=>setPersoncard()}>X</p>
+          <p className="cancel" onClick={()=>setPersoncardEdit()}>X</p>
           <img src={Avatar} className="div_1__Avatar" alt="no img" width='23.3mm' height='31mm'></img>
           <div className="div_1__FIO">ТЕМОШЕНКО Кирилл Викторович</div>
         </div>
 
         <div className="div_2">
           {uli}
-
+         <p className="div_2__edit" onClick={()=>{ setPersoncardEdit(); col('col6');  }}>Редактировать личную карточку</p> 
         </div>
 
       </main>
