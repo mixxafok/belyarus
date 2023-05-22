@@ -1,50 +1,49 @@
 import React, {useState, useEffect} from 'react';
 import '../styles/Registration.css';
 import Ava from '../img/ava.png';
-import {fio} from './FIO.js';
 
-export function EditCard (){
+export function EditCard ({infoCard}){
 
+  let data =new Date( infoCard[0].dateStart) //перевод даты из дд.мм.гггг 
+  let dateStart = `${data.getFullYear()}-${data.getMonth()}-${data.getDate()}`//в гггг-мм-дд для input[date]
 
-  const [fetchdata, setFetchdata] = useState([]);
-  const [formInput, setFormInput] = useState({
-    Surname: '',
-    Name: '',
-    Parent: '',
-    NumBilet: '',
-    Status: ''
-  })
+  let data1 =new Date( infoCard[0].dateBirth) //перевод даты из дд.мм.гггг 
+  let dateBirth= `${data1.getFullYear()}-${data1.getMonth()}-${data1.getDate()}`//в гггг-мм-дд для input[date]
 
+    const [formInput, setFormInput] = useState({
+      Surname: infoCard[0].surname, 
+      Name: infoCard[0].name,
+      Parent: infoCard[0].parent,
+      NumBilet: infoCard[0].numBilet,
+      DateStart: `${dateStart}`,
+      DateFinish: ``,
+      DateIssue: ``,
+      StatusBilet: `${infoCard[0].statusBilet}`,
+      StatusMember: infoCard[0].statusMember,
+      Sex: '',
+      DateBirth: `${dateBirth}`,
+      PlaceIssue:'',
+      Education: '',
+      SocialGroup: '',
+      SphereActivity: '',
+      PlaceJob: '',
+      StatusPart:'',
+      Deputat: '',
+      Contact:'',
+      Place: ''
+    })
+
+//console.log(dateStart)
 
 
 const handleForm = () =>{
   console.log(formInput);
 }
 
-//перепроверить
-const fetchfunc = async()=>{
-  const response = await fetch("http:localhost:5000/Home/Nazvanie/");
-  let data = await response.json();
-  await setFetchdata(data);
-}
-
-const getFetchdata = fetchdata.map(item =>{
-  return (
-    <ul>
-      <li>{item.name}</li>
-    </ul>
-  )
-})
-//
-
   return (
     <div className='registration'>
-
-        <div>
-          {getFetchdata}
-        </div>
-
-        <div className="reg__Button" onClick={()=>handleForm()}>
+      
+        <div className="reg__Button" onClick={()=>{handleForm();}}>
            <button >Сохранить</button>
         </div>
 
@@ -59,7 +58,7 @@ const getFetchdata = fetchdata.map(item =>{
           type="search"
          onChange={(e) => setFormInput({ ...formInput, Surname: e.target.value })}
           value={formInput.Surname }
-          className="input"
+          className="reg__input"
           placeholder=""
         />
         </div>
@@ -70,7 +69,7 @@ const getFetchdata = fetchdata.map(item =>{
           type="search"
         onChange={(e) => setFormInput({ ...formInput, Name: e.target.value })}
           value={formInput.Name }
-          className="input"
+          className="reg__input"
           placeholder=""
         />
         </div>
@@ -81,7 +80,7 @@ const getFetchdata = fetchdata.map(item =>{
           type="search"
           onChange={(e) => setFormInput({ ...formInput, Parent: e.target.value })}
           value={formInput.Parent }
-          className="input"
+          className="reg__input"
           placeholder=""
         />
         </div>
@@ -92,17 +91,16 @@ const getFetchdata = fetchdata.map(item =>{
           type="search"
           onChange={(e) => setFormInput({ ...formInput, NumBilet: e.target.value })}
           value={formInput.NumBilet }
-          className="input"
+          className="reg__input"
           placeholder=""
         />
         </div>
 
         <div className="reg__form_input_combobox">
         <label>Статус билета</label>
-        <select  > 
-          <option
-           onChange={(e) => setFormInput({ ...formInput, Status: e.target.value })} ></option>
-          <option >Изготовлен</option>
+        <select value={formInput.StatusBilet} onChange={(e) => setFormInput({ ...formInput, StatusBilet: e.target.value })} > 
+          <option value={''}></option>
+          <option value={'Изготовлен'}>Изготовлен</option>
           <option>Не изготовлен</option>
           <option>Выдан</option>
           <option>Утерян*</option>
@@ -120,12 +118,12 @@ const getFetchdata = fetchdata.map(item =>{
         
         <div className="reg__form_input_date" >
         <label>Дата рождения</label>
-        <input type="date" min="1923-01-01"/>
+        <input value={formInput.DateBirth} onChange={(e) => setFormInput({ ...formInput, DateBirth: e.target.value })} type="date" min="1923-01-01"/>
         </div>
 
         <div className="reg__form_input_date">
         <label>Дата вступления</label>
-        <input type="date" min="2023-01-01"/>
+        <input value={formInput.DateStart} onChange={(e) => setFormInput({ ...formInput, DateStart: e.target.value })} type="date" min="2023-01-01"/>
         </div>
 
         <div className="reg__form_input_combobox">

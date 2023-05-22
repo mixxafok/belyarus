@@ -1,0 +1,24 @@
+import React from 'react';
+
+ export const formInputs = {
+    Surname: '',  // Фамилия
+    Name: '', // Имя
+    Parent: '', // отчество
+    NumBilet: '', // номер билета
+    DateIssue: '', // дата вступления
+    DateStart: '', // дата выдачи билетов
+    DateFinish: '', // дата 
+    StatusBilet: '', // статус билета
+    StatusMember: '', // статус членства
+    Sex: '', // пол
+    DateBirth: '', // день рождение
+    PlaceIssue:'', // место вступления
+    Education: '', // Образовние
+    SocialGroup: '', // социальная группа
+    SphereActivity: '', // сфера деятельности
+    PlaceJob: '', // место работы
+    StatusPart:'', // статус в партии
+    Deputat: '', // был ли депутатом
+    Contact:'', // контакты
+    Place: '' // место проживания
+  }

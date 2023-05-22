@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import {fio} from '../components/FIO.js';
 import { FindFilter } from "../components/FindFilter.js";
 import {PersonalCardEdit} from '../components/PersonalCardEdit';
 import Icon from '../icons/partIcon.js';
@@ -12,7 +11,7 @@ import '../styles/Table.css';
 import '../styles/PersonalCardEdit.css';
 
 export function OperatorPage(){
-
+  const [infoCard,setInfoCard] = useState([]) // для персональной карточки
   const [col_1, setcol_1] = useState(false)
   const [col_2, setcol_2] = useState(false)
   const [col_3, setcol_3] = useState(false)
@@ -26,6 +25,7 @@ export function OperatorPage(){
 
   const[personcardEdit, setPersoncardEdit] = useState(false)
 
+  //нажатие на меню
   function col (cols){
     if (cols == 'col1') {
           setcol_1(!col_1); 
@@ -112,9 +112,9 @@ export function OperatorPage(){
        navigateTo('/');
    };
  
-
+//fetch
    const [b,setb] = useState([])
-   //добавил
+
    const fetchPOO = async ()=>{
      const response = await fetch("http://localhost:5140/UserPage/tablePOO/", {
        method: "get",
@@ -138,13 +138,13 @@ export function OperatorPage(){
      let q = await response.json();
      await setb(q);
    };
-//добавил
+//fetch
 
-
+//вывод таблиц
    let tablePOO = b.map(function(item,index) {
      return <tr key={item.id}>
        <td> {index+1}</td>
-        <td className="table__surname"><p  onClick={()=>{ setPersoncardEdit(!personcardEdit) }} className="table_span__surname">{item.surname}</p></td>
+        <td className="table__surname"><p  onClick={()=>{ setPersoncardEdit(!personcardEdit); setInfoCard([item]) }} className="table_span__surname">{item.surname}</p></td>
         <td>{item.name}</td>
         <td>{item.parent}</td>
         <td>{item.numBilet}</td>
@@ -174,6 +174,7 @@ export function OperatorPage(){
         <td>{item.datePause}</td>
    </tr>
  });
+//вывод таблиц
 
   return (
     <div className="oper_page">
@@ -206,14 +207,14 @@ export function OperatorPage(){
         onClick={()=>{col('col4')}}>Список снятых с учета</span></li>
         <li className="main__li_5"><span className={`main__span ${col_5 ? 'act' : ''}`} 
         onClick={()=>{col('col5')}}>Зарегистрировать члена партии</span></li>
-        <li className="main__li_6"><span className={`main__span ${col_6 ? '' : 'hide'}`} 
-        onClick={()=>{col('col6')}}>Режим редактирования учетной карточки</span></li>
+        <li className="main__li_6"><span className={`main__span__edit ${col_6 ? '' : 'hide'}`} 
+        onClick={()=>{col('col6')}}>Режим редактирования <br/>учетной карточки</span></li>
       </ul>
       </div>
 
 
 
-    {personcardEdit ? <PersonalCardEdit setPersoncardEdit ={setPersoncardEdit} col={col} /> : null}
+    {personcardEdit ? <PersonalCardEdit setPersoncardEdit ={setPersoncardEdit} col={col} infoCard={infoCard} setinfoCard={setInfoCard}/> : null}
 
     <div className="tables">
 
@@ -273,7 +274,7 @@ export function OperatorPage(){
      </table>
      { (col_2) ? <FindFilter b={b}/> : null}
      { (col_5) ? <Registration/> : null}
-     { (col_6) ? <EditCard/> : null}
+     { (col_6) ? <EditCard infoCard={infoCard}/> : null}
      </div>
 
 

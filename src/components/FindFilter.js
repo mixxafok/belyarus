@@ -11,21 +11,38 @@ export function FindFilter({b}){
   const [foundUsers, setFoundUsers] = useState(b);
   
   const [formInput, setFormInput] = useState({
-    Surname: '',
+    Surname: '', 
     Name: '',
     Parent: '',
-    NumBilet: ''
+    NumBilet: '',
+    DateStart: '',
+    DateFinish: '',
+    DateIssue: '',
+    StatusBilet: '',
+    StatusMember: '',
+    Sex: '',
+    DateBirth: '',
+    PlaceIssue:'',
+    Education: '',
+    SocialGroup: '',
+    SphereActivity: '',
+    PlaceJob: '',
+    StatusPart:'',
+    Deputat: '',
+    Contact:'',
+    Place: ''
   })
 
     const handleForm = () =>{
       console.log(formInput)
   
-      if (formInput.Name !== '' || formInput.Surname !== '' || formInput.Parent !== '' || formInput.NumBilet !== '') {
+      if ( formInput.Name !== '' || formInput.Surname !== '' || formInput.Parent !== '' || formInput.NumBilet !== ''|| formInput.StatusBilet !== '') {
         const results = b.filter((result) => {
          return(result.name.toLowerCase().startsWith(formInput.Name.toLowerCase()) 
             && result.surname.toLowerCase().startsWith(formInput.Surname.toLowerCase())
             && result.parent.toLowerCase().startsWith(formInput.Parent.toLowerCase())
             && result.numBilet.toLowerCase().startsWith(formInput.NumBilet.toLowerCase())
+           /* && result.statusBilet == formInput.StatusBilet*/
         )
         });
         setFoundUsers(results);
@@ -36,7 +53,8 @@ export function FindFilter({b}){
         Surname: '',
         Name: '',
         Parent: '',
-        NumBilet: ''
+        NumBilet: '',
+        StatusBilet:''
       })
   
     }
@@ -112,16 +130,16 @@ export function FindFilter({b}){
           placeholder=""
         />
         </div>
-
-        <div className="form_input_1">
+        
+        <div className="form_input_combobox">
         <label>Статус билета</label>
-        <input
-          type="search"
-          
-          
-          className="input"
-          placeholder=""
-        />
+        <select value={formInput.StatusBilet} onChange={(e) => setFormInput({ ...formInput, StatusBilet: e.target.value })} > 
+          <option ></option>
+          <option value="Изготовлен">Изготовлен</option>
+          <option value="Не изготовлен">Не изготовлен</option>
+          <option>Выдан</option>
+          <option>Утерян*</option>
+        </select>
         </div>
 
         <div className="form_input_combobox">

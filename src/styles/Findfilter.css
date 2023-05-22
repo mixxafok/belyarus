@@ -103,8 +103,8 @@ select {
   outline: auto;
   width: 100%;
   outline-color: #bdbdba;
-  height: calc(1.8rem + 2px);
-  padding: 0.375rem 0.75rem;
+  height: calc(2rem + 2px);
+  padding: 0.2rem 0.75rem;
   font-family: inherit;
   font-size: 1rem;
   font-weight: 400;

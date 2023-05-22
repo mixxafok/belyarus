@@ -8,11 +8,29 @@ export function Registration (){
 
   const [fetchdata, setFetchdata] = useState([]);
   const [formInput, setFormInput] = useState({
-    Surname: '',
+    Surname: '', 
     Name: '',
     Parent: '',
     NumBilet: '',
-    Status: ''
+    DateStart: '',
+    DateFinish: '',
+    DateIssue: '',
+    StatusBilet: '',
+    StatusMember: '',
+    Sex: '',
+    DateBirth: '',
+    PlaceIssue:'',
+    Education: '',
+    SocialGroup: '',
+    SphereActivity: '',
+    PlaceJob: '',
+    PostJob:'',
+    StatusPart:'',
+    Deputat: '',
+    RegistrationAddress:'',
+    LivingAddress:'',
+    TelephoneNumber:'',
+    Place: '' 
   })
 
 
@@ -84,7 +102,7 @@ const getFetchdata = fetchdata.map(item =>{
         />
         </div>
 
-        <div className="reg__form_input_1">
+      {/* <div className="reg__form_input_1">
         <label>Номер билета</label>
         <input
           type="search"
@@ -94,12 +112,12 @@ const getFetchdata = fetchdata.map(item =>{
           placeholder=""
         />
         </div>
-
+        */}
+        
         <div className="reg__form_input_combobox">
         <label>Статус билета</label>
         <select  > 
-          <option
-           onChange={(e) => setFormInput({ ...formInput, Status: e.target.value })} ></option>
+          <option  onChange={(e) => setFormInput({ ...formInput, StatusBilet: e.target.value })} ></option>
           <option >Изготовлен</option>
           <option>Не изготовлен</option>
           <option>Выдан</option>
@@ -109,7 +127,7 @@ const getFetchdata = fetchdata.map(item =>{
 
         <div className="reg__form_input_combobox">
         <label>Пол</label>
-        <select  > 
+        <select  onChange={(e) => setFormInput({ ...formInput, Sex: e.target.value })}> 
           <option ></option>
           <option >Мужской</option>
           <option>Женский</option>
@@ -211,6 +229,61 @@ const getFetchdata = fetchdata.map(item =>{
           <option>Да</option>
           <option>Нет</option>
         </select>
+        </div>
+
+        <div className="reg__form_input_1">
+        <label>Место работы</label>
+        <input
+          type="search"
+          onChange={(e) => setFormInput({ ...formInput, PlaceJob: e.target.value })}
+          value={formInput.PlaceJob }
+          className="reg__input"
+          placeholder=""
+        />
+        </div>
+
+        <div className="reg__form_input_1">
+        <label>Должность</label>
+        <input
+          type="search"
+          onChange={(e) => setFormInput({ ...formInput, PostJob: e.target.value })}
+          value={formInput.PostJob }
+          className="reg__input"
+          placeholder=""
+        />
+        </div>
+
+        <div className="reg__form_input_1">
+        <label>Адрес регистрации</label>
+        <input
+          type="search"
+          onChange={(e) => setFormInput({ ...formInput, RegistrationAddress: e.target.value })}
+          value={formInput.RegistrationAddress }
+          className="reg__input"
+          placeholder=""
+        />
+        </div>
+
+        <div className="reg__form_input_1">
+        <label>Адрес проживания</label>
+        <input
+          type="search"
+          onChange={(e) => setFormInput({ ...formInput, LivingAddress: e.target.value })}
+          value={formInput.LivingAddress }
+          className="reg__input"
+          placeholder=""
+        />
+        </div>
+
+        <div className="reg__form_input_1">
+        <label>Номер телефона</label>
+        <input
+          type="search"
+          onChange={(e) => setFormInput({ ...formInput, TelephoneNumber: e.target.value })}
+          value={formInput.TelephoneNumber }
+          className="reg__input"
+          placeholder=""
+        />
         </div>
     </div>
     

@@ -1,15 +1,17 @@
 import React, {useState} from "react";
 import Avatar from '../img/ava.png';
-import {fio} from './FIO.js';
 import '../styles/PersonalCardEdit.css';
 
 
-export function PersonalCardEdit({setPersoncardEdit,col, chosenUser} ){
+export function PersonalCardEdit({setPersoncardEdit,col, infoCard} ){
 
+  let fioMember = infoCard.map((tem) => {
+    return (
+      <p>{tem.surname.toUpperCase()} {tem.name} {tem.parent}</p>
+    )
+  })
 
-
-
-  let uli = fio.filter((tem) => {return tem.id == 1 }).map((item) => {
+  let uli = infoCard.map((item) => {
     return <ul className="div_2__ul">
        <li>Номер партийного билета: <span className="span1">{item.numBilet}</span> </li>
        <li>Дата выдачи билета: {item.dateStart}</li>
@@ -26,12 +28,7 @@ export function PersonalCardEdit({setPersoncardEdit,col, chosenUser} ){
        <li>Место работы, должность: {item.placeJob}</li>
        <li>Статус в партии: {item.statusPart}</li>
        <li>Избирался ли депутатом: {item.deputat}</li>
-       <li>Контактная информация: 
-        {/*<input style={{color: "black"}} 
-        type="text" 
-        onChange={(e) => setFoundUsers({ ...foundUsers, contact: e.target.value })} 
-        value={foundUsers.contact}/>*/} 
-        {item.contact} </li>
+       <li>Контактная информация: {item.contact} </li>
     </ul>
   });
 
@@ -41,7 +38,7 @@ export function PersonalCardEdit({setPersoncardEdit,col, chosenUser} ){
         <div className="div_1">
           <p className="cancel" onClick={()=>setPersoncardEdit()}>X</p>
           <img src={Avatar} className="div_1__Avatar" alt="no img" width='23.3mm' height='31mm'></img>
-          <div className="div_1__FIO">ТЕМОШЕНКО Кирилл Викторович</div>
+          <div className="div_1__FIO">{fioMember}</div>
         </div>
 
         <div className="div_2">

@@ -52,9 +52,18 @@
   color:rgb(175, 98, 3);
   letter-spacing: 0.020em;
 }
+}
+
+.main__span__edit{
+  cursor:default;
   &.hide {
-    display: none;
-  }
+  display: none;
+}
+}
+
+.oper_page .main__span__edit:hover{
+  letter-spacing: 0.00em;
+  transition-duration: 300ms;
 }
 
 .oper_page .main__span:hover{
