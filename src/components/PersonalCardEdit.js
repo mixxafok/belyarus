@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import Avatar from '../img/ava.png';
 import '../styles/PersonalCardEdit.css';
 

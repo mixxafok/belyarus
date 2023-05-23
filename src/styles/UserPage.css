@@ -1,20 +1,51 @@
 
-/*.user_page{
+.user_page{
+  background-image: url('../img/back4.jpg');
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size:cover;
+ /* box-shadow: inset 220px 20px 90px 60px rgba(168, 165, 165, 0.6);*/
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.user_page main {
   display: flex;
-  flex-direction: row;
-}*/
+  flex-grow: 1;
+  flex-shrink: 0;
+ /* backdrop-filter: blur(0.8px);*/
+}
+
+.reg__img{
+  width: 23.3mm;
+  height: 31mm;
+  object-fit: cover;
+}
 
 .user_page .main__ul {
-  margin-top: 1%;
   display: flex;
-  flex-direction: row;
-  text-align: center;
-  align-items:center;
+  flex-direction: column;
+  text-align: start;
+  align-items:start;
+  flex-grow: 1;
+  flex-shrink: 0;
   font-family: Montserrat-SemiBold;
   color: black;
-  border: 1px solid rgb(218,172,83);
-  height: 20px;
-  font-size: 5px;
+  border-right: 1px solid rgb(218,172,83);
+ height: 100vh;
+  font-size: 16px;
+  width: 100%;
+  margin-top: 0;
+  padding-left: 1%;
+  margin-left: 4%;
+
+}
+
+.user_page .tables {
+  width: 100%;
 
 }
 
@@ -27,6 +58,18 @@
 }
 }
 
+.main__span__edit{
+  cursor:default;
+  &.hide {
+  display: none;
+}
+}
+
+.user_page .main__span__edit:hover{
+  letter-spacing: 0.00em;
+  transition-duration: 300ms;
+}
+
 .user_page .main__span:hover{
   letter-spacing: 0.020em;
   transition-duration: 300ms;
@@ -37,24 +80,43 @@
   color: rgb(50, 43, 30);
 }
 
-.user_page .main__ul li:first-child {
- width: 30%;
+.user_page  .main__ul li:first-child {
+ width: 100%;
+ margin-top: 5%;
+ padding-right: 2%;
   /* border: 1px solid green;*/
 }
-.user_page .main__ul li:nth-child(2) {
-  width: 20%;
+.user_page  .main__ul li:nth-child(2) {
+  width: 100%;
+  margin-top: 5%;
   /* border: 1px solid green;*/
  }
- .user_page .main__ul li:nth-child(3) {
-  width: 30%;
+ .user_page  .main__ul li:nth-child(3) {
+  width: 100%;
+  margin-top: 5%;
   /* border: 1px solid green;*/
  }
- .user_page .main__ul li:nth-child(4) {
-  width: 20%;
+ .user_page  .main__ul li:nth-child(4) {
+  width: 100%;
+  margin-top: 5%;
   /* border: 1px solid green;*/
  }
 
-.user_page .Otchet{
+ .user_page  .main__ul li:nth-child(5) {
+  width: 100%;
+  margin-top: 5%;
+  /* border: 1px solid green;*/
+ }
+ 
+ .user_page .main__ul li:nth-child(6) {
+  width: 100%;
+  margin-top: 5%;
+  color:brown;
+  /* border: 1px solid green;*/
+ }
+
+ .user_page .Otchet{
+
   font-family: Noto sans;
   color: black;
   width: 20%;
@@ -71,52 +133,53 @@
   }
 }
 
-
+/*
 @media screen and (min-width: 320px) {
-  .user_page .main__ul {
+  .oper_page .main__ul {
     height: 22px;
     font-size: 6px;
   }
 }
 
 @media screen and (min-width: 384px) {
-  .user_page .main__ul {
+  .oper_page  .main__ul {
     height: 22px;
     font-size: 7px;
   }
 }
 
 @media screen and (min-width: 448px) {
-  .user_page .main__ul {
+  .oper_page  .main__ul {
     height: 26px;
     font-size: 8px;
   }
 }
 
 @media screen and (min-width: 576px) {
-  .user_page .main__ul {
+  .oper_page .main__ul {
     height: 28px;
     font-size: 9px;
   }
 }
 
 @media screen and (min-width: 672px) {
-  .user_page .main__ul {
+  .oper_page  .main__ul {
     height: 30px;
     font-size: 10px;
   }
 }
 
 @media screen and (min-width: 768px) {
-  .user_page .main__ul {
+  .oper_page  .main__ul {
     height: 35px;
     font-size: 12px;
   }
 }
 
 @media screen and (min-width: 992px) {
-  .user_page .main__ul {
-    height: 50px;
+  .oper_page .main__ul {
+    height: 50%;
     font-size: 16px;
   }
-}
+} 
+*/

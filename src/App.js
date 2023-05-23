@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Login } from './pages/Login';
 import  AdminSystemPage  from './pages/AdminSystemPage';
 import { AdminNodePage } from './pages/AdminNodePage';
-import  UserPage  from './pages/UserPage';
+import { UserPage }   from './pages/UserPage';
 import { OperatorPage } from './pages/OperatorPage';
 import './App.css';
 
