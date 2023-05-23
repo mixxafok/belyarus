@@ -1,21 +1,40 @@
 .registration {
-
-  width: 70%;
-  margin: auto;
- margin-left: 2%;
- padding: 0 0 2% 5%;
- backdrop-filter: blur(2px);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 0;
+  margin: 0 0 0 1%;
+  padding: 0 2% 2% 2%;
+  backdrop-filter: blur(2px);
+ /* border: 1px solid red; */
+ background-color: rgba(200, 200, 200, 0.435);
 }
 
 .file {
   font-size: 12px;
 }
 
+.Img_Fio {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  
+ /* border: 1px solid red;*/
+}
+
+.Img_Fio_SexBirthday{
+  display: flex;
+  flex-direction: column;
+  width: 65%;
+  margin-left: 1%;
+ /* border: 1px solid green;*/
+}
+
 .reg__input {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 50%;
+  width: 100%;
   height: calc(1.8rem + 2px);
   padding: 0.375rem 0.75rem;
   font-family: inherit;
@@ -28,15 +47,14 @@
   border: 1px solid #bdbdbd;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  
 }
 
-.input:focus {
+.reg__input:focus {
   color: #212529;
   background-color: #fff;
-  outline-color: #bdbdba;
-  outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);
+  outline-color: #606060;
+
+ /* box-shadow: 0 0 0 0.2rem rgba(39, 39, 39, 0.25);*/
 }
 
 label {
@@ -46,88 +64,244 @@ label {
   margin-bottom: 0.25rem;
 }
 
-
-.reg__form_input_1{
+.Fio {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  flex-shrink: 0;
+  justify-content: space-between;
   width: 100%;
+  margin-top: 2%;
+ /* border: 1px solid blue;*/
+}
+
+.SexBirthday{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  flex-shrink: 0;
+  justify-content: space-between;
+  width: 59%;
+  margin-top: 1%;
+ /* border: 1px solid yellow;*/
+}
+
+.Places {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  flex-shrink: 0;
+  width: 80%;
+  margin-top: 1%;
+ /* border: 1px solid green;*/
+}
+
+.Social{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  flex-shrink: 0;
+  justify-content: space-between;
+  width: 80%;
+  margin-top: 1%;
+}
+
+.StatusPartya{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  flex-shrink: 0;
+  justify-content: start;
+  width: 80%;
+  margin-top: 1%;
+}
+
+.Jobs {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  flex-shrink: 0;
+  width: 70%;
+  margin-top: 1%;
+}
+
+.Address{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  flex-shrink: 0;
+  width: 70%;
+  margin-top: 1%;
+}
+
+.reg__form_input_fio{
+  width: 30%;
   display: flex;
   flex-direction: column;
-  justify-content:baseline;
-  margin-left: 1%;
   padding-top: 0;
   margin-top: 1%;
   border-color: #bdbdba;
+ /* border: 1px solid green;*/
 }
 
-.reg__form_input_combobox{
-  width: 50%;
+.reg__form_input_jobs{
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 0;
+  margin-top: 1%;
+  border-color: #bdbdba;
+ /* border: 1px solid green;*/
+}
+
+.reg__form_input_jobsAddress{
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 0;
+  margin-top: 1%;
+  border-color: #bdbdba;
+  margin-left: 5%;
+ /* border: 1px solid green;*/
+}
+
+.reg__form_input_combobox__sex{
+  width: 40%;
   display: flex;
   flex-direction: column;
   justify-content:baseline;
-  margin-left: 1%;
   padding-top: 0;
   margin-top: 1%;
-
 }
 
-select {
-  outline: auto;
-  width: 100%;
-  outline-color: #bdbdba;
-  height: calc(1.8rem + 2px);
-  padding: 0.375rem 0.75rem;
-  font-family: inherit;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #212529;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #bdbdbd;
-  border-radius: 0.25rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+.reg__form_input_combobox__places{
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  justify-content:baseline;
+  padding-top: 0;
+  margin-top: 1%;
 }
 
-input[type=date]{
-  outline: auto;
-  outline-color: #bdbdba;
-  width: 100%;
-  height: calc(1.8rem + 2px);
-  padding: 0.375rem 0.75rem;
-  font-family: inherit;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #212529;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #bdbdbd;
-  border-radius: 0.25rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-.reg__form_input_date {
+.reg__form_input_combobox__social{
   width: 30%;
   display: flex;
   flex-direction: column;
   justify-content:baseline;
-  margin-left: 1%;
   padding-top: 0;
   margin-top: 1%;
 }
 
+.reg__form_input_combobox__placesYchet{
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  justify-content:baseline;
+  padding-top: 0;
+  margin-top: 1%;
+  margin-left: 5%;
+}
+
+.reg__form_input_combobox__deputat{
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content:baseline;
+  padding-top: 0;
+  margin-top: 1%;
+  margin-left: 5%;
+}
+
+.reg__form_input_number{
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 0;
+  margin-top: 2%;
+  border-color: #bdbdba;
+}
+
+.registration select {
+  outline: auto;
+  width: 100%;
+  outline-color: #bdbdba;
+  height: calc(1.8rem + 2px);
+  padding: 0.2rem 0.75rem;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #bdbdbd;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.reg__form_input_dateBirthday {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content:baseline;
+  padding-top: 0;
+  margin-top: 1%;
+  
+}
+
+.reg__form_input_date {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content:baseline;
+  padding-top: 0;
+  margin-top: 1%;
+  margin-left: 5%;
+}
+
+.reg__form_input_date input[type=date]{
+  outline: auto;
+  outline-color: #bdbdba;
+  width: 100%;
+  height: calc(1.8rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #bdbdbd;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+
+
+
+
 .reg__Button{
   background-color:rgba(218, 173, 83, 0.746);
-  width: 25%;
+  width: 15%;
   border-radius: 8px;
   margin: auto;
   margin-top: 2%;
   text-align: center;
+  transition: 50ms;
 }
 
 .reg__Button:active {
   box-shadow:0px 0px 2px 1px black;
     opacity: 1;
-    transition: 30ms;
+    transition: 50ms;
 }
   
 
