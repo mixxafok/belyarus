@@ -5,20 +5,27 @@ import React from 'react';
     Name: '', // Имя
     Parent: '', // отчество
     NumBilet: '', // номер билета
-    DateIssue: '', // дата вступления
-    DateStart: '', // дата выдачи билетов
-    DateFinish: '', // дата 
     StatusBilet: '', // статус билета
-    StatusMember: '', // статус членства
     Sex: '', // пол
     DateBirth: '', // день рождение
+    DateIssue: '', // дата вступления
     PlaceIssue:'', // место вступления
+    StatusMember: '', // статус членства
+    PlaceYchet: '', // место постановки на учет
     Education: '', // Образовние
     SocialGroup: '', // социальная группа
     SphereActivity: '', // сфера деятельности
-    PlaceJob: '', // место работы
     StatusPart:'', // статус в партии
     Deputat: '', // был ли депутатом
+
+    DateStart: '', // дата выдачи билетов
+    DateFinish: '', // дата окончания
+
+    PlaceJob: '', // место работы
+    PostJob: '', // должность
     Contact:'', // контакты
-    Place: '' // место проживания
+    RegistrationAddress:'', // адрес регистрации
+    LivingAddress:'', // адрес проживания
+    TelephoneNumber:'', // номер телефона
+
   }

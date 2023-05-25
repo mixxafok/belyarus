@@ -21,17 +21,19 @@ export  function Login() {
     })
 
   
-    if (formInput.login === "admin" && formInput.password === "admin") {
+    if (formInput.login === "adminsystem" && formInput.password === "adminsystem") {
       navigateTo('/AdminSystemPage')
     }
-    if (formInput.login === "oper" && formInput.password === "oper") {
+    else if (formInput.login === "adminnode" && formInput.password === "adminnode") {
+      navigateTo('/AdminNodePage')
+    }
+    else if (formInput.login === "oper" && formInput.password === "oper") {
       navigateTo('/OperatorPage')
     }
     else if (formInput.login === fio[0].name && formInput.password === fio[0].surname) {
-      
       navigateTo('/UserPage')
       }
-      else alert('Неверный логин или пароль')
+    else alert('Неверный логин или пароль')
   }
 
 

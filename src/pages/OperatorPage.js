@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { FindFilter } from "../components/FindFilter.js";
+import { FindFilterEdit } from "../components/FindFilterEdit.js";
 import {PersonalCardEdit} from '../components/PersonalCardEdit';
 import Icon from '../icons/partIcon.js';
 import {Registration} from '../components/Registration.js';
@@ -51,7 +51,9 @@ export function OperatorPage(){
           setTableFindFilter(!tablefindfilter);
           setTableHidePause(true);
           setTableHideNO(true);
-          fetchPOO(); // подгрузка таблицы РОО
+          fetchPOO();
+          fetchOptions();
+          // подгрузка таблицы РОО
         }
     else if (cols == 'col3'){
           setcol_1(false); 
@@ -81,28 +83,31 @@ export function OperatorPage(){
           fetchNO();
         }
     else if ( cols == 'col5') {
-      setcol_1(false); 
-      setcol_2(false); 
-      setcol_3(false); 
-      setcol_4(false);
-      setcol_5(!col_5);
-      setcol_6(false);
-      setTableHidePOO(true);
-      setTableFindFilter(true);
-      setTableHidePause(true);
-      setTableHideNO(true);
+          setcol_1(false); 
+          setcol_2(false); 
+          setcol_3(false); 
+          setcol_4(false);
+          setcol_5(!col_5);
+          setcol_6(false);
+          setTableHidePOO(true);
+          setTableFindFilter(true);
+          setTableHidePause(true);
+          setTableHideNO(true);
+          fetchOptions();
     }
     else if ( cols == 'col6') {
-      setcol_1(false); 
-      setcol_2(false); 
-      setcol_3(false); 
-      setcol_4(false);
-      setcol_5(false);
-      setcol_6(!col_6);
-      setTableHidePOO(true);
-      setTableFindFilter(true);
-      setTableHidePause(true);
-      setTableHideNO(true);
+          setcol_1(false); 
+          setcol_2(false); 
+          setcol_3(false); 
+          setcol_4(false);
+          setcol_5(false);
+          setcol_6(!col_6);
+          setTableHidePOO(true);
+          setTableFindFilter(true);
+          setTableHidePause(true);
+          setTableHideNO(true);
+          fetchOptions();
+
     }
    }
 
@@ -114,17 +119,19 @@ export function OperatorPage(){
  
 //fetch
    const [b,setb] = useState([])
+   const [options, setOptions] = useState([]);
 
    const fetchPOO = async ()=>{
-     const response = await fetch("http://localhost:5140/UserPage/tablePOO/", {
+     const response = await fetch("http://localhost:5059/UserPage/tablePOO/", {
        method: "get",
+      "content-type" : "application/json; charset=utf-8"
      });
      let q = await response.json();
      await setb(q);
    };
 
    const fetchNO = async ()=>{
-     const response = await fetch("http://localhost:5140/UserPage/tableNO/", {
+     const response = await fetch("http://localhost:5059/UserPage/tableNO/", {
        method: "get",
      });
      let q = await response.json();
@@ -132,19 +139,36 @@ export function OperatorPage(){
    };
 
    const fetchPause = async ()=>{
-     const response = await fetch("http://localhost:5140/UserPage/tablePause/", {
+     const response = await fetch("http://localhost:5059/UserPage/tablePause/", {
        method: "get",
      });
      let q = await response.json();
      await setb(q);
    };
+
+   const fetchOne = async (itemid)=>{
+    const response = await fetch(`http://localhost:5059/UserPage/GetOne?id=${itemid}`, {
+      method: "get",
+    });
+    let q = await response.json();
+    await setInfoCard([q]);
+  };
+
+  const fetchOptions = async ()=>{
+    const response = await fetch("http://localhost:5059/UserPage/GetOptions/", {
+      method: "get",
+    });
+    let q = await response.json();
+    await setOptions(q);
+  };
 //fetch
+
 
 //вывод таблиц
    let tablePOO = b.map(function(item,index) {
      return <tr key={item.id}>
        <td> {index+1}</td>
-        <td className="table__surname"><p  onClick={()=>{ setPersoncardEdit(!personcardEdit); setInfoCard([item]) }} className="table_span__surname">{item.surname}</p></td>
+        <td className="table__surname"><p  onClick={()=>{ fetchOne(item.id); setPersoncardEdit(!personcardEdit); }} className="table_span__surname">{item.surname}</p></td>
         <td>{item.name}</td>
         <td>{item.parent}</td>
         <td>{item.numBilet}</td>
@@ -198,7 +222,7 @@ export function OperatorPage(){
       <div className="spisok">
       <ul className="main__ul">
         <li className="main__li_1"><span className={`main__span ${col_1 ? 'act' : ''}`} 
-        onClick={()=>{col('col1')}}>Список членов партии "Белая Русь"</span></li>
+        onClick={()=>{col('col1')}}>Список членов партии <br/> "Белая Русь"</span></li>
         <li className="main__li_2"><span className={`main__span ${col_2 ? 'act' : ''}`} 
         onClick={()=>{col('col2')}}>Поиск и фильтрация</span></li>
         <li className="main__li_3"><span className={`main__span ${col_3 ? 'act' : ''}`} 
@@ -214,7 +238,7 @@ export function OperatorPage(){
 
 
 
-    {personcardEdit ? <PersonalCardEdit setPersoncardEdit ={setPersoncardEdit} col={col} infoCard={infoCard} setinfoCard={setInfoCard}/> : null}
+    {personcardEdit ? <PersonalCardEdit setPersoncardEdit ={setPersoncardEdit} col={col} infoCard={infoCard} /> : null}
 
     <div className="tables">
 
@@ -272,9 +296,9 @@ export function OperatorPage(){
            {tableNO}
         </tbody>
      </table>
-     { (col_2) ? <FindFilter b={b}/> : null}
-     { (col_5) ? <Registration/> : null}
-     { (col_6) ? <EditCard infoCard={infoCard}/> : null}
+     { (col_2) ? <FindFilterEdit b={b}/> : null}
+     { (col_5) ? <Registration options={options}/> : null}
+     { (col_6) ? <EditCard infoCard={infoCard} options={options}/> : null}
      </div>
 
 

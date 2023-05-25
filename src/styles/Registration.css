@@ -53,13 +53,12 @@
   color: #212529;
   background-color: #fff;
   outline-color: #606060;
-
  /* box-shadow: 0 0 0 0.2rem rgba(39, 39, 39, 0.25);*/
 }
 
 label {
   width: 100%;
-  font-size: 16px;
+  font-size: 14px; /*либо на 16px*/
   font-weight: 600;
   margin-bottom: 0.25rem;
 }
@@ -106,6 +105,16 @@ label {
   flex-grow: 1;
   flex-shrink: 0;
   justify-content: space-between;
+  width: 80%;
+  margin-top: 1%;
+}
+
+.Statusts{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  flex-shrink: 0;
   width: 80%;
   margin-top: 1%;
 }

@@ -1,6 +1,6 @@
 
-.user_page{
-  background-image: url('../img/back4.jpg');
+.adminNode_page{
+  background-image: url('../../img/back4.jpg');
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -12,11 +12,7 @@
   box-sizing: border-box;
 }
 
-.spisok {
-  width: 20%;
-}
-
-.user_page main {
+.adminNode_page main {
   display: flex;
   flex-grow: 1;
   flex-shrink: 0;
@@ -29,13 +25,7 @@
   object-fit: cover;
 }
 
-.main__li_spravka{
-  display: inline-flex;
-  font-size: 10px;
-  cursor: pointer;
-}
-
-.user_page .main__ul {
+.adminNode_page .main__ul {
   display: flex;
   flex-direction: column;
   text-align: start;
@@ -51,13 +41,15 @@
   margin-top: 0;
   padding-left: 1%;
   margin-left: 4%;
+
 }
 
-.user_page .tables {
-  width: 95%;
+.adminNode_page .tables {
+  width: 100%;
+
 }
 
-.user_page .main__span {
+.adminNode_page .main__span {
   cursor:pointer;
   transition-duration: 300ms;
   &.act {
@@ -66,55 +58,68 @@
 }
 }
 
-.main__span__edit{
+.adminNode_page .main__span__edit{
   cursor:default;
   &.hide {
   display: none;
 }
 }
 
-.user_page .main__span__edit:hover{
+.adminNode_page .main__span__edit:hover{
   letter-spacing: 0.00em;
   transition-duration: 300ms;
 }
 
-.user_page .main__span:hover{
+.adminNode_page .main__span:hover{
   letter-spacing: 0.020em;
   transition-duration: 300ms;
 }
 
-.user_page .main__span:active{
+.adminNode_page .main__span:active{
   letter-spacing: 0.020em;
   color: rgb(50, 43, 30);
 }
 
-.user_page  .main__ul li:first-child {
+.adminNode_page  .main__ul li:first-child {
  width: 100%;
  margin-top: 5%;
  padding-right: 2%;
   /* border: 1px solid green;*/
 }
-.user_page  .main__ul li:nth-child(2) {
+.adminNode_page  .main__ul li:nth-child(2) {
   width: 100%;
   margin-top: 5%;
   /* border: 1px solid green;*/
  }
- .user_page  .main__ul li:nth-child(3) {
+ .adminNode_page  .main__ul li:nth-child(3) {
   width: 100%;
   margin-top: 5%;
   /* border: 1px solid green;*/
  }
- .user_page  .main__ul li:nth-child(4) {
+ .adminNode_page  .main__ul li:nth-child(4) {
+  width: 100%;
+  margin-top: 5%;
+  /* border: 1px solid green;*/
+ }
+ .adminNode_page  .main__ul li:nth-child(5) {
+  width: 100%;
+  margin-top: 5%;
+  /* border: 1px solid green;*/
+ }
+ .adminNode_page  .main__ul li:nth-child(7) {
+  width: 100%;
+  margin-top: 5%;
+  color:brown;
+  /* border: 1px solid green;*/
+ }
+ .adminNode_page  .main__ul li:nth-child(6) {
   width: 100%;
   margin-top: 5%;
   /* border: 1px solid green;*/
  }
 
-.main__li_spravka {
-  position: relative;
-}
+ .adminNode_page .Otchet{
 
- .user_page .Otchet{
   font-family: Noto sans;
   color: black;
   width: 20%;
@@ -126,21 +131,6 @@
   margin-top: 1%;
   margin-right: 10%;
   margin-bottom: 1%;
-  &.hide {
-    display: none;
-  }
-}
-
-.user_page .OtchetFilter{
-  font-family: Noto sans;
-  color: black;
-  width: 30%;
-  display: flex;
-  flex-flow: row;
-  justify-content: space-between;
-  font-size: 14px;
-float: right;
-  margin: 1% 6% 1% 0;
   &.hide {
     display: none;
   }

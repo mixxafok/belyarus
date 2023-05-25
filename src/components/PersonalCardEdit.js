@@ -3,11 +3,12 @@ import Avatar from '../img/ava.png';
 import '../styles/PersonalCardEdit.css';
 
 
-export function PersonalCardEdit({setPersoncardEdit,col, infoCard} ){
+export function PersonalCardEdit({setPersoncardEdit,col, infoCard } ){
 
   let fioMember = infoCard.map((tem) => {
     return (
-      <p>{tem.surname.toUpperCase()} {tem.name} {tem.parent}</p>
+      // <p>{tem.surname.toUpperCase()} {tem.name} {tem.parent}</p>
+       <p>{tem.fio}</p>
     )
   })
 
@@ -37,7 +38,7 @@ export function PersonalCardEdit({setPersoncardEdit,col, infoCard} ){
       <main className="PersonalCard_main">
         <div className="div_1">
           <p className="cancel" onClick={()=>setPersoncardEdit()}>X</p>
-          <img src={Avatar} className="div_1__Avatar" alt="no img" width='23.3mm' height='31mm'></img>
+          <img src={Avatar} className="div_1__Avatar" alt="no img" ></img>
           <div className="div_1__FIO">{fioMember}</div>
         </div>
 

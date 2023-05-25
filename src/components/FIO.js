@@ -1,6 +1,4 @@
 
-import React from "react";
-
 export const fio = [
   {id: 1, 
     surname: 'user', 
