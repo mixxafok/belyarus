@@ -104,7 +104,8 @@ const fetchRegistration = async ()=>{
       method: 'post',
       headers: {
         'Accept': 'application/json',
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
+
       },
       body: JSON.stringify(formInput)
     });

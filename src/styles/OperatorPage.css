@@ -114,6 +114,10 @@
   /* border: 1px solid green;*/
  }
 
+ .main__li_spravka {
+  position: relative;
+}
+
  .oper_page .Otchet{
 
   font-family: Noto sans;
@@ -127,6 +131,22 @@
   margin-top: 1%;
   margin-right: 10%;
   margin-bottom: 1%;
+  &.hide {
+    display: none;
+  }
+}
+
+.oper_page .OtchetFilter{
+  font-family: Noto sans;
+  color: black;
+  width: 30%;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  font-size: 14px;
+float: right;
+  margin: 1% 6% 1% 0;
+  cursor: pointer;
   &.hide {
     display: none;
   }

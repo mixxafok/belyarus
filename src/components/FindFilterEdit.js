@@ -3,10 +3,10 @@ import '../styles/Table.css';
 import '../styles/Findfilter.css';
 import {PersonalCardEdit} from './PersonalCardEdit.js';
 
-export function FindFilterEdit({b}){
+export function FindFilterEdit({b,tablefindfilter, options, col, infoCard, setInfoCard}){
 
   const[personcardEdit, setPersoncardEdit] = useState(false);
-  const [infoCard,setInfoCard] = useState([])
+  // const [infoCard,setInfoCard] = useState([])
   const [foundUsers, setFoundUsers] = useState(b);
   
   const [formInput, setFormInput] = useState({
@@ -46,21 +46,39 @@ export function FindFilterEdit({b}){
         setFoundUsers(b);
       }
       setFormInput({
-        Surname: '',
+        Surname: '', 
         Name: '',
         Parent: '',
         NumBilet: '',
-        StatusBilet:''
+        StatusBilet: '',
+        Sex: '',
+        DateBirth: '',
+        DateIssue: '',
+        PlaceIssue:'',
+        StatusMember: '',
+        PlaceYchet: '',
+        Education: '',
+        SocialGroup: '',
+        SphereActivity: '',
+        StatusPart:'',
+        Deputat: ''
       })
   
     }
 
+    const fetchOne = async (itemid)=>{
+      const response = await fetch(`http://localhost:5059/UserPage/GetOne?id=${itemid}`, {
+        method: "get",
+      });
+      let q = await response.json();
+      await setInfoCard([q]);
+    };
 
   let filt = foundUsers && foundUsers.length > 0 ? (
     foundUsers.map((user,index) => (
       <tr key={user.id}>
       <td> {index+1}</td>
-       <td className="table__surname"><p onClick={()=>{ setPersoncardEdit(!personcardEdit); setInfoCard([user])}} className="table_span__surname">{user.surname}</p></td>
+       <td className="table__surname"><p onClick={()=>{fetchOne(user.id); setPersoncardEdit(!personcardEdit); setInfoCard([user])}} className="table_span__surname">{user.surname}</p></td>
        <td>{user.name}</td>
          <td>{user.parent}</td>
          <td>{user.numBilet}</td>
@@ -72,6 +90,66 @@ export function FindFilterEdit({b}){
     <h1>Результаты не найдены!</h1>
   )
 
+    //обработка options
+    const educ = [];
+    const socs = [];
+    const acts = [];
+    const regPlcs = [];
+    const entrPlcs = [];
+    const partPoss = [];
+    const mbrSt = [];
+    const crdSt = [];
+    for (let key in options){
+      if(key == 'edus'){
+        for (let ked of options['edus']){
+          educ.push( ked.val)
+          continue
+          }
+      }
+      if(key == 'socs'){
+        for (let ked of options['socs']){
+          socs.push( ked.val)
+          continue
+          }
+      }
+      if(key == 'acts'){
+        for (let ked of options['acts']){
+          acts.push( ked.val)
+          continue
+          }
+      }
+      if(key == 'regPlcs'){
+        for (let ked of options['regPlcs']){
+          regPlcs.push( ked.val)
+          continue
+          }
+      }
+      if(key == 'entrPlcs'){
+        for (let ked of options['entrPlcs']){
+          entrPlcs.push( ked.val)
+          continue
+          }
+      }
+      if(key == 'partPoss'){
+        for (let ked of options['partPoss']){
+          partPoss.push( ked.val)
+          continue
+          }
+      }
+      if(key == 'mbrSt'){
+        for (let ked of options['mbrSt']){
+          mbrSt.push( ked.val)
+          continue
+          }
+      }
+      if(key == 'crdSt'){
+        for (let ked of options['crdSt']){
+          crdSt.push( ked.val)
+          continue
+          }
+      }
+    }
+  //обработка options
 
   return (
     
@@ -129,123 +207,110 @@ export function FindFilterEdit({b}){
         
         <div className="form_input_combobox">
         <label>Статус билета</label>
-        <select value={formInput.StatusBilet} onChange={(e) => setFormInput({ ...formInput, StatusBilet: e.target.value })} > 
+        <select value={formInput.StatusBilet} onChange={(e) => setFormInput({ ...formInput, StatusBilet: e.target.value })}> 
           <option ></option>
-          <option value="Изготовлен">Изготовлен</option>
-          <option value="Не изготовлен">Не изготовлен</option>
-          <option>Выдан</option>
-          <option>Утерян*</option>
+          {crdSt.map((item, index)=>{ return <option value={index+1}>{item}</option>})} 
         </select>
         </div>
 
         <div className="form_input_combobox">
         <label>Пол</label>
-        <select  > 
+        <select value={formInput.Sex} onChange={(e) => setFormInput({ ...formInput, Sex: e.target.value })}> 
           <option ></option>
-          <option >Мужской</option>
-          <option>Женский</option>
+          <option value={'Мужской'}>Мужской</option>
+          <option value={'Женский'}>Женский</option>
         </select>
         </div>
         
         <div className="form_input_date" >
         <label>Дата рождения</label>
-        <input type="date" min="1923-01-01"/>
+        <input 
+          value={formInput.DateBirth} 
+          onChange={(e) => setFormInput({ ...formInput, DateBirth: e.target.value })} 
+          type="date" 
+          min="1923-01-01"/>
         </div>
 
         <div className="form_input_date">
         <label>Дата вступления</label>
-        <input type="date" min="2023-01-01"/>
+        <input 
+          value={formInput.DateIssue}
+          onChange={(e) => setFormInput({ ...formInput, DateIssue: e.target.value })} 
+          type="date" 
+          min="2023-01-01"/>
         </div>
 
         <div className="form_input_combobox">
         <label>Место вступления</label>
-        <select   > 
-          <option ></option>
-          <option >Места</option>
-          <option>дополнят</option>
-          <option>...</option>
+        <select value={formInput.PlaceIssue} onChange={(e) => setFormInput({ ...formInput, PlaceIssue: e.target.value })}>
+          <option ></option> 
+          {entrPlcs.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
         </select>
         </div>
 
         <div className="form_input_combobox">
         <label>Статус членства</label>
-        <select  >
+        <select value={formInput.StatusMember} onChange={(e) => setFormInput({ ...formInput, StatusMember: e.target.value })}>
           <option ></option> 
-          <option >Действующий член</option>
-          <option>Членство приостановлено</option>
-          <option>Снят с учета</option>
+          {mbrSt.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
         </select>
         </div>
 
         <div className="form_input_combobox">
         <label>Место постановки на учет</label>
-        <select   >
-          <option ></option>
-          <option >Отделение</option>
-          <option>дополнят</option>
-          <option>...</option>
+        <select value={formInput.PlaceYchet} onChange={(e) => setFormInput({ ...formInput, PlaceYchet: e.target.value })}>
+          <option ></option> 
+          {regPlcs.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
         </select>
         </div>
 
         <div className="form_input_combobox">
         <label>Образование</label>
-        <select >
+        <select value={formInput.Education} onChange={(e) => setFormInput({ ...formInput, Education: e.target.value })}>
           <option ></option> 
-          <option>Общее среднее</option>
-          <option>Профессионально-техническое</option>
-          <option>Среднее специальное</option>
-          <option>Высшее</option>
+          {educ.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
         </select>
         </div>
       
         <div className="form_input_combobox">
         <label>Социальная категория</label>
-        <select  > 
-          <option ></option>
-          <option>Рабочий</option>
-          <option>Служащий</option>
-          <option>Предприниматель</option>
-          <option>Студент</option>
-          <option>Пенсионер</option>
-          <option>Временно неработающий</option>
+        <select value={formInput.SocialGroup} onChange={(e) => setFormInput({ ...formInput, SocialGroup: e.target.value })}>
+          <option ></option> 
+          {socs.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
         </select>
         </div>
 
         <div className="form_input_combobox">
         <label>Сфера деятельности</label>
-        <select >
-          <option ></option>
-          <option>Агропромышленный комплекс</option>
-          <option>Архитектура и строительство</option>
-          <option>Государственное управление</option>
-          <option>Жилищно-коммунальное хозяйство</option>
-          <option>...</option>
+        <select value={formInput.SphereActivity} onChange={(e) => setFormInput({ ...formInput, SphereActivity: e.target.value })}>
+          <option ></option> 
+          {acts.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
         </select>
         </div>
 
         <div className="form_input_combobox">
         <label>Статус в партии</label>
-        <select >
-          <option ></option>
-          <option>Член БП «Белая Русь»,</option>
-          <option>Председатель первичного отделения БП «Белая Русь»</option>
-          <option>Председатель местного отделения БП «Белая Русь»,</option>
-          <option>Председатель областного/Минского городского отделения БП «Белая Русь»,</option>
-          <option>...</option>
+        <select value={formInput.StatusPart} onChange={(e) => setFormInput({ ...formInput, StatusPart: e.target.value })}>
+          <option ></option> 
+          {partPoss.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
         </select>
         </div>
 
         <div className="form_input_combobox">
         <label>Избирался ли депутатом</label>
-        <select >
+        <select value={formInput.Deputat} onChange={(e) => setFormInput({ ...formInput, Deputat: e.target.value })}> 
           <option ></option>
-          <option>Да</option>
-          <option>Нет</option>
+          <option value={'Да'}>Да</option>
+          <option value={'Нет'}>Нет</option>
         </select>
         </div>
     </div>
 
     <div className="table">
+    <div className={`OtchetFilter ${(tablefindfilter) ? 'hide' : ''}`}>
+          <p>Отчет в Word</p>
+          <p>Отчет в Excel</p>
+        </div>
     <table className={`tablePOO `}> 
     <thead>
        <tr>
@@ -262,7 +327,7 @@ export function FindFilterEdit({b}){
        {filt}
     </tbody>
     </table>
-    {personcardEdit ? <PersonalCardEdit setPersoncardEdit={setPersoncardEdit} infoCard={infoCard} setinfoCard={setInfoCard}/> : null}
+    {personcardEdit ? <PersonalCardEdit setPersoncardEdit={setPersoncardEdit} col={col} infoCard={infoCard} setinfoCard={setInfoCard}/> : null}
     </div>
   </div>
   )

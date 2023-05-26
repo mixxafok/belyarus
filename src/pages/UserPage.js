@@ -179,7 +179,7 @@ export function UserPage(){
           <li className="main__li_2"><span className={`main__span ${col_2 ? 'act' : ''}`} 
           onClick={()=>{col('col2')}}>Поиск и фильтрация</span></li>
           <li className="main__li_3"><span className={`main__span ${col_3 ? 'act' : ''}`} 
-          onClick={()=>{col('col3')}}>Список <br/> приостановленных членов</span></li>
+          onClick={()=>{col('col3')}}>Список <br/> приостановленных <br/> членов партии</span></li>
           <li className="main__li_4"><span className={`main__span ${col_4 ? 'act' : ''}`} 
           onClick={()=>{col('col4')}}>Список снятых с учета</span></li>
         </ul>

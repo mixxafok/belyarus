@@ -6,10 +6,13 @@
   text-align: center;
   width: 90%;
   cursor: default;
+  table-layout: fixed;
+
   &.hide{
     display:none;
     
   }
+
 }
 
  thead td{

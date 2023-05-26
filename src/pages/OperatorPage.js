@@ -3,12 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { FindFilterEdit } from "../components/FindFilterEdit.js";
 import {PersonalCardEdit} from '../components/PersonalCardEdit';
 import Icon from '../icons/partIcon.js';
+import question from '../icons/question.png';
 import {Registration} from '../components/Registration.js';
 import {EditCard} from '../components/EditCard.js';
 import '../styles/OperatorPage.css';
 import '../styles/Header.css';
 import '../styles/Table.css';
 import '../styles/PersonalCardEdit.css';
+import { Options } from "../components/Options.js";
 
 export function OperatorPage(){
   const [infoCard,setInfoCard] = useState([]) // для персональной карточки
@@ -122,12 +124,17 @@ export function OperatorPage(){
    const [options, setOptions] = useState([]);
 
    const fetchPOO = async ()=>{
+    try{
      const response = await fetch("http://localhost:5059/UserPage/tablePOO/", {
        method: "get",
       "content-type" : "application/json; charset=utf-8"
      });
      let q = await response.json();
      await setb(q);
+    }
+    catch(err){
+      console.log(err)
+    }
    };
 
    const fetchNO = async ()=>{
@@ -180,7 +187,7 @@ export function OperatorPage(){
   let tableNO = b.map(function(item,index) {
    return <tr key={item.id}>
      <td> {index+1}</td>
-      <td className="table__surname"><p onClick={()=>{ setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
+      <td className="table__surname"><p onClick={()=>{ fetchOne(item.id); setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
       <td>{item.name}</td>
       <td>{item.parent}</td>
       <td>{item.dateFinish}</td>
@@ -190,7 +197,7 @@ export function OperatorPage(){
  let tablePause = b.map(function(item,index) {
    return <tr key={item.id}>
      <td> {index+1}</td>
-      <td className="table__surname"><p onClick={()=>{ setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
+      <td className="table__surname"><p onClick={()=>{ fetchOne(item.id); setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
       <td>{item.name}</td>
         <td>{item.parent}</td>
         <td>{item.numBilet}</td>
@@ -202,6 +209,8 @@ export function OperatorPage(){
 
   return (
     <div className="oper_page">
+    
+
     <header className="header_UserPage">
 
     <div className="ICON"> <Icon height="20px" width="20px"/></div>
@@ -213,6 +222,7 @@ export function OperatorPage(){
       <div className="Header__nav">
         <p className="Header__nameUser">Карпатов Николай Александрович</p> 
         <p className="Header__ruleUser" >Оператор</p>
+        <p className="main__li_spravka">Справка &nbsp; <img src={question} alt="" width="13px"/> </p>
         <p className="Header__exit" onClick={()=> Exit()}>Выход  </p>
       </div>
   
@@ -226,11 +236,11 @@ export function OperatorPage(){
         <li className="main__li_2"><span className={`main__span ${col_2 ? 'act' : ''}`} 
         onClick={()=>{col('col2')}}>Поиск и фильтрация</span></li>
         <li className="main__li_3"><span className={`main__span ${col_3 ? 'act' : ''}`} 
-        onClick={()=>{col('col3')}}>Список приостановленных членов</span></li>
+        onClick={()=>{col('col3')}}>Список <br/> приостановленных <br/> членов партии</span></li>
         <li className="main__li_4"><span className={`main__span ${col_4 ? 'act' : ''}`} 
         onClick={()=>{col('col4')}}>Список снятых с учета</span></li>
         <li className="main__li_5"><span className={`main__span ${col_5 ? 'act' : ''}`} 
-        onClick={()=>{col('col5')}}>Зарегистрировать члена партии</span></li>
+        onClick={()=>{col('col5')}}>Зарегистрировать <br/> члена партии</span></li>
         <li className="main__li_6"><span className={`main__span__edit ${col_6 ? '' : 'hide'}`} 
         onClick={()=>{col('col6')}}>Режим редактирования <br/>учетной карточки</span></li>
       </ul>
@@ -296,12 +306,10 @@ export function OperatorPage(){
            {tableNO}
         </tbody>
      </table>
-     { (col_2) ? <FindFilterEdit b={b}/> : null}
+     { (col_2) ? <FindFilterEdit b={b} options={options} col={col} infoCard={infoCard} setInfoCard={setInfoCard}/> : null}
      { (col_5) ? <Registration options={options}/> : null}
-     { (col_6) ? <EditCard infoCard={infoCard} options={options}/> : null}
+     { (col_6) ? <EditCard infoCard={infoCard} options={options} /> : null}
      </div>
-
-
 
     </main>
     

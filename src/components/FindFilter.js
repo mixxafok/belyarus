@@ -3,6 +3,7 @@ import '../styles/Table.css';
 import '../styles/Findfilter.css';
 import {PersonalCard} from './PersonalCard.js';
 
+
 export function FindFilter({b, options,tablefindfilter}){
   const [personcard, setPersoncard] = useState(false);
   const [infoCard,setInfoCard] = useState([]);
@@ -197,7 +198,7 @@ export function FindFilter({b, options,tablefindfilter}){
         <div className="form_input_combobox">
         <label>Статус билета</label>
         <select value={formInput.StatusBilet} onChange={(e) => setFormInput({ ...formInput, StatusBilet: e.target.value })}> 
-        <option ></option>
+          <option ></option>
           {crdSt.map((item, index)=>{ return <option value={index+1}>{item}</option>})} 
         </select>
         </div>
@@ -205,20 +206,28 @@ export function FindFilter({b, options,tablefindfilter}){
         <div className="form_input_combobox">
         <label>Пол</label>
         <select value={formInput.Sex} onChange={(e) => setFormInput({ ...formInput, Sex: e.target.value })}> 
-        <option ></option>
-        <option value={'Мужской'}>Мужской</option>
-        <option value={'Женский'}>Женский</option>
+          <option ></option>
+          <option value={'Мужской'}>Мужской</option>
+          <option value={'Женский'}>Женский</option>
         </select>
         </div>
         
         <div className="form_input_date" >
         <label>Дата рождения</label>
-        <input type="date" min="1923-01-01"/>
+        <input 
+          value={formInput.DateBirth}
+          onChange={(e) => setFormInput({ ...formInput, DateBirth: e.target.value })} 
+          type="date" 
+          min="1923-01-01"/>
         </div>
 
         <div className="form_input_date">
         <label>Дата вступления</label>
-        <input type="date" min="2023-01-01"/>
+        <input 
+          value={formInput.DateIssue}
+          onChange={(e) => setFormInput({ ...formInput, DateIssue: e.target.value })} 
+          type="date" 
+          min="2023-01-01"/>
         </div>
 
         <div className="form_input_combobox">

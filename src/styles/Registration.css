@@ -82,7 +82,7 @@ label {
   flex-grow: 1;
   flex-shrink: 0;
   justify-content: space-between;
-  width: 59%;
+  width: 54%;
   margin-top: 1%;
  /* border: 1px solid yellow;*/
 }
@@ -182,7 +182,7 @@ label {
 }
 
 .reg__form_input_combobox__sex{
-  width: 40%;
+  width: 38%;
   display: flex;
   flex-direction: column;
   justify-content:baseline;
@@ -256,7 +256,7 @@ label {
 }
 
 .reg__form_input_dateBirthday {
-  width: 40%;
+  width: 35%;
   display: flex;
   flex-direction: column;
   justify-content:baseline;
@@ -266,7 +266,7 @@ label {
 }
 
 .reg__form_input_date {
-  width: 20%;
+  width: 15%;
   display: flex;
   flex-direction: column;
   justify-content:baseline;

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import '../styles/Registration.css';
 import Ava from '../img/ava.png';
 
-export function EditCard ({infoCard}){
+export function EditCard ({infoCard, options}){
 
   let data =new Date( infoCard[0].dateStart) //перевод даты из дд.мм.гггг 
   let dateStart = `${data.getFullYear()}-${data.getMonth()}-${data.getDate()}`//в гггг-мм-дд для input[date]
@@ -10,27 +10,33 @@ export function EditCard ({infoCard}){
   let data1 =new Date( infoCard[0].dateBirth) //перевод даты из дд.мм.гггг 
   let dateBirth= `${data1.getFullYear()}-${data1.getMonth()}-${data1.getDate()}`//в гггг-мм-дд для input[date]
 
+  let data2 =new Date( infoCard[0].dateIssue) //перевод даты из дд.мм.гггг 
+  let dateIssue= `${data2.getFullYear()}-${data2.getMonth()}-${data2.getDate()}`//в гггг-мм-дд для input[date]
+
     const [formInput, setFormInput] = useState({
-      Surname: infoCard[0].surname, 
-      Name: infoCard[0].name,
-      Parent: infoCard[0].parent,
+      Surname: infoCard[0].fio.split(' ')[0], 
+      Name: infoCard[0].fio.split(' ')[1],
+      Parent: infoCard[0].fio.split(' ')[2],
       NumBilet: infoCard[0].numBilet,
       DateStart: `${dateStart}`,
       DateFinish: ``,
-      DateIssue: ``,
-      StatusBilet: `${infoCard[0].statusBilet}`,
+      DateIssue: `${dateIssue}`,
+      StatusBilet: '1',
       StatusMember: infoCard[0].statusMember,
       Sex: infoCard[0].sex,
       DateBirth: `${dateBirth}`,
+      StatusPart:'',
+      Deputat: '',
       PlaceIssue:'',
       Education: '',
       SocialGroup: '',
       SphereActivity: '',
-      PlaceJob: infoCard[0].jobas,
-      StatusPart:'',
-      Deputat: '',
-      Contact:'',
-      Place: ''
+      PlaceJob: infoCard[0].jobas.split(',')[0], 
+      PostJob: infoCard[0].jobas.split(',')[1],
+      RegistrationAddress: infoCard[0].contact.split(',')[0], 
+      LivingAddress: infoCard[0].contact.split(',')[1], 
+      TelephoneNumber: infoCard[0].contact.split(',')[2], 
+
     })
 
 //console.log(formInput.DateBirth)
@@ -39,6 +45,68 @@ export function EditCard ({infoCard}){
 const handleForm = () =>{
   console.log(formInput);
 }
+
+//обработка options
+const educ = [];
+const socs = [];
+const acts = [];
+const regPlcs = [];
+const entrPlcs = [];
+const partPoss = [];
+const mbrSt = [];
+const crdSt = [];
+for (let key in options){
+  if(key == 'edus'){
+    for (let ked of options['edus']){
+      educ.push( ked.val)
+      continue
+      }
+  }
+  if(key == 'socs'){
+    for (let ked of options['socs']){
+      socs.push( ked.val)
+      continue
+      }
+  }
+  if(key == 'acts'){
+    for (let ked of options['acts']){
+      acts.push( ked.val)
+      continue
+      }
+  }
+  if(key == 'regPlcs'){
+    for (let ked of options['regPlcs']){
+      regPlcs.push( ked.val)
+      continue
+      }
+  }
+  if(key == 'entrPlcs'){
+    for (let ked of options['entrPlcs']){
+      entrPlcs.push( ked.val)
+      continue
+      }
+  }
+  if(key == 'partPoss'){
+    for (let ked of options['partPoss']){
+      partPoss.push( ked.val)
+      continue
+      }
+  }
+  if(key == 'mbrSt'){
+    for (let ked of options['mbrSt']){
+      mbrSt.push( ked.val)
+      continue
+      }
+  }
+  if(key == 'crdSt'){
+    for (let ked of options['crdSt']){
+      crdSt.push( ked.val)
+      continue
+      }
+  }
+}
+//обработка options
+
 
   return (
     <div className='registration'>
@@ -65,43 +133,44 @@ const handleForm = () =>{
               placeholder=""
             />
           </div>
-
           <div className="reg__form_input_fio">
-          <label>Имя</label>
-          <input
-            type="search"
-            onChange={(e) => setFormInput({ ...formInput, Name: e.target.value })}
-            value={formInput.Name }
-            className="reg__input"
-            placeholder=""
-          />
+            <label>Имя</label>
+            <input
+              type="search"
+              onChange={(e) => setFormInput({ ...formInput, Name: e.target.value })}
+              value={formInput.Name }
+              className="reg__input"
+              placeholder=""
+            />
           </div>
-
           <div className="reg__form_input_fio">
-          <label>Отчество</label>
-          <input
-            type="search"
-            onChange={(e) => setFormInput({ ...formInput, Parent: e.target.value })}
-            value={formInput.Parent }
-            className="reg__input"
-            placeholder=""
-          />
+            <label>Отчество</label>
+            <input
+              type="search"
+              onChange={(e) => setFormInput({ ...formInput, Parent: e.target.value })}
+              value={formInput.Parent }
+              className="reg__input"
+              placeholder=""
+            />
           </div>
          </container> 
 
          <container className="SexBirthday">
           <div className='reg__form_input_combobox__sex'>
-          <label>Пол</label>
-          <select  onChange={(e) => setFormInput({ ...formInput, Sex: e.target.value })}> 
-            <option ></option>
-            <option >Мужской</option>
-            <option>Женский</option>
-          </select>
+            <label>Пол</label>
+            <select value={formInput.Sex} onChange={(e) => setFormInput({ ...formInput, Sex: e.target.value })}> 
+              <option ></option>
+              <option value={'Мужской'}>Мужской</option>
+              <option value={'Женский'}>Женский</option>
+            </select>
           </div>
-          
           <div className="reg__form_input_dateBirthday" >
-          <label>Дата рождения</label>
-          <input value={formInput.DateBirth} onChange={(e) => setFormInput({ ...formInput, DateBirth: e.target.value })} type="date" min="1923-01-01"/>
+            <label>Дата рождения</label>
+            <input 
+              value={formInput.DateBirth} 
+              onChange={(e) => setFormInput({ ...formInput, DateBirth: e.target.value })} 
+              type="date" 
+              min="1923-01-01"/>
           </div>
           </container>
          </container>
@@ -118,180 +187,153 @@ const handleForm = () =>{
             placeholder=""
           />
           </div>
+          */}
           
-          
-          <div className="reg__form_input_combobox">
-          <label>Статус билета</label>
-          <select  > 
-            <option  onChange={(e) => setFormInput({ ...formInput, StatusBilet: e.target.value })} ></option>
-            <option >Изготовлен</option>
-            <option>Не изготовлен</option>
-            <option>Выдан</option>
-            <option>Утерян*</option>
-          </select>
-          </div>*/}
+
         <container className="Social">
           <div className="reg__form_input_combobox__social">
           <label>Образование</label>
-          <select  >
-            <option ></option> 
-            <option>Общее среднее</option>
-            <option>Профессионально-техническое</option>
-            <option>Среднее специальное</option>
-            <option>Высшее</option>
-          </select>
+            <select value={formInput.Education} onChange={(e) => setFormInput({ ...formInput, Education: e.target.value })}>
+              <option ></option> 
+              {educ.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
+            </select>
           </div>
-        
           <div className="reg__form_input_combobox__social">
           <label>Социальная категория</label>
-          <select > 
-            <option ></option>
-            <option>Рабочий</option>
-            <option>Служащий</option>
-            <option>Предприниматель</option>
-            <option>Студент</option>
-            <option>Пенсионер</option>
-            <option>Временно неработающий</option>
-          </select>
+            <select value={formInput.SocialGroup} onChange={(e) => setFormInput({ ...formInput, SocialGroup: e.target.value })}>
+              <option ></option> 
+              {socs.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
+            </select>
           </div>
-        
           <div className="reg__form_input_combobox__social">
-          <label>Сфера деятельности</label>
-          <select >
-            <option ></option>
-            <option>Агропромышленный комплекс</option>
-            <option>Архитектура и строительство</option>
-            <option>Государственное управление</option>
-            <option>Жилищно-коммунальное хозяйство</option>
-            <option>...</option>
-          </select>
+            <label>Сфера деятельности</label>
+            <select value={formInput.SphereActivity} onChange={(e) => setFormInput({ ...formInput, SphereActivity: e.target.value })}>
+              <option ></option> 
+              {acts.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
+            </select>
           </div>
         </container>
        
 
-       {/*<div className="reg__form_input_combobox">
-          <label>Статус членства</label>
-          <select  >
-            <option ></option> 
-            <option >Действующий член</option>
-            <option>Членство приостановлено</option>
-            <option>Снят с учета</option>
-          </select>
-          </div>*/}
-
 <br/>
 <hr/>
 
-        
-        <container className="StatusPartya">
-          <div className="reg__form_input_combobox__social">
-          <label>Статус в партии</label>
-          <select >
-            <option ></option>
-            <option>Член БП «Белая Русь»,</option>
-            <option>Председатель первичного отделения БП «Белая Русь»</option>
-            <option>Председатель местного отделения БП «Белая Русь»,</option>
-            <option>Председатель областного/Минского городского отделения БП «Белая Русь»,</option>
-            <option>...</option>
-          </select>
+        <container className='Statusts'>
+          <div className="reg__form_input_combobox__places">
+            <label>Статус билета</label>
+            <select value={formInput.StatusBilet} onChange={(e) => setFormInput({ ...formInput, StatusBilet: e.target.value })}> 
+              <option ></option>
+              {crdSt.map((item, index)=>{ return <option value={index+1}>{item}</option>})} 
+            </select>
           </div>
-        
-          <div className="reg__form_input_combobox__deputat">
-          <label>Избирался ли депутатом</label>
-          <select >
-            <option ></option>
-            <option>Да</option>
-            <option>Нет</option>
-          </select>
+          <div className="reg__form_input_combobox__placesYchet">
+            <label>Статус членства</label>
+            <select value={formInput.StatusMember} onChange={(e) => setFormInput({ ...formInput, StatusMember: e.target.value })}>
+              <option ></option> 
+              {mbrSt.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
+            </select>
           </div>
+        </container>
 
+        <container className="StatusPartya">
+          <div className="reg__form_input_combobox__places">
+            <label>Статус в партии</label>
+            <select value={formInput.StatusPart} onChange={(e) => setFormInput({ ...formInput, StatusPart: e.target.value })}>
+              <option ></option> 
+              {partPoss.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
+            </select>
+          </div>
+          <div className="reg__form_input_combobox__deputat">
+            <label>Избирался ли депутатом</label>
+            <select value={formInput.Deputat} onChange={(e) => setFormInput({ ...formInput, Deputat: e.target.value })}> 
+              <option ></option>
+              <option value={'Да'}>Да</option>
+              <option value={'Нет'}>Нет</option>
+            </select>
+          </div>
           <div className="reg__form_input_date">
-          <label>Дата вступления</label>
-          <input value={formInput.DateStart} onChange={(e) => setFormInput({ ...formInput, DateStart: e.target.value })} type="date" min="2023-01-01"/>
+            <label>Дата вступления</label>
+            <input 
+              value={formInput.DateIssue}
+              onChange={(e) => setFormInput({ ...formInput, DateIssue: e.target.value })} 
+              type="date" 
+              min="2023-01-01"/>
           </div>
         </container>
 
         <container className="Places">
           <div className="reg__form_input_combobox__places">
           <label>Место вступления</label>
-          <select  > 
-            <option ></option>
-            <option >Места</option>
-            <option>дополнят</option>
-            <option>...</option>
-          </select>
+            <select value={formInput.PlaceIssue} onChange={(e) => setFormInput({ ...formInput, PlaceIssue: e.target.value })}>
+              <option ></option> 
+              {entrPlcs.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
+            </select>
           </div>
-        
           <div className="reg__form_input_combobox__placesYchet">
-          <label>Место постановки на учет</label>
-          <select  >
-            <option ></option>
-            <option >Отделение</option>
-            <option>дополнят</option>
-            <option>...</option>
-          </select>
+            <label>Место постановки на учет</label>
+            <select value={formInput.PlaceYchet} onChange={(e) => setFormInput({ ...formInput, PlaceYchet: e.target.value })}>
+              <option ></option> 
+              {regPlcs.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
+            </select>
           </div>
         </container>
 <br/>
 <hr/>
         <container className="Jobs">
           <div className="reg__form_input_jobs">
-          <label>Место работы</label>
-          <input
-            type="search"
-            onChange={(e) => setFormInput({ ...formInput, PlaceJob: e.target.value })}
-            value={formInput.PlaceJob }
-            className="reg__input"
-            placeholder=""
-          />
+            <label>Место работы</label>
+            <input
+              type="search"
+              onChange={(e) => setFormInput({ ...formInput, PlaceJob: e.target.value })}
+              value={formInput.PlaceJob }
+              className="reg__input"
+              placeholder=""
+            />
           </div>
-        
           <div className="reg__form_input_jobsAddress">
-          <label>Должность</label>
-          <input
-            type="search"
-            onChange={(e) => setFormInput({ ...formInput, PostJob: e.target.value })}
-            value={formInput.PostJob }
-            className="reg__input"
-            placeholder=""
-          />
+            <label>Должность</label>
+            <input
+              type="search"
+              onChange={(e) => setFormInput({ ...formInput, PostJob: e.target.value })}
+              value={formInput.PostJob }
+              className="reg__input"
+              placeholder=""
+            />
           </div>
         </container>
 
-
         <container className="Address">
           <div className="reg__form_input_jobs">
-          <label>Адрес регистрации</label>
-          <input
-            type="search"
-            onChange={(e) => setFormInput({ ...formInput, RegistrationAddress: e.target.value })}
-            value={formInput.RegistrationAddress }
-            className="reg__input"
-            placeholder=""
-          />
+            <label>Адрес регистрации</label>
+            <input
+              type="search"
+              onChange={(e) => setFormInput({ ...formInput, RegistrationAddress: e.target.value })}
+              value={formInput.RegistrationAddress }
+              className="reg__input"
+              placeholder=""
+            />
           </div>
-        
           <div className="reg__form_input_jobsAddress">
-          <label>Адрес проживания</label>
-          <input
-            type="search"
-            onChange={(e) => setFormInput({ ...formInput, LivingAddress: e.target.value })}
-            value={formInput.LivingAddress }
-            className="reg__input"
-            placeholder=""
-          />
+            <label>Адрес проживания</label>
+            <input
+              type="search"
+              onChange={(e) => setFormInput({ ...formInput, LivingAddress: e.target.value })}
+              value={formInput.LivingAddress }
+              className="reg__input"
+              placeholder=""
+            />
           </div>
         </container>
 
           <div className="reg__form_input_number">
-          <label>Номер телефона</label>
-          <input
-            type="search"
-            onChange={(e) => setFormInput({ ...formInput, TelephoneNumber: e.target.value })}
-            value={formInput.TelephoneNumber }
-            className="reg__input"
-            placeholder=""
-          />
+            <label>Номер телефона</label>
+            <input
+              type="search"
+              onChange={(e) => setFormInput({ ...formInput, TelephoneNumber: e.target.value })}
+              value={formInput.TelephoneNumber }
+              className="reg__input"
+              placeholder=""
+            />
           </div>
       </div>
     

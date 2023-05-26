@@ -54,7 +54,7 @@
 }
 
 .user_page .tables {
-  width: 95%;
+  width: 100%;
 }
 
 .user_page .main__span {
@@ -141,6 +141,7 @@
   font-size: 14px;
 float: right;
   margin: 1% 6% 1% 0;
+  cursor: pointer;
   &.hide {
     display: none;
   }
