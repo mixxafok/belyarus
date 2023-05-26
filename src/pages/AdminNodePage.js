@@ -251,8 +251,9 @@ let chec = true;
      <td className="table__surname"><p onClick={()=>{ fetchOne(item.id); setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
      <td>{item.name}</td>
        <td>{item.parent}</td>
-       <td>{item.numBilet}</td>
-       <td>{item.dateStart} <input type="checkbox" name="name1" checked={chec}  /*onChange={this.toggleChange} */ /></td>
+       <td>{item.dateStart}</td>
+       <td><input type="checkbox" name="name1" checked={chec}  /*onChange={this.toggleChange} */ /></td>
+       <td><input type="checkbox" name="name1" checked={chec}  /*onChange={this.toggleChange} */ /></td>
   </tr>
 });
 //вывод таблиц
@@ -364,6 +365,7 @@ let chec = true;
               <td>Отчество</td>
               <td>Последняя дата входа</td>
               <td>Оплата взносов</td>
+              <td>Права оператора</td>
            </tr>
         </thead>
         <tbody>
