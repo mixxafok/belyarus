@@ -270,8 +270,10 @@ const fetchRegistration = async ()=>{
           <div className="reg__form_input_Rule">
             <label>Роль в системе</label>
             <select value={formInput.Rule} onChange={(e) => setFormInput({ ...formInput, Rule: e.target.value })}>
-              <option ></option> 
-              {partPoss.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
+              <option value="1">Информационный пользователь</option> 
+              <option value="2">Оператор</option> 
+              <option value="3">Администратор узла</option> 
+              <option value="4">Администратор системы</option> 
             </select>
           </div>
          </container>
