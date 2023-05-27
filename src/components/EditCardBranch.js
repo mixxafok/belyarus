@@ -1,126 +1,111 @@
 import React, {useState} from 'react';
-import '../styles/Registration.css';
+import '../styles/RegistrationBranch.css';
 import Ava from '../img/ava.png';
 
-export function Registration ({options}){
+export function EditCardBranch ({infoCard, options}){
 
-  const [formInput, setFormInput] = useState({
-    Login: '',
-    Password: '',
-    RepeatPassword: '',
-    Rule: '',
-    Surname: '', 
-    Name: '',
-    Parent: '',
-    NumBilet: '',
-    DateStart: '',
-    DateFinish: '',
-    DateIssue: '',
-    StatusBilet: '',
-    StatusMember: '',
-    Sex: '',
-    DateBirth: '',
-    PlaceIssue:'',
-    Education: '',
-    SocialGroup: '',
-    SphereActivity: '',
-    PlaceJob: '',
-    PostJob:'',
-    StatusPart:'',
-    Deputat: '',
-    RegistrationAddress:'',
-    LivingAddress:'',
-    TelephoneNumber:'',
-    Place: '' 
-  })
+  let data =new Date( infoCard[0].dateStart) //перевод даты из дд.мм.гггг 
+  let dateStart = `${data.getFullYear()}-${data.getMonth()}-${data.getDate()}`//в гггг-мм-дд для input[date]
 
-  //обработка options
-  const educ = [];
-  const socs = [];
-  const acts = [];
-  const regPlcs = [];
-  const entrPlcs = [];
-  const partPoss = [];
-  const mbrSt = [];
-  const crdSt = [];
-  for (let key in options){
-    if(key == 'edus'){
-      for (let ked of options['edus']){
-        educ.push( ked.val)
-        continue
-        }
-    }
-    if(key == 'socs'){
-      for (let ked of options['socs']){
-        socs.push( ked.val)
-        continue
-        }
-    }
-    if(key == 'acts'){
-      for (let ked of options['acts']){
-        acts.push( ked.val)
-        continue
-        }
-    }
-    if(key == 'regPlcs'){
-      for (let ked of options['regPlcs']){
-        regPlcs.push( ked.val)
-        continue
-        }
-    }
-    if(key == 'entrPlcs'){
-      for (let ked of options['entrPlcs']){
-        entrPlcs.push( ked.val)
-        continue
-        }
-    }
-    if(key == 'partPoss'){
-      for (let ked of options['partPoss']){
-        partPoss.push( ked.val)
-        continue
-        }
-    }
-    if(key == 'mbrSt'){
-      for (let ked of options['mbrSt']){
-        mbrSt.push( ked.val)
-        continue
-        }
-    }
-    if(key == 'crdSt'){
-      for (let ked of options['crdSt']){
-        crdSt.push( ked.val)
-        continue
-        }
-    }
-  }
-//обработка options
+  let data1 =new Date( infoCard[0].dateBirth) //перевод даты из дд.мм.гггг 
+  let dateBirth= `${data1.getFullYear()}-${data1.getMonth()}-${data1.getDate()}`//в гггг-мм-дд для input[date]
+
+  let data2 =new Date( infoCard[0].dateIssue) //перевод даты из дд.мм.гггг 
+  let dateIssue= `${data2.getFullYear()}-${data2.getMonth()}-${data2.getDate()}`//в гггг-мм-дд для input[date]
+
+    const [formInput, setFormInput] = useState({
+      Surname: infoCard[0].fio.split(' ')[0], 
+      Name: infoCard[0].fio.split(' ')[1],
+      Parent: infoCard[0].fio.split(' ')[2],
+      NumBilet: infoCard[0].numBilet,
+      DateStart: `${dateStart}`,
+      DateFinish: ``,
+      DateIssue: `${dateIssue}`,
+      StatusBilet: `${infoCard[0].statusBilet}`,
+      StatusMember: infoCard[0].statusMember,
+      Sex: infoCard[0].sex,
+      DateBirth: `${dateBirth}`,
+      StatusPart:'1',
+      Deputat: '',
+      PlaceIssue:'',
+      Education: '',
+      SocialGroup: '',
+      SphereActivity: '',
+      PlaceJob: infoCard[0].jobas.split(',')[0], 
+      PostJob: infoCard[0].jobas.split(',')[1],
+      RegistrationAddress: infoCard[0].contact.split(',')[0], 
+      LivingAddress: infoCard[0].contact.split(',')[1], 
+      TelephoneNumber: infoCard[0].contact.split(',')[2], 
+
+    })
+
+//console.log(formInput.DateBirth)
 
 
 const handleForm = () =>{
-  console.log(formInput); 
-  fetchRegistration();
+  console.log(formInput);
 }
 
-//запрос fetch POST
-const fetchRegistration = async ()=>{
-  try{
-    const response = await fetch("http://localhost:5059/UserPage/Search/", {
-      method: 'post',
-      headers: {
-        'Accept': 'application/json',
-      'Content-Type': 'application/json;charset=utf-8',
-
-      },
-      body: JSON.stringify(formInput)
-    });
-
-    let q = await response.json();
-    await console.log(JSON.stringify(q));
+//обработка options
+const educ = [];
+const socs = [];
+const acts = [];
+const regPlcs = [];
+const entrPlcs = [];
+const partPoss = [];
+const mbrSt = [];
+const crdSt = [];
+for (let key in options){
+  if(key == 'edus'){
+    for (let ked of options['edus']){
+      educ.push( ked.val)
+      continue
+      }
   }
-  catch(err){
-    console.log(err)
+  if(key == 'socs'){
+    for (let ked of options['socs']){
+      socs.push( ked.val)
+      continue
+      }
   }
-};//запрос fetch POST
+  if(key == 'acts'){
+    for (let ked of options['acts']){
+      acts.push( ked.val)
+      continue
+      }
+  }
+  if(key == 'regPlcs'){
+    for (let ked of options['regPlcs']){
+      regPlcs.push( ked.val)
+      continue
+      }
+  }
+  if(key == 'entrPlcs'){
+    for (let ked of options['entrPlcs']){
+      entrPlcs.push( ked.val)
+      continue
+      }
+  }
+  if(key == 'partPoss'){
+    for (let ked of options['partPoss']){
+      partPoss.push( ked.val)
+      continue
+      }
+  }
+  if(key == 'mbrSt'){
+    for (let ked of options['mbrSt']){
+      mbrSt.push( ked.val)
+      continue
+      }
+  }
+  if(key == 'crdSt'){
+    for (let ked of options['crdSt']){
+      crdSt.push( ked.val)
+      continue
+      }
+  }
+}
+//обработка options
 
 
   return (
@@ -204,7 +189,10 @@ const fetchRegistration = async ()=>{
           </div>
           */}
           
-
+          <div className="reg__form_input_checkbox" >
+            <label>Оператор</label>
+            <input type="checkbox" name="name1" />
+          </div>
         <container className="Social">
           <div className="reg__form_input_combobox__social">
           <label>Образование</label>
@@ -229,53 +217,6 @@ const fetchRegistration = async ()=>{
           </div>
         </container>
        
-
-<br/>
-<hr/>
-
-        <container className="Img_Fio_LoginRule">
-         <container className="Fio">
-          <div className='reg__form_input_Login'>
-            <label>Логин</label>
-            <input
-              type="search"
-              onChange={(e) => setFormInput({ ...formInput, Login: e.target.value })}
-              value={formInput.Login }
-              className="reg__input"
-              placeholder=""
-            />
-          </div>
-          <div className="reg__form_input_Login">
-            <label>Пароль</label>
-            <input
-              type="password"
-              onChange={(e) => setFormInput({ ...formInput, Password: e.target.value })}
-              value={formInput.Password }
-              className="reg__input"
-              placeholder=""
-            />
-            <a href="#" className="password-control">s</a>
-          </div>
-          <div className="reg__form_input_Login">
-            <label>Повторите пароль</label>
-            <input
-              type="password"
-              onChange={(e) => setFormInput({ ...formInput, RepeatPassword: e.target.value })}
-              value={formInput.RepeatPassword }
-              className="reg__input"
-              placeholder=""
-            />
-            <a href="#" className="password-control">s</a>
-          </div>
-          <div className="reg__form_input_Rule">
-            <label>Роль в системе</label>
-            <select value={formInput.Rule} onChange={(e) => setFormInput({ ...formInput, Rule: e.target.value })}>
-              <option ></option> 
-              {partPoss.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
-            </select>
-          </div>
-         </container>
-         </container>
 
 <br/>
 <hr/>
@@ -316,8 +257,8 @@ const fetchRegistration = async ()=>{
           <div className="reg__form_input_date">
             <label>Дата вступления</label>
             <input 
-              value={formInput.DateBirth}
-              onChange={(e) => setFormInput({ ...formInput, DateBirth: e.target.value })} 
+              value={formInput.DateIssue}
+              onChange={(e) => setFormInput({ ...formInput, DateIssue: e.target.value })} 
               type="date" 
               min="2023-01-01"/>
           </div>
@@ -398,6 +339,6 @@ const fetchRegistration = async ()=>{
             />
           </div>
       </div>
-      
-  ) 
-} 
+    
+  )
+}

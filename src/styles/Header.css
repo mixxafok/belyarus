@@ -81,10 +81,15 @@
 }
 
 .Header__ruleUser{
+  display: flex ;
   font-size: 3px;
   font-weight:300;
 }
 
+.spravka {
+  width: 14px;
+  height: 14px;
+}
 
 .Header__text {
   position: relative;

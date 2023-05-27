@@ -1,6 +1,6 @@
 
 .adminNode_page{
-  background-image: url('../../img/back4.jpg');
+  background-image: url('../img/back4.jpg');
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -112,7 +112,12 @@
   margin-top: 5%;
   /* border: 1px solid green;*/
  }
- .adminNode_page .main__ul li:nth-child(7) {
+ .adminNode_page  .main__ul li:nth-child(7) {
+  width: 100%;
+  margin-top: 5%;
+  /* border: 1px solid green;*/
+ }
+ .adminNode_page .main__ul li:nth-child(8) {
   width: 100%;
   margin-top: 5%;
   color:brown;
@@ -123,11 +128,45 @@
   position: relative;
 }
 
+.adminnode__Button{
+  background-color:rgba(218, 173, 83, 0.746);
+  width: 15%;
+  border-radius: 8px;
+  text-align: center;
+  transition: 50ms;
+  margin-right: 50%;
+
+}
+
+.adminnode__Button:active {
+  box-shadow:0px 0px 2px 1px black;
+    opacity: 1;
+    transition: 50ms;
+}
+
+.adminNode_page .OtchetBranch{
+  font-family: Noto sans;
+  color: black;
+  width: 80%;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  font-size: 14px;
+  float: right;
+  margin-top: 1%;
+  margin-right: 10%;
+  margin-bottom: 1%;
+  &.hide {
+    display: none;
+  }
+}
+
+
 .adminNode_page .Otchet{
 
   font-family: Noto sans;
   color: black;
-  width: 20%;
+  width: 30%;
   display: flex;
   flex-flow: row;
   justify-content: space-between;
@@ -146,11 +185,10 @@
   color: black;
   width: 30%;
   display: flex;
-  flex-flow: row;
   justify-content: space-between;
   font-size: 14px;
 float: right;
-  margin: 1% 6% 1% 0;
+  margin: 1% 9% 1% 0;
   cursor: pointer;
   &.hide {
     display: none;
