@@ -8,6 +8,7 @@ import {Registration} from '../components/Registration.js';
 import {EditCard} from '../components/EditCard.js';
 import {EditCardBranch} from '../components/EditCardBranch.js';
 import { Branchs } from "../components/Branchs.js";
+import { Spravochnik } from "../components/Spravochnik.js";
 import '../styles/AdminNodePage.css';
 import '../styles/Header.css';
 import '../styles/Table.css';
@@ -24,6 +25,9 @@ export function AdminNodePage(){
   const [col_6, setcol_6] = useState(false)
   const [col_7, setcol_7] = useState(false)
   const [col_8, setcol_8] = useState(false)
+  const [col_9, setcol_9] = useState(false)
+  const [col_0, setcol_0] = useState(false)
+  const [hideLi, setHideLi] = useState(true)
   const [tablehidePOO, setTableHidePOO] = useState(true)
   const [tablefindfilter, setTableFindFilter] = useState(true)
   const [tablehidePause, setTableHidePause] = useState(true)
@@ -34,7 +38,27 @@ export function AdminNodePage(){
 
   //нажатие на меню
   function col (cols){
-    if (cols == 'col1') {
+    if (cols == 'col0') {
+      setcol_0(!col_0);
+      setcol_1(false); 
+      setcol_2(false); 
+      setcol_3(false); 
+      setcol_4(false);
+      setcol_5(false);
+      setcol_6(false);
+      setcol_7(false);
+      setcol_8(false);
+      setcol_9(false);
+      setHideLi(!hideLi);
+      setTableHidePOO(true);
+      setTableFindFilter(true);
+      setTableHidePause(true);
+      setTableHideNO(true);
+      setTableHideBranch(true);
+      fetchPOO();
+}
+   else if (cols == 'col1') {
+      
           setcol_1(!col_1); 
           setcol_2(false); 
           setcol_3(false); 
@@ -43,6 +67,7 @@ export function AdminNodePage(){
           setcol_6(false);
           setcol_7(false);
           setcol_8(false);
+          setcol_9(false);
           setTableHidePOO(!tablehidePOO);
           setTableFindFilter(true);
           setTableHidePause(true);
@@ -51,6 +76,7 @@ export function AdminNodePage(){
           fetchPOO();
     }
    else if (cols == 'col2'){
+    
           setcol_1(false); 
           setcol_2(!col_2); 
           setcol_3(false); 
@@ -59,6 +85,7 @@ export function AdminNodePage(){
           setcol_6(false);
           setcol_7(false);
           setcol_8(false);
+          setcol_9(false);
           setTableHidePOO(true);
           setTableFindFilter(!tablefindfilter);
           setTableHidePause(true);
@@ -69,6 +96,7 @@ export function AdminNodePage(){
           // подгрузка таблицы РОО
         }
     else if (cols == 'col3'){
+      
           setcol_1(false); 
           setcol_2(false); 
           setcol_3(!col_3); 
@@ -77,6 +105,7 @@ export function AdminNodePage(){
           setcol_6(false);
           setcol_7(false);
           setcol_8(false);
+          setcol_9(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(!tablehidePause);
@@ -86,6 +115,7 @@ export function AdminNodePage(){
         
         }
     else if ( cols == 'col4') {
+     
           setcol_1(false); 
           setcol_2(false); 
           setcol_3(false); 
@@ -94,6 +124,7 @@ export function AdminNodePage(){
           setcol_6(false);
           setcol_7(false);
           setcol_8(false);
+          setcol_9(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(true);
@@ -110,6 +141,7 @@ export function AdminNodePage(){
           setcol_6(false);
           setcol_7(false);
           setcol_8(false);
+          setcol_9(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(true);
@@ -117,7 +149,25 @@ export function AdminNodePage(){
           setTableHideBranch(true);
           fetchOptions();
     }
+    else if ( cols == 'col6') {
+      setcol_0(false);
+      setcol_1(false); 
+      setcol_2(false); 
+      setcol_3(false); 
+      setcol_4(false);
+      setcol_5(false);
+      setcol_6(!col_6);
+      setcol_7(false);
+      setcol_8(false);
+      setTableHidePOO(true);
+      setTableFindFilter(true);
+      setTableHidePause(true);
+      setTableHideNO(true);
+      setTableHideBranch(true);
+      fetchOptions();
+}
     else if ( cols == 'col7') {
+      setcol_0(false);
           setcol_1(false); 
           setcol_2(false); 
           setcol_3(false); 
@@ -126,6 +176,7 @@ export function AdminNodePage(){
           setcol_6(false);
           setcol_7(!col_7);
           setcol_8(false);
+          setcol_9(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(true);
@@ -134,6 +185,7 @@ export function AdminNodePage(){
           fetchBranch();
 }
     else if ( cols == 'col8') {
+      setcol_0(false);
           setcol_1(false); 
           setcol_2(false); 
           setcol_3(false); 
@@ -142,6 +194,7 @@ export function AdminNodePage(){
           setcol_6(false);
           setcol_7(false);
           setcol_8(!col_8);
+          setcol_9(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(true);
@@ -149,22 +202,23 @@ export function AdminNodePage(){
           setTableHideBranch(true);
           fetchBranch();
 }
-    else if ( cols == 'col6') {
+    else if ( cols == 'col9') {
+      setcol_0(false);
           setcol_1(false); 
           setcol_2(false); 
           setcol_3(false); 
           setcol_4(false);
           setcol_5(false);
-          setcol_6(!col_6);
+          setcol_6(false);
           setcol_7(false);
           setcol_8(false);
+          setcol_9(!col_9);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
           fetchOptions();
-
     }
    }
 
@@ -304,6 +358,9 @@ let chec = true;
     <main>
       <div className="spisok">
       <ul className="main__ul">
+      <li className="main__li_0"><span className={`main__span ${col_0 ? 'act' : ''}`} 
+        onClick={()=>{col('col0')}}>Моя ветка</span></li>
+        <div className={hideLi ? 'hide' : null}>
         <li className="main__li_1"><span className={`main__span ${col_1 ? 'act' : ''}`} 
         onClick={()=>{col('col1')}}>Список членов партии <br/> "Белая Русь"</span></li>
         <li className="main__li_2"><span className={`main__span ${col_2 ? 'act' : ''}`} 
@@ -314,10 +371,13 @@ let chec = true;
         onClick={()=>{col('col4')}}>Список снятых с учета</span></li>
         <li className="main__li_5"><span className={`main__span ${col_5 ? 'act' : ''}`} 
         onClick={()=>{col('col5')}}>Зарегистрировать <br/> члена партии</span></li>
+        </div>
         <li className="main__li_7"><span className={`main__span ${col_7 ? 'act' : ''}`} 
-        onClick={()=>{col('col7')}}>Список пользователей <br/>своей ветки</span></li>
+        onClick={()=>{col('col7')}}>Последняя дата входа <br/>и взносы</span></li>
         <li className="main__li_8"><span className={`main__span ${col_8 ? 'act' : ''}`} 
         onClick={()=>{col('col8')}}>Дерево организаций</span></li>
+        <li className="main__li_9"><span className={`main__span ${col_9 ? 'act' : ''}`} 
+        onClick={()=>{col('col9')}}>Справочники</span></li>
         <li className="main__li_6"><span className={`main__span__edit ${col_6 ? '' : 'hide'}`} 
         onClick={()=>{col('col6')}}>Режим редактирования <br/>учетной карточки</span></li>
       </ul>
@@ -412,7 +472,8 @@ let chec = true;
      { (col_5) ? <Registration options={options}/> : null}
      {/* { (col_6) ? <EditCard infoCard={infoCard} options={options} /> : null} */}
      { (col_6) ? <EditCardBranch infoCard={infoCard} options={options} /> : null}
-     { (col_8) ? <Branchs /> : null}
+     { (col_8) ? <Branchs options={options}/> : null}
+     { (col_9) ? <Spravochnik options={options}/> : null}
      </div>
 
     </main>

@@ -5,16 +5,16 @@ import Ava from '../img/ava.png';
 export function Registration ({options}){
 
   const [formInput, setFormInput] = useState({
-    Login: '',
-    Password: '',
-    RepeatPassword: '',
-    Rule: '',
+   // Login: '',
+   // Password: '',
+   // RepeatPassword: '',
+   // Rule: '',
     Surname: '', 
     Name: '',
     Parent: '',
-    NumBilet: '',
-    DateStart: '',
-    DateFinish: '',
+    NumBilet: 0,
+   // DateStart: '',
+   // DateFinish: '',
     DateIssue: '',
     StatusBilet: '',
     StatusMember: '',
@@ -104,7 +104,7 @@ const handleForm = () =>{
 //запрос fetch POST
 const fetchRegistration = async ()=>{
   try{
-    const response = await fetch("http://localhost:5059/UserPage/Search/", {
+    const response = await fetch("http://localhost:5059/UserPage/addCard/", {
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -318,8 +318,8 @@ const fetchRegistration = async ()=>{
           <div className="reg__form_input_date">
             <label>Дата вступления</label>
             <input 
-              value={formInput.DateBirth}
-              onChange={(e) => setFormInput({ ...formInput, DateBirth: e.target.value })} 
+              value={formInput.DateIssue}
+              onChange={(e) => setFormInput({ ...formInput, DateIssue: e.target.value })} 
               type="date" 
               min="2023-01-01"/>
           </div>
@@ -335,7 +335,7 @@ const fetchRegistration = async ()=>{
           </div>
           <div className="reg__form_input_combobox__placesYchet">
             <label>Место постановки на учет</label>
-            <select value={formInput.PlaceYchet} onChange={(e) => setFormInput({ ...formInput, PlaceYchet: e.target.value })}>
+            <select value={formInput.Place} onChange={(e) => setFormInput({ ...formInput, Place: e.target.value })}>
               <option ></option> 
               {regPlcs.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
             </select>

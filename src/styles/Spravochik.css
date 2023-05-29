@@ -1,0 +1,30 @@
+.spavochnik{
+  margin: 1% 0 0 1%;
+  padding: 0 2% 2% 2%;
+  font-family: Montserrat-SemiBold;
+}
+
+.spavochnik span {
+  cursor: pointer;
+}
+
+.PlaceIssue::before{
+  content: "- "
+}
+
+.PlaceIssueHide{
+display: none;
+}
+
+.PlaceYchetHide{
+display: none;
+}
+
+
+
+.Placemargin{
+  margin-left: 4%;
+  font-size: 14px;
+  margin-bottom: 1%;
+}
+

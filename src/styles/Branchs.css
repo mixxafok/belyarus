@@ -1,0 +1,32 @@
+.branchs{
+  margin: 1% 0 0 1%;
+  padding: 0 2% 2% 2%;
+  font-family: Montserrat-SemiBold;
+}
+
+.branchs span {
+  cursor: pointer;
+}
+
+.PlaceIssue::before{
+  content: "- "
+}
+
+.OblastiHide{
+display: none;
+}
+
+.CityHide{
+display: none;
+}
+
+.Placemargin1{
+  margin-left: 4%;
+  font-size: 14px;
+
+}
+.Placemargin2{
+  margin-left: 8%;
+  font-size: 14px;
+  margin-bottom: 1%;
+}

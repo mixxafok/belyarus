@@ -10,7 +10,6 @@ import '../styles/OperatorPage.css';
 import '../styles/Header.css';
 import '../styles/Table.css';
 import '../styles/PersonalCardEdit.css';
-import { Options } from "../components/Options.js";
 
 export function OperatorPage(){
   const [infoCard,setInfoCard] = useState([]) // для персональной карточки
@@ -221,8 +220,7 @@ export function OperatorPage(){
 
       <div className="Header__nav">
         <p className="Header__nameUser">Карпатов Николай Александрович</p> 
-        <p className="Header__ruleUser" >Оператор</p>
-        <p className="main__li_spravka">Справка &nbsp; <img src={question} alt="" width="13px"/> </p>
+        <p className="Header__ruleUser" >Оператор &nbsp; <img className="spravka" src={question} alt="" width="13px" /></p>
         <p className="Header__exit" onClick={()=> Exit()}>Выход  </p>
       </div>
   

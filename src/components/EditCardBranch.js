@@ -14,29 +14,29 @@ export function EditCardBranch ({infoCard, options}){
   let dateIssue= `${data2.getFullYear()}-${data2.getMonth()}-${data2.getDate()}`//в гггг-мм-дд для input[date]
 
     const [formInput, setFormInput] = useState({
-      Surname: infoCard[0].fio.split(' ')[0], 
-      Name: infoCard[0].fio.split(' ')[1],
-      Parent: infoCard[0].fio.split(' ')[2],
+      Surname: infoCard[0].name, 
+      Name: infoCard[0].surname,
+      Parent: infoCard[0].parent,
       NumBilet: infoCard[0].numBilet,
       DateStart: `${dateStart}`,
-      DateFinish: ``,
+     // DateFinish: ``,
       DateIssue: `${dateIssue}`,
-      StatusBilet: `${infoCard[0].statusBilet}`,
+      StatusBilet: infoCard[0].statusBilet,
       StatusMember: infoCard[0].statusMember,
       Sex: infoCard[0].sex,
       DateBirth: `${dateBirth}`,
-      StatusPart:'1',
-      Deputat: '',
-      PlaceIssue:'',
-      Education: '',
-      SocialGroup: '',
-      SphereActivity: '',
-      PlaceJob: infoCard[0].jobas.split(',')[0], 
-      PostJob: infoCard[0].jobas.split(',')[1],
-      RegistrationAddress: infoCard[0].contact.split(',')[0], 
-      LivingAddress: infoCard[0].contact.split(',')[1], 
-      TelephoneNumber: infoCard[0].contact.split(',')[2], 
-
+      StatusPart: infoCard[0].statusPart,
+      Deputat: infoCard[0].deputat,
+      PlaceYchet: infoCard[0].uchetPlace,
+      PlaceIssue: infoCard[0].placeIssue,
+      Education: infoCard[0].educarion,
+      SocialGroup: infoCard[0].socialGroup,
+      SphereActivity: infoCard[0].sphereActivity,
+      PlaceJob: infoCard[0].placeJob, 
+      PostJob: infoCard[0].postJob,
+      RegistrationAddress: infoCard[0].registrationAddress, 
+      LivingAddress: infoCard[0].livingAddress, 
+      TelephoneNumber: infoCard[0].telephoneNumber, 
     })
 
 //console.log(formInput.DateBirth)
@@ -160,8 +160,8 @@ for (let key in options){
             <label>Пол</label>
             <select value={formInput.Sex} onChange={(e) => setFormInput({ ...formInput, Sex: e.target.value })}> 
               <option ></option>
-              <option value={'Мужской'}>Мужской</option>
-              <option value={'Женский'}>Женский</option>
+              <option value={true}>Мужской</option>
+              <option value={false}>Женский</option>
             </select>
           </div>
           <div className="reg__form_input_dateBirthday" >
@@ -250,8 +250,8 @@ for (let key in options){
             <label>Избирался ли депутатом</label>
             <select value={formInput.Deputat} onChange={(e) => setFormInput({ ...formInput, Deputat: e.target.value })}> 
               <option ></option>
-              <option value={'Да'}>Да</option>
-              <option value={'Нет'}>Нет</option>
+              <option value={true}>Да</option>
+              <option value={false}>Нет</option>
             </select>
           </div>
           <div className="reg__form_input_date">

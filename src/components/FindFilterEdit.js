@@ -26,25 +26,30 @@ export function FindFilterEdit({b,tablefindfilter, options, col, infoCard, setIn
     SphereActivity: '',
     StatusPart:'',
     Deputat: '',
-
   })
 
+// действие по кнопке Найти
     const handleForm = () =>{
       console.log(formInput)
-  
-      if ( formInput.Name !== '' || formInput.Surname !== '' || formInput.Parent !== '' || formInput.NumBilet !== ''|| formInput.StatusBilet !== '') {
-        const results = b.filter((result) => {
-         return(result.name.toLowerCase().startsWith(formInput.Name.toLowerCase()) 
-            && result.surname.toLowerCase().startsWith(formInput.Surname.toLowerCase())
-            && result.parent.toLowerCase().startsWith(formInput.Parent.toLowerCase())
-            && result.numBilet.toLowerCase().startsWith(formInput.NumBilet.toLowerCase())
-           /* && result.statusBilet == formInput.StatusBilet*/
-        )
-        });
-        setFoundUsers(results);
-      } else {
-        setFoundUsers(b);
-      }
+     if( formInput.Surname !== '' || formInput.Name !== '' || formInput.Parent !== ''
+      || formInput.NumBilet !== '' || formInput.StatusBilet !== '' || formInput.Sex !== ''
+      || formInput.DateBirth !== '' || formInput.DateIssue !== '' || formInput.PlaceIssue !== ''
+      || formInput.StatusMember !== '' || formInput.Education !== '' || formInput.SocialGroup !== ''
+      || formInput.SphereActivity !== '' || formInput.StatusPart !== '' || formInput.Deputat !== '' )  fetchPost();
+     else setFoundUsers(b);
+      // if ( formInput.Name !== '' || formInput.Surname !== '' || formInput.Parent !== '' || formInput.NumBilet !== ''|| formInput.StatusBilet !== '') {
+      //   const results = b.filter((result) => {
+      //    return(result.name.toLowerCase().startsWith(formInput.Name.toLowerCase()) 
+      //       && result.surname.toLowerCase().startsWith(formInput.Surname.toLowerCase())
+      //       && result.parent.toLowerCase().startsWith(formInput.Parent.toLowerCase())
+      //       && result.numBilet.toLowerCase().startsWith(formInput.NumBilet.toLowerCase())
+      //      /* && result.statusBilet == formInput.StatusBilet*/
+      //   )
+      //   });
+      //   setFoundUsers(results);
+      // } else {
+      //   setFoundUsers(b);
+      // }
       setFormInput({
         Surname: '', 
         Name: '',
@@ -66,12 +71,32 @@ export function FindFilterEdit({b,tablefindfilter, options, col, infoCard, setIn
   
     }
 
+// get одного пользователя
     const fetchOne = async (itemid)=>{
       const response = await fetch(`http://localhost:5059/UserPage/GetOne?id=${itemid}`, {
         method: "get",
       });
       let q = await response.json();
       await setInfoCard([q]);
+    };
+
+// post для поиска
+    const fetchPost = async () => {
+      try{
+        const responce = await fetch('http://localhost:5059/UserPage/Search/', {
+          method: 'post',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json;charset=utf-8',  
+          },
+          body: JSON.stringify(formInput)
+        })
+        let q = await responce.json();
+        await setFoundUsers([q]);
+      }
+      catch(err){
+        console.log(err);
+      }
     };
 
   let filt = foundUsers && foundUsers.length > 0 ? (
@@ -90,7 +115,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col, infoCard, setIn
     <h1>Результаты не найдены!</h1>
   )
 
-    //обработка options
+//обработка options
     const educ = [];
     const socs = [];
     const acts = [];
@@ -217,8 +242,8 @@ export function FindFilterEdit({b,tablefindfilter, options, col, infoCard, setIn
         <label>Пол</label>
         <select value={formInput.Sex} onChange={(e) => setFormInput({ ...formInput, Sex: e.target.value })}> 
           <option ></option>
-          <option value={'Мужской'}>Мужской</option>
-          <option value={'Женский'}>Женский</option>
+          <option value={true}>Мужской</option>
+          <option value={false}>Женский</option>
         </select>
         </div>
         
@@ -300,8 +325,8 @@ export function FindFilterEdit({b,tablefindfilter, options, col, infoCard, setIn
         <label>Избирался ли депутатом</label>
         <select value={formInput.Deputat} onChange={(e) => setFormInput({ ...formInput, Deputat: e.target.value })}> 
           <option ></option>
-          <option value={'Да'}>Да</option>
-          <option value={'Нет'}>Нет</option>
+          <option value={true}>Да</option>
+          <option value={false}>Нет</option>
         </select>
         </div>
     </div>

@@ -164,8 +164,7 @@ export function UserPage(){
 
         <div className="Header__nav">
           <p className="Header__nameUser">Темошенко Кирилл Александрович</p> 
-          <p className="Header__ruleUser" >Информационный пользователь</p>
-          <p className="main__li_spravka">Справка &nbsp; <img src={question} alt="" width="13px"/> </p>
+          <p className="Header__ruleUser" >Информационный пользователь &nbsp; <img className="spravka" src={question} alt="" width="13px" /></p>
           <p className="Header__exit" onClick={()=> Exit()}>Выход  </p>
         </div>
     
