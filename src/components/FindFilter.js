@@ -1,74 +1,109 @@
-import React, { useState} from "react";
+import React, {useState} from "react";
 import '../styles/Table.css';
 import '../styles/Findfilter.css';
 import {PersonalCard} from './PersonalCard.js';
 
+export function FindFilter({b,tablefindfilter, options, infoCard, setInfoCard}){
 
-export function FindFilter({b, options,tablefindfilter}){
-  const [personcard, setPersoncard] = useState(false);
-  const [infoCard,setInfoCard] = useState([]);
+  const[personcard, setPersoncard] = useState(false);
+  // const [infoCard,setInfoCard] = useState([])
   const [foundUsers, setFoundUsers] = useState(b);
   
   const [formInput, setFormInput] = useState({
-    Surname: '',  // Фамилия
-    Name: '', // Имя
-    Parent: '', // отчество
-    NumBilet: '', // номер билета
-    StatusBilet: '', // статус билета
-    Sex: '', // пол
-    DateBirth: '', // день рождение
-    DateIssue: '', // дата вступления
-    PlaceIssue:'', // место вступления
-    StatusMember: '', // статус членства
-    PlaceYchet: '', // место постановки на учет
-    Education: '', // Образовние
-    SocialGroup: '', // социальная группа
-    SphereActivity: '', // сфера деятельности
-    StatusPart:'', // статус в партии
-    Deputat: '' // был ли депутатом
+    Surname: '', 
+    Name: '',
+    Parent: '',
+    NumBilet: '',
+    StatusBilet: '',
+    Sex: '',
+    DateBirth: '',
+    DateIssue: '',
+    PlaceIssue:'',
+    StatusMember: '',
+    PlaceYchet: '',
+    Education: '',
+    SocialGroup: '',
+    SphereActivity: '',
+    StatusPart:'',
+    Deputat: '',
   })
 
+// действие по кнопке Найти
     const handleForm = () =>{
       console.log(formInput)
-  
-      if ( formInput.Name !== '' || formInput.Surname !== '' || formInput.Parent !== '' || formInput.NumBilet !== ''|| formInput.StatusBilet !== '') {
-        const results = b.filter((result) => {
-         return(result.name.toLowerCase().startsWith(formInput.Name.toLowerCase()) 
-            && result.surname.toLowerCase().startsWith(formInput.Surname.toLowerCase())
-            && result.parent.toLowerCase().startsWith(formInput.Parent.toLowerCase())
-            && result.numBilet.toLowerCase().startsWith(formInput.NumBilet.toLowerCase())
-           /* && result.statusBilet == formInput.StatusBilet*/
-        )
-        });
-        setFoundUsers(results);
-      } else {
-        setFoundUsers(b);
-      }
+     if( formInput.Surname !== '' || formInput.Name !== '' || formInput.Parent !== ''
+      || formInput.NumBilet !== '' || formInput.StatusBilet !== '' || formInput.Sex !== ''
+      || formInput.DateBirth !== '' || formInput.DateIssue !== '' || formInput.PlaceIssue !== ''
+      || formInput.StatusMember !== '' || formInput.Education !== '' || formInput.SocialGroup !== ''
+      || formInput.SphereActivity !== '' || formInput.StatusPart !== '' || formInput.Deputat !== '' )  fetchPost();
+     else setFoundUsers(b);
+      // if ( formInput.Name !== '' || formInput.Surname !== '' || formInput.Parent !== '' || formInput.NumBilet !== ''|| formInput.StatusBilet !== '') {
+      //   const results = b.filter((result) => {
+      //    return(result.name.toLowerCase().startsWith(formInput.Name.toLowerCase()) 
+      //       && result.surname.toLowerCase().startsWith(formInput.Surname.toLowerCase())
+      //       && result.parent.toLowerCase().startsWith(formInput.Parent.toLowerCase())
+      //       && result.numBilet.toLowerCase().startsWith(formInput.NumBilet.toLowerCase())
+      //      /* && result.statusBilet == formInput.StatusBilet*/
+      //   )
+      //   });
+      //   setFoundUsers(results);
+      // } else {
+      //   setFoundUsers(b);
+      // }
       setFormInput({
-        Surname: '',  
-        Name: '', 
-        Parent: '', 
-        NumBilet: '', 
-        StatusBilet: '', 
-        Sex: '', 
-        DateBirth: '', 
-        DateIssue: '', 
-        PlaceIssue:'', 
-        StatusMember: '', 
-        PlaceYchet: '', 
-        Education: '', 
-        SocialGroup: '', 
-        SphereActivity: '', 
-        StatusPart:'', 
-        Deputat: '' 
+        Surname: '', 
+        Name: '',
+        Parent: '',
+        NumBilet: '',
+        StatusBilet: '',
+        Sex: '',
+        DateBirth: '',
+        DateIssue: '',
+        PlaceIssue:'',
+        StatusMember: '',
+        PlaceYchet: '',
+        Education: '',
+        SocialGroup: '',
+        SphereActivity: '',
+        StatusPart:'',
+        Deputat: ''
       })
+  
     }
+
+// get одного пользователя
+    const fetchOne = async (itemid)=>{
+      const response = await fetch(`http://localhost:5059/UserPage/GetOne?id=${itemid}`, {
+        method: "get",
+      });
+      let q = await response.json();
+      await setInfoCard([q]);
+    };
+
+// post для поиска
+    const fetchPost = async () => {
+      try{
+        const responce = await fetch('http://localhost:5059/UserPage/Search/', {
+          method: 'post',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json;charset=utf-8',  
+          },
+          body: JSON.stringify(formInput)
+        })
+        let q = await responce.json();
+        await setFoundUsers([q]);
+      }
+      catch(err){
+        console.log(err);
+      }
+    };
 
   let filt = foundUsers && foundUsers.length > 0 ? (
     foundUsers.map((user,index) => (
       <tr key={user.id}>
       <td> {index+1}</td>
-       <td className="table__surname"><p onClick={()=>{ setPersoncard(!personcard); setInfoCard([user])}} className="table_span__surname">{user.surname}</p></td>
+       <td className="table__surname"><p onClick={()=>{fetchOne(user.id); setPersoncard(!personcard); setInfoCard([user])}} className="table_span__surname">{user.surname}</p></td>
        <td>{user.name}</td>
          <td>{user.parent}</td>
          <td>{user.numBilet}</td>
@@ -81,78 +116,78 @@ export function FindFilter({b, options,tablefindfilter}){
   )
 
 //обработка options
-  const educ = [];
-  const socs = [];
-  const acts = [];
-  const regPlcs = [];
-  const entrPlcs = [];
-  const partPoss = [];
-  const mbrSt = [];
-  const crdSt = [];
-  for (let key in options){
-    if(key == 'edus'){
-      for (let ked of options['edus']){
-        educ.push( ked.val)
-        continue
-        }
+    const educ = [];
+    const socs = [];
+    const acts = [];
+    const regPlcs = [];
+    const entrPlcs = [];
+    const partPoss = [];
+    const mbrSt = [];
+    const crdSt = [];
+    for (let key in options){
+      if(key == 'edus'){
+        for (let ked of options['edus']){
+          educ.push( ked.val)
+          continue
+          }
+      }
+      if(key == 'socs'){
+        for (let ked of options['socs']){
+          socs.push( ked.val)
+          continue
+          }
+      }
+      if(key == 'acts'){
+        for (let ked of options['acts']){
+          acts.push( ked.val)
+          continue
+          }
+      }
+      if(key == 'regPlcs'){
+        for (let ked of options['regPlcs']){
+          regPlcs.push( ked.val)
+          continue
+          }
+      }
+      if(key == 'entrPlcs'){
+        for (let ked of options['entrPlcs']){
+          entrPlcs.push( ked.val)
+          continue
+          }
+      }
+      if(key == 'partPoss'){
+        for (let ked of options['partPoss']){
+          partPoss.push( ked.val)
+          continue
+          }
+      }
+      if(key == 'mbrSt'){
+        for (let ked of options['mbrSt']){
+          mbrSt.push( ked.val)
+          continue
+          }
+      }
+      if(key == 'crdSt'){
+        for (let ked of options['crdSt']){
+          crdSt.push( ked.val)
+          continue
+          }
+      }
     }
-    if(key == 'socs'){
-      for (let ked of options['socs']){
-        socs.push( ked.val)
-        continue
-        }
-    }
-    if(key == 'acts'){
-      for (let ked of options['acts']){
-        acts.push( ked.val)
-        continue
-        }
-    }
-    if(key == 'regPlcs'){
-      for (let ked of options['regPlcs']){
-        regPlcs.push( ked.val)
-        continue
-        }
-    }
-    if(key == 'entrPlcs'){
-      for (let ked of options['entrPlcs']){
-        entrPlcs.push( ked.val)
-        continue
-        }
-    }
-    if(key == 'partPoss'){
-      for (let ked of options['partPoss']){
-        partPoss.push( ked.val)
-        continue
-        }
-    }
-    if(key == 'mbrSt'){
-      for (let ked of options['mbrSt']){
-        mbrSt.push( ked.val)
-        continue
-        }
-    }
-    if(key == 'crdSt'){
-      for (let ked of options['crdSt']){
-        crdSt.push( ked.val)
-        continue
-        }
-    }
-  }
+  //обработка options
 
-
-  
   return (
     
   <div className="filter">
+
     <div className="form">
       <div className="form_input_1">
-        
-        <div className="Button" onClick={()=>{handleForm()}} >
+
+        <div className="Button" onClick={()=>handleForm()}>
            <button >Найти</button>
         </div>
 
-      <label>Фамилия </label>
+      <label>Фамилия</label>
         <input
           type="search"
           onChange={(e) => setFormInput({ ...formInput, Surname: e.target.value })}
@@ -207,15 +242,15 @@ export function FindFilter({b, options,tablefindfilter}){
         <label>Пол</label>
         <select value={formInput.Sex} onChange={(e) => setFormInput({ ...formInput, Sex: e.target.value })}> 
           <option ></option>
-          <option value={'Мужской'}>Мужской</option>
-          <option value={'Женский'}>Женский</option>
+          <option value={true}>Мужской</option>
+          <option value={false}>Женский</option>
         </select>
         </div>
         
         <div className="form_input_date" >
         <label>Дата рождения</label>
         <input 
-          value={formInput.DateBirth}
+          value={formInput.DateBirth} 
           onChange={(e) => setFormInput({ ...formInput, DateBirth: e.target.value })} 
           type="date" 
           min="1923-01-01"/>
@@ -289,9 +324,9 @@ export function FindFilter({b, options,tablefindfilter}){
         <div className="form_input_combobox">
         <label>Избирался ли депутатом</label>
         <select value={formInput.Deputat} onChange={(e) => setFormInput({ ...formInput, Deputat: e.target.value })}> 
-        <option ></option>
-        <option value={'Да'}>Да</option>
-        <option value={'Нет'}>Нет</option>
+          <option ></option>
+          <option value={true}>Да</option>
+          <option value={false}>Нет</option>
         </select>
         </div>
     </div>
@@ -317,7 +352,7 @@ export function FindFilter({b, options,tablefindfilter}){
        {filt}
     </tbody>
     </table>
-    {personcard ? <PersonalCard setPersoncard={setPersoncard} infoCard={infoCard} setinfoCard={setInfoCard}/> : null}
+    {personcard ? <PersonalCard setPersoncard={setPersoncard}  infoCard={infoCard} setinfoCard={setInfoCard}/> : null}
     </div>
   </div>
   )
