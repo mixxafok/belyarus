@@ -6,12 +6,16 @@ import Icon from '../icons/partIcon.js';
 import question from '../icons/question.png';
 import {Registration} from '../components/Registration.js';
 import {EditCard} from '../components/EditCard.js';
+import Up from '../icons/up.png';
 import '../styles/OperatorPage.css';
 import '../styles/Header.css';
 import '../styles/Table.css';
 import '../styles/PersonalCardEdit.css';
 
 export function OperatorPage(){
+  const [b,setb] = useState([])
+  const [options, setOptions] = useState([]);
+
   const [infoCard,setInfoCard] = useState([]) // для персональной карточки
   const [col_1, setcol_1] = useState(false)
   const [col_2, setcol_2] = useState(false)
@@ -19,13 +23,17 @@ export function OperatorPage(){
   const [col_4, setcol_4] = useState(false)
   const [col_5, setcol_5] = useState(false)
   const [col_6, setcol_6] = useState(false)
+  const [col_7, setcol_7] = useState(false)
   const [tablehidePOO, setTableHidePOO] = useState(true)
   const [tablefindfilter, setTableFindFilter] = useState(true)
   const [tablehidePause, setTableHidePause] = useState(true)
   const [tablehideNO, setTableHideNO] = useState(true)
+  const [tablehideBranch, setTableHideBranch] = useState(true)
 
   const[personcardEdit, setPersoncardEdit] = useState(false)
-
+  const[inputSearch, setInputSearch] = useState('')
+  const[inputDate, setInputDate] = useState('')
+  const[foundUsers, setFoundUsers] = useState(b)
   //нажатие на меню
   function col (cols){
     if (cols == 'col1') {
@@ -35,10 +43,12 @@ export function OperatorPage(){
           setcol_4(false);
           setcol_5(false);
           setcol_6(false);
+          setcol_7(false);
           setTableHidePOO(!tablehidePOO);
           setTableFindFilter(true);
           setTableHidePause(true);
           setTableHideNO(true);
+          setTableHideBranch(true);
           fetchPOO();
     }
    else if (cols == 'col2'){
@@ -48,13 +58,15 @@ export function OperatorPage(){
           setcol_4(false);
           setcol_5(false);
           setcol_6(false);
+          setcol_7(false);
           setTableHidePOO(true);
           setTableFindFilter(!tablefindfilter);
           setTableHidePause(true);
           setTableHideNO(true);
-          fetchPOO();
+          setTableHideBranch(true);
+          fetchPOO();// подгрузка таблицы РОО
           fetchOptions();
-          // подгрузка таблицы РОО
+          
         }
     else if (cols == 'col3'){
           setcol_1(false); 
@@ -63,10 +75,12 @@ export function OperatorPage(){
           setcol_4(false);
           setcol_5(false);
           setcol_6(false);
+          setcol_7(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(!tablehidePause);
           setTableHideNO(true);
+          setTableHideBranch(true);
           fetchPause();
         
         }
@@ -77,10 +91,12 @@ export function OperatorPage(){
           setcol_4(!col_4);
           setcol_5(false);
           setcol_6(false);
+          setcol_7(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(true);
           setTableHideNO(!tablehideNO);
+          setTableHideBranch(true);
           fetchNO();
         }
     else if ( cols == 'col5') {
@@ -90,12 +106,30 @@ export function OperatorPage(){
           setcol_4(false);
           setcol_5(!col_5);
           setcol_6(false);
+          setcol_7(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(true);
           setTableHideNO(true);
+          setTableHideBranch(true);
           fetchOptions();
     }
+    else if ( cols == 'col7') {
+          setcol_1(false); 
+          setcol_2(false); 
+          setcol_3(false); 
+          setcol_4(false);
+          setcol_5(false);
+          setcol_6(false);
+          setcol_7(!col_7);
+          setTableHidePOO(true);
+          setTableFindFilter(true);
+          setTableHidePause(true);
+          setTableHideNO(true);
+          setTableHideBranch(!tablehideBranch);
+          fetchBranch();
+
+}
     else if ( cols == 'col6') {
           setcol_1(false); 
           setcol_2(false); 
@@ -103,12 +137,13 @@ export function OperatorPage(){
           setcol_4(false);
           setcol_5(false);
           setcol_6(!col_6);
+          setcol_7(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(true);
           setTableHideNO(true);
+          setTableHideBranch(true);
           fetchOptions();
-
     }
    }
 
@@ -119,8 +154,7 @@ export function OperatorPage(){
    };
  
 //fetch
-   const [b,setb] = useState([])
-   const [options, setOptions] = useState([]);
+
 
    const fetchPOO = async ()=>{
     try{
@@ -151,6 +185,14 @@ export function OperatorPage(){
      let q = await response.json();
      await setb(q);
    };
+
+   const fetchBranch = async ()=>{
+    const response = await fetch("http://localhost:5059/UserPage/tablePOO/", {
+      method: "get",
+    });
+    let q = await response.json();
+    await setb(q);
+  };
 
    const fetchOne = async (itemid)=>{
     const response = await fetch(`http://localhost:5059/UserPage/GetOne?id=${itemid}`, {
@@ -204,15 +246,40 @@ export function OperatorPage(){
         <td>{item.datePause}</td>
    </tr>
  });
+
+ let chec = true;
+ let tableBranch = foundUsers.sort((a,b)=>a.surname.localeCompare(b.surname)).map(function(item,index) {
+  return <tr key={item.id}>
+    <td> {index+1}</td>
+     <td className="table__surname"><p onClick={()=>{ fetchOne(item.id); setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
+     <td>{item.name}</td>
+       <td>{item.parent}</td>
+       <td><input type="checkbox" name="name1" checked={chec}  /*onChange={this.toggleChange} */ /></td>
+  </tr>
+});
 //вывод таблиц
+
+
+const handleForm = () =>{
+  console.log(inputSearch)
+
+  if ( inputSearch !== '' ) {
+    const results = b.filter((result) => {
+     return(result.surname.toLowerCase().startsWith(inputSearch.toLowerCase()) 
+    )
+    });
+    setFoundUsers(results);
+  } else {
+    setFoundUsers(b);
+  }
+  setInputSearch('')
+}
 
   return (
     <div className="oper_page">
-    
+      <header className="header_UserPage">
 
-    <header className="header_UserPage">
-
-    <div className="ICON"> <Icon height="20px" width="20px"/></div>
+      <div className="ICON"> <Icon height="20px" width="20px"/></div>
 
       <div className="Header__text">
        <p className="Header__text_2">Белорусская партия «Белая Русь»</p> 
@@ -239,6 +306,8 @@ export function OperatorPage(){
         onClick={()=>{col('col4')}}>Список снятых с учета</span></li>
         <li className="main__li_5"><span className={`main__span ${col_5 ? 'act' : ''}`} 
         onClick={()=>{col('col5')}}>Зарегистрировать <br/> члена партии</span></li>
+         <li className="main__li_7"><span className={`main__span ${col_7 ? 'act' : ''}`} 
+        onClick={()=>{col('col7')}}>Взносы</span></li>
         <li className="main__li_6"><span className={`main__span__edit ${col_6 ? '' : 'hide'}`} 
         onClick={()=>{col('col6')}}>Режим редактирования <br/>учетной карточки</span></li>
       </ul>
@@ -248,14 +317,40 @@ export function OperatorPage(){
 
     {personcardEdit ? <PersonalCardEdit setPersoncardEdit ={setPersoncardEdit} col={col} infoCard={infoCard} /> : null}
 
-    <div className="tables">
+    <div className="tables" id="start_table">
 
-    <div className={`Otchet ${(tablehidePOO && tablehidePause && tablehideNO) ? 'hide' : ''}`}>
+    <div className={`Otchet ${(tablehidePOO && tablehidePause && tablehideNO ) ? 'hide' : ''}`}>
         <p>Отчет в Word</p>
         <p>Отчет в Excel</p>
       </div>
 
+      <div className={`OtchetBranch ${(tablehideBranch ) ? 'hide' : ''}`}>
+          <div className="adminnode__Button" onClick={()=> {handleForm()}}>
+            <button >Сохранить</button>
+          </div>
+          <div className="otchetbranch_input">
+            <input
+          type='search'
+          value={inputSearch}
+          onChange={e=>setInputSearch( e.target.value)}
+          placeholder="Введите фамилию"
+          />
+          <input
+          type='date'
+          value={inputDate}
+          onChange={e=>setInputDate( e.target.value)}
+          placeholder="Введите фамилию"
+          />
+          </div>
+          <div className="otchetbranch_word">
+            <p>Отчет в Word</p>
+            <p>Отчет в Excel</p>
+          </div>
+        
+      </div>
+
       <table className={`tablePOO ${tablehidePOO ? 'hide' : ''}`}> 
+      <a href='#start_table' className="start_fixed"><img src={Up} width='20px'/></a>
         <thead>
         <tr>
           <td>Номер</td>
@@ -273,6 +368,7 @@ export function OperatorPage(){
       </table>
 
      <table className={`tablePOO ${tablehidePause ? 'hide' : ''}`}> 
+     <a href='#start_table' className="start_fixed"><img src={Up} width='20px'/></a>
         <thead>
            <tr>
               <td>Номер</td>
@@ -291,6 +387,7 @@ export function OperatorPage(){
 
 
      <table className={`tablePOO ${tablehideNO ? 'hide' : ''}`}> 
+     <a href='#start_table' className="start_fixed"><img src={Up} width='20px'/></a>
         <thead>
            <tr>
               <td>Номер</td>
@@ -304,6 +401,23 @@ export function OperatorPage(){
            {tableNO}
         </tbody>
      </table>
+
+     <table className={`tablePOO ${tablehideBranch ? 'hide' : ''}`}> 
+     <a href='#start_table' className="start_fixed"><img src={Up} width='20px'/></a>
+        <thead>
+           <tr>
+              <td>Номер</td>
+              <td>Фамилия</td>
+              <td>Имя</td>
+              <td>Отчество</td>
+              <td>Оплата взносов</td>
+           </tr>
+        </thead>
+        <tbody>
+           {tableBranch}
+        </tbody>
+     </table>
+
      { (col_2) ? <FindFilterEdit b={b} options={options} col={col} infoCard={infoCard} setInfoCard={setInfoCard}/> : null}
      { (col_5) ? <Registration options={options}/> : null}
      { (col_6) ? <EditCard infoCard={infoCard} options={options} /> : null}

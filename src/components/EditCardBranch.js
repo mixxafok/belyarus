@@ -14,6 +14,10 @@ export function EditCardBranch ({infoCard, options}){
   let dateIssue= `${data2.getFullYear()}-${data2.getMonth()}-${data2.getDate()}`//в гггг-мм-дд для input[date]
 
     const [formInput, setFormInput] = useState({
+      // Login: '',
+      // Password: '',
+      // Rule: '',
+      Vznos: '',
       Surname: infoCard[0].name, 
       Name: infoCard[0].surname,
       Parent: infoCard[0].parent,

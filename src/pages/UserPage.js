@@ -4,6 +4,7 @@ import { FindFilter } from "../components/FindFilter.js";
 import {PersonalCard} from '../components/PersonalCard';
 import Icon from '../icons/partIcon.js';
 import question from '../icons/question.png';
+import Up from '../icons/up.png';
 import '../styles/UserPage.css';
 import '../styles/Header.css';
 import '../styles/Table.css';
@@ -107,6 +108,13 @@ export function UserPage(){
      await setb(q);
    };
 
+   const fetchOne = async (itemid)=>{
+    const response = await fetch(`http://localhost:5059/UserPage/GetOne?id=${itemid}`, {
+      method: "get",
+    });
+    let q = await response.json();
+    await setInfoCard([q]);
+  };
    const fetchOptions = async ()=>{
     const response = await fetch("  http://localhost:5059/UserPage/GetOptions", {
       method: "get",
@@ -120,7 +128,7 @@ export function UserPage(){
    let tablePOO = b.map(function(item,index) {
      return <tr key={item.id}>
        <td> {index+1}</td>
-        <td className="table__surname"><p  onClick={()=>{ setPersoncard(!personcard); setInfoCard([item]) }} className="table_span__surname">{item.surname}</p></td>
+        <td className="table__surname"><p  onClick={()=>{fetchOne(item.id); setPersoncard(!personcard); setInfoCard([item]) }} className="table_span__surname">{item.surname}</p></td>
         <td>{item.name}</td>
         <td>{item.parent}</td>
         <td>{item.numBilet}</td>
@@ -132,7 +140,7 @@ export function UserPage(){
   let tableNO = b.map(function(item,index) {
    return <tr key={item.id}>
      <td> {index+1}</td>
-      <td className="table__surname"><p onClick={()=>{ setPersoncard(!personcard)}} className="table_span__surname">{item.surname}</p></td>
+      <td className="table__surname"><p onClick={()=>{fetchOne(item.id); setPersoncard(!personcard)}} className="table_span__surname">{item.surname}</p></td>
       <td>{item.name}</td>
       <td>{item.parent}</td>
       <td>{item.dateFinish}</td>
@@ -142,7 +150,7 @@ export function UserPage(){
  let tablePause = b.map(function(item,index) {
    return <tr key={item.id}>
      <td> {index+1}</td>
-      <td className="table__surname"><p onClick={()=>{ setPersoncard(!personcard)}} className="table_span__surname">{item.surname}</p></td>
+      <td className="table__surname"><p onClick={()=>{fetchOne(item.id); setPersoncard(!personcard)}} className="table_span__surname">{item.surname}</p></td>
       <td>{item.name}</td>
         <td>{item.parent}</td>
         <td>{item.numBilet}</td>
@@ -187,13 +195,14 @@ export function UserPage(){
 
       {personcard ? <PersonalCard setPersoncard={setPersoncard} infoCard={infoCard} setinfoCard={setInfoCard}/> : null}
 
-      <div className="tables">
+      <div className="tables" id="start_table">
       <div className={`Otchet ${(tablehidePOO && tablehidePause && tablehideNO) ? 'hide' : ''}`}>
           <p>Отчет в Word</p>
           <p>Отчет в Excel</p>
         </div>
 
         <table className={`tablePOO ${tablehidePOO ? 'hide' : ''}`}> 
+        <a href='#start_table' className="start_fixed"><img src={Up} width='20px'/></a>
           <thead>
           <tr>
             <td>Номер</td>
@@ -211,6 +220,7 @@ export function UserPage(){
         </table>
 
        <table className={`tablePOO ${tablehidePause ? 'hide' : ''}`}> 
+       <a href='#start_table' className="start_fixed"><img src={Up} width='20px'/></a>
           <thead>
              <tr>
                 <td>Номер</td>
@@ -229,6 +239,7 @@ export function UserPage(){
 
 
        <table className={`tablePOO ${tablehideNO ? 'hide' : ''}`}> 
+       <a href='#start_table' className="start_fixed"><img src={Up} width='20px'/></a>
           <thead>
              <tr>
                 <td>Номер</td>

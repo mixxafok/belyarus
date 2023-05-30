@@ -8,7 +8,7 @@ export function PersonalCardEdit({setPersoncardEdit,col, infoCard } ){
   let fioMember = infoCard.map((tem) => {
     return (
       // <p>{tem.surname.toUpperCase()} {tem.name} {tem.parent}</p>
-       <p>{tem.fio}</p>
+       <p>{tem.name.toUpperCase()} {tem.surname} {tem.parent}</p>
     )
   })
 
@@ -22,14 +22,17 @@ export function PersonalCardEdit({setPersoncardEdit,col, infoCard } ){
        <li>Дата вступления: {item.dateStart}</li>
        <li>Место вступления: {item.placeIssue}</li>
        <li>Статус членства: {item.statusMember}</li>
-       <li>Место постановки на учет: {item.place}</li>
-       <li>Образование: {item.education}</li>
+       <li>Место постановки на учет: {item.uchetPlace}</li>
+       <li>Образование: {item.educarion}</li>
        <li>Социальная категория: {item.socialGroup}</li>
        <li>Сфера деятельности: {item.sphereActivity}</li>
-       <li>Место работы, должность: {item.placeJob}</li>
+       <li>Место работы: {item.placeJob} </li>
+       <li>Должность: {item.postJob} </li>
        <li>Статус в партии: {item.statusPart}</li>
        <li>Избирался ли депутатом: {item.deputat}</li>
-       <li>Контактная информация: {item.contact} </li>
+       <li>Адрес проживания: {item.livingAddress} </li>
+       <li>Номер телефона: {item.telephoneNumber} </li>
+       <li>Взносы:  </li>
     </ul>
   });
 

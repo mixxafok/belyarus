@@ -352,7 +352,7 @@ export function FindFilter({b,tablefindfilter, options, infoCard, setInfoCard}){
        {filt}
     </tbody>
     </table>
-    {personcard ? <PersonalCard setPersoncard={setPersoncard}  infoCard={infoCard} setinfoCard={setInfoCard}/> : null}
+    {personcard ? <PersonalCard setPersoncard={setPersoncard}  infoCard={infoCard} setInfoCard={setInfoCard}/> : null}
     </div>
   </div>
   )

@@ -9,6 +9,7 @@ import {EditCard} from '../components/EditCard.js';
 import {EditCardBranch} from '../components/EditCardBranch.js';
 import { Branchs } from "../components/Branchs.js";
 import { Spravochnik } from "../components/Spravochnik.js";
+import Up from '../icons/up.png';
 import '../styles/AdminNodePage.css';
 import '../styles/Header.css';
 import '../styles/Table.css';
@@ -333,7 +334,6 @@ let chec = true;
        <td>{item.parent}</td>
        <td>{item.dateStart}</td>
        <td><input type="checkbox" name="name1" checked={chec}  /*onChange={this.toggleChange} */ /></td>
-       <td><input type="checkbox" name="name1" checked={chec}  /*onChange={this.toggleChange} */ /></td>
   </tr>
 });
 //вывод таблиц
@@ -387,7 +387,7 @@ let chec = true;
 
     {personcardEdit ? <PersonalCardEdit setPersoncardEdit ={setPersoncardEdit} col={col} infoCard={infoCard} /> : null}
 
-    <div className="tables">
+    <div className="tables" id="start_table">
     
     <div className={`Otchet ${(tablehidePOO && tablehidePause && tablehideNO ) ? 'hide' : ''}`}>
         <p>Отчет в Word</p>
@@ -403,6 +403,7 @@ let chec = true;
       </div>
 
       <table className={`tablePOO ${tablehidePOO ? 'hide' : ''}`}> 
+      <a href='#start_table' className="start_fixed"><img src={Up} width='20px'/></a>
         <thead>
         <tr>
           <td>Номер</td>
@@ -420,6 +421,7 @@ let chec = true;
       </table>
 
      <table className={`tablePOO ${tablehidePause ? 'hide' : ''}`}> 
+     <a href='#start_table' className="start_fixed"><img src={Up} width='20px'/></a>
         <thead>
            <tr>
               <td>Номер</td>
@@ -437,6 +439,7 @@ let chec = true;
      </table>
 
      <table className={`tablePOO ${tablehideNO ? 'hide' : ''}`}> 
+     <a href='#start_table' className="start_fixed"><img src={Up} width='20px'/></a>
         <thead>
            <tr>
               <td>Номер</td>
@@ -452,6 +455,7 @@ let chec = true;
      </table>
 
      <table className={`tablePOO ${tablehideBranch ? 'hide' : ''}`}> 
+     <a href='#start_table' className="start_fixed"><img src={Up} width='20px'/></a>
         <thead>
            <tr>
               <td>Номер</td>
@@ -460,19 +464,17 @@ let chec = true;
               <td>Отчество</td>
               <td>Последняя дата входа</td>
               <td>Оплата взносов</td>
-              <td>Права оператора</td>
            </tr>
         </thead>
         <tbody>
            {tableBranch}
         </tbody>
      </table>
-
      { (col_2) ? <FindFilterEdit b={b} options={options} col={col} infoCard={infoCard} setInfoCard={setInfoCard}/> : null}
      { (col_5) ? <Registration options={options}/> : null}
      {/* { (col_6) ? <EditCard infoCard={infoCard} options={options} /> : null} */}
      { (col_6) ? <EditCardBranch infoCard={infoCard} options={options} /> : null}
-     { (col_8) ? <Branchs options={options}/> : null}
+     { (col_8) ? <Branchs options={options} tablePOO={tablePOO} tablehidePOO={tablehidePOO}/> : null}
      { (col_9) ? <Spravochnik options={options}/> : null}
      </div>
 

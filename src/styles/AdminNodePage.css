@@ -148,6 +148,13 @@
   /* border: 1px solid green;*/
  }
 
+ .start_fixed{
+  position: fixed;
+  right: 2%;
+  top: 20%;
+  opacity: 0.8;
+}
+
  .main__li_spravka {
   position: relative;
 }
@@ -159,7 +166,6 @@
   text-align: center;
   transition: 50ms;
   margin-right: 50%;
-
 }
 
 .adminnode__Button:active {

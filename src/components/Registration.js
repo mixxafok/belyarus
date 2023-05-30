@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import '../styles/Registration.css';
 import Ava from '../img/ava.png';
+import view from '../icons/eye.png';
+import no_view from '../icons/no-view.png';
 
 export function Registration ({options}){
 
@@ -9,9 +11,10 @@ export function Registration ({options}){
    // Password: '',
    // RepeatPassword: '',
    // Rule: '',
+   // Vznos: '',
     Surname: '', 
     Name: '',
-    Parent: '',
+    patronymic: '',
     NumBilet: 0,
    // DateStart: '',
    // DateFinish: '',
@@ -25,13 +28,13 @@ export function Registration ({options}){
     SocialGroup: '',
     SphereActivity: '',
     PlaceJob: '',
-    PostJob:'',
+    jobPost:'',
     StatusPart:'',
     Deputat: '',
-    RegistrationAddress:'',
-    LivingAddress:'',
-    TelephoneNumber:'',
-    Place: '' 
+    contactRegistrationAddress:'',
+    contactLivingAddress:'',
+    contactNumber:'',
+    uchetPlace: '' 
   })
 
   //обработка options
@@ -162,8 +165,8 @@ const fetchRegistration = async ()=>{
             <label>Отчество</label>
             <input
               type="search"
-              onChange={(e) => setFormInput({ ...formInput, Parent: e.target.value })}
-              value={formInput.Parent }
+              onChange={(e) => setFormInput({ ...formInput, patronymic: e.target.value })}
+              value={formInput.Parenpatronymict }
               className="reg__input"
               placeholder=""
             />
@@ -254,9 +257,9 @@ const fetchRegistration = async ()=>{
               className="reg__input"
               placeholder=""
             />
-            <a href="#" className="password-control">s</a>
+            <a href="#" className="password-control"></a>
           </div>
-          <div className="reg__form_input_Login">
+          {/* <div className="reg__form_input_Login">
             <label>Повторите пароль</label>
             <input
               type="password"
@@ -266,14 +269,14 @@ const fetchRegistration = async ()=>{
               placeholder=""
             />
             <a href="#" className="password-control">s</a>
-          </div>
+          </div> */}
           <div className="reg__form_input_Rule">
             <label>Роль в системе</label>
             <select value={formInput.Rule} onChange={(e) => setFormInput({ ...formInput, Rule: e.target.value })}>
               <option value="1">Информационный пользователь</option> 
-              <option value="2">Оператор</option> 
+              {/* <option value="2">Оператор</option> 
               <option value="3">Администратор узла</option> 
-              <option value="4">Администратор системы</option> 
+              <option value="4">Администратор системы</option>  */}
             </select>
           </div>
          </container>
@@ -286,8 +289,8 @@ const fetchRegistration = async ()=>{
           <div className="reg__form_input_combobox__places">
             <label>Статус билета</label>
             <select value={formInput.StatusBilet} onChange={(e) => setFormInput({ ...formInput, StatusBilet: e.target.value })}> 
-              <option ></option>
-              {crdSt.map((item, index)=>{ return <option value={index+1}>{item}</option>})} 
+              <option value={'2'}>Не изготовлен</option>
+              
             </select>
           </div>
           <div className="reg__form_input_combobox__placesYchet">
@@ -335,7 +338,7 @@ const fetchRegistration = async ()=>{
           </div>
           <div className="reg__form_input_combobox__placesYchet">
             <label>Место постановки на учет</label>
-            <select value={formInput.Place} onChange={(e) => setFormInput({ ...formInput, Place: e.target.value })}>
+            <select value={formInput.uchetPlace} onChange={(e) => setFormInput({ ...formInput, uchetPlace: e.target.value })}>
               <option ></option> 
               {regPlcs.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
             </select>
@@ -358,8 +361,8 @@ const fetchRegistration = async ()=>{
             <label>Должность</label>
             <input
               type="search"
-              onChange={(e) => setFormInput({ ...formInput, PostJob: e.target.value })}
-              value={formInput.PostJob }
+              onChange={(e) => setFormInput({ ...formInput, jobPost: e.target.value })}
+              value={formInput.jobPost }
               className="reg__input"
               placeholder=""
             />
@@ -371,8 +374,8 @@ const fetchRegistration = async ()=>{
             <label>Адрес регистрации</label>
             <input
               type="search"
-              onChange={(e) => setFormInput({ ...formInput, RegistrationAddress: e.target.value })}
-              value={formInput.RegistrationAddress }
+              onChange={(e) => setFormInput({ ...formInput, contactRegistrationAddress: e.target.value })}
+              value={formInput.contactRegistrationAddress}
               className="reg__input"
               placeholder=""
             />
@@ -381,8 +384,8 @@ const fetchRegistration = async ()=>{
             <label>Адрес проживания</label>
             <input
               type="search"
-              onChange={(e) => setFormInput({ ...formInput, LivingAddress: e.target.value })}
-              value={formInput.LivingAddress }
+              onChange={(e) => setFormInput({ ...formInput, contactLivingAddress: e.target.value })}
+              value={formInput.contactLivingAddress }
               className="reg__input"
               placeholder=""
             />
@@ -393,8 +396,8 @@ const fetchRegistration = async ()=>{
             <label>Номер телефона</label>
             <input
               type="search"
-              onChange={(e) => setFormInput({ ...formInput, TelephoneNumber: e.target.value })}
-              value={formInput.TelephoneNumber }
+              onChange={(e) => setFormInput({ ...formInput, contactNumber: e.target.value })}
+              value={formInput.contactNumber }
               className="reg__input"
               placeholder=""
             />

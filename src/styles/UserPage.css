@@ -16,6 +16,13 @@
   width: 20%;
 }
 
+.start_fixed{
+  position: fixed;
+  right: 2%;
+  top: 20%;
+  opacity: 0.8;
+}
+
 .user_page main {
   display: flex;
   flex-grow: 1;

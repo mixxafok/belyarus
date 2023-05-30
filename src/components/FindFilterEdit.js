@@ -176,6 +176,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col, infoCard, setIn
     }
   //обработка options
 
+
   return (
     
   <div className="filter">
