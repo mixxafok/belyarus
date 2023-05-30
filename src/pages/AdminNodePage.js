@@ -34,9 +34,12 @@ export function AdminNodePage(){
   const [tablehidePause, setTableHidePause] = useState(true)
   const [tablehideNO, setTableHideNO] = useState(true)
   const [tablehideBranch, setTableHideBranch] = useState(true)
-
+  const [b,setb] = useState([])
+  const [options, setOptions] = useState([]);
   const[personcardEdit, setPersoncardEdit] = useState(false)
-
+  const[inputSearch, setInputSearch] = useState('')
+  const[inputDate, setInputDate] = useState('')
+  const[foundUsers, setFoundUsers] = useState(b)
   //нажатие на меню
   function col (cols){
     if (cols == 'col0') {
@@ -229,11 +232,9 @@ export function AdminNodePage(){
        navigateTo('/');
    };
  
-//fetch
-   const [b,setb] = useState([])
-   const [options, setOptions] = useState([]);
 
-   const fetchPOO = async ()=>{
+//fetch
+   const fetchPOO = async () =>{
     try{
      const response = await fetch("http://localhost:5059/UserPage/tablePOO/", {
        method: "get",
@@ -326,7 +327,7 @@ export function AdminNodePage(){
 
 let chec = true;
 
- let tableBranch = b.map(function(item,index) {
+ let tableBranch = foundUsers.sort((a,b)=>a.surname.localeCompare(b.surname)).map(function(item,index) {
   return <tr key={item.id}>
     <td> {index+1}</td>
      <td className="table__surname"><p onClick={()=>{ fetchOne(item.id); setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
@@ -337,6 +338,22 @@ let chec = true;
   </tr>
 });
 //вывод таблиц
+
+
+const handleForm = () =>{
+  console.log(inputDate)
+
+  if ( inputSearch != '' ) {
+    const results = b.filter((result) => {
+     return(result.surname.toLowerCase().startsWith(inputSearch.toLowerCase()) 
+    )
+    });
+    setFoundUsers(results);
+  } else {
+    setFoundUsers(b);
+  }
+  setInputSearch('')
+}
 
   return (
     <div className="adminNode_page">
@@ -395,11 +412,27 @@ let chec = true;
       </div>
 
       <div className={`OtchetBranch ${(tablehideBranch ) ? 'hide' : ''}`}>
-          <div className="adminnode__Button" onClick={()=> {}}>
+          <div className="adminnode__Button" onClick={()=> {handleForm()}}>
             <button >Сохранить</button>
           </div>
-        <p>Отчет в Word</p>
-        <p>Отчет в Excel</p>
+          <div className="otchetbranch_input">
+            <input
+          type='search'
+          value={inputSearch}
+          onChange={e=>setInputSearch( e.target.value)}
+          placeholder="Введите фамилию"
+          />
+          <input
+          type='month'
+          value={inputDate}
+          onChange={e=>setInputDate( e.target.value)}
+          placeholder="Введите фамилию"
+          />
+          </div>
+          <div className="otchetbranch_word">
+            <p>Отчет в Word</p>
+            <p>Отчет в Excel</p>
+          </div>
       </div>
 
       <table className={`tablePOO ${tablehidePOO ? 'hide' : ''}`}> 

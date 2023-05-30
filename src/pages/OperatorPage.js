@@ -336,7 +336,7 @@ const handleForm = () =>{
           placeholder="Введите фамилию"
           />
           <input
-          type='date'
+          type='month'
           value={inputDate}
           onChange={e=>setInputDate( e.target.value)}
           placeholder="Введите фамилию"
@@ -346,7 +346,6 @@ const handleForm = () =>{
             <p>Отчет в Word</p>
             <p>Отчет в Excel</p>
           </div>
-        
       </div>
 
       <table className={`tablePOO ${tablehidePOO ? 'hide' : ''}`}> 

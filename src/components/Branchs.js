@@ -1,16 +1,47 @@
 import React, {useState} from 'react'
 import '../styles/Branchs.css'
 import '../styles/Table.css'
-import {fio} from '../components/FIO'
+import { Raions, Novopolotsk, Polotsk } from './FIO.js'
 
-export  function Branchs({options}) {
-  const [tablehidePOO, setTableHidePOO] = useState(true)
+export  function Branchs() {
+  const [openRaion, setOpenRaion] = useState(false)
   const [oblasti, setOblasti] = useState(false)
   const [raions, setRaions] = useState(false)
   const [city, setCity]  = useState(false)
-  const [b, setb] = useState([])
+  const [InputYzel, setInputYzel] = useState('')
+  const [LabelYzel, setLabelYzel] = useState('')
 
-  const regPlcs = [];
+  let raion = Raions.map(item => {
+    return <li key={item.id} className={(LabelYzel == item.raion && openRaion) ? 'selectedRaion' : 'selectedRaionNull'}
+            onClick={()=> {setRaions(!raions); setLabelYzel(item.raion); otdel(item.id); setOpenRaion(!openRaion) } }>
+           <span >{item.raion}</span> 
+          </li>
+  })
+  
+// открытие отделение соответствуя районам
+  const [p, setp] = useState([])
+  let otdel = (number)=>{ 
+      if (number == 2){
+      setp ( Novopolotsk.map(item => {
+        return <li key={item.id} onClick={()=> {setCity(!city);}}> {item.raion}</li>
+        }))
+        console.log(number)
+      }
+     else if (number == 3){
+       setp ( Polotsk.map(item => {
+        return <li key={item.id} onClick={()=> {setCity(!city);}}> {item.raion}</li>
+        }))
+        console.log(p)
+      }
+      else {
+        setp(null)
+      }
+  }
+
+
+
+
+/*  const regPlcs = [];
   const entrPlcs = [];
   for (let key in options){
     if(key == 'regPlcs'){
@@ -26,7 +57,8 @@ export  function Branchs({options}) {
         }
     }
   }
-
+*/
+/*
   const fetchPOO = async ()=>{
     try{
      const response = await fetch("http://localhost:5059/UserPage/tablePOO/", {
@@ -40,50 +72,31 @@ export  function Branchs({options}) {
       console.log(err)
     }
    };
-
-  let tablePOO = fio.sort((a,b)=>a.surname.localeCompare(b.surname)).map(function(item,index) {
-    return <tr key={item.id}>
-      <td> {index+1}</td>
-       <td className="table__surname"><p  onClick={()=>{/* fetchOne(item.id); setPersoncardEdit(!personcardEdit);*/ }} className="table_span__surname">{item.surname}</p></td>
-       <td>{item.name}</td>
-       <td>{item.parent}</td>
-       <td>{item.numBilet}</td>
-       <td>{item.dateStart}</td>
-       <td>{item.place}</td>
-    </tr>
- })
+*/
 
   return (
     <div>
         {/* Республика Беларусь &gt; Минский район &gt; Молодечно &gt; Отделение Воложино 7 */}
       <div className='branchs'>
         <div>
-          <span onClick={()=> setOblasti(!oblasti)}>Республика Беларусь</span>
+          <span onClick={()=>{ setOblasti(!oblasti); setLabelYzel('Витебская областная организация')}}>Витебская областная организация</span>
         </div> 
-        <div className='Placemargin1'>
-          <span className={oblasti ? null : 'OblastiHide'} onClick={()=> setRaions(!raions)}>Области</span>
+        <div className= {oblasti ? 'Placemargin1' : 'PlacemarginHide'}>
+          <ul >{raion}</ul>
+            <div className='Placemargin2'>
+              <span className={raions ? null : 'CityHide'} >{p}</span>
+            </div>  
         </div>
-        <div className='Placemargin2'>
-          <span className={raions ? null : 'CityHide'} onClick={()=> {setCity(!city); setTableHidePOO(!tablehidePOO); fetchPOO()}}>города</span>
-        </div>  
-      </div>
+        </div>
 
-      <table className={`tablePOO ${tablehidePOO ? 'hide' : ''}`}> 
-        <thead>
-        <tr>
-          <td>Номер</td>
-          <td>Фамилия</td>
-          <td>Имя</td>
-          <td>Отчество</td>
-          <td>Номер билета</td>
-          <td>Дата вступления</td>
-          <td>Место постановки на учет</td>
-        </tr>
-        </thead>
-        <tbody>
-          {tablePOO}
-        </tbody>
-      </table>
+        <div className='branchs_input'>
+          <label >Добавить узел в &lt;&lt; <span style={{color: 'brown'}}>{LabelYzel}</span>  &gt;&gt; </label>
+          <input className='input_addYzel'
+            type='search'
+            value={InputYzel}
+            onChange={e=>setInputYzel(e.target.value)}
+          />
+        </div>
     </div>
   )
 }

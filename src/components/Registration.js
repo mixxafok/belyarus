@@ -14,12 +14,12 @@ export function Registration ({options}){
    // Vznos: '',
     Surname: '', 
     Name: '',
-    patronymic: '',
+    Parent: '',
     NumBilet: 0,
    // DateStart: '',
    // DateFinish: '',
-    DateIssue: '',
-    StatusBilet: '',
+    dateIssue: '',
+    StatusBilet: '2',
     StatusMember: '',
     Sex: '',
     DateBirth: '',
@@ -28,13 +28,13 @@ export function Registration ({options}){
     SocialGroup: '',
     SphereActivity: '',
     PlaceJob: '',
-    jobPost:'',
+    PostJob: '',
     StatusPart:'',
     Deputat: '',
-    contactRegistrationAddress:'',
-    contactLivingAddress:'',
-    contactNumber:'',
-    uchetPlace: '' 
+    RegistrationAddress:'',
+    LivingAddress:'',
+    TelephoneNumber:'',
+    Place: '' 
   })
 
   //обработка options
@@ -165,8 +165,8 @@ const fetchRegistration = async ()=>{
             <label>Отчество</label>
             <input
               type="search"
-              onChange={(e) => setFormInput({ ...formInput, patronymic: e.target.value })}
-              value={formInput.Parenpatronymict }
+              onChange={(e) => setFormInput({ ...formInput, Parent: e.target.value })}
+              value={formInput.Parent }
               className="reg__input"
               placeholder=""
             />
@@ -288,8 +288,9 @@ const fetchRegistration = async ()=>{
         <container className='Statusts'>
           <div className="reg__form_input_combobox__places">
             <label>Статус билета</label>
-            <select value={formInput.StatusBilet} onChange={(e) => setFormInput({ ...formInput, StatusBilet: e.target.value })}> 
-              <option value={'2'}>Не изготовлен</option>
+            <select defaultValue={'2'}  value={formInput.StatusBilet} onChange={(e) => setFormInput({ ...formInput, StatusBilet: e.target.value })}> 
+              
+              <option defaultvalue={'2'}>Не изготовлен</option>
               
             </select>
           </div>
@@ -321,8 +322,8 @@ const fetchRegistration = async ()=>{
           <div className="reg__form_input_date">
             <label>Дата вступления</label>
             <input 
-              value={formInput.DateIssue}
-              onChange={(e) => setFormInput({ ...formInput, DateIssue: e.target.value })} 
+              value={formInput.dateIssue}
+              onChange={(e) => setFormInput({ ...formInput, dateIssue: e.target.value })} 
               type="date" 
               min="2023-01-01"/>
           </div>
@@ -338,7 +339,7 @@ const fetchRegistration = async ()=>{
           </div>
           <div className="reg__form_input_combobox__placesYchet">
             <label>Место постановки на учет</label>
-            <select value={formInput.uchetPlace} onChange={(e) => setFormInput({ ...formInput, uchetPlace: e.target.value })}>
+            <select value={formInput.Place} onChange={(e) => setFormInput({ ...formInput, Place: e.target.value })}>
               <option ></option> 
               {regPlcs.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
             </select>
@@ -361,8 +362,8 @@ const fetchRegistration = async ()=>{
             <label>Должность</label>
             <input
               type="search"
-              onChange={(e) => setFormInput({ ...formInput, jobPost: e.target.value })}
-              value={formInput.jobPost }
+              onChange={(e) => setFormInput({ ...formInput, PostJob: e.target.value })}
+              value={formInput.PostJob }
               className="reg__input"
               placeholder=""
             />
@@ -374,8 +375,8 @@ const fetchRegistration = async ()=>{
             <label>Адрес регистрации</label>
             <input
               type="search"
-              onChange={(e) => setFormInput({ ...formInput, contactRegistrationAddress: e.target.value })}
-              value={formInput.contactRegistrationAddress}
+              onChange={(e) => setFormInput({ ...formInput, RegistrationAddress: e.target.value })}
+              value={formInput.RegistrationAddress}
               className="reg__input"
               placeholder=""
             />
@@ -384,8 +385,8 @@ const fetchRegistration = async ()=>{
             <label>Адрес проживания</label>
             <input
               type="search"
-              onChange={(e) => setFormInput({ ...formInput, contactLivingAddress: e.target.value })}
-              value={formInput.contactLivingAddress }
+              onChange={(e) => setFormInput({ ...formInput, LivingAddress: e.target.value })}
+              value={formInput.LivingAddress }
               className="reg__input"
               placeholder=""
             />
@@ -396,8 +397,8 @@ const fetchRegistration = async ()=>{
             <label>Номер телефона</label>
             <input
               type="search"
-              onChange={(e) => setFormInput({ ...formInput, contactNumber: e.target.value })}
-              value={formInput.contactNumber }
+              onChange={(e) => setFormInput({ ...formInput, TelephoneNumber: e.target.value })}
+              value={formInput.TelephoneNumber }
               className="reg__input"
               placeholder=""
             />

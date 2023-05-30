@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import '../styles/RegistrationBranch.css';
+import '../styles/Registration.css';
 import Ava from '../img/ava.png';
 
 export function EditCardBranch ({infoCard, options}){
@@ -14,6 +14,7 @@ export function EditCardBranch ({infoCard, options}){
   let dateIssue= `${data2.getFullYear()}-${data2.getMonth()}-${data2.getDate()}`//в гггг-мм-дд для input[date]
 
     const [formInput, setFormInput] = useState({
+      Id:infoCard[0].id,
       // Login: '',
       // Password: '',
       // Rule: '',
@@ -25,22 +26,23 @@ export function EditCardBranch ({infoCard, options}){
       DateStart: `${dateStart}`,
      // DateFinish: ``,
       DateIssue: `${dateIssue}`,
-      StatusBilet: infoCard[0].statusBilet,
-      StatusMember: infoCard[0].statusMember,
+      StatusBilet: infoCard[0].statusBiletId,
+      StatusMember: infoCard[0].statusMemberId,
       Sex: infoCard[0].sex,
       DateBirth: `${dateBirth}`,
-      StatusPart: infoCard[0].statusPart,
+      StatusPart: `${infoCard[0].partStatus}`,
       Deputat: infoCard[0].deputat,
-      PlaceYchet: infoCard[0].uchetPlace,
-      PlaceIssue: infoCard[0].placeIssue,
-      Education: infoCard[0].educarion,
-      SocialGroup: infoCard[0].socialGroup,
-      SphereActivity: infoCard[0].sphereActivity,
+      PlaceYchet: `${infoCard[0].uchetId}`,
+      PlaceIssue: infoCard[0].placeId,
+      Education: infoCard[0].educationId,
+      SocialGroup: infoCard[0].socId,
+      SphereActivity: infoCard[0].sphereId,
       PlaceJob: infoCard[0].placeJob, 
       PostJob: infoCard[0].postJob,
       RegistrationAddress: infoCard[0].registrationAddress, 
       LivingAddress: infoCard[0].livingAddress, 
-      TelephoneNumber: infoCard[0].telephoneNumber, 
+      TelephoneNumber: infoCard[0].telephoneNumber
+
     })
 
 //console.log(formInput.DateBirth)
@@ -48,7 +50,30 @@ export function EditCardBranch ({infoCard, options}){
 
 const handleForm = () =>{
   console.log(formInput);
+  fetchEditCard();
+
 }
+
+const fetchEditCard = async ()=>{
+  try{
+    const response = await fetch("http://localhost:5059/UserPage/ChangeUsr/", {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+      'Content-Type': 'application/json;charset=utf-8',
+
+      },
+      body: JSON.stringify(formInput)
+    });
+
+    let q = await response.json();
+    await console.log(JSON.stringify(q));
+  }
+  catch(err){
+    console.log(err)
+  }
+};//запрос fetch POST
+
 
 //обработка options
 const educ = [];
@@ -164,8 +189,8 @@ for (let key in options){
             <label>Пол</label>
             <select value={formInput.Sex} onChange={(e) => setFormInput({ ...formInput, Sex: e.target.value })}> 
               <option ></option>
-              <option value={true}>Мужской</option>
-              <option value={false}>Женский</option>
+              <option value={'Мужской'}>Мужской</option>
+              <option value={'Женский'}>Женский</option>
             </select>
           </div>
           <div className="reg__form_input_dateBirthday" >
@@ -193,10 +218,7 @@ for (let key in options){
           </div>
           */}
           
-          <div className="reg__form_input_checkbox" >
-            <label>Оператор</label>
-            <input type="checkbox" name="name1" />
-          </div>
+
         <container className="Social">
           <div className="reg__form_input_combobox__social">
           <label>Образование</label>
@@ -221,6 +243,67 @@ for (let key in options){
           </div>
         </container>
        
+
+<br/>
+<hr/>
+
+        <container className="Img_Fio_LoginRule">
+         <container className="Fio">
+          <div className='reg__form_input_Login'>
+            <label>Логин</label>
+            <input
+              type="search"
+              onChange={(e) => setFormInput({ ...formInput, Login: e.target.value })}
+              value={formInput.Login }
+              className="reg__input"
+              placeholder=""
+            />
+          </div>
+          <div className="reg__form_input_Login">
+            <label>Пароль</label>
+            <input
+              type="password"
+              onChange={(e) => setFormInput({ ...formInput, Password: e.target.value })}
+              value={formInput.Password }
+              className="reg__input"
+              placeholder=""
+            />
+            <a href="#" className="password-control">ы</a>
+          </div>
+          {/* <div className="reg__form_input_Login">
+            <label>Повторите пароль</label>
+            <input
+              type="password"
+              onChange={(e) => setFormInput({ ...formInput, RepeatPassword: e.target.value })}
+              value={formInput.RepeatPassword }
+              className="reg__input"
+              placeholder=""
+            />
+            <a href="#" className="password-control">s</a>
+          </div> */}
+          <div className="reg__form_input_Rule">
+            <label>Роль в системе</label>
+            <select value={formInput.Rule} onChange={(e) => setFormInput({ ...formInput, Rule: e.target.value })}>
+              <option value="1">Информационный пользователь</option> 
+              {/* <option value="2">Оператор</option> 
+              <option value="3">Администратор узла</option> 
+              <option value="4">Администратор системы</option>  */}
+            </select>
+          </div>
+         </container>
+         </container>
+
+
+<hr/>
+
+         <div className="reg__form_input_Vznos">
+            <label>Уплата членских взносов</label>
+            <input 
+              value={formInput.Vznos} 
+              onChange={(e) => setFormInput({ ...formInput, Vznos: e.target.value })} 
+              type="date" 
+              min="2023-01-01"/>
+          </div>
 
 <br/>
 <hr/>
@@ -254,8 +337,8 @@ for (let key in options){
             <label>Избирался ли депутатом</label>
             <select value={formInput.Deputat} onChange={(e) => setFormInput({ ...formInput, Deputat: e.target.value })}> 
               <option ></option>
-              <option value={true}>Да</option>
-              <option value={false}>Нет</option>
+              <option value={'Да'}>Да</option>
+              <option value={'Нет'}>Нет</option>
             </select>
           </div>
           <div className="reg__form_input_date">

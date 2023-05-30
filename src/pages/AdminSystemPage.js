@@ -6,6 +6,10 @@ import Icon from '../icons/partIcon.js';
 import question from '../icons/question.png';
 import {Registration} from '../components/Registration.js';
 import {EditCard} from '../components/EditCard.js';
+import {EditCardBranch} from '../components/EditCardBranch.js';
+import { Branchs } from "../components/Branchs.js";
+import { Spravochnik } from "../components/Spravochnik.js";
+import Up from '../icons/up.png';
 import '../styles/AdminSystemPage.css';
 import '../styles/Header.css';
 import '../styles/Table.css';
@@ -22,17 +26,43 @@ export function AdminSystemPage(){
   const [col_6, setcol_6] = useState(false)
   const [col_7, setcol_7] = useState(false)
   const [col_8, setcol_8] = useState(false)
+  const [col_9, setcol_9] = useState(false)
+  const [col_0, setcol_0] = useState(false)
+  const [hideLi, setHideLi] = useState(true)
   const [tablehidePOO, setTableHidePOO] = useState(true)
   const [tablefindfilter, setTableFindFilter] = useState(true)
   const [tablehidePause, setTableHidePause] = useState(true)
   const [tablehideNO, setTableHideNO] = useState(true)
   const [tablehideBranch, setTableHideBranch] = useState(true)
-
+  const [b,setb] = useState([])
+  const [options, setOptions] = useState([]);
   const[personcardEdit, setPersoncardEdit] = useState(false)
-
+  const[inputSearch, setInputSearch] = useState('')
+  const[inputDate, setInputDate] = useState('')
+  const[foundUsers, setFoundUsers] = useState(b)
   //нажатие на меню
   function col (cols){
-    if (cols == 'col1') {
+    if (cols == 'col0') {
+      setcol_0(!col_0);
+      setcol_1(false); 
+      setcol_2(false); 
+      setcol_3(false); 
+      setcol_4(false);
+      setcol_5(false);
+      setcol_6(false);
+      setcol_7(false);
+      setcol_8(false);
+      setcol_9(false);
+      setHideLi(!hideLi);
+      setTableHidePOO(true);
+      setTableFindFilter(true);
+      setTableHidePause(true);
+      setTableHideNO(true);
+      setTableHideBranch(true);
+      fetchPOO();
+}
+   else if (cols == 'col1') {
+      
           setcol_1(!col_1); 
           setcol_2(false); 
           setcol_3(false); 
@@ -40,6 +70,8 @@ export function AdminSystemPage(){
           setcol_5(false);
           setcol_6(false);
           setcol_7(false);
+          setcol_8(false);
+          setcol_9(false);
           setTableHidePOO(!tablehidePOO);
           setTableFindFilter(true);
           setTableHidePause(true);
@@ -48,6 +80,7 @@ export function AdminSystemPage(){
           fetchPOO();
     }
    else if (cols == 'col2'){
+    
           setcol_1(false); 
           setcol_2(!col_2); 
           setcol_3(false); 
@@ -55,6 +88,8 @@ export function AdminSystemPage(){
           setcol_5(false);
           setcol_6(false);
           setcol_7(false);
+          setcol_8(false);
+          setcol_9(false);
           setTableHidePOO(true);
           setTableFindFilter(!tablefindfilter);
           setTableHidePause(true);
@@ -65,6 +100,7 @@ export function AdminSystemPage(){
           // подгрузка таблицы РОО
         }
     else if (cols == 'col3'){
+      
           setcol_1(false); 
           setcol_2(false); 
           setcol_3(!col_3); 
@@ -72,6 +108,8 @@ export function AdminSystemPage(){
           setcol_5(false);
           setcol_6(false);
           setcol_7(false);
+          setcol_8(false);
+          setcol_9(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(!tablehidePause);
@@ -81,6 +119,7 @@ export function AdminSystemPage(){
         
         }
     else if ( cols == 'col4') {
+     
           setcol_1(false); 
           setcol_2(false); 
           setcol_3(false); 
@@ -88,6 +127,8 @@ export function AdminSystemPage(){
           setcol_5(false);
           setcol_6(false);
           setcol_7(false);
+          setcol_8(false);
+          setcol_9(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(true);
@@ -103,6 +144,8 @@ export function AdminSystemPage(){
           setcol_5(!col_5);
           setcol_6(false);
           setcol_7(false);
+          setcol_8(false);
+          setcol_9(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(true);
@@ -110,7 +153,25 @@ export function AdminSystemPage(){
           setTableHideBranch(true);
           fetchOptions();
     }
+    else if ( cols == 'col6') {
+      setcol_0(false);
+      setcol_1(false); 
+      setcol_2(false); 
+      setcol_3(false); 
+      setcol_4(false);
+      setcol_5(false);
+      setcol_6(!col_6);
+      setcol_7(false);
+      setcol_8(false);
+      setTableHidePOO(true);
+      setTableFindFilter(true);
+      setTableHidePause(true);
+      setTableHideNO(true);
+      setTableHideBranch(true);
+      fetchOptions();
+}
     else if ( cols == 'col7') {
+      setcol_0(false);
           setcol_1(false); 
           setcol_2(false); 
           setcol_3(false); 
@@ -118,6 +179,8 @@ export function AdminSystemPage(){
           setcol_5(false);
           setcol_6(false);
           setcol_7(!col_7);
+          setcol_8(false);
+          setcol_9(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(true);
@@ -125,21 +188,41 @@ export function AdminSystemPage(){
           setTableHideBranch(!tablehideBranch);
           fetchBranch();
 }
-    else if ( cols == 'col6') {
+    else if ( cols == 'col8') {
+      setcol_0(false);
           setcol_1(false); 
           setcol_2(false); 
           setcol_3(false); 
           setcol_4(false);
           setcol_5(false);
-          setcol_6(!col_6);
+          setcol_6(false);
           setcol_7(false);
+          setcol_8(!col_8);
+          setcol_9(false);
+          setTableHidePOO(true);
+          setTableFindFilter(true);
+          setTableHidePause(true);
+          setTableHideNO(true);
+          setTableHideBranch(true);
+          fetchBranch();
+}
+    else if ( cols == 'col9') {
+      setcol_0(false);
+          setcol_1(false); 
+          setcol_2(false); 
+          setcol_3(false); 
+          setcol_4(false);
+          setcol_5(false);
+          setcol_6(false);
+          setcol_7(false);
+          setcol_8(false);
+          setcol_9(!col_9);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
           fetchOptions();
-
     }
    }
 
@@ -149,11 +232,9 @@ export function AdminSystemPage(){
        navigateTo('/');
    };
  
-//fetch
-   const [b,setb] = useState([])
-   const [options, setOptions] = useState([]);
 
-   const fetchPOO = async ()=>{
+//fetch
+   const fetchPOO = async () =>{
     try{
      const response = await fetch("http://localhost:5059/UserPage/tablePOO/", {
        method: "get",
@@ -246,7 +327,7 @@ export function AdminSystemPage(){
 
 let chec = true;
 
- let tableBranch = b.map(function(item,index) {
+ let tableBranch = foundUsers.sort((a,b)=>a.surname.localeCompare(b.surname)).map(function(item,index) {
   return <tr key={item.id}>
     <td> {index+1}</td>
      <td className="table__surname"><p onClick={()=>{ fetchOne(item.id); setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
@@ -254,10 +335,25 @@ let chec = true;
        <td>{item.parent}</td>
        <td>{item.dateStart}</td>
        <td><input type="checkbox" name="name1" checked={chec}  /*onChange={this.toggleChange} */ /></td>
-       <td><input type="checkbox" name="name1" checked={chec}  /*onChange={this.toggleChange} */ /></td>
   </tr>
 });
 //вывод таблиц
+
+
+const handleForm = () =>{
+  console.log(inputDate)
+
+  if ( inputSearch != '' ) {
+    const results = b.filter((result) => {
+     return(result.surname.toLowerCase().startsWith(inputSearch.toLowerCase()) 
+    )
+    });
+    setFoundUsers(results);
+  } else {
+    setFoundUsers(b);
+  }
+  setInputSearch('')
+}
 
   return (
     <div className="adminSystem_page">
@@ -270,9 +366,8 @@ let chec = true;
        <p className="Header__text_2">Белорусская партия «Белая Русь»</p> 
       </div>
       <div className="Header__nav">
-        <p className="Header__nameUser">Бурьянова Екатерина Павловна</p> 
-        <p className="Header__ruleUser" >Администратор системы</p>
-        <p className="main__li_spravka">Справка &nbsp; <img src={question} alt="" width="13px"/> </p>
+        <p className="Header__nameUser">Котикова Алиса Геннадьевна</p> 
+        <p className="Header__ruleUser" >Администратор системы &nbsp; <img className="spravka" src={question} alt="" width="13px" /></p>
         <p className="Header__exit" onClick={()=> Exit()}>Выход  </p>
       </div>
     </header>
@@ -280,6 +375,9 @@ let chec = true;
     <main>
       <div className="spisok">
       <ul className="main__ul">
+      <li className="main__li_0"><span className={`main__span ${col_0 ? 'act' : ''}`} 
+        onClick={()=>{col('col0')}}>Моя ветка</span></li>
+        <div className={hideLi ? 'hide' : null}>
         <li className="main__li_1"><span className={`main__span ${col_1 ? 'act' : ''}`} 
         onClick={()=>{col('col1')}}>Список членов партии <br/> "Белая Русь"</span></li>
         <li className="main__li_2"><span className={`main__span ${col_2 ? 'act' : ''}`} 
@@ -290,10 +388,13 @@ let chec = true;
         onClick={()=>{col('col4')}}>Список снятых с учета</span></li>
         <li className="main__li_5"><span className={`main__span ${col_5 ? 'act' : ''}`} 
         onClick={()=>{col('col5')}}>Зарегистрировать <br/> члена партии</span></li>
+        </div>
         <li className="main__li_7"><span className={`main__span ${col_7 ? 'act' : ''}`} 
-        onClick={()=>{col('col7')}}>Список пользователей <br/>своей ветки</span></li>
+        onClick={()=>{col('col7')}}>Последняя дата входа <br/>и взносы</span></li>
         <li className="main__li_8"><span className={`main__span ${col_8 ? 'act' : ''}`} 
         onClick={()=>{col('col8')}}>Дерево организаций</span></li>
+        <li className="main__li_9"><span className={`main__span ${col_9 ? 'act' : ''}`} 
+        onClick={()=>{col('col9')}}>Справочники</span></li>
         <li className="main__li_6"><span className={`main__span__edit ${col_6 ? '' : 'hide'}`} 
         onClick={()=>{col('col6')}}>Режим редактирования <br/>учетной карточки</span></li>
       </ul>
@@ -303,14 +404,39 @@ let chec = true;
 
     {personcardEdit ? <PersonalCardEdit setPersoncardEdit ={setPersoncardEdit} col={col} infoCard={infoCard} /> : null}
 
-    <div className="tables">
-
-    <div className={`Otchet ${(tablehidePOO && tablehidePause && tablehideNO && tablehideBranch) ? 'hide' : ''}`}>
+    <div className="tables" id="start_table">
+    
+    <div className={`Otchet ${(tablehidePOO && tablehidePause && tablehideNO ) ? 'hide' : ''}`}>
         <p>Отчет в Word</p>
         <p>Отчет в Excel</p>
       </div>
 
+      <div className={`OtchetBranch ${(tablehideBranch ) ? 'hide' : ''}`}>
+          <div className="adminnode__Button" onClick={()=> {handleForm()}}>
+            <button >Сохранить</button>
+          </div>
+          <div className="otchetbranch_input">
+            <input
+          type='search'
+          value={inputSearch}
+          onChange={e=>setInputSearch( e.target.value)}
+          placeholder="Введите фамилию"
+          />
+          <input
+          type='month'
+          value={inputDate}
+          onChange={e=>setInputDate( e.target.value)}
+          placeholder="Введите фамилию"
+          />
+          </div>
+          <div className="otchetbranch_word">
+            <p>Отчет в Word</p>
+            <p>Отчет в Excel</p>
+          </div>
+      </div>
+
       <table className={`tablePOO ${tablehidePOO ? 'hide' : ''}`}> 
+      <a href='#start_table' className="start_fixed"><img src={Up} width='20px'/></a>
         <thead>
         <tr>
           <td>Номер</td>
@@ -328,6 +454,7 @@ let chec = true;
       </table>
 
      <table className={`tablePOO ${tablehidePause ? 'hide' : ''}`}> 
+     <a href='#start_table' className="start_fixed"><img src={Up} width='20px'/></a>
         <thead>
            <tr>
               <td>Номер</td>
@@ -345,6 +472,7 @@ let chec = true;
      </table>
 
      <table className={`tablePOO ${tablehideNO ? 'hide' : ''}`}> 
+     <a href='#start_table' className="start_fixed"><img src={Up} width='20px'/></a>
         <thead>
            <tr>
               <td>Номер</td>
@@ -360,6 +488,7 @@ let chec = true;
      </table>
 
      <table className={`tablePOO ${tablehideBranch ? 'hide' : ''}`}> 
+     <a href='#start_table' className="start_fixed"><img src={Up} width='20px'/></a>
         <thead>
            <tr>
               <td>Номер</td>
@@ -368,17 +497,18 @@ let chec = true;
               <td>Отчество</td>
               <td>Последняя дата входа</td>
               <td>Оплата взносов</td>
-              <td>Права оператора</td>
            </tr>
         </thead>
         <tbody>
            {tableBranch}
         </tbody>
      </table>
-
      { (col_2) ? <FindFilterEdit b={b} options={options} col={col} infoCard={infoCard} setInfoCard={setInfoCard}/> : null}
      { (col_5) ? <Registration options={options}/> : null}
-     { (col_6) ? <EditCard infoCard={infoCard} options={options} /> : null}
+     {/* { (col_6) ? <EditCard infoCard={infoCard} options={options} /> : null} */}
+     { (col_6) ? <EditCardBranch infoCard={infoCard} options={options} /> : null}
+     { (col_8) ? <Branchs options={options} tablePOO={tablePOO} tablehidePOO={tablehidePOO}/> : null}
+     { (col_9) ? <Spravochnik options={options}/> : null}
      </div>
 
     </main>

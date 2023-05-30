@@ -1,4 +1,41 @@
 
+export const Raions = [
+  {id: 1,
+    raion: "Ушачская районная ороганизация"
+  },
+  {id: 2,
+    raion: "Новополоцкая районная ороганизация"
+  },
+  {id: 3,
+    raion: "Полоцкая районная ороганизация"
+  }
+]
+
+
+export const Novopolotsk = [
+  {id: 1,
+    raion: "ОАО Нафтан"
+  },
+  {id: 2,
+    raion: "Полоцкий Государственный университет"
+  },
+  {id: 3,
+    raion: "Хлебзавод"
+  }
+]
+
+export const Polotsk = [
+  {id: 1,
+    raion: "Гостиница Двина"
+  },
+  {id: 2,
+    raion: "Манеж"
+  },
+  {id: 3,
+    raion: "Автовокзал"
+  }
+]
+
 export const fio = [
   {id: 1, 
     surname: 'user', 
@@ -22,7 +59,6 @@ export const fio = [
     contact:'Новоплоцк, Молодежная 153, +375336665544',
     place: 'Novopolotsk' },
   {id: 2, 
-    id: 'index',
     surname: 'Aleksander', 
     name: 'Grunalevich',
     parent: 'Alekseevichk',
