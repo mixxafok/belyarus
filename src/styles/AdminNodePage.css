@@ -233,7 +233,7 @@ float: right;
 }
 
 .otchetbranch_input input[type=search] {
-  width: 40%;
+  width: 42%;
   height: calc(1.3rem + 2px);
   padding: 0.375rem 0.75rem;
   border: 1px solid #bdbdbd;

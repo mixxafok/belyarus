@@ -8,7 +8,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col, infoCard, setIn
   const[personcardEdit, setPersoncardEdit] = useState(false);
   // const [infoCard,setInfoCard] = useState([])
   const [foundUsers, setFoundUsers] = useState(b);
-  
+  const [foundUsersS, setFoundUsersS] = useState([]);
   const [formInput, setFormInput] = useState({
     Surname: '', 
     Name: '',
@@ -92,12 +92,14 @@ export function FindFilterEdit({b,tablefindfilter, options, col, infoCard, setIn
           body: JSON.stringify(formInput)
         })
         let q = await responce.json();
-        await setFoundUsers([q]);
+        await setFoundUsers(q);
+       
       }
       catch(err){
         console.log(err);
       }
     };
+
 
   let filt = foundUsers && foundUsers.length > 0 ? (
     foundUsers.map((user,index) => (
@@ -105,15 +107,16 @@ export function FindFilterEdit({b,tablefindfilter, options, col, infoCard, setIn
       <td> {index+1}</td>
        <td className="table__surname"><p onClick={()=>{fetchOne(user.id); setPersoncardEdit(!personcardEdit); setInfoCard([user])}} className="table_span__surname">{user.surname}</p></td>
        <td>{user.name}</td>
-         <td>{user.parent}</td>
-         <td>{user.numBilet}</td>
-         <td>{user.dateStart}</td>
-         <td>{user.place}</td>
+       <td>{(user.parent)}</td>
+       <td>{user.numBilet}</td>
+       <td>{user.dateStart}</td>
+       <td>{user.place}</td>
     </tr>
     ))
   ) : (
     <h1>Результаты не найдены!</h1>
   )
+
 
 //обработка options
     const educ = [];

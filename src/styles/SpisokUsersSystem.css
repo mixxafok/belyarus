@@ -1,0 +1,48 @@
+.SpisokUsersSystem{
+  margin: 1% 0 0 3%;
+  font-family: Montserrat-SemiBold;
+  
+}
+
+.ul_SpisokUsers span {
+  cursor: pointer;
+  transition: 300ms;
+}
+
+.ul_SpisokUsers span:hover {
+  transition: 300ms;
+  font-size: 17px;
+}
+
+.ul_SpisilUsers__li_Hide{
+  display: none;
+}
+
+.SpisokUsersSystem .tableUsers {
+  margin-top: 1%;
+  margin-left: 0;
+  border-collapse: collapse;
+  text-align: center;
+  width: 95%;
+  cursor: default;
+  font-size: 14px;
+  /* table-layout: fixed; */
+}
+
+.SpisokUsersSystem td:first-child {
+  width: 5%;
+}
+
+.SpisokUsersSystem thead td{
+
+  font-size: 14px;
+  font-family: Montserrat-SemiBold;
+  padding: 8px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+ /* background-color: #04AA6D;*/
+  background-color:rgb(218, 173, 83);
+  color: white;
+  
+}

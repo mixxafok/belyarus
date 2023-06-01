@@ -6,9 +6,9 @@ import Icon from '../icons/partIcon.js';
 import question from '../icons/question.png';
 import {Registration} from '../components/Registration.js';
 import {EditCard} from '../components/EditCard.js';
-import {EditCardBranch} from '../components/EditCardBranch.js';
+import {EditCardNode} from '../components/EditCardNode.js';
 import { Branchs } from "../components/Branchs.js";
-import { Spravochnik } from "../components/Spravochnik.js";
+import { SpisokUsersSystem } from "../components/SpisokUsersSystem.js";
 import Up from '../icons/up.png';
 import '../styles/AdminNodePage.css';
 import '../styles/Header.css';
@@ -234,6 +234,51 @@ export function AdminNodePage(){
  
 
 //fetch
+const fetchSparvka = async () =>{
+  const pesponse = await fetch('', {
+    method: 'get'
+  });
+ }
+
+ const fetchPOOWord = async () =>{
+  try{
+    const response = await fetch('',{
+    method: 'get'
+  });
+  alert('Файл успешно скачан')
+  }
+  catch(err){
+    console.log(err)
+    alert('Повторите попытку')
+  }
+ }
+ const fetchPausedWord = async () =>{
+  const response = await fetch('http://localhost:5059/api/Otchet/GetPausedWord/',{
+    method: 'get'
+  });
+ }
+ const fetchNOWord = async () =>{
+  const response = await fetch('http://localhost:5059/api/Otchet/GetKickedWord/',{
+    method: 'get'
+  });
+ }
+
+ const fetchPausedExcel = async () =>{
+  const response = await fetch('http://localhost:5059/api/Otchet/GetPausedExel/',{
+    method: 'get'
+  });
+ }
+ const fetchPOOExcel = async () =>{
+  const response = await fetch('http://localhost:5059/api/Otchet/GetPausedExel/',{
+    method: 'get'
+  });
+ }
+ const fetchNOExcel = async () =>{
+  const response = await fetch('http://localhost:5059/api/Otchet/GetKickedExel/',{
+    method: 'get'
+  });
+ }
+
    const fetchPOO = async () =>{
     try{
      const response = await fetch("http://localhost:5059/UserPage/tablePOO/", {
@@ -355,6 +400,8 @@ const handleForm = () =>{
   setInputSearch('')
 }
 
+
+
   return (
     <div className="adminNode_page">
     
@@ -367,7 +414,7 @@ const handleForm = () =>{
       </div>
       <div className="Header__nav">
         <p className="Header__nameUser">Котиков Алексей Геннадьевич</p> 
-        <p className="Header__ruleUser" >Администратор узла &nbsp; <img className="spravka" src={question} alt="" width="13px" /></p>
+        <p className="Header__ruleUser" >Администратор узла &nbsp; <img className="spravka" src={question} alt="?" width="13px" onClick={fetchSparvka()}/></p>
         <p className="Header__exit" onClick={()=> Exit()}>Выход  </p>
       </div>
     </header>
@@ -406,9 +453,17 @@ const handleForm = () =>{
 
     <div className="tables" id="start_table">
     
-    <div className={`Otchet ${(tablehidePOO && tablehidePause && tablehideNO ) ? 'hide' : ''}`}>
-        <p>Отчет в Word</p>
-        <p>Отчет в Excel</p>
+    <div className={`Otchet ${(tablehidePOO  ) ? 'hide' : ''}`}>
+        <p onClick={()=>fetchPOOWord()}>Отчет в Word</p>
+        <p onClick={()=>fetchPOOExcel()}>Отчет в Excel</p>
+      </div>
+      <div className={`Otchet ${( tablehidePause  ) ? 'hide' : ''}`}>
+        <p onClick={()=>fetchPausedWord()}>Отчет в Word</p>
+        <p onClick={()=>fetchPausedExcel()}>Отчет в Excel</p>
+      </div>
+      <div className={`Otchet ${( tablehideNO ) ? 'hide' : ''}`}>
+        <p onClick={()=>fetchNOWord()}>Отчет в Word</p>
+        <p onClick={()=>fetchNOExcel()}>Отчет в Excel</p>
       </div>
 
       <div className={`OtchetBranch ${(tablehideBranch ) ? 'hide' : ''}`}>
@@ -436,7 +491,7 @@ const handleForm = () =>{
       </div>
 
       <table className={`tablePOO ${tablehidePOO ? 'hide' : ''}`}> 
-      <a href='#start_table' className="start_fixed"><img src={Up} width='20px'/></a>
+      <a href='#start_table' className="start_fixed"><img src={Up} alt='↑' width='20px'/></a>
         <thead>
         <tr>
           <td>Номер</td>
@@ -454,7 +509,7 @@ const handleForm = () =>{
       </table>
 
      <table className={`tablePOO ${tablehidePause ? 'hide' : ''}`}> 
-     <a href='#start_table' className="start_fixed"><img src={Up} width='20px'/></a>
+     <a href='#start_table' className="start_fixed"><img src={Up} alt='↑' width='20px'/></a>
         <thead>
            <tr>
               <td>Номер</td>
@@ -472,7 +527,7 @@ const handleForm = () =>{
      </table>
 
      <table className={`tablePOO ${tablehideNO ? 'hide' : ''}`}> 
-     <a href='#start_table' className="start_fixed"><img src={Up} width='20px'/></a>
+     <a href='#start_table' className="start_fixed"><img src={Up} alt='↑' width='20px'/></a>
         <thead>
            <tr>
               <td>Номер</td>
@@ -488,7 +543,7 @@ const handleForm = () =>{
      </table>
 
      <table className={`tablePOO ${tablehideBranch ? 'hide' : ''}`}> 
-     <a href='#start_table' className="start_fixed"><img src={Up} width='20px'/></a>
+     <a href='#start_table' className="start_fixed"><img src={Up} alt='↑' width='20px'/></a>
         <thead>
            <tr>
               <td>Номер</td>
@@ -506,9 +561,9 @@ const handleForm = () =>{
      { (col_2) ? <FindFilterEdit b={b} options={options} col={col} infoCard={infoCard} setInfoCard={setInfoCard}/> : null}
      { (col_5) ? <Registration options={options}/> : null}
      {/* { (col_6) ? <EditCard infoCard={infoCard} options={options} /> : null} */}
-     { (col_6) ? <EditCardBranch infoCard={infoCard} options={options} /> : null}
+     { (col_6) ? <EditCardNode infoCard={infoCard} options={options} /> : null}
      { (col_8) ? <Branchs options={options} tablePOO={tablePOO} tablehidePOO={tablehidePOO}/> : null}
-     { (col_9) ? <Spravochnik options={options}/> : null}
+     { (col_9) ? <SpisokUsersSystem options={options}/> : null}
      </div>
 
     </main>

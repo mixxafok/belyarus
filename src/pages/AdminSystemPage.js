@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { FindFilterEdit } from "../components/FindFilterEdit.js";
-import {PersonalCardEdit} from '../components/PersonalCardEdit';
+import {PersonalCardSystem} from '../components/PersonalCardSystem.js';
 import Icon from '../icons/partIcon.js';
 import question from '../icons/question.png';
 import {Registration} from '../components/Registration.js';
 import {EditCard} from '../components/EditCard.js';
-import {EditCardBranch} from '../components/EditCardBranch.js';
-import { Branchs } from "../components/Branchs.js";
-import { Spravochnik } from "../components/Spravochnik.js";
+import {EditCardNode} from '../components/EditCardNode.js';
+import { BranchsSystem } from "../components/BranchsSystem.js";
+import { SpisokUsersSystem } from "../components/SpisokUsersSystem.js";
 import Up from '../icons/up.png';
 import '../styles/AdminSystemPage.css';
 import '../styles/Header.css';
 import '../styles/Table.css';
-import '../styles/PersonalCardEdit.css';
+import '../styles/PersonalCardSystem.css';
 
 
 export function AdminSystemPage(){
@@ -27,6 +27,7 @@ export function AdminSystemPage(){
   const [col_7, setcol_7] = useState(false)
   const [col_8, setcol_8] = useState(false)
   const [col_9, setcol_9] = useState(false)
+  const [col_10, setcol_10] = useState(false)
   const [col_0, setcol_0] = useState(false)
   const [hideLi, setHideLi] = useState(true)
   const [tablehidePOO, setTableHidePOO] = useState(true)
@@ -53,6 +54,7 @@ export function AdminSystemPage(){
       setcol_7(false);
       setcol_8(false);
       setcol_9(false);
+      setcol_10(false);
       setHideLi(!hideLi);
       setTableHidePOO(true);
       setTableFindFilter(true);
@@ -60,8 +62,8 @@ export function AdminSystemPage(){
       setTableHideNO(true);
       setTableHideBranch(true);
       fetchPOO();
-}
-   else if (cols == 'col1') {
+    }
+    else if (cols == 'col1') {
       
           setcol_1(!col_1); 
           setcol_2(false); 
@@ -72,6 +74,7 @@ export function AdminSystemPage(){
           setcol_7(false);
           setcol_8(false);
           setcol_9(false);
+          setcol_10(false);
           setTableHidePOO(!tablehidePOO);
           setTableFindFilter(true);
           setTableHidePause(true);
@@ -79,7 +82,7 @@ export function AdminSystemPage(){
           setTableHideBranch(true);
           fetchPOO();
     }
-   else if (cols == 'col2'){
+    else if (cols == 'col2'){
     
           setcol_1(false); 
           setcol_2(!col_2); 
@@ -90,6 +93,7 @@ export function AdminSystemPage(){
           setcol_7(false);
           setcol_8(false);
           setcol_9(false);
+          setcol_10(false);
           setTableHidePOO(true);
           setTableFindFilter(!tablefindfilter);
           setTableHidePause(true);
@@ -98,7 +102,7 @@ export function AdminSystemPage(){
           fetchPOO();
           fetchOptions();
           // подгрузка таблицы РОО
-        }
+    }
     else if (cols == 'col3'){
       
           setcol_1(false); 
@@ -110,6 +114,7 @@ export function AdminSystemPage(){
           setcol_7(false);
           setcol_8(false);
           setcol_9(false);
+          setcol_10(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(!tablehidePause);
@@ -117,7 +122,7 @@ export function AdminSystemPage(){
           setTableHideBranch(true);
           fetchPause();
         
-        }
+    }
     else if ( cols == 'col4') {
      
           setcol_1(false); 
@@ -129,13 +134,14 @@ export function AdminSystemPage(){
           setcol_7(false);
           setcol_8(false);
           setcol_9(false);
+          setcol_10(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(true);
           setTableHideNO(!tablehideNO);
           setTableHideBranch(true);
           fetchNO();
-        }
+    }
     else if ( cols == 'col5') {
           setcol_1(false); 
           setcol_2(false); 
@@ -146,6 +152,7 @@ export function AdminSystemPage(){
           setcol_7(false);
           setcol_8(false);
           setcol_9(false);
+          setcol_10(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(true);
@@ -163,13 +170,15 @@ export function AdminSystemPage(){
       setcol_6(!col_6);
       setcol_7(false);
       setcol_8(false);
+      setcol_9(false);
+      setcol_10(false);
       setTableHidePOO(true);
       setTableFindFilter(true);
       setTableHidePause(true);
       setTableHideNO(true);
       setTableHideBranch(true);
       fetchOptions();
-}
+    }
     else if ( cols == 'col7') {
       setcol_0(false);
           setcol_1(false); 
@@ -181,13 +190,14 @@ export function AdminSystemPage(){
           setcol_7(!col_7);
           setcol_8(false);
           setcol_9(false);
+          setcol_10(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(!tablehideBranch);
           fetchBranch();
-}
+    }
     else if ( cols == 'col8') {
       setcol_0(false);
           setcol_1(false); 
@@ -199,13 +209,14 @@ export function AdminSystemPage(){
           setcol_7(false);
           setcol_8(!col_8);
           setcol_9(false);
+          setcol_10(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
           fetchBranch();
-}
+    }
     else if ( cols == 'col9') {
       setcol_0(false);
           setcol_1(false); 
@@ -217,6 +228,26 @@ export function AdminSystemPage(){
           setcol_7(false);
           setcol_8(false);
           setcol_9(!col_9);
+          setcol_10(false);
+          setTableHidePOO(true);
+          setTableFindFilter(true);
+          setTableHidePause(true);
+          setTableHideNO(true);
+          setTableHideBranch(true);
+          fetchOptions();
+    }
+    else if ( cols == 'col10') {
+      setcol_0(false);
+          setcol_1(false); 
+          setcol_2(false); 
+          setcol_3(false); 
+          setcol_4(false);
+          setcol_5(false);
+          setcol_6(false);
+          setcol_7(false);
+          setcol_8(false);
+          setcol_9(false);
+          setcol_10(!col_10);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(true);
@@ -234,6 +265,58 @@ export function AdminSystemPage(){
  
 
 //fetch
+   const fetchSparvka = async () =>{
+    try{
+      const pesponse = await fetch('http://localhost:5059/api/Otchet/GetHelp/', {
+      method: 'get'
+    });
+    alert('Файл успешно загружен')
+    }
+    catch(err){
+      alert('Повторите попытку')
+    }
+
+   }
+
+   const fetchPOOWord = async () =>{
+    try{
+      const response = await fetch('',{
+      method: 'get'
+    });
+    alert('Файл успешно скачан')
+    }
+    catch(err){
+      console.log(err)
+      alert('Повторите попытку')
+    }
+   }
+   const fetchPausedWord = async () =>{
+    const response = await fetch('http://localhost:5059/api/Otchet/GetPausedWord/',{
+      method: 'get'
+    });
+   }
+   const fetchNOWord = async () =>{
+    const response = await fetch('http://localhost:5059/api/Otchet/GetKickedWord/',{
+      method: 'get'
+    });
+   }
+
+   const fetchPausedExcel = async () =>{
+    const response = await fetch('http://localhost:5059/api/Otchet/GetPausedExel/',{
+      method: 'get'
+    });
+   }
+   const fetchPOOExcel = async () =>{
+    const response = await fetch('http://localhost:5059/api/Otchet/GetPausedExel/',{
+      method: 'get'
+    });
+   }
+   const fetchNOExcel = async () =>{
+    const response = await fetch('http://localhost:5059/api/Otchet/GetKickedExel/',{
+      method: 'get'
+    });
+   }
+
    const fetchPOO = async () =>{
     try{
      const response = await fetch("http://localhost:5059/UserPage/tablePOO/", {
@@ -333,7 +416,6 @@ let chec = true;
      <td className="table__surname"><p onClick={()=>{ fetchOne(item.id); setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
      <td>{item.name}</td>
        <td>{item.parent}</td>
-       <td>{item.dateStart}</td>
        <td><input type="checkbox" name="name1" checked={chec}  /*onChange={this.toggleChange} */ /></td>
   </tr>
 });
@@ -367,7 +449,7 @@ const handleForm = () =>{
       </div>
       <div className="Header__nav">
         <p className="Header__nameUser">Котикова Алиса Геннадьевна</p> 
-        <p className="Header__ruleUser" >Администратор системы &nbsp; <img className="spravka" src={question} alt="" width="13px" /></p>
+        <p className="Header__ruleUser" >Администратор системы &nbsp; <span onClick={()=>fetchSparvka()}><img className="spravka" src={question} alt="?" width="13px" /></span> </p>
         <p className="Header__exit" onClick={()=> Exit()}>Выход  </p>
       </div>
     </header>
@@ -390,11 +472,13 @@ const handleForm = () =>{
         onClick={()=>{col('col5')}}>Зарегистрировать <br/> члена партии</span></li>
         </div>
         <li className="main__li_7"><span className={`main__span ${col_7 ? 'act' : ''}`} 
-        onClick={()=>{col('col7')}}>Последняя дата входа <br/>и взносы</span></li>
+        onClick={()=>{col('col7')}}>Уплата взносов</span></li>
         <li className="main__li_8"><span className={`main__span ${col_8 ? 'act' : ''}`} 
         onClick={()=>{col('col8')}}>Дерево организаций</span></li>
         <li className="main__li_9"><span className={`main__span ${col_9 ? 'act' : ''}`} 
-        onClick={()=>{col('col9')}}>Справочники</span></li>
+        onClick={()=>{col('col9')}}>Список пользователей системы</span></li>
+        <li className="main__li_10"><span className={`main__span ${col_10 ? 'act' : ''}`} 
+        onClick={()=>{col('col10')}}>Зарегистрировать <br/> пользователя</span></li>
         <li className="main__li_6"><span className={`main__span__edit ${col_6 ? '' : 'hide'}`} 
         onClick={()=>{col('col6')}}>Режим редактирования <br/>учетной карточки</span></li>
       </ul>
@@ -402,13 +486,21 @@ const handleForm = () =>{
 
 
 
-    {personcardEdit ? <PersonalCardEdit setPersoncardEdit ={setPersoncardEdit} col={col} infoCard={infoCard} /> : null}
+    {personcardEdit ? <PersonalCardSystem setPersoncardEdit ={setPersoncardEdit} col={col} infoCard={infoCard} /> : null}
 
     <div className="tables" id="start_table">
     
-    <div className={`Otchet ${(tablehidePOO && tablehidePause && tablehideNO ) ? 'hide' : ''}`}>
-        <p>Отчет в Word</p>
-        <p>Отчет в Excel</p>
+    <div className={`Otchet ${(tablehidePOO  ) ? 'hide' : ''}`}>
+        <p onClick={()=>fetchPOOWord()}>Отчет в Word</p>
+        <p onClick={()=>fetchPOOExcel()}>Отчет в Excel</p>
+      </div>
+      <div className={`Otchet ${( tablehidePause  ) ? 'hide' : ''}`}>
+        <p onClick={()=>fetchPausedWord()}>Отчет в Word</p>
+        <p onClick={()=>fetchPausedExcel()}>Отчет в Excel</p>
+      </div>
+      <div className={`Otchet ${( tablehideNO ) ? 'hide' : ''}`}>
+        <p onClick={()=>fetchNOWord()}>Отчет в Word</p>
+        <p onClick={()=>fetchNOExcel()}>Отчет в Excel</p>
       </div>
 
       <div className={`OtchetBranch ${(tablehideBranch ) ? 'hide' : ''}`}>
@@ -430,13 +522,13 @@ const handleForm = () =>{
           />
           </div>
           <div className="otchetbranch_word">
-            <p>Отчет в Word</p>
-            <p>Отчет в Excel</p>
+            <p onClick={()=>fetchPOOWord()}>Отчет в Word</p>
+            <p onClick={()=>fetchPOOExcel()}>Отчет в Excel</p>
           </div>
       </div>
 
       <table className={`tablePOO ${tablehidePOO ? 'hide' : ''}`}> 
-      <a href='#start_table' className="start_fixed"><img src={Up} width='20px'/></a>
+      <a href='#start_table' className="start_fixed"><img src={Up} alt='↑' width='20px'/></a>
         <thead>
         <tr>
           <td>Номер</td>
@@ -454,7 +546,7 @@ const handleForm = () =>{
       </table>
 
      <table className={`tablePOO ${tablehidePause ? 'hide' : ''}`}> 
-     <a href='#start_table' className="start_fixed"><img src={Up} width='20px'/></a>
+     <a href='#start_table' className="start_fixed"><img src={Up} alt='↑' width='20px'/></a>
         <thead>
            <tr>
               <td>Номер</td>
@@ -472,7 +564,7 @@ const handleForm = () =>{
      </table>
 
      <table className={`tablePOO ${tablehideNO ? 'hide' : ''}`}> 
-     <a href='#start_table' className="start_fixed"><img src={Up} width='20px'/></a>
+     <a href='#start_table' className="start_fixed"><img src={Up} alt='↑' width='20px'/></a>
         <thead>
            <tr>
               <td>Номер</td>
@@ -488,14 +580,13 @@ const handleForm = () =>{
      </table>
 
      <table className={`tablePOO ${tablehideBranch ? 'hide' : ''}`}> 
-     <a href='#start_table' className="start_fixed"><img src={Up} width='20px'/></a>
+     <a href='#start_table' className="start_fixed"><img src={Up} alt='↑' width='20px'/></a>
         <thead>
            <tr>
               <td>Номер</td>
               <td>Фамилия</td>
               <td>Имя</td>
               <td>Отчество</td>
-              <td>Последняя дата входа</td>
               <td>Оплата взносов</td>
            </tr>
         </thead>
@@ -506,9 +597,9 @@ const handleForm = () =>{
      { (col_2) ? <FindFilterEdit b={b} options={options} col={col} infoCard={infoCard} setInfoCard={setInfoCard}/> : null}
      { (col_5) ? <Registration options={options}/> : null}
      {/* { (col_6) ? <EditCard infoCard={infoCard} options={options} /> : null} */}
-     { (col_6) ? <EditCardBranch infoCard={infoCard} options={options} /> : null}
-     { (col_8) ? <Branchs options={options} tablePOO={tablePOO} tablehidePOO={tablehidePOO}/> : null}
-     { (col_9) ? <Spravochnik options={options}/> : null}
+     { (col_6) ? <EditCardNode infoCard={infoCard} options={options} /> : null}
+     { (col_8) ? <BranchsSystem options={options} tablePOO={tablePOO} tablehidePOO={tablehidePOO}/> : null}
+     { (col_9) ? <SpisokUsersSystem options={options}/> : null}
      </div>
 
     </main>

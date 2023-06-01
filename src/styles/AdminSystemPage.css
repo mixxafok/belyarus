@@ -75,7 +75,13 @@
 }
 
 .adminSystem_page  .main__span:hover{
-  letter-spacing: 0.020em;
+  /* letter-spacing: 0.020em; */
+  font-size: 17px;
+  transition-duration: 300ms;
+}
+
+.adminSystem_page  .main__ul div li .main__span:hover{
+  font-size: 15px;
   transition-duration: 300ms;
 }
 
@@ -141,7 +147,12 @@
   margin-top: 5%;
   /* border: 1px solid green;*/
  }
- .adminSystem_page  .main__ul li:nth-child(6) {
+ .adminSystem_page   .main__ul li:nth-child(6) {
+  width: 100%;
+  margin-top: 5%;
+  /* border: 1px solid green;*/
+ }
+ .adminSystem_page  .main__ul li:nth-child(7) {
   width: 100%;
   margin-top: 5%;
   color:brown;
@@ -225,22 +236,23 @@ float: right;
   }
 }
 
-.otchetbranch_input{
+.adminSystem_page .otchetbranch_input{
   display: flex;
   width: 45%;
   margin-right: 5%;
   justify-content: space-between;
 }
 
-.otchetbranch_input input[type=search] {
-  width: 40%;
+.adminSystem_page .otchetbranch_input input[type=search] {
+  width: 42%;
   height: calc(1.3rem + 2px);
-  padding: 0.375rem 0.75rem;
+  padding: 0.375rem 0.70rem ;
   border: 1px solid #bdbdbd;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-.otchetbranch_input input[type=date] {
+
+.adminSystem_page .otchetbranch_input input[type=date] {
   width: 35%;
   height: calc(1.3rem + 2px);
   padding: 0.375rem 0.75rem;

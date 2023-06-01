@@ -3,11 +3,10 @@ import Avatar from '../img/ava.png';
 import '../styles/PersonalCardEdit.css';
 
 
-export function PersonalCardEdit({setPersoncardEdit,col, infoCard } ){
+export function PersonalCardSystem({setPersoncardEdit,col, infoCard } ){
 
   let fioMember = infoCard.map((tem) => {
     return (
-      // <p>{tem.surname.toUpperCase()} {tem.name} {tem.parent}</p>
        <p>{tem.surname.toUpperCase()} {tem.name} {tem.parent}</p>
     )
   })
@@ -36,6 +35,45 @@ export function PersonalCardEdit({setPersoncardEdit,col, infoCard } ){
     </ul>
   });
 
+  const fetchBilet = async (id) =>{
+    try{
+      const responce = await fetch(`http://localhost:5059/api/Otchet/GetUserCard?id=${id}`,{
+      method: 'get'
+    })
+   await alert('Файл успешно скачан')
+    }
+    catch(err){
+      console.log(err);
+      alert('Не удалось скачать файл')
+    }
+   //console.log(id)
+  }
+  const fetchPersonWord = async (id) =>{
+    try{
+    const responce = await fetch(`http://localhost:5059/api/Otchet/GetPersonWord?id=${id}`,{
+      method: 'get'
+    })
+    await alert('Файл успешно скачан')
+  }
+    catch(err){
+      console.log(err);
+      alert('Не удалось скачать файл')
+    }
+   //console.log(id)
+  }
+  const fetchPersonExcel = async (id) =>{
+    try{
+    const responce = await fetch(`http://localhost:5059/api/Otchet/GetPersonExel?id=${id}`,{
+      method: 'get'
+    })
+   await alert('Файл успешно скачан')
+    }
+    catch(err){
+      console.log(err);
+      alert('Не удалось скачать файл')
+    }
+   //console.log(id)
+  }
 
   return (
       <main className="PersonalCard_main">
@@ -43,11 +81,17 @@ export function PersonalCardEdit({setPersoncardEdit,col, infoCard } ){
           <p className="cancel" onClick={()=>setPersoncardEdit()}>X</p>
           <img src={Avatar} className="div_1__Avatar" alt="no img" ></img>
           <div className="div_1__FIO">{fioMember}</div>
+          <div className="div_1__bilet" >
+            <span onClick={()=>{setPersoncardEdit(); fetchBilet(infoCard[0].id) }}>Сформировать билет</span>
+            <span onClick={()=>{setPersoncardEdit(); fetchPersonWord(infoCard[0].id) }}>Отчет Word</span>
+            <span onClick={()=>{setPersoncardEdit(); fetchPersonExcel(infoCard[0].id) }}>Отчет Excel</span>
+            </div>
         </div>
 
         <div className="div_2">
+        {/* <span className="" onClick={()=>{ setPersoncardEdit(); col('col6');  }}>Сформировать билет</span>  */}
           {uli}
-         <p className="div_2__edit" onClick={()=>{ setPersoncardEdit(); col('col6');  }}>Редактировать личную карточку</p> 
+         <div className="div_2__edits" > <span onClick={()=>{ setPersoncardEdit(); col('col6');  }}>Редактировать личную карточку</span></div> 
         </div>
 
       </main>

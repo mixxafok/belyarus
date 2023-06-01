@@ -7,7 +7,7 @@
   width: 90%;
   cursor: default;
   table-layout: fixed;
-
+  font-size: 16px;
   &.hide{
     display:none;
     
@@ -30,7 +30,7 @@
 }
 
 thead td:first-child{
-  width: 10%;
+  width: 5%;
 }
 
 .table_span__surname:hover {

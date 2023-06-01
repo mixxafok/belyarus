@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import '../styles/Registration.css';
 import Ava from '../img/ava.png';
 
-export function EditCardBranch ({infoCard, options}){
+export function EditCardNode ({infoCard, options}){
 
   let data =new Date( infoCard[0].dateStart) //перевод даты из дд.мм.гггг 
   let dateStart = `${data.getFullYear()}-${data.getMonth()}-${data.getDate()}`//в гггг-мм-дд для input[date]
@@ -285,9 +285,9 @@ for (let key in options){
             <label>Роль в системе</label>
             <select value={formInput.Rule} onChange={(e) => setFormInput({ ...formInput, Rule: e.target.value })}>
               <option value="1">Информационный пользователь</option> 
-              {/* <option value="2">Оператор</option> 
+               <option value="2">Оператор</option> 
               <option value="3">Администратор узла</option> 
-              <option value="4">Администратор системы</option>  */}
+              <option value="4">Администратор системы</option>  
             </select>
           </div>
          </container>
@@ -301,7 +301,7 @@ for (let key in options){
             <input 
               value={formInput.Vznos} 
               onChange={(e) => setFormInput({ ...formInput, Vznos: e.target.value })} 
-              type="date" 
+              type="month" 
               min="2023-01-01"/>
           </div>
 
