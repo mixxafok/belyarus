@@ -236,7 +236,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col, infoCard, setIn
         
         <div className="form_input_combobox">
         <label>Статус билета</label>
-        <select value={formInput.StatusBilet} onChange={(e) => setFormInput({ ...formInput, StatusBilet: e.target.value })}> 
+        <select  className="select" value={formInput.StatusBilet} onChange={(e) => setFormInput({ ...formInput, StatusBilet: e.target.value })}> 
           <option ></option>
           {crdSt.map((item, index)=>{ return <option value={index+1}>{item}</option>})} 
         </select>
@@ -244,7 +244,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col, infoCard, setIn
 
         <div className="form_input_combobox">
         <label>Пол</label>
-        <select value={formInput.Sex} onChange={(e) => setFormInput({ ...formInput, Sex: e.target.value })}> 
+        <select className="select" value={formInput.Sex} onChange={(e) => setFormInput({ ...formInput, Sex: e.target.value })}> 
           <option ></option>
           <option value={true}>Мужской</option>
           <option value={false}>Женский</option>
@@ -254,6 +254,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col, infoCard, setIn
         <div className="form_input_date" >
         <label>Дата рождения</label>
         <input 
+          
           value={formInput.DateBirth} 
           onChange={(e) => setFormInput({ ...formInput, DateBirth: e.target.value })} 
           type="date" 
@@ -263,6 +264,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col, infoCard, setIn
         <div className="form_input_date">
         <label>Дата вступления</label>
         <input 
+          
           value={formInput.DateIssue}
           onChange={(e) => setFormInput({ ...formInput, DateIssue: e.target.value })} 
           type="date" 
@@ -271,7 +273,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col, infoCard, setIn
 
         <div className="form_input_combobox">
         <label>Место вступления</label>
-        <select value={formInput.PlaceIssue} onChange={(e) => setFormInput({ ...formInput, PlaceIssue: e.target.value })}>
+        <select className="select" value={formInput.PlaceIssue} onChange={(e) => setFormInput({ ...formInput, PlaceIssue: e.target.value })}>
           <option ></option> 
           {entrPlcs.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
         </select>
@@ -279,7 +281,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col, infoCard, setIn
 
         <div className="form_input_combobox">
         <label>Статус членства</label>
-        <select value={formInput.StatusMember} onChange={(e) => setFormInput({ ...formInput, StatusMember: e.target.value })}>
+        <select className="select" value={formInput.StatusMember} onChange={(e) => setFormInput({ ...formInput, StatusMember: e.target.value })}>
           <option ></option> 
           {mbrSt.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
         </select>
@@ -287,7 +289,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col, infoCard, setIn
 
         <div className="form_input_combobox">
         <label>Место постановки на учет</label>
-        <select value={formInput.PlaceYchet} onChange={(e) => setFormInput({ ...formInput, PlaceYchet: e.target.value })}>
+        <select className="select" value={formInput.PlaceYchet} onChange={(e) => setFormInput({ ...formInput, PlaceYchet: e.target.value })}>
           <option ></option> 
           {regPlcs.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
         </select>
@@ -295,7 +297,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col, infoCard, setIn
 
         <div className="form_input_combobox">
         <label>Образование</label>
-        <select value={formInput.Education} onChange={(e) => setFormInput({ ...formInput, Education: e.target.value })}>
+        <select className="select" value={formInput.Education} onChange={(e) => setFormInput({ ...formInput, Education: e.target.value })}>
           <option ></option> 
           {educ.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
         </select>
@@ -303,7 +305,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col, infoCard, setIn
       
         <div className="form_input_combobox">
         <label>Социальная категория</label>
-        <select value={formInput.SocialGroup} onChange={(e) => setFormInput({ ...formInput, SocialGroup: e.target.value })}>
+        <select className="select" value={formInput.SocialGroup} onChange={(e) => setFormInput({ ...formInput, SocialGroup: e.target.value })}>
           <option ></option> 
           {socs.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
         </select>
@@ -311,7 +313,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col, infoCard, setIn
 
         <div className="form_input_combobox">
         <label>Сфера деятельности</label>
-        <select value={formInput.SphereActivity} onChange={(e) => setFormInput({ ...formInput, SphereActivity: e.target.value })}>
+        <select className="select" value={formInput.SphereActivity} onChange={(e) => setFormInput({ ...formInput, SphereActivity: e.target.value })}>
           <option ></option> 
           {acts.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
         </select>
@@ -319,7 +321,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col, infoCard, setIn
 
         <div className="form_input_combobox">
         <label>Статус в партии</label>
-        <select value={formInput.StatusPart} onChange={(e) => setFormInput({ ...formInput, StatusPart: e.target.value })}>
+        <select className="select" value={formInput.StatusPart} onChange={(e) => setFormInput({ ...formInput, StatusPart: e.target.value })}>
           <option ></option> 
           {partPoss.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
         </select>
@@ -327,7 +329,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col, infoCard, setIn
 
         <div className="form_input_combobox">
         <label>Избирался ли депутатом</label>
-        <select value={formInput.Deputat} onChange={(e) => setFormInput({ ...formInput, Deputat: e.target.value })}> 
+        <select className="select" value={formInput.Deputat} onChange={(e) => setFormInput({ ...formInput, Deputat: e.target.value })}> 
           <option ></option>
           <option value={true}>Да</option>
           <option value={false}>Нет</option>

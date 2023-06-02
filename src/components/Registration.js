@@ -100,8 +100,9 @@ export function Registration ({options}){
 
 
 const handleForm = () =>{
-  console.log(formInput); 
+   console.log(formInput); 
   fetchRegistration();
+  // ДОБАВИТЬ ОЧИТСКУ forminput
 }
 
 //запрос fetch POST
@@ -119,9 +120,11 @@ const fetchRegistration = async ()=>{
 
     let q = await response.json();
     await console.log(JSON.stringify(q));
+    alert('Член партии зарегистрирован')
   }
   catch(err){
     console.log(err)
+    alert('Ошибка с отправкой данных')
   }
 };//запрос fetch POST
 
@@ -177,7 +180,7 @@ const fetchRegistration = async ()=>{
           <div className='reg__form_input_combobox__sex'>
             <label>Пол</label>
             <select value={formInput.Sex} onChange={(e) => setFormInput({ ...formInput, Sex: e.target.value })}> 
-              <option ></option>
+              <option disabled hidden></option>
               <option value={'Мужской'}>Мужской</option>
               <option value={'Женский'}>Женский</option>
             </select>
@@ -208,97 +211,56 @@ const fetchRegistration = async ()=>{
           */}
           
 
-        <container className="Social">
-          <div className="reg__form_input_combobox__social">
+        <container className="Statusts">
+          <div className="reg__form_input_combobox__places">
           <label>Образование</label>
             <select value={formInput.Education} onChange={(e) => setFormInput({ ...formInput, Education: e.target.value })}>
-              <option ></option> 
-              {educ.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
+              <option disabled hidden></option> 
+              {educ.map((item)=>{ return <option value={item.id}>{item}</option>})}
             </select>
           </div>
-          <div className="reg__form_input_combobox__social">
+          <div className="reg__form_input_combobox__placesYchet">
           <label>Социальная категория</label>
             <select value={formInput.SocialGroup} onChange={(e) => setFormInput({ ...formInput, SocialGroup: e.target.value })}>
-              <option ></option> 
-              {socs.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
-            </select>
-          </div>
-          <div className="reg__form_input_combobox__social">
-            <label>Сфера деятельности</label>
-            <select value={formInput.SphereActivity} onChange={(e) => setFormInput({ ...formInput, SphereActivity: e.target.value })}>
-              <option ></option> 
-              {acts.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
+              <option disabled hidden></option> 
+              {socs.map((item, index)=>{ return <option value={item.id}>{item}</option>})}
             </select>
           </div>
         </container>
-       
-
-<br/>
-<hr/>
-
-        <container className="Img_Fio_LoginRule">
-         <container className="Fio">
-          <div className='reg__form_input_Login'>
-            <label>Логин</label>
-            <input
-              type="search"
-              onChange={(e) => setFormInput({ ...formInput, Login: e.target.value })}
-              value={formInput.Login }
-              className="reg__input"
-              placeholder=""
-            />
-          </div>
-          <div className="reg__form_input_Login">
-            <label>Пароль</label>
-            <input
-              type="password"
-              onChange={(e) => setFormInput({ ...formInput, Password: e.target.value })}
-              value={formInput.Password }
-              className="reg__input"
-              placeholder=""
-            />
-            <a href="#" className="password-control"></a>
-          </div>
-          {/* <div className="reg__form_input_Login">
-            <label>Повторите пароль</label>
-            <input
-              type="password"
-              onChange={(e) => setFormInput({ ...formInput, RepeatPassword: e.target.value })}
-              value={formInput.RepeatPassword }
-              className="reg__input"
-              placeholder=""
-            />
-            <a href="#" className="password-control">s</a>
-          </div> */}
-          <div className="reg__form_input_Rule">
-            <label>Роль в системе</label>
-            <select value={formInput.Rule} onChange={(e) => setFormInput({ ...formInput, Rule: e.target.value })}>
-              <option value="1">Информационный пользователь</option> 
-              {/* <option value="2">Оператор</option> 
-              <option value="3">Администратор узла</option> 
-              <option value="4">Администратор системы</option>  */}
+       <div className="reg__form_input_combobox__social">
+            <label>Сфера деятельности</label>
+            <select value={formInput.SphereActivity} onChange={(e) => setFormInput({ ...formInput, SphereActivity: e.target.value })}>
+              <option disabled hidden></option> 
+              {acts.map((item)=>{ return <option value={item.id}>{item}</option>})}
             </select>
           </div>
-         </container>
-         </container>
 
 <br/>
 <hr/>
+
+        <div className="reg__form_input_NumBilet">
+            <label>Место работы</label>
+            <input
+              type="search"
+              onChange={(e) => setFormInput({ ...formInput, PlaceJob: e.target.value })}
+              value={formInput.PlaceJob }
+              className="reg__input"
+              placeholder=""
+            />
+          </div>
 
         <container className='Statusts'>
           <div className="reg__form_input_combobox__places">
             <label>Статус билета</label>
-            <select defaultValue={'2'}  value={formInput.StatusBilet} onChange={(e) => setFormInput({ ...formInput, StatusBilet: e.target.value })}> 
-              
-              <option defaultvalue={'2'}>Не изготовлен</option>
-              
+            <select value={formInput.StatusBilet} onChange={(e) => setFormInput({ ...formInput, StatusBilet: e.target.value })}> 
+              <option selected value={2}  >Не изготовлен</option>
             </select>
           </div>
           <div className="reg__form_input_combobox__placesYchet">
             <label>Статус членства</label>
             <select value={formInput.StatusMember} onChange={(e) => setFormInput({ ...formInput, StatusMember: e.target.value })}>
-              <option ></option> 
-              {mbrSt.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
+              <option disabled hidden></option> 
+              {mbrSt.map((item, index)=>{ return <option value={item.id}>{item}</option>})}
             </select>
           </div>
         </container>
@@ -307,14 +269,14 @@ const fetchRegistration = async ()=>{
           <div className="reg__form_input_combobox__places">
             <label>Статус в партии</label>
             <select value={formInput.StatusPart} onChange={(e) => setFormInput({ ...formInput, StatusPart: e.target.value })}>
-              <option ></option> 
-              {partPoss.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
+              <option disabled hidden></option> 
+              {partPoss.map((item, index)=>{ return <option value={item.id}>{item}</option>})}
             </select>
           </div>
           <div className="reg__form_input_combobox__deputat">
             <label>Избирался ли депутатом</label>
             <select value={formInput.Deputat} onChange={(e) => setFormInput({ ...formInput, Deputat: e.target.value })}> 
-              <option ></option>
+              <option disabled hidden></option>
               <option value={'Да'}>Да</option>
               <option value={'Нет'}>Нет</option>
             </select>
@@ -333,15 +295,15 @@ const fetchRegistration = async ()=>{
           <div className="reg__form_input_combobox__places">
           <label>Место вступления</label>
             <select value={formInput.PlaceIssue} onChange={(e) => setFormInput({ ...formInput, PlaceIssue: e.target.value })}>
-              <option ></option> 
-              {entrPlcs.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
+              <option disabled hidden></option> 
+              {entrPlcs.map((item, index)=>{ return <option value={item.id}>{item}</option>})}
             </select>
           </div>
           <div className="reg__form_input_combobox__placesYchet">
             <label>Место постановки на учет</label>
-            <select value={formInput.Place} onChange={(e) => setFormInput({ ...formInput, Place: e.target.value })}>
-              <option ></option> 
-              {regPlcs.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
+            <select  value={formInput.Place} onChange={(e) => setFormInput({ ...formInput, Place: e.target.value })}>
+              <option disabled hidden></option> 
+              {regPlcs.map((item, index)=>{ return <option value={item.id}>{item}</option>})}
             </select>
           </div>
         </container>

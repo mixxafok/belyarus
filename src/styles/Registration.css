@@ -24,10 +24,10 @@
 
 .Img_Fio_SexBirthday{
   display: flex;
-  flex-direction: column;
-  width: 65%;
+  flex-direction: row;
+  width: 22%;
   margin-left: 1%;
- /* border: 1px solid green;*/
+  /* border: 1px solid green; */
 }
 
 .Img_Fio_LoginRule{
@@ -83,7 +83,7 @@ label {
 
 .Fio {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   flex-grow: 1;
   flex-shrink: 0;
@@ -95,13 +95,15 @@ label {
 
 .SexBirthday{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
   flex-wrap: wrap;
   flex-grow: 1;
   flex-shrink: 0;
-  justify-content: space-between;
+  
   width: 54%;
-  margin-top: 1%;
+  margin-top: 2%;
+  margin-left: 5%;
  /* border: 1px solid yellow;*/
 }
 
@@ -169,7 +171,7 @@ label {
 }
 
 .reg__form_input_fio{
-  width: 30%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   padding-top: 0;
@@ -229,7 +231,7 @@ label {
 }
 
 .reg__form_input_combobox__sex{
-  width: 38%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content:baseline;
@@ -247,7 +249,7 @@ label {
 }
 
 .reg__form_input_combobox__social{
-  width: 30%;
+  width: 28%;
   display: flex;
   flex-direction: column;
   justify-content:baseline;
@@ -303,13 +305,31 @@ label {
 }
 
 .reg__form_input_dateBirthday {
-  width: 35%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content:baseline;
   padding-top: 0;
-  margin-top: 1%;
+  margin-top: 2%;
   
+}
+
+.reg__form_input_dateBirthday input[type=date]{
+  outline: auto;
+  outline-color: #bdbdba;
+  width: 100%;
+  height: calc(1.8rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #bdbdbd;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .reg__form_input_date {
@@ -319,7 +339,7 @@ label {
   justify-content:baseline;
   padding-top: 0;
   margin-top: 1%;
-  margin-left: 5%;
+  margin-left: 2%;
 }
 
 .reg__form_input_date input[type=date]{

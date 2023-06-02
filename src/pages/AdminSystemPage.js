@@ -10,10 +10,12 @@ import {EditCardNode} from '../components/EditCardNode.js';
 import { BranchsSystem } from "../components/BranchsSystem.js";
 import { SpisokUsersSystem } from "../components/SpisokUsersSystem.js";
 import Up from '../icons/up.png';
+import { LogPassUser } from "../components/LogPassUser.js";
 import '../styles/AdminSystemPage.css';
 import '../styles/Header.css';
 import '../styles/Table.css';
 import '../styles/PersonalCardSystem.css';
+
 
 
 export function AdminSystemPage(){
@@ -600,6 +602,7 @@ const handleForm = () =>{
      { (col_6) ? <EditCardNode infoCard={infoCard} options={options} /> : null}
      { (col_8) ? <BranchsSystem options={options} tablePOO={tablePOO} tablehidePOO={tablehidePOO}/> : null}
      { (col_9) ? <SpisokUsersSystem options={options}/> : null}
+     { (col_10) ? <LogPassUser /> : null}
      </div>
 
     </main>
