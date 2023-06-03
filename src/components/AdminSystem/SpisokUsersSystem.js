@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
-import '../styles/SpisokUsersSystem.css'
-import { uzels } from './FIO'
-import Up from '../icons/up.png'
+import '../../styles/SpisokUsersSystem.css'
+import { uzels } from '../FIO'
+import Up from '../../icons/up.png'
+
+
 export  function SpisokUsersSystem() {
 
   const [seletedLi1, setSelectedLi1] = useState(true)

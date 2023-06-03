@@ -5,8 +5,9 @@ import {PersonalCard} from '../components/PersonalCard';
 import Icon from '../icons/partIcon.js';
 import question from '../icons/question.png';
 import Up from '../icons/up.png';
+import { fetchPOO, fetchPause, fetchNO, fetchOne, fetchOptions, fetchSparvka } from "../components/fetchs.js";
 import '../styles/UserPage.css';
-import '../styles/Header.css';
+import '../styles/Header.css'; 
 import '../styles/Table.css';
 import '../styles/PersonalCard.css';
 
@@ -23,6 +24,8 @@ export function UserPage(){
 
   const[personcard, setPersoncard] = useState(false)
 
+   const [b,setb] = useState([])
+   const [options, setOptions] = useState([]);
   //нажатие на меню
   function col (cols){
     if (cols == 'col1') {
@@ -34,7 +37,7 @@ export function UserPage(){
           setTableFindFilter(true);
           setTableHidePause(true);
           setTableHideNO(true);
-          fetchPOO();
+          fetchPOO({setb});
     }
    else if (cols == 'col2'){
           setcol_1(false); 
@@ -45,8 +48,8 @@ export function UserPage(){
           setTableFindFilter(!tablefindfilter);
           setTableHidePause(true);
           setTableHideNO(true);
-          fetchPOO(); // подгрузка таблицы РОО
-          fetchOptions();
+          fetchPOO({setb}); // подгрузка таблицы РОО
+          fetchOptions({setOptions});
         }
     else if (cols == 'col3'){
           setcol_1(false); 
@@ -57,7 +60,7 @@ export function UserPage(){
           setTableFindFilter(true);
           setTableHidePause(!tablehidePause);
           setTableHideNO(true);
-          fetchPause();
+          fetchPause({setb});
         
         }
     else if ( cols == 'col4') {
@@ -69,7 +72,7 @@ export function UserPage(){
           setTableFindFilter(true);
           setTableHidePause(true);
           setTableHideNO(!tablehideNO);
-          fetchNO();
+          fetchNO({setb});
         }
 
    }
@@ -81,15 +84,6 @@ export function UserPage(){
    };
  
 //fetch
-   const [b,setb] = useState([])
-   const [options, setOptions] = useState([]);
-
-   const fetchSparvka = async () =>{
-    const pesponse = await fetch('http://localhost:5059/api/Otchet/GetHelp/', {
-      method: 'get'
-    });
-   }
-
    const fetchPOOWord = async () =>{
     try{
       const response = await fetch('',{
@@ -103,77 +97,38 @@ export function UserPage(){
     }
    }
    const fetchPausedWord = async () =>{
-    const response = await fetch('http://localhost:5059/api/Otchet/GetPausedWord/',{
+    const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedWord/',{
       method: 'get'
     });
    }
    const fetchNOWord = async () =>{
-    const response = await fetch('http://localhost:5059/api/Otchet/GetKickedWord/',{
+    const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetKickedWord/',{
       method: 'get'
     });
    }
 
    const fetchPausedExcel = async () =>{
-    const response = await fetch('http://localhost:5059/api/Otchet/GetPausedExel/',{
+    const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedExel/',{
       method: 'get'
     });
    }
    const fetchPOOExcel = async () =>{
-    const response = await fetch('http://localhost:5059/api/Otchet/GetPausedExel/',{
+    const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedExel/',{
       method: 'get'
     });
    }
    const fetchNOExcel = async () =>{
-    const response = await fetch('http://localhost:5059/api/Otchet/GetKickedExel/',{
+    const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetKickedExel/',{
       method: 'get'
     });
    }
-
-   const fetchPOO = async ()=>{
-     const response = await fetch("http://localhost:5059/UserPage/tablePOO/", {
-       method: "get",
-     });
-     let q = await response.json();
-     await setb(q);
-   };
-
-   const fetchNO = async ()=>{
-     const response = await fetch("http://localhost:5059/UserPage/tableNO/", {
-       method: "get",
-     });
-     let q = await response.json();
-     await setb(q);
-   };
-
-   const fetchPause = async ()=>{
-     const response = await fetch("http://localhost:5059/UserPage/tablePause/", {
-       method: "get",
-     });
-     let q = await response.json();
-     await setb(q);
-   };
-
-   const fetchOne = async (itemid)=>{
-    const response = await fetch(`http://localhost:5059/UserPage/GetOne?id=${itemid}`, {
-      method: "get",
-    });
-    let q = await response.json();
-    await setInfoCard([q]);
-  };
-   const fetchOptions = async ()=>{
-    const response = await fetch("  http://localhost:5059/UserPage/GetOptions", {
-      method: "get",
-    });
-    let q = await response.json();
-    await setOptions(q);
-  };
 //fetch
 
 //вывод таблиц
    let tablePOO = b.map(function(item,index) {
      return <tr key={item.id}>
        <td> {index+1}</td>
-        <td className="table__surname"><p  onClick={()=>{fetchOne(item.id); setPersoncard(!personcard); setInfoCard([item]) }} className="table_span__surname">{item.surname}</p></td>
+        <td className="table__surname"><p  onClick={()=>{fetchOne(item.id, {setInfoCard}); setTimeout(()=>setPersoncard(!personcard), 200)}} className="table_span__surname">{item.surname}</p></td>
         <td>{item.name}</td>
         <td>{item.parent}</td>
         <td>{item.numBilet}</td>
@@ -185,7 +140,7 @@ export function UserPage(){
   let tableNO = b.map(function(item,index) {
    return <tr key={item.id}>
      <td> {index+1}</td>
-      <td className="table__surname"><p onClick={()=>{fetchOne(item.id); setPersoncard(!personcard)}} className="table_span__surname">{item.surname}</p></td>
+      <td className="table__surname"><p onClick={()=>{fetchOne(item.id, {setInfoCard}); setTimeout(()=>setPersoncard(!personcard), 200)}} className="table_span__surname">{item.surname}</p></td>
       <td>{item.name}</td>
       <td>{item.parent}</td>
       <td>{item.dateFinish}</td>
@@ -195,7 +150,7 @@ export function UserPage(){
  let tablePause = b.map(function(item,index) {
    return <tr key={item.id}>
      <td> {index+1}</td>
-      <td className="table__surname"><p onClick={()=>{fetchOne(item.id); setPersoncard(!personcard)}} className="table_span__surname">{item.surname}</p></td>
+      <td className="table__surname"><p onClick={()=>{fetchOne(item.id, {setInfoCard}); setTimeout(()=>setPersoncard(!personcard), 200)}} className="table_span__surname">{item.surname}</p></td>
       <td>{item.name}</td>
         <td>{item.parent}</td>
         <td>{item.numBilet}</td>
@@ -217,7 +172,7 @@ export function UserPage(){
 
         <div className="Header__nav">
           <p className="Header__nameUser">Темошенко Кирилл Александрович</p> 
-          <p className="Header__ruleUser" >Информационный пользователь &nbsp; <span onClick={fetchSparvka()}><img className="spravka" src={question} alt="?" width="13px"  /></span> </p>
+          <p className="Header__ruleUser" >Информационный пользователь &nbsp; <span onClick={()=>fetchSparvka()}><img className="spravka" src={question} alt="?" width="13px"  /></span> </p>
           <p className="Header__exit" onClick={()=> Exit()}>Выход  </p>
         </div>
     
@@ -238,7 +193,7 @@ export function UserPage(){
         </div>
 
 
-      {personcard ? <PersonalCard setPersoncard={setPersoncard} infoCard={infoCard} setinfoCard={setInfoCard}/> : null}
+      {personcard ? <PersonalCard setPersoncard={setPersoncard} infoCard={infoCard} setInfoCard={setInfoCard}/> : null}
 
       <div className="tables" id="start_table">
       <div className={`Otchet ${(tablehidePOO  ) ? 'hide' : ''}`}>

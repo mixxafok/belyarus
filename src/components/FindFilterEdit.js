@@ -8,7 +8,6 @@ export function FindFilterEdit({b,tablefindfilter, options, col, infoCard, setIn
   const[personcardEdit, setPersoncardEdit] = useState(false);
   // const [infoCard,setInfoCard] = useState([])
   const [foundUsers, setFoundUsers] = useState(b);
-  const [foundUsersS, setFoundUsersS] = useState([]);
   const [formInput, setFormInput] = useState({
     Surname: '', 
     Name: '',
@@ -110,7 +109,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col, infoCard, setIn
        <td>{(user.parent)}</td>
        <td>{user.numBilet}</td>
        <td>{user.dateStart}</td>
-       <td>{user.place}</td>
+       <td>{user.uchetPlace}</td>
     </tr>
     ))
   ) : (

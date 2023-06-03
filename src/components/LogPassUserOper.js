@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
 import '../styles/LogPassUser.css'
 import { BranchsSystemLog } from './BranchsSystemLog'
-export  function LogPassUser() {
+
+export  function LogPassUserOper() {
 
   const [formInput, setFormInput] = useState({
     Surname: '',
@@ -76,9 +77,6 @@ export  function LogPassUser() {
           <label>Роль в системе</label>
           <select  value={formInput.Rule} onChange={e=>setFormInput({...formInput, Rule: e.target.value})} className='LogPassUser_select' >
             <option selected value={1} >Информационный пользователь</option>
-            <option value={2}>Оператор</option>
-            <option value={3}>Администратор узла</option>
-            <option value={4}>Администратор системы</option>
           </select>
           <label>Пароль</label>
           <input 

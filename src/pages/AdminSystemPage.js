@@ -1,21 +1,20 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { FindFilterEdit } from "../components/FindFilterEdit.js";
-import {PersonalCardSystem} from '../components/PersonalCardSystem.js';
+import {PersonalCardSystem} from '../components/AdminSystem/PersonalCardSystem.js';
 import Icon from '../icons/partIcon.js';
 import question from '../icons/question.png';
 import {Registration} from '../components/Registration.js';
-import {EditCard} from '../components/EditCard.js';
-import {EditCardNode} from '../components/EditCardNode.js';
-import { BranchsSystem } from "../components/BranchsSystem.js";
-import { SpisokUsersSystem } from "../components/SpisokUsersSystem.js";
+import {EditCardSystem} from '../components/AdminSystem/EditCardSystem.js';
+import { BranchsSystem } from "../components/AdminSystem/BranchsSystem.js";
+import { SpisokUsersSystem } from "../components/AdminSystem/SpisokUsersSystem.js";
 import Up from '../icons/up.png';
-import { LogPassUser } from "../components/LogPassUser.js";
+import { LogPassUserSystem } from "../components/AdminSystem/LogPassUserSystem.js";
 import '../styles/AdminSystemPage.css';
 import '../styles/Header.css';
 import '../styles/Table.css';
 import '../styles/PersonalCardSystem.css';
-
+import { fetchPOO, fetchPause, fetchNO, fetchSparvka, fetchBranch } from "../components/fetchs.js";
 
 
 export function AdminSystemPage(){
@@ -63,7 +62,7 @@ export function AdminSystemPage(){
       setTableHidePause(true);
       setTableHideNO(true);
       setTableHideBranch(true);
-      fetchPOO();
+      fetchPOO({setb});
     }
     else if (cols == 'col1') {
       
@@ -82,7 +81,7 @@ export function AdminSystemPage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
-          fetchPOO();
+          fetchPOO({setb});
     }
     else if (cols == 'col2'){
     
@@ -101,7 +100,7 @@ export function AdminSystemPage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
-          fetchPOO();
+          fetchPOO({setb});
           fetchOptions();
           // подгрузка таблицы РОО
     }
@@ -122,7 +121,7 @@ export function AdminSystemPage(){
           setTableHidePause(!tablehidePause);
           setTableHideNO(true);
           setTableHideBranch(true);
-          fetchPause();
+          fetchPause({setb});
         
     }
     else if ( cols == 'col4') {
@@ -142,7 +141,7 @@ export function AdminSystemPage(){
           setTableHidePause(true);
           setTableHideNO(!tablehideNO);
           setTableHideBranch(true);
-          fetchNO();
+          fetchNO({setb});
     }
     else if ( cols == 'col5') {
           setcol_1(false); 
@@ -198,7 +197,7 @@ export function AdminSystemPage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(!tablehideBranch);
-          fetchBranch();
+          fetchBranch({setb});
     }
     else if ( cols == 'col8') {
       setcol_0(false);
@@ -217,7 +216,7 @@ export function AdminSystemPage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
-          fetchBranch();
+          fetchBranch({setb});
     }
     else if ( cols == 'col9') {
       setcol_0(false);
@@ -267,18 +266,17 @@ export function AdminSystemPage(){
  
 
 //fetch
-   const fetchSparvka = async () =>{
-    try{
-      const pesponse = await fetch('http://localhost:5059/api/Otchet/GetHelp/', {
-      method: 'get'
-    });
-    alert('Файл успешно загружен')
-    }
-    catch(err){
-      alert('Повторите попытку')
-    }
-
-   }
+  //  const fetchSparvka = async () =>{
+  //   try{
+  //     const pesponse = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetHelp/', {
+  //     method: 'get'
+  //   });
+  //   alert('Файл успешно загружен')
+  //   }
+  //   catch(err){
+  //     alert('Повторите попытку')
+  //   }
+  //  }
 
    const fetchPOOWord = async () =>{
     try{
@@ -293,72 +291,72 @@ export function AdminSystemPage(){
     }
    }
    const fetchPausedWord = async () =>{
-    const response = await fetch('http://localhost:5059/api/Otchet/GetPausedWord/',{
+    const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedWord/',{
       method: 'get'
     });
    }
    const fetchNOWord = async () =>{
-    const response = await fetch('http://localhost:5059/api/Otchet/GetKickedWord/',{
+    const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetKickedWord/',{
       method: 'get'
     });
    }
 
    const fetchPausedExcel = async () =>{
-    const response = await fetch('http://localhost:5059/api/Otchet/GetPausedExel/',{
+    const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedExel/',{
       method: 'get'
     });
    }
    const fetchPOOExcel = async () =>{
-    const response = await fetch('http://localhost:5059/api/Otchet/GetPausedExel/',{
+    const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedExel/',{
       method: 'get'
     });
    }
    const fetchNOExcel = async () =>{
-    const response = await fetch('http://localhost:5059/api/Otchet/GetKickedExel/',{
+    const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetKickedExel/',{
       method: 'get'
     });
    }
 
-   const fetchPOO = async () =>{
-    try{
-     const response = await fetch("http://localhost:5059/UserPage/tablePOO/", {
-       method: "get",
-      "content-type" : "application/json; charset=utf-8"
-     });
-     let q = await response.json();
-     await setb(q);
-    }
-    catch(err){
-      console.log(err)
-    }
-   };
+  //  const fetchPOO = async () =>{
+  //   try{
+  //    const response = await fetch("http://secondsin-001-site1.dtempurl.com/UserPage/tablePOO/", {
+  //      method: "get",
+  //     "content-type" : "application/json; charset=utf-8"
+  //    });
+  //    let q = await response.json();
+  //    await setb(q);
+  //   }
+  //   catch(err){
+  //     console.log(err)
+  //   }
+  //  };
 
-   const fetchNO = async ()=>{
-     const response = await fetch("http://localhost:5059/UserPage/tableNO/", {
-       method: "get",
-     });
-     let q = await response.json();
-     await setb(q);
-   };
+  //  const fetchNO = async ()=>{
+  //    const response = await fetch("http://secondsin-001-site1.dtempurl.com/UserPage/tableNO/", {
+  //      method: "get",
+  //    });
+  //    let q = await response.json();
+  //    await setb(q);
+  //  };
 
-   const fetchPause = async ()=>{
-     const response = await fetch("http://localhost:5059/UserPage/tablePause/", {
-       method: "get",
-     });
-     let q = await response.json();
-     await setb(q);
-   };
+  //  const fetchPause = async ()=>{
+  //    const response = await fetch("http://secondsin-001-site1.dtempurl.com/UserPage/tablePause/", {
+  //      method: "get",
+  //    });
+  //    let q = await response.json();
+  //    await setb(q);
+  //  };
 
-   const fetchBranch = async ()=>{
-    const response = await fetch("http://localhost:5059/UserPage/tablePOO/", {
-      method: "get",
-    });
-    let q = await response.json();
-    await setb(q);
-  };
+  //  const fetchBranch = async ()=>{
+  //   const response = await fetch("http://secondsin-001-site1.dtempurl.com/UserPage/tablePOO/", {
+  //     method: "get",
+  //   });
+  //   let q = await response.json();
+  //   await setb(q);
+  // };
 
    const fetchOne = async (itemid)=>{
-    const response = await fetch(`http://localhost:5059/UserPage/GetOne?id=${itemid}`, {
+    const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/GetOne?id=${itemid}`, {
       method: "get",
     });
     let q = await response.json();
@@ -366,7 +364,7 @@ export function AdminSystemPage(){
   };
 
   const fetchOptions = async ()=>{
-    const response = await fetch("http://localhost:5059/UserPage/GetOptions/", {
+    const response = await fetch("http://secondsin-001-site1.dtempurl.com/UserPage/GetOptions/", {
       method: "get",
     });
     let q = await response.json();
@@ -599,10 +597,10 @@ const handleForm = () =>{
      { (col_2) ? <FindFilterEdit b={b} options={options} col={col} infoCard={infoCard} setInfoCard={setInfoCard}/> : null}
      { (col_5) ? <Registration options={options}/> : null}
      {/* { (col_6) ? <EditCard infoCard={infoCard} options={options} /> : null} */}
-     { (col_6) ? <EditCardNode infoCard={infoCard} options={options} /> : null}
+     { (col_6) ? <EditCardSystem infoCard={infoCard} options={options} /> : null}
      { (col_8) ? <BranchsSystem options={options} tablePOO={tablePOO} tablehidePOO={tablehidePOO}/> : null}
      { (col_9) ? <SpisokUsersSystem options={options}/> : null}
-     { (col_10) ? <LogPassUser /> : null}
+     { (col_10) ? <LogPassUserSystem /> : null}
      </div>
 
     </main>

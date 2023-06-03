@@ -1,5 +1,4 @@
 .tablePOO {
-  counter-reset: rowNumber;
   margin: auto;
   margin-top: 1%;
   border-collapse: collapse;
@@ -17,14 +16,14 @@
 
  thead td{
 
-  font-size: 16px;
+  font-size: 14px;
   font-family: Montserrat-SemiBold;
   padding: 8px;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   text-align: center;
  /* background-color: #04AA6D;*/
- background-color:rgb(218, 173, 83);
+  background-color:rgb(218, 173, 83);
   color: white;
   
 }

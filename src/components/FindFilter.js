@@ -3,10 +3,10 @@ import '../styles/Table.css';
 import '../styles/Findfilter.css';
 import {PersonalCard} from './PersonalCard.js';
 
-export function FindFilter({b,tablefindfilter, options, infoCard, setInfoCard}){
+export function FindFilter({b,tablefindfilter, options}){
 
   const[personcard, setPersoncard] = useState(false);
-  // const [infoCard,setInfoCard] = useState([])
+  const [infoCard,setInfoCard] = useState([])
   const [foundUsers, setFoundUsers] = useState(b);
   
   const [formInput, setFormInput] = useState({
@@ -73,7 +73,7 @@ export function FindFilter({b,tablefindfilter, options, infoCard, setInfoCard}){
 
 // get одного пользователя
     const fetchOne = async (itemid)=>{
-      const response = await fetch(`http://localhost:5059/UserPage/GetOne?id=${itemid}`, {
+      const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/GetOne?id=${itemid}`, {
         method: "get",
       });
       let q = await response.json();
@@ -83,7 +83,7 @@ export function FindFilter({b,tablefindfilter, options, infoCard, setInfoCard}){
 // post для поиска
     const fetchPost = async () => {
       try{
-        const responce = await fetch('http://localhost:5059/UserPage/Search/', {
+        const responce = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/Search/', {
           method: 'post',
           headers: {
             'Accept': 'application/json',
@@ -93,6 +93,7 @@ export function FindFilter({b,tablefindfilter, options, infoCard, setInfoCard}){
         })
         let q = await responce.json();
         await setFoundUsers([q]);
+        console.log(foundUsers)
       }
       catch(err){
         console.log(err);
@@ -103,7 +104,7 @@ export function FindFilter({b,tablefindfilter, options, infoCard, setInfoCard}){
     foundUsers.map((user,index) => (
       <tr key={user.id}>
       <td> {index+1}</td>
-       <td className="table__surname"><p onClick={()=>{fetchOne(user.id); setPersoncard(!personcard); setInfoCard([user])}} className="table_span__surname">{user.surname}</p></td>
+       <td className="table__surname"><p onClick={()=>{fetchOne(user.id); setPersoncard(!personcard);}} className="table_span__surname">{user.surname}</p></td>
        <td>{user.name}</td>
          <td>{user.parent}</td>
          <td>{user.numBilet}</td>

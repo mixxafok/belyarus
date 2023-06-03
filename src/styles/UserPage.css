@@ -133,6 +133,7 @@
   margin-top: 1%;
   margin-right: 10%;
   margin-bottom: 1%;
+  cursor: pointer;
   &.hide {
     display: none;
   }
@@ -146,7 +147,7 @@
   flex-flow: row;
   justify-content: space-between;
   font-size: 14px;
-float: right;
+  float: right;
   margin: 1% 6% 1% 0;
   cursor: pointer;
   &.hide {

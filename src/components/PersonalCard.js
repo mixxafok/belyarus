@@ -3,7 +3,7 @@ import Avatar from '../img/ava.png';
 import '../styles/PersonalCardEdit.css';
 
 
-export function PersonalCard({setPersoncard, infoCard} ){
+export function PersonalCard({setPersoncard, infoCard, setInfoCard} ){
 
   let fioMember = infoCard.map((tem) => {
     return (
@@ -39,7 +39,7 @@ export function PersonalCard({setPersoncard, infoCard} ){
   return (
       <main className="PersonalCard_main">
         <div className="div_1">
-          <p className="cancel" onClick={()=> setPersoncard()}>X</p>
+          <p className="cancel" onClick={()=> {setPersoncard(); setInfoCard([]);}}>X</p>
           <img src={Avatar} className="div_1__Avatar" alt="no img" width='23.3mm' height='31mm'></img>
           <div className="div_1__FIO">{fioMember}</div>
         </div>

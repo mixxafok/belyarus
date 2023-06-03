@@ -1,117 +1,62 @@
 import React, {useState} from 'react';
-import '../styles/Registration.css';
-import Ava from '../img/ava.png';
-import view from '../icons/eye.png';
-import no_view from '../icons/no-view.png';
+import '../../styles/Registration.css';
+import Ava from '../../img/ava.png';
 
-export function Registration ({options}){
+export function EditCardSystem ({infoCard, options}){
 
-  const [formInput, setFormInput] = useState({
-   // Login: '',
-   // Password: '',
-   // RepeatPassword: '',
-   // Rule: '',
-   // Vznos: '',
-    Surname: '', 
-    Name: '',
-    Parent: '',
-    NumBilet: 0,
-   // DateStart: '',
-   // DateFinish: '',
-    dateIssue: '',
-    StatusBilet: '2',
-    StatusMember: '',
-    Sex: '',
-    DateBirth: '',
-    PlaceIssue:'',
-    Education: '',
-    SocialGroup: '',
-    SphereActivity: '',
-    PlaceJob: '',
-    PostJob: '',
-    StatusPart:'',
-    Deputat: '',
-    RegistrationAddress:'',
-    LivingAddress:'',
-    TelephoneNumber:'',
-    Place: '' 
-  })
+  let data =new Date( infoCard[0].dateStart) //перевод даты из дд.мм.гггг 
+  let dateStart = `${data.getFullYear()}-${data.getMonth()}-${data.getDate()}`//в гггг-мм-дд для input[date]
 
-  //обработка options
-  const educ = {};
-  const socs = [];
-  const acts = [];
-  const regPlcs = [];
-  const entrPlcs = [];
-  const partPoss = [];
-  const mbrSt = [];
-  const crdSt = [];
-  for (let key in options){
-    if(key == 'edus'){
-    //   for (let ked of options['edus']){
-    //     educ.push( [ked.val, ked.Id])
-    //     continue
-    //     }
- 
-    
-    }
-    if(key == 'socs'){
-      for (let ked of options['socs']){
-        socs.push( ked.val)
-        continue
-        }
-    }
-    if(key == 'acts'){
-      for (let ked of options['acts']){
-        acts.push( ked.val)
-        continue
-        }
-    }
-    if(key == 'regPlcs'){
-      for (let ked of options['regPlcs']){
-        regPlcs.push( ked.val)
-        continue
-        }
-    }
-    if(key == 'entrPlcs'){
-      for (let ked of options['entrPlcs']){
-        entrPlcs.push( ked.val)
-        continue
-        }
-    }
-    if(key == 'partPoss'){
-      for (let ked of options['partPoss']){
-        partPoss.push( ked.val)
-        continue
-        }
-    }
-    if(key == 'mbrSt'){
-      for (let ked of options['mbrSt']){
-        mbrSt.push( ked.val)
-        continue
-        }
-    }
-    if(key == 'crdSt'){
-      for (let ked of options['crdSt']){
-        crdSt.push( ked.val)
-        continue
-        }
-    }
-    console.log(educ)
-  }
-//обработка options
+  let data1 =new Date( infoCard[0].dateBirth) //перевод даты из дд.мм.гггг 
+  let dateBirth= `${data1.getFullYear()}-${data1.getMonth()}-${data1.getDate()}`//в гггг-мм-дд для input[date]
+
+  let data2 =new Date( infoCard[0].dateIssue) //перевод даты из дд.мм.гггг 
+  let dateIssue= `${data2.getFullYear()}-${data2.getMonth()}-${data2.getDate()}`//в гггг-мм-дд для input[date]
+
+    const [formInput, setFormInput] = useState({
+      Id:infoCard[0].id,
+      // Login: '',
+      // Password: '',
+      // Rule: '',
+      Vznos: '',
+      Surname: infoCard[0].name, 
+      Name: infoCard[0].surname,
+      Parent: infoCard[0].parent,
+      NumBilet: infoCard[0].numBilet,
+      DateStart: `${dateStart}`,
+     // DateFinish: ``,
+      DateIssue: `${dateIssue}`,
+      StatusBilet: infoCard[0].statusBiletId,
+      StatusMember: infoCard[0].statusMemberId,
+      Sex: infoCard[0].sex,
+      DateBirth: `${dateBirth}`,
+      StatusPart: `${infoCard[0].partStatus}`,
+      Deputat: infoCard[0].deputat,
+      PlaceYchet: `${infoCard[0].uchetId}`,
+      PlaceIssue: infoCard[0].placeId,
+      Education: infoCard[0].educationId,
+      SocialGroup: infoCard[0].socId,
+      SphereActivity: infoCard[0].sphereId,
+      PlaceJob: infoCard[0].placeJob, 
+      PostJob: infoCard[0].postJob,
+      RegistrationAddress: infoCard[0].registrationAddress, 
+      LivingAddress: infoCard[0].livingAddress, 
+      TelephoneNumber: infoCard[0].telephoneNumber
+
+    })
+
+//console.log(formInput.DateBirth)
 
 
 const handleForm = () =>{
-   console.log(formInput); 
-  fetchRegistration();
-  // ДОБАВИТЬ ОЧИТСКУ forminput
+  console.log(formInput);
+  fetchEditCard();
+
 }
 
-//запрос fetch POST
-const fetchRegistration = async ()=>{
+const fetchEditCard = async ()=>{
   try{
-    const response = await fetch("http://localhost:5059/UserPage/addCard/", {
+    const response = await fetch("http://localhost:5059/UserPage/ChangeUsr/", {
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -123,13 +68,73 @@ const fetchRegistration = async ()=>{
 
     let q = await response.json();
     await console.log(JSON.stringify(q));
-    alert('Член партии зарегистрирован')
   }
   catch(err){
     console.log(err)
-    alert('Ошибка с отправкой данных')
   }
 };//запрос fetch POST
+
+
+//обработка options
+const educ = [];
+const socs = [];
+const acts = [];
+const regPlcs = [];
+const entrPlcs = [];
+const partPoss = [];
+const mbrSt = [];
+const crdSt = [];
+for (let key in options){
+  if(key == 'edus'){
+    for (let ked of options['edus']){
+      educ.push( ked.val)
+      continue
+      }
+  }
+  if(key == 'socs'){
+    for (let ked of options['socs']){
+      socs.push( ked.val)
+      continue
+      }
+  }
+  if(key == 'acts'){
+    for (let ked of options['acts']){
+      acts.push( ked.val)
+      continue
+      }
+  }
+  if(key == 'regPlcs'){
+    for (let ked of options['regPlcs']){
+      regPlcs.push( ked.val)
+      continue
+      }
+  }
+  if(key == 'entrPlcs'){
+    for (let ked of options['entrPlcs']){
+      entrPlcs.push( ked.val)
+      continue
+      }
+  }
+  if(key == 'partPoss'){
+    for (let ked of options['partPoss']){
+      partPoss.push( ked.val)
+      continue
+      }
+  }
+  if(key == 'mbrSt'){
+    for (let ked of options['mbrSt']){
+      mbrSt.push( ked.val)
+      continue
+      }
+  }
+  if(key == 'crdSt'){
+    for (let ked of options['crdSt']){
+      crdSt.push( ked.val)
+      continue
+      }
+  }
+}
+//обработка options
 
 
   return (
@@ -145,7 +150,8 @@ const fetchRegistration = async ()=>{
             <input type="file" name="file" className='file'/>
           </div>
 
-        <container className="Img_Fio_SexBirthday">
+
+          <container className="Img_Fio_SexBirthday">
          <container className="Fio">
           <div className='reg__form_input_fio'>
             <label>Фамилия</label>
@@ -218,19 +224,19 @@ const fetchRegistration = async ()=>{
           <div className="reg__form_input_combobox__places">
           <label>Образование</label>
             <select value={formInput.Education} onChange={(e) => setFormInput({ ...formInput, Education: e.target.value })}>
-              <option disabled hidden></option> 
-              {educ.map((item)=>{ return <option value={item.id}>{item}</option>})}
+              <option ></option> 
+              {educ.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
             </select>
           </div>
           <div className="reg__form_input_combobox__placesYchet">
           <label>Социальная категория</label>
             <select value={formInput.SocialGroup} onChange={(e) => setFormInput({ ...formInput, SocialGroup: e.target.value })}>
-              <option disabled hidden></option> 
-              {socs.map((item)=>{ return <option value={item.id}>{item}</option>})}
+              <option ></option> 
+              {socs.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
             </select>
           </div>
         </container>
-       <div className="reg__form_input_combobox__social">
+        <div className="reg__form_input_combobox__social">
             <label>Сфера деятельности</label>
             <select value={formInput.SphereActivity} onChange={(e) => setFormInput({ ...formInput, SphereActivity: e.target.value })}>
               <option disabled hidden></option> 
@@ -241,18 +247,44 @@ const fetchRegistration = async ()=>{
 <br/>
 <hr/>
 
+        <container className='NumBlietVznos'>
+          <div className="reg__form_input_numBilet">
+            <label >Номер билета</label>
+            <input
+              type="search"
+              maxlength="6"
+              onChange={(e) => setFormInput({ ...formInput, NumBilet: e.target.value })}
+              value={formInput.NumBilet }
+              className="reg__input"
+              placeholder=""
+            />
+          </div>
+          <div className="reg__form_input_Vznos">
+            <label>Уплата членских взносов</label>
+            <input 
+              value={formInput.Vznos} 
+              onChange={(e) => setFormInput({ ...formInput, Vznos: e.target.value })} 
+              type="month" 
+              min="2023-01-01"/>
+          </div>
+        </container>
+
+<br/>
+<hr/>
+
         <container className='Statusts'>
           <div className="reg__form_input_combobox__places">
             <label>Статус билета</label>
             <select value={formInput.StatusBilet} onChange={(e) => setFormInput({ ...formInput, StatusBilet: e.target.value })}> 
-              <option selected value={2}  >Не изготовлен</option>
+              <option ></option>
+              {crdSt.map((item, index)=>{ return <option value={index+1}>{item}</option>})} 
             </select>
           </div>
           <div className="reg__form_input_combobox__placesYchet">
             <label>Статус членства</label>
             <select value={formInput.StatusMember} onChange={(e) => setFormInput({ ...formInput, StatusMember: e.target.value })}>
-              <option disabled hidden></option> 
-              {mbrSt.map((item, index)=>{ return <option value={item.id}>{item}</option>})}
+              <option ></option> 
+              {mbrSt.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
             </select>
           </div>
         </container>
@@ -261,14 +293,14 @@ const fetchRegistration = async ()=>{
           <div className="reg__form_input_combobox__places">
             <label>Статус в партии</label>
             <select value={formInput.StatusPart} onChange={(e) => setFormInput({ ...formInput, StatusPart: e.target.value })}>
-              <option disabled hidden></option> 
-              {partPoss.map((item, index)=>{ return <option value={item.id}>{item}</option>})}
+              <option ></option> 
+              {partPoss.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
             </select>
           </div>
           <div className="reg__form_input_combobox__deputat">
             <label>Избирался ли депутатом</label>
             <select value={formInput.Deputat} onChange={(e) => setFormInput({ ...formInput, Deputat: e.target.value })}> 
-              <option disabled hidden></option>
+              <option ></option>
               <option value={'Да'}>Да</option>
               <option value={'Нет'}>Нет</option>
             </select>
@@ -276,8 +308,8 @@ const fetchRegistration = async ()=>{
           <div className="reg__form_input_date">
             <label>Дата вступления</label>
             <input 
-              value={formInput.dateIssue}
-              onChange={(e) => setFormInput({ ...formInput, dateIssue: e.target.value })} 
+              value={formInput.DateIssue}
+              onChange={(e) => setFormInput({ ...formInput, DateIssue: e.target.value })} 
               type="date" 
               min="2023-01-01"/>
           </div>
@@ -287,15 +319,15 @@ const fetchRegistration = async ()=>{
           <div className="reg__form_input_combobox__places">
           <label>Место вступления</label>
             <select value={formInput.PlaceIssue} onChange={(e) => setFormInput({ ...formInput, PlaceIssue: e.target.value })}>
-              <option disabled hidden></option> 
-              {entrPlcs.map((item, index)=>{ return <option value={item.id}>{item}</option>})}
+              <option ></option> 
+              {entrPlcs.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
             </select>
           </div>
           <div className="reg__form_input_combobox__placesYchet">
             <label>Место постановки на учет</label>
-            <select  value={formInput.Place} onChange={(e) => setFormInput({ ...formInput, Place: e.target.value })}>
-              <option disabled hidden></option> 
-              {regPlcs.map((item, index)=>{ return <option value={item.id}>{item}</option>})}
+            <select value={formInput.PlaceYchet} onChange={(e) => setFormInput({ ...formInput, PlaceYchet: e.target.value })}>
+              <option ></option> 
+              {regPlcs.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
             </select>
           </div>
         </container>
@@ -330,7 +362,7 @@ const fetchRegistration = async ()=>{
             <input
               type="search"
               onChange={(e) => setFormInput({ ...formInput, RegistrationAddress: e.target.value })}
-              value={formInput.RegistrationAddress}
+              value={formInput.RegistrationAddress }
               className="reg__input"
               placeholder=""
             />
@@ -358,6 +390,6 @@ const fetchRegistration = async ()=>{
             />
           </div>
       </div>
-      
-  ) 
-} 
+    
+  )
+}

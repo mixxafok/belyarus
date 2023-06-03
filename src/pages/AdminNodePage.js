@@ -8,7 +8,7 @@ import {Registration} from '../components/Registration.js';
 import {EditCard} from '../components/EditCard.js';
 import {EditCardNode} from '../components/EditCardNode.js';
 import { Branchs } from "../components/Branchs.js";
-import { SpisokUsersSystem } from "../components/SpisokUsersSystem.js";
+import { SpisokUsersSystem } from "../components/AdminSystem/SpisokUsersSystem.js";
 import Up from '../icons/up.png';
 import '../styles/AdminNodePage.css';
 import '../styles/Header.css';
