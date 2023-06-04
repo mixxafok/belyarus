@@ -2,14 +2,14 @@
 .user_page{
   background-image: url('../img/back4.jpg');
   -webkit-background-size: cover;
-  -moz-background-size: cover;
+  /* -moz-background-size: cover; */
   -o-background-size: cover;
   background-size:cover;
  /* box-shadow: inset 220px 20px 90px 60px rgba(168, 165, 165, 0.6);*/
   background-repeat: no-repeat;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: content-box;
 }
 
 .spisok {
@@ -28,6 +28,7 @@
   flex-grow: 1;
   flex-shrink: 0;
  /* backdrop-filter: blur(0.8px);*/
+
 }
 
 .reg__img{
@@ -134,9 +135,12 @@
   margin-right: 10%;
   margin-bottom: 1%;
   cursor: pointer;
-  &.hide {
-    display: none;
-  }
+
+}
+
+.user_page .OtchetHide{
+ display: none;
+
 }
 
 .user_page .OtchetFilter{
@@ -150,10 +154,12 @@
   float: right;
   margin: 1% 6% 1% 0;
   cursor: pointer;
-  &.hide {
-    display: none;
-  }
 }
+
+.user_page .OtchetFilterHide{
+  display: none;
+}
+
 
 /*
 @media screen and (min-width: 320px) {

@@ -38,7 +38,7 @@ export function Registration ({options}){
   })
 
   //обработка options
-  const educ = {};
+  const educ = [];
   const socs = [];
   const acts = [];
   const regPlcs = [];
@@ -47,57 +47,55 @@ export function Registration ({options}){
   const mbrSt = [];
   const crdSt = [];
   for (let key in options){
+
     if(key == 'edus'){
-    //   for (let ked of options['edus']){
-    //     educ.push( [ked.val, ked.Id])
-    //     continue
-    //     }
- 
-    
+      for (let ked of options['edus']){
+        educ.push( ked)
+        continue
+        }
     }
     if(key == 'socs'){
       for (let ked of options['socs']){
-        socs.push( ked.val)
+        socs.push( ked)
         continue
         }
     }
     if(key == 'acts'){
       for (let ked of options['acts']){
-        acts.push( ked.val)
+        acts.push( ked)
         continue
         }
     }
     if(key == 'regPlcs'){
       for (let ked of options['regPlcs']){
-        regPlcs.push( ked.val)
+        regPlcs.push( ked)
         continue
         }
     }
     if(key == 'entrPlcs'){
       for (let ked of options['entrPlcs']){
-        entrPlcs.push( ked.val)
+        entrPlcs.push( ked)
         continue
         }
     }
     if(key == 'partPoss'){
       for (let ked of options['partPoss']){
-        partPoss.push( ked.val)
+        partPoss.push( ked)
         continue
         }
     }
     if(key == 'mbrSt'){
       for (let ked of options['mbrSt']){
-        mbrSt.push( ked.val)
+        mbrSt.push( ked)
         continue
         }
     }
     if(key == 'crdSt'){
       for (let ked of options['crdSt']){
-        crdSt.push( ked.val)
+        crdSt.push( ked)
         continue
         }
     }
-    console.log(educ)
   }
 //обработка options
 
@@ -111,7 +109,7 @@ const handleForm = () =>{
 //запрос fetch POST
 const fetchRegistration = async ()=>{
   try{
-    const response = await fetch("http://localhost:5059/UserPage/addCard/", {
+    const response = await fetch("http://secondsin-001-site1.dtempurl.com/UserPage/addCard/", {
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -219,14 +217,14 @@ const fetchRegistration = async ()=>{
           <label>Образование</label>
             <select value={formInput.Education} onChange={(e) => setFormInput({ ...formInput, Education: e.target.value })}>
               <option disabled hidden></option> 
-              {educ.map((item)=>{ return <option value={item.id}>{item}</option>})}
+              {educ.map((item)=>{ return <option value={item.id}>{item.val}</option>})}
             </select>
           </div>
           <div className="reg__form_input_combobox__placesYchet">
           <label>Социальная категория</label>
             <select value={formInput.SocialGroup} onChange={(e) => setFormInput({ ...formInput, SocialGroup: e.target.value })}>
               <option disabled hidden></option> 
-              {socs.map((item)=>{ return <option value={item.id}>{item}</option>})}
+              {socs.map((item)=>{ return <option value={item.id}>{item.val}</option>})}
             </select>
           </div>
         </container>
@@ -234,7 +232,7 @@ const fetchRegistration = async ()=>{
             <label>Сфера деятельности</label>
             <select value={formInput.SphereActivity} onChange={(e) => setFormInput({ ...formInput, SphereActivity: e.target.value })}>
               <option disabled hidden></option> 
-              {acts.map((item)=>{ return <option value={item.id}>{item}</option>})}
+              {acts.map((item)=>{ return <option value={item.id}>{item.val}</option>})}
             </select>
           </div>
 
@@ -252,7 +250,7 @@ const fetchRegistration = async ()=>{
             <label>Статус членства</label>
             <select value={formInput.StatusMember} onChange={(e) => setFormInput({ ...formInput, StatusMember: e.target.value })}>
               <option disabled hidden></option> 
-              {mbrSt.map((item, index)=>{ return <option value={item.id}>{item}</option>})}
+              {mbrSt.map((item, index)=>{ return <option value={item.id}>{item.val}</option>})}
             </select>
           </div>
         </container>
@@ -262,7 +260,7 @@ const fetchRegistration = async ()=>{
             <label>Статус в партии</label>
             <select value={formInput.StatusPart} onChange={(e) => setFormInput({ ...formInput, StatusPart: e.target.value })}>
               <option disabled hidden></option> 
-              {partPoss.map((item, index)=>{ return <option value={item.id}>{item}</option>})}
+              {partPoss.map((item, index)=>{ return <option value={item.id}>{item.val}</option>})}
             </select>
           </div>
           <div className="reg__form_input_combobox__deputat">
@@ -288,14 +286,14 @@ const fetchRegistration = async ()=>{
           <label>Место вступления</label>
             <select value={formInput.PlaceIssue} onChange={(e) => setFormInput({ ...formInput, PlaceIssue: e.target.value })}>
               <option disabled hidden></option> 
-              {entrPlcs.map((item, index)=>{ return <option value={item.id}>{item}</option>})}
+              {entrPlcs.map((item, index)=>{ return <option value={item.id}>{item.val}</option>})}
             </select>
           </div>
           <div className="reg__form_input_combobox__placesYchet">
             <label>Место постановки на учет</label>
             <select  value={formInput.Place} onChange={(e) => setFormInput({ ...formInput, Place: e.target.value })}>
               <option disabled hidden></option> 
-              {regPlcs.map((item, index)=>{ return <option value={item.id}>{item}</option>})}
+              {regPlcs.map((item, index)=>{ return <option value={item.id}>{item.val}</option>})}
             </select>
           </div>
         </container>

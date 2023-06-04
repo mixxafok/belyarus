@@ -5,7 +5,6 @@ import {PersonalCardEdit} from '../components/PersonalCardEdit';
 import Icon from '../icons/partIcon.js';
 import question from '../icons/question.png';
 import {Registration} from '../components/Registration.js';
-import {EditCard} from '../components/EditCard.js';
 import {EditCardNode} from '../components/EditCardNode.js';
 import { Branchs } from "../components/Branchs.js";
 import { SpisokUsersSystem } from "../components/AdminSystem/SpisokUsersSystem.js";

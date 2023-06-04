@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import '../styles/Registration.css';
-import Ava from '../img/ava.png';
+import '../../styles/Registration.css';
+import Ava from '../../img/ava.png';
 
 export function EditCard ({infoCard, options}){
 
@@ -14,6 +14,7 @@ export function EditCard ({infoCard, options}){
   let dateIssue= `${data2.getFullYear()}-${data2.getMonth()}-${data2.getDate()}`//в гггг-мм-дд для input[date]
 
     const [formInput, setFormInput] = useState({
+      Id:infoCard[0].id,
       // Login: '',
       // Password: '',
       // Rule: '',
@@ -29,9 +30,9 @@ export function EditCard ({infoCard, options}){
       StatusMember: infoCard[0].statusMemberId,
       Sex: infoCard[0].sex,
       DateBirth: `${dateBirth}`,
-      StatusPart: infoCard[0].partStatus,
+      StatusPart: `${infoCard[0].partStatus}`,
       Deputat: infoCard[0].deputat,
-      PlaceYchet: infoCard[0].uchetId,
+      PlaceYchet: `${infoCard[0].uchetId}`,
       PlaceIssue: infoCard[0].placeId,
       Education: infoCard[0].educationId,
       SocialGroup: infoCard[0].socId,
@@ -49,7 +50,30 @@ export function EditCard ({infoCard, options}){
 
 const handleForm = () =>{
   console.log(formInput);
+  fetchEditCard();
+
 }
+
+const fetchEditCard = async ()=>{
+  try{
+    const response = await fetch("http://secondsin-001-site1.dtempurl.com/UserPage/ChangeUsr/", {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+      'Content-Type': 'application/json;charset=utf-8',
+
+      },
+      body: JSON.stringify(formInput)
+    });
+
+    let q = await response.json();
+    await console.log(JSON.stringify(q));
+  }
+  catch(err){
+    console.log(err)
+  }
+};//запрос fetch POST
+
 
 //обработка options
 const educ = [];
@@ -126,7 +150,8 @@ for (let key in options){
             <input type="file" name="file" className='file'/>
           </div>
 
-        <container className="Img_Fio_SexBirthday">
+
+          <container className="Img_Fio_SexBirthday">
          <container className="Fio">
           <div className='reg__form_input_fio'>
             <label>Фамилия</label>
@@ -164,7 +189,7 @@ for (let key in options){
           <div className='reg__form_input_combobox__sex'>
             <label>Пол</label>
             <select value={formInput.Sex} onChange={(e) => setFormInput({ ...formInput, Sex: e.target.value })}> 
-              <option ></option>
+              <option disabled hidden></option>
               <option value={'Мужской'}>Мужской</option>
               <option value={'Женский'}>Женский</option>
             </select>
@@ -195,91 +220,43 @@ for (let key in options){
           */}
           
 
-        <container className="Social">
-          <div className="reg__form_input_combobox__social">
+        <container className="Statusts">
+          <div className="reg__form_input_combobox__places">
           <label>Образование</label>
             <select value={formInput.Education} onChange={(e) => setFormInput({ ...formInput, Education: e.target.value })}>
               <option ></option> 
               {educ.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
             </select>
           </div>
-          <div className="reg__form_input_combobox__social">
+          <div className="reg__form_input_combobox__placesYchet">
           <label>Социальная категория</label>
             <select value={formInput.SocialGroup} onChange={(e) => setFormInput({ ...formInput, SocialGroup: e.target.value })}>
               <option ></option> 
               {socs.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
             </select>
           </div>
-          <div className="reg__form_input_combobox__social">
+        </container>
+        <div className="reg__form_input_combobox__social">
             <label>Сфера деятельности</label>
             <select value={formInput.SphereActivity} onChange={(e) => setFormInput({ ...formInput, SphereActivity: e.target.value })}>
-              <option ></option> 
-              {acts.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
+              <option disabled hidden></option> 
+              {acts.map((item)=>{ return <option value={item.id}>{item}</option>})}
             </select>
           </div>
-        </container>
-       
 
 <br/>
 <hr/>
 
-        <container className="Img_Fio_LoginRule">
-         <container className="Fio">
-          <div className='reg__form_input_Login'>
-            <label>Логин</label>
-            <input
-              type="search"
-              onChange={(e) => setFormInput({ ...formInput, Login: e.target.value })}
-              value={formInput.Login }
-              className="reg__input"
-              placeholder=""
-            />
-          </div>
-          <div className="reg__form_input_Login">
-            <label>Пароль</label>
-            <input
-              type="password"
-              onChange={(e) => setFormInput({ ...formInput, Password: e.target.value })}
-              value={formInput.Password }
-              className="reg__input"
-              placeholder=""
-            />
-            <a href="#" className="password-control">ы</a>
-          </div>
-          {/* <div className="reg__form_input_Login">
-            <label>Повторите пароль</label>
-            <input
-              type="password"
-              onChange={(e) => setFormInput({ ...formInput, RepeatPassword: e.target.value })}
-              value={formInput.RepeatPassword }
-              className="reg__input"
-              placeholder=""
-            />
-            <a href="#" className="password-control">s</a>
-          </div> */}
-          <div className="reg__form_input_Rule">
-            <label>Роль в системе</label>
-            <select value={formInput.Rule} onChange={(e) => setFormInput({ ...formInput, Rule: e.target.value })}>
-              <option value="1">Информационный пользователь</option> 
-              {/* <option value="2">Оператор</option> 
-              <option value="3">Администратор узла</option> 
-              <option value="4">Администратор системы</option>  */}
-            </select>
-          </div>
-         </container>
-         </container>
-
-
-<hr/>
-
-         <div className="reg__form_input_Vznos">
+        <container className='NumBlietVznos'>
+          <div className="oper_reg__form_input_Vznos">
             <label>Уплата членских взносов</label>
             <input 
               value={formInput.Vznos} 
               onChange={(e) => setFormInput({ ...formInput, Vznos: e.target.value })} 
-              type="date" 
+              type="month" 
               min="2023-01-01"/>
           </div>
+        </container>
 
 <br/>
 <hr/>

@@ -333,7 +333,7 @@ export function FindFilter({b,tablefindfilter, options}){
     </div>
 
     <div className="table">
-    <div className={`OtchetFilter ${(tablefindfilter) ? 'hide' : ''}`}>
+    <div className={` ${(tablefindfilter) ? 'OtchetFilterHide' : 'OtchetFilter'}`}>
           <p>Отчет в Word</p>
           <p>Отчет в Excel</p>
         </div>

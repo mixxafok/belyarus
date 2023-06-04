@@ -196,15 +196,15 @@ export function UserPage(){
       {personcard ? <PersonalCard setPersoncard={setPersoncard} infoCard={infoCard} setInfoCard={setInfoCard}/> : null}
 
       <div className="tables" id="start_table">
-      <div className={`Otchet ${(tablehidePOO  ) ? 'hide' : ''}`}>
+      <div className={` ${(tablehidePOO  ) ? 'OtchetHide' : 'Otchet'}`}>
         <p onClick={()=>fetchPOOWord()}>Отчет в Word</p>
         <p onClick={()=>fetchPOOExcel()}>Отчет в Excel</p>
       </div>
-      <div className={`Otchet ${( tablehidePause  ) ? 'hide' : ''}`}>
+      <div className={` ${( tablehidePause  ) ? 'OtchetHide' : 'Otchet'}`}>
         <p onClick={()=>fetchPausedWord()}>Отчет в Word</p>
         <p onClick={()=>fetchPausedExcel()}>Отчет в Excel</p>
       </div>
-      <div className={`Otchet ${( tablehideNO ) ? 'hide' : ''}`}>
+      <div className={` ${( tablehideNO ) ? 'OtchetHide' : 'Otchet'}`}>
         <p onClick={()=>fetchNOWord()}>Отчет в Word</p>
         <p onClick={()=>fetchNOExcel()}>Отчет в Excel</p>
       </div>

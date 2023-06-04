@@ -5,14 +5,15 @@ import {PersonalCardEdit} from '../components/PersonalCardEdit';
 import Icon from '../icons/partIcon.js';
 import question from '../icons/question.png';
 import {Registration} from '../components/Registration.js';
-import {EditCard} from '../components/EditCard.js';
+import {EditCard} from '../components/Operator/EditCard.js';
 import Up from '../icons/up.png';
 import '../styles/OperatorPage.css';
 import '../styles/Header.css';
 import '../styles/Table.css';
 import '../styles/PersonalCardEdit.css';
+import { fetchPOO, fetchPause, fetchNO, fetchBranch, fetchOptions, fetchSparvka, fetchOne } from "../components/fetchs.js";
 
-export function OperatorPage(){
+export function OperatorPage(){ 
   const [b,setb] = useState([])
   const [options, setOptions] = useState([]);
 
@@ -49,7 +50,7 @@ export function OperatorPage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
-          fetchPOO();
+          fetchPOO({setb});
     }
    else if (cols == 'col2'){
           setcol_1(false); 
@@ -64,8 +65,8 @@ export function OperatorPage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
-          fetchPOO();// подгрузка таблицы РОО
-          fetchOptions();
+          fetchPOO({setb});// подгрузка таблицы РОО
+          fetchOptions({setOptions});
           
         }
     else if (cols == 'col3'){
@@ -81,7 +82,7 @@ export function OperatorPage(){
           setTableHidePause(!tablehidePause);
           setTableHideNO(true);
           setTableHideBranch(true);
-          fetchPause();
+          fetchPause({setb});
         
         }
     else if ( cols == 'col4') {
@@ -97,7 +98,7 @@ export function OperatorPage(){
           setTableHidePause(true);
           setTableHideNO(!tablehideNO);
           setTableHideBranch(true);
-          fetchNO();
+          fetchNO({setb});
         }
     else if ( cols == 'col5') {
           setcol_1(false); 
@@ -112,7 +113,7 @@ export function OperatorPage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
-          fetchOptions();
+          fetchOptions({setOptions});
     }
     else if ( cols == 'col7') {
           setcol_1(false); 
@@ -127,7 +128,7 @@ export function OperatorPage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(!tablehideBranch);
-          fetchBranch();
+          fetchBranch({setb});
 
 }
     else if ( cols == 'col6') {
@@ -143,7 +144,7 @@ export function OperatorPage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
-          fetchOptions();
+          fetchOptions({setOptions});
     }
    }
 
@@ -154,13 +155,6 @@ export function OperatorPage(){
    };
  
 //fetch
-
-const fetchSparvka = async () =>{
-  const pesponse = await fetch('', {
-    method: 'get'
-  });
- }
-
  const fetchPOOWord = async () =>{
   try{
     const response = await fetch('',{
@@ -174,85 +168,32 @@ const fetchSparvka = async () =>{
   }
  }
  const fetchPausedWord = async () =>{
-  const response = await fetch('http://localhost:5059/api/Otchet/GetPausedWord/',{
+  const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedWord/',{
     method: 'get'
   });
  }
  const fetchNOWord = async () =>{
-  const response = await fetch('http://localhost:5059/api/Otchet/GetKickedWord/',{
+  const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetKickedWord/',{
     method: 'get'
   });
  }
 
  const fetchPausedExcel = async () =>{
-  const response = await fetch('http://localhost:5059/api/Otchet/GetPausedExel/',{
+  const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedExel/',{
     method: 'get'
   });
  }
  const fetchPOOExcel = async () =>{
-  const response = await fetch('http://localhost:5059/api/Otchet/GetPausedExel/',{
+  const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedExel/',{
     method: 'get'
   });
  }
  const fetchNOExcel = async () =>{
-  const response = await fetch('http://localhost:5059/api/Otchet/GetKickedExel/',{
+  const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetKickedExel/',{
     method: 'get'
   });
  }
 
-   const fetchPOO = async ()=>{
-    try{
-     const response = await fetch("http://localhost:5059/UserPage/tablePOO/", {
-       method: "get",
-      "content-type" : "application/json; charset=utf-8"
-     });
-     let q = await response.json();
-     await setb(q);
-    }
-    catch(err){
-      console.log(err)
-    }
-   };
-
-   const fetchNO = async ()=>{
-     const response = await fetch("http://localhost:5059/UserPage/tableNO/", {
-       method: "get",
-     });
-     let q = await response.json();
-     await setb(q);
-   };
-
-   const fetchPause = async ()=>{
-     const response = await fetch("http://localhost:5059/UserPage/tablePause/", {
-       method: "get",
-     });
-     let q = await response.json();
-     await setb(q);
-   };
-
-   const fetchBranch = async ()=>{
-    const response = await fetch("http://localhost:5059/UserPage/tablePOO/", {
-      method: "get",
-    });
-    let q = await response.json();
-    await setb(q);
-  };
-
-   const fetchOne = async (itemid)=>{
-    const response = await fetch(`http://localhost:5059/UserPage/GetOne?id=${itemid}`, {
-      method: "get",
-    });
-    let q = await response.json();
-    await setInfoCard([q]);
-  };
-
-  const fetchOptions = async ()=>{
-    const response = await fetch("http://localhost:5059/UserPage/GetOptions/", {
-      method: "get",
-    });
-    let q = await response.json();
-    await setOptions(q);
-  };
 //fetch
 
 
@@ -260,7 +201,7 @@ const fetchSparvka = async () =>{
    let tablePOO = b.map(function(item,index) {
      return <tr key={item.id}>
        <td> {index+1}</td>
-        <td className="table__surname"><p  onClick={()=>{ fetchOne(item.id); setPersoncardEdit(!personcardEdit); }} className="table_span__surname">{item.surname}</p></td>
+        <td className="table__surname"><p  onClick={()=>{ fetchOne(item.id, {setInfoCard}); setPersoncardEdit(!personcardEdit); }} className="table_span__surname">{item.surname}</p></td>
         <td>{item.name}</td>
         <td>{item.parent}</td>
         <td>{item.numBilet}</td>
@@ -272,7 +213,7 @@ const fetchSparvka = async () =>{
   let tableNO = b.map(function(item,index) {
    return <tr key={item.id}>
      <td> {index+1}</td>
-      <td className="table__surname"><p onClick={()=>{ fetchOne(item.id); setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
+      <td className="table__surname"><p onClick={()=>{ fetchOne(item.id, {setInfoCard}); setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
       <td>{item.name}</td>
       <td>{item.parent}</td>
       <td>{item.dateFinish}</td>
@@ -282,7 +223,7 @@ const fetchSparvka = async () =>{
  let tablePause = b.map(function(item,index) {
    return <tr key={item.id}>
      <td> {index+1}</td>
-      <td className="table__surname"><p onClick={()=>{ fetchOne(item.id); setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
+      <td className="table__surname"><p onClick={()=>{ fetchOne(item.id, {setInfoCard}); setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
       <td>{item.name}</td>
         <td>{item.parent}</td>
         <td>{item.numBilet}</td>
@@ -295,7 +236,7 @@ const fetchSparvka = async () =>{
  let tableBranch = foundUsers.sort((a,b)=>a.surname.localeCompare(b.surname)).map(function(item,index) {
   return <tr key={item.id}>
     <td> {index+1}</td>
-     <td className="table__surname"><p onClick={()=>{ fetchOne(item.id); setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
+     <td className="table__surname"><p onClick={()=>{ fetchOne(item.id, {setInfoCard}); setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
      <td>{item.name}</td>
        <td>{item.parent}</td>
        <td><input type="checkbox" name="name1" checked={chec}  /*onChange={this.toggleChange} */ /></td>
@@ -331,7 +272,7 @@ const handleForm = () =>{
 
       <div className="Header__nav">
         <p className="Header__nameUser">Карпатов Николай Александрович</p> 
-        <p className="Header__ruleUser" >Оператор &nbsp; <img className="spravka" src={question} alt="?" width="13px" onClick={fetchSparvka()} /></p>
+        <p className="Header__ruleUser" >Оператор &nbsp;<span onClick={()=>fetchSparvka()}><img className="spravka" src={question} alt="?" width="13px"  /></span> </p>
         <p className="Header__exit" onClick={()=> Exit()}>Выход  </p>
       </div>
   
@@ -363,20 +304,20 @@ const handleForm = () =>{
 
     <div className="tables" id="start_table">
 
-    <div className={`Otchet ${(tablehidePOO  ) ? 'hide' : ''}`}>
+    <div className={` ${(tablehidePOO  ) ? 'OtchetHide' : 'Otchet'}`}>
         <p onClick={()=>fetchPOOWord()}>Отчет в Word</p>
         <p onClick={()=>fetchPOOExcel()}>Отчет в Excel</p>
       </div>
-      <div className={`Otchet ${( tablehidePause  ) ? 'hide' : ''}`}>
+      <div className={` ${( tablehidePause  ) ? 'OtchetHide' : 'Otchet'}`}>
         <p onClick={()=>fetchPausedWord()}>Отчет в Word</p>
         <p onClick={()=>fetchPausedExcel()}>Отчет в Excel</p>
       </div>
-      <div className={`Otchet ${( tablehideNO ) ? 'hide' : ''}`}>
+      <div className={` ${( tablehideNO ) ? 'OtchetHide' : 'Otchet'}`}>
         <p onClick={()=>fetchNOWord()}>Отчет в Word</p>
         <p onClick={()=>fetchNOExcel()}>Отчет в Excel</p>
       </div>
 
-      <div className={`OtchetBranch ${(tablehideBranch ) ? 'hide' : ''}`}>
+      <div className={` ${(tablehideBranch ) ? 'OtchetBranchHide' : 'OtchetBranch'}`}>
           <div className="adminnode__Button" onClick={()=> {handleForm()}}>
             <button >Сохранить</button>
           </div>
@@ -469,7 +410,7 @@ const handleForm = () =>{
         </tbody>
      </table>
 
-     { (col_2) ? <FindFilterEdit b={b} options={options} col={col} infoCard={infoCard} setInfoCard={setInfoCard}/> : null}
+     { (col_2) ? <FindFilterEdit b={b} options={options} col={col}/> : null}
      { (col_5) ? <Registration options={options}/> : null}
      { (col_6) ? <EditCard infoCard={infoCard} options={options} /> : null}
      </div>

@@ -3,11 +3,11 @@ import '../styles/Table.css';
 import '../styles/Findfilter.css';
 import {PersonalCardEdit} from './PersonalCardEdit.js';
 
-export function FindFilterEdit({b,tablefindfilter, options, col, infoCard, setInfoCard}){
+export function FindFilterEdit({b,tablefindfilter, options, col}){
 
   const[personcardEdit, setPersoncardEdit] = useState(false);
-  // const [infoCard,setInfoCard] = useState([])
-  const [foundUsers, setFoundUsers] = useState(b);
+  const [infoCard,setInfoCard] = useState([])
+  const [foundUsers, setFoundUsers] = useState([]);
   const [formInput, setFormInput] = useState({
     Surname: '', 
     Name: '',
@@ -72,7 +72,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col, infoCard, setIn
 
 // get одного пользователя
     const fetchOne = async (itemid)=>{
-      const response = await fetch(`http://localhost:5059/UserPage/GetOne?id=${itemid}`, {
+      const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/GetOne?id=${itemid}`, {
         method: "get",
       });
       let q = await response.json();
@@ -82,7 +82,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col, infoCard, setIn
 // post для поиска
     const fetchPost = async () => {
       try{
-        const responce = await fetch('http://localhost:5059/UserPage/Search/', {
+        const responce = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/Search/', {
           method: 'post',
           headers: {
             'Accept': 'application/json',
@@ -91,8 +91,8 @@ export function FindFilterEdit({b,tablefindfilter, options, col, infoCard, setIn
           body: JSON.stringify(formInput)
         })
         let q = await responce.json();
-        await setFoundUsers(q);
-       
+        await setFoundUsers([q]);
+       console.log(q)
       }
       catch(err){
         console.log(err);
@@ -104,12 +104,12 @@ export function FindFilterEdit({b,tablefindfilter, options, col, infoCard, setIn
     foundUsers.map((user,index) => (
       <tr key={user.id}>
       <td> {index+1}</td>
-       <td className="table__surname"><p onClick={()=>{fetchOne(user.id); setPersoncardEdit(!personcardEdit); setInfoCard([user])}} className="table_span__surname">{user.surname}</p></td>
+       <td className="table__surname"><p onClick={()=>{fetchOne(user.id); setPersoncardEdit(!personcardEdit);}} className="table_span__surname">{user.surname}</p></td>
        <td>{user.name}</td>
-       <td>{(user.parent)}</td>
+       <td>{user.parent}</td>
        <td>{user.numBilet}</td>
        <td>{user.dateStart}</td>
-       <td>{user.uchetPlace}</td>
+       <td>{user.place}</td>
     </tr>
     ))
   ) : (
@@ -357,7 +357,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col, infoCard, setIn
        {filt}
     </tbody>
     </table>
-    {personcardEdit ? <PersonalCardEdit setPersoncardEdit={setPersoncardEdit} col={col} infoCard={infoCard} setinfoCard={setInfoCard}/> : null}
+    {personcardEdit ? <PersonalCardEdit setPersoncardEdit={setPersoncardEdit} col={col} infoCard={infoCard}/> : null}
     </div>
   </div>
   )
