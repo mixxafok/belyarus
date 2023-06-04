@@ -5,14 +5,16 @@ import {PersonalCardEdit} from '../components/PersonalCardEdit';
 import Icon from '../icons/partIcon.js';
 import question from '../icons/question.png';
 import {Registration} from '../components/Registration.js';
-import {EditCardNode} from '../components/EditCardNode.js';
-import { Branchs } from "../components/Branchs.js";
-import { SpisokUsersSystem } from "../components/AdminSystem/SpisokUsersSystem.js";
+import {EditCardNode} from '../components/AdminNode/EditCardNode.js';
+import { Branchs } from "../components/AdminNode/Branchs.js";
+import { SpisokUsersNode } from "../components/AdminNode/SpisokUsersNode.js";
+import { LogPassUserNode } from "../components/AdminNode/LogPassUserNode.js";
 import Up from '../icons/up.png';
 import '../styles/AdminNodePage.css';
 import '../styles/Header.css';
 import '../styles/Table.css';
 import '../styles/PersonalCardEdit.css';
+import { fetchPOO, fetchPause, fetchNO, fetchSparvka, fetchOne, fetchBranch, fetchOptions } from "../components/fetchs.js";
 
 
 export function AdminNodePage(){
@@ -26,6 +28,7 @@ export function AdminNodePage(){
   const [col_7, setcol_7] = useState(false)
   const [col_8, setcol_8] = useState(false)
   const [col_9, setcol_9] = useState(false)
+  const [col_10, setcol_10] = useState(false)
   const [col_0, setcol_0] = useState(false)
   const [hideLi, setHideLi] = useState(true)
   const [tablehidePOO, setTableHidePOO] = useState(true)
@@ -58,7 +61,7 @@ export function AdminNodePage(){
       setTableHidePause(true);
       setTableHideNO(true);
       setTableHideBranch(true);
-      fetchPOO();
+      fetchPOO({setb});
 }
    else if (cols == 'col1') {
       
@@ -76,7 +79,7 @@ export function AdminNodePage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
-          fetchPOO();
+          fetchPOO({setb});
     }
    else if (cols == 'col2'){
     
@@ -94,8 +97,8 @@ export function AdminNodePage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
-          fetchPOO();
-          fetchOptions();
+          fetchPOO({setb});
+          fetchOptions({setOptions});
           // подгрузка таблицы РОО
         }
     else if (cols == 'col3'){
@@ -114,7 +117,7 @@ export function AdminNodePage(){
           setTableHidePause(!tablehidePause);
           setTableHideNO(true);
           setTableHideBranch(true);
-          fetchPause();
+          fetchPause({setb});
         
         }
     else if ( cols == 'col4') {
@@ -133,7 +136,7 @@ export function AdminNodePage(){
           setTableHidePause(true);
           setTableHideNO(!tablehideNO);
           setTableHideBranch(true);
-          fetchNO();
+          fetchNO({setb});
         }
     else if ( cols == 'col5') {
           setcol_1(false); 
@@ -150,7 +153,7 @@ export function AdminNodePage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
-          fetchOptions();
+          fetchOptions({setOptions});
     }
     else if ( cols == 'col6') {
       setcol_0(false);
@@ -167,7 +170,7 @@ export function AdminNodePage(){
       setTableHidePause(true);
       setTableHideNO(true);
       setTableHideBranch(true);
-      fetchOptions();
+      fetchOptions({setOptions});
 }
     else if ( cols == 'col7') {
       setcol_0(false);
@@ -185,7 +188,7 @@ export function AdminNodePage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(!tablehideBranch);
-          fetchBranch();
+          fetchBranch({setb});
 }
     else if ( cols == 'col8') {
       setcol_0(false);
@@ -203,7 +206,7 @@ export function AdminNodePage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
-          fetchBranch();
+          fetchBranch({setb});
 }
     else if ( cols == 'col9') {
       setcol_0(false);
@@ -221,7 +224,26 @@ export function AdminNodePage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
-          fetchOptions();
+          fetchOptions({setOptions});
+    }
+    else if ( cols == 'col10') {
+      setcol_0(false);
+          setcol_1(false); 
+          setcol_2(false); 
+          setcol_3(false); 
+          setcol_4(false);
+          setcol_5(false);
+          setcol_6(false);
+          setcol_7(false);
+          setcol_8(false);
+          setcol_9(false);
+          setcol_10(!col_10);
+          setTableHidePOO(true);
+          setTableFindFilter(true);
+          setTableHidePause(true);
+          setTableHideNO(true);
+          setTableHideBranch(true);
+          fetchOptions({setOptions});
     }
    }
 
@@ -233,11 +255,11 @@ export function AdminNodePage(){
  
 
 //fetch
-const fetchSparvka = async () =>{
-  const pesponse = await fetch('', {
-    method: 'get'
-  });
- }
+// const fetchSparvka = async () =>{
+//   const pesponse = await fetch('', {
+//     method: 'get'
+//   });
+//  }
 
  const fetchPOOWord = async () =>{
   try{
@@ -252,85 +274,85 @@ const fetchSparvka = async () =>{
   }
  }
  const fetchPausedWord = async () =>{
-  const response = await fetch('http://localhost:5059/api/Otchet/GetPausedWord/',{
+  const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedWord/',{
     method: 'get'
   });
  }
  const fetchNOWord = async () =>{
-  const response = await fetch('http://localhost:5059/api/Otchet/GetKickedWord/',{
+  const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetKickedWord/',{
     method: 'get'
   });
  }
 
  const fetchPausedExcel = async () =>{
-  const response = await fetch('http://localhost:5059/api/Otchet/GetPausedExel/',{
+  const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedExel/',{
     method: 'get'
   });
  }
  const fetchPOOExcel = async () =>{
-  const response = await fetch('http://localhost:5059/api/Otchet/GetPausedExel/',{
+  const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedExel/',{
     method: 'get'
   });
  }
  const fetchNOExcel = async () =>{
-  const response = await fetch('http://localhost:5059/api/Otchet/GetKickedExel/',{
+  const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetKickedExel/',{
     method: 'get'
   });
  }
 
-   const fetchPOO = async () =>{
-    try{
-     const response = await fetch("http://localhost:5059/UserPage/tablePOO/", {
-       method: "get",
-      "content-type" : "application/json; charset=utf-8"
-     });
-     let q = await response.json();
-     await setb(q);
-    }
-    catch(err){
-      console.log(err)
-    }
-   };
+  //  const fetchPOO = async () =>{
+  //   try{
+  //    const response = await fetch("http://localhost:5059/UserPage/tablePOO/", {
+  //      method: "get",
+  //     "content-type" : "application/json; charset=utf-8"
+  //    });
+  //    let q = await response.json();
+  //    await setb(q);
+  //   }
+  //   catch(err){
+  //     console.log(err)
+  //   }
+  //  };
 
-   const fetchNO = async ()=>{
-     const response = await fetch("http://localhost:5059/UserPage/tableNO/", {
-       method: "get",
-     });
-     let q = await response.json();
-     await setb(q);
-   };
+  //  const fetchNO = async ()=>{
+  //    const response = await fetch("http://localhost:5059/UserPage/tableNO/", {
+  //      method: "get",
+  //    });
+  //    let q = await response.json();
+  //    await setb(q);
+  //  };
 
-   const fetchPause = async ()=>{
-     const response = await fetch("http://localhost:5059/UserPage/tablePause/", {
-       method: "get",
-     });
-     let q = await response.json();
-     await setb(q);
-   };
+  //  const fetchPause = async ()=>{
+  //    const response = await fetch("http://localhost:5059/UserPage/tablePause/", {
+  //      method: "get",
+  //    });
+  //    let q = await response.json();
+  //    await setb(q);
+  //  };
 
-   const fetchBranch = async ()=>{
-    const response = await fetch("http://localhost:5059/UserPage/tablePOO/", {
-      method: "get",
-    });
-    let q = await response.json();
-    await setb(q);
-  };
+  //  const fetchBranch = async ()=>{
+  //   const response = await fetch("http://localhost:5059/UserPage/tablePOO/", {
+  //     method: "get",
+  //   });
+  //   let q = await response.json();
+  //   await setb(q);
+  // };
 
-   const fetchOne = async (itemid)=>{
-    const response = await fetch(`http://localhost:5059/UserPage/GetOne?id=${itemid}`, {
-      method: "get",
-    });
-    let q = await response.json();
-    await setInfoCard([q]);
-  };
+  //  const fetchOne = async (itemid)=>{
+  //   const response = await fetch(`http://localhost:5059/UserPage/GetOne?id=${itemid}`, {
+  //     method: "get",
+  //   });
+  //   let q = await response.json();
+  //   await setInfoCard([q]);
+  // };
 
-  const fetchOptions = async ()=>{
-    const response = await fetch("http://localhost:5059/UserPage/GetOptions/", {
-      method: "get",
-    });
-    let q = await response.json();
-    await setOptions(q);
-  };
+  // const fetchOptions = async ()=>{
+  //   const response = await fetch("http://localhost:5059/UserPage/GetOptions/", {
+  //     method: "get",
+  //   });
+  //   let q = await response.json();
+  //   await setOptions(q);
+  // };
 //fetch
 
 
@@ -338,7 +360,7 @@ const fetchSparvka = async () =>{
    let tablePOO = b.map(function(item,index) {
      return <tr key={item.id}>
        <td> {index+1}</td>
-        <td className="table__surname"><p  onClick={()=>{ fetchOne(item.id); setPersoncardEdit(!personcardEdit); }} className="table_span__surname">{item.surname}</p></td>
+        <td className="table__surname"><p  onClick={()=>{ fetchOne(item.id, {setInfoCard}); setPersoncardEdit(!personcardEdit); }} className="table_span__surname">{item.surname}</p></td>
         <td>{item.name}</td>
         <td>{item.parent}</td>
         <td>{item.numBilet}</td>
@@ -350,7 +372,7 @@ const fetchSparvka = async () =>{
   let tableNO = b.map(function(item,index) {
    return <tr key={item.id}>
      <td> {index+1}</td>
-      <td className="table__surname"><p onClick={()=>{ fetchOne(item.id); setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
+      <td className="table__surname"><p onClick={()=>{ fetchOne(item.id, {setInfoCard}); setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
       <td>{item.name}</td>
       <td>{item.parent}</td>
       <td>{item.dateFinish}</td>
@@ -360,7 +382,7 @@ const fetchSparvka = async () =>{
  let tablePause = b.map(function(item,index) {
    return <tr key={item.id}>
      <td> {index+1}</td>
-      <td className="table__surname"><p onClick={()=>{ fetchOne(item.id); setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
+      <td className="table__surname"><p onClick={()=>{ fetchOne(item.id, {setInfoCard}); setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
       <td>{item.name}</td>
         <td>{item.parent}</td>
         <td>{item.numBilet}</td>
@@ -374,10 +396,9 @@ let chec = true;
  let tableBranch = foundUsers.sort((a,b)=>a.surname.localeCompare(b.surname)).map(function(item,index) {
   return <tr key={item.id}>
     <td> {index+1}</td>
-     <td className="table__surname"><p onClick={()=>{ fetchOne(item.id); setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
+     <td className="table__surname"><p onClick={()=>{ fetchOne(item.id, {setInfoCard}); setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
      <td>{item.name}</td>
        <td>{item.parent}</td>
-       <td>{item.dateStart}</td>
        <td><input type="checkbox" name="name1" checked={chec}  /*onChange={this.toggleChange} */ /></td>
   </tr>
 });
@@ -413,7 +434,7 @@ const handleForm = () =>{
       </div>
       <div className="Header__nav">
         <p className="Header__nameUser">Котиков Алексей Геннадьевич</p> 
-        <p className="Header__ruleUser" >Администратор узла &nbsp; <img className="spravka" src={question} alt="?" width="13px" onClick={fetchSparvka()}/></p>
+        <p className="Header__ruleUser" >Администратор узла &nbsp;<span onClick={()=>fetchSparvka()}><img className="spravka" src={question} alt="?" width="13px" /></span></p>
         <p className="Header__exit" onClick={()=> Exit()}>Выход  </p>
       </div>
     </header>
@@ -436,11 +457,13 @@ const handleForm = () =>{
         onClick={()=>{col('col5')}}>Зарегистрировать <br/> члена партии</span></li>
         </div>
         <li className="main__li_7"><span className={`main__span ${col_7 ? 'act' : ''}`} 
-        onClick={()=>{col('col7')}}>Последняя дата входа <br/>и взносы</span></li>
+        onClick={()=>{col('col7')}}>Уплата взносов</span></li>
         <li className="main__li_8"><span className={`main__span ${col_8 ? 'act' : ''}`} 
         onClick={()=>{col('col8')}}>Дерево организаций</span></li>
         <li className="main__li_9"><span className={`main__span ${col_9 ? 'act' : ''}`} 
-        onClick={()=>{col('col9')}}>Справочники</span></li>
+        onClick={()=>{col('col9')}}>Список пользователей системы</span></li>
+        <li className="main__li_10"><span className={`main__span ${col_10 ? 'act' : ''}`} 
+        onClick={()=>{col('col10')}}>Зарегистрировать <br/> пользователя</span></li>
         <li className="main__li_6"><span className={`main__span__edit ${col_6 ? '' : 'hide'}`} 
         onClick={()=>{col('col6')}}>Режим редактирования <br/>учетной карточки</span></li>
       </ul>
@@ -480,7 +503,7 @@ const handleForm = () =>{
           type='month'
           value={inputDate}
           onChange={e=>setInputDate( e.target.value)}
-          placeholder="Введите фамилию"
+          placeholder="Введите дату"
           />
           </div>
           <div className="otchetbranch_word">
@@ -549,7 +572,6 @@ const handleForm = () =>{
               <td>Фамилия</td>
               <td>Имя</td>
               <td>Отчество</td>
-              <td>Последняя дата входа</td>
               <td>Оплата взносов</td>
            </tr>
         </thead>
@@ -562,7 +584,8 @@ const handleForm = () =>{
      {/* { (col_6) ? <EditCard infoCard={infoCard} options={options} /> : null} */}
      { (col_6) ? <EditCardNode infoCard={infoCard} options={options} /> : null}
      { (col_8) ? <Branchs options={options} tablePOO={tablePOO} tablehidePOO={tablehidePOO}/> : null}
-     { (col_9) ? <SpisokUsersSystem options={options}/> : null}
+     { (col_9) ? <SpisokUsersNode options={options}/> : null}
+     { (col_10) ? <LogPassUserNode /> : null}
      </div>
 
     </main>

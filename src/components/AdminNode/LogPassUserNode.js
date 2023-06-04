@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import '../styles/LogPassUser.css'
-import { BranchsSystemLog } from './BranchsSystemLog'
+import '../../styles/LogPassUser.css'
+import { BranchsSystemLog } from '../AdminSystem/BranchsSystemLog'
 
 export  function LogPassUserNode() {
 

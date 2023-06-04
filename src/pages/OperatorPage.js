@@ -332,7 +332,7 @@ const handleForm = () =>{
           type='month'
           value={inputDate}
           onChange={e=>setInputDate( e.target.value)}
-          placeholder="Введите фамилию"
+          placeholder="Введите дату"
           />
           </div>
           <div className="otchetbranch_word">

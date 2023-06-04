@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import '../styles/Registration.css';
-import Ava from '../img/ava.png';
+import '../../styles/Registration.css';
+import Ava from '../../img/ava.png';
 
 export function EditCardNode ({infoCard, options}){
 
@@ -51,12 +51,12 @@ export function EditCardNode ({infoCard, options}){
 const handleForm = () =>{
   console.log(formInput);
   fetchEditCard();
-
+  alert('Изменения успешно сохранены')
 }
 
 const fetchEditCard = async ()=>{
   try{
-    const response = await fetch("http://localhost:5059/UserPage/ChangeUsr/", {
+    const response = await fetch("http://secondsin-001-site1.dtempurl.com/UserPage/ChangeUsr/", {
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -87,49 +87,49 @@ const crdSt = [];
 for (let key in options){
   if(key == 'edus'){
     for (let ked of options['edus']){
-      educ.push( ked.val)
+      educ.push( ked)
       continue
       }
   }
   if(key == 'socs'){
     for (let ked of options['socs']){
-      socs.push( ked.val)
+      socs.push( ked)
       continue
       }
   }
   if(key == 'acts'){
     for (let ked of options['acts']){
-      acts.push( ked.val)
+      acts.push( ked)
       continue
       }
   }
   if(key == 'regPlcs'){
     for (let ked of options['regPlcs']){
-      regPlcs.push( ked.val)
+      regPlcs.push( ked)
       continue
       }
   }
   if(key == 'entrPlcs'){
     for (let ked of options['entrPlcs']){
-      entrPlcs.push( ked.val)
+      entrPlcs.push( ked)
       continue
       }
   }
   if(key == 'partPoss'){
     for (let ked of options['partPoss']){
-      partPoss.push( ked.val)
+      partPoss.push( ked)
       continue
       }
   }
   if(key == 'mbrSt'){
     for (let ked of options['mbrSt']){
-      mbrSt.push( ked.val)
+      mbrSt.push( ked)
       continue
       }
   }
   if(key == 'crdSt'){
     for (let ked of options['crdSt']){
-      crdSt.push( ked.val)
+      crdSt.push( ked)
       continue
       }
   }
@@ -224,15 +224,15 @@ for (let key in options){
           <div className="reg__form_input_combobox__places">
           <label>Образование</label>
             <select value={formInput.Education} onChange={(e) => setFormInput({ ...formInput, Education: e.target.value })}>
-              <option ></option> 
-              {educ.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
+              <option disabled hidden></option> 
+              {educ.map((item)=>{ return <option value={item.id}>{item.val}</option>})}
             </select>
           </div>
           <div className="reg__form_input_combobox__placesYchet">
           <label>Социальная категория</label>
             <select value={formInput.SocialGroup} onChange={(e) => setFormInput({ ...formInput, SocialGroup: e.target.value })}>
-              <option ></option> 
-              {socs.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
+              <option disabled hidden></option> 
+              {socs.map((item)=>{ return <option value={item.id}>{item.val}</option>})}
             </select>
           </div>
         </container>
@@ -240,14 +240,14 @@ for (let key in options){
             <label>Сфера деятельности</label>
             <select value={formInput.SphereActivity} onChange={(e) => setFormInput({ ...formInput, SphereActivity: e.target.value })}>
               <option disabled hidden></option> 
-              {acts.map((item)=>{ return <option value={item.id}>{item}</option>})}
+              {acts.map((item)=>{ return <option value={item.id}>{item.val}</option>})}
             </select>
           </div>
 
 <br/>
 <hr/>
-
-          <div className="reg__form_input_Vznos">
+        <container className='NumBlietVznos'> 
+          <div className="oper_reg__form_input_Vznos">
             <label>Уплата членских взносов</label>
             <input 
               value={formInput.Vznos} 
@@ -255,6 +255,7 @@ for (let key in options){
               type="month" 
               min="2023-01-01"/>
           </div>
+        </container>
 
 
 <br/>
@@ -264,15 +265,15 @@ for (let key in options){
           <div className="reg__form_input_combobox__places">
             <label>Статус билета</label>
             <select value={formInput.StatusBilet} onChange={(e) => setFormInput({ ...formInput, StatusBilet: e.target.value })}> 
-              <option ></option>
-              {crdSt.map((item, index)=>{ return <option value={index+1}>{item}</option>})} 
+              <option disabled hidden></option>
+              {crdSt.map((item)=>{ return <option value={item.id}>{item.val}</option>})} 
             </select>
           </div>
           <div className="reg__form_input_combobox__placesYchet">
             <label>Статус членства</label>
             <select value={formInput.StatusMember} onChange={(e) => setFormInput({ ...formInput, StatusMember: e.target.value })}>
-              <option ></option> 
-              {mbrSt.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
+              <option disabled hidden></option> 
+              {mbrSt.map((item)=>{ return <option value={item.id}>{item.val}</option>})}
             </select>
           </div>
         </container>
@@ -281,14 +282,14 @@ for (let key in options){
           <div className="reg__form_input_combobox__places">
             <label>Статус в партии</label>
             <select value={formInput.StatusPart} onChange={(e) => setFormInput({ ...formInput, StatusPart: e.target.value })}>
-              <option ></option> 
-              {partPoss.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
+              <option disabled hidden></option> 
+              {partPoss.map((item)=>{ return <option value={item.id}>{item.val}</option>})}
             </select>
           </div>
           <div className="reg__form_input_combobox__deputat">
             <label>Избирался ли депутатом</label>
             <select value={formInput.Deputat} onChange={(e) => setFormInput({ ...formInput, Deputat: e.target.value })}> 
-              <option ></option>
+              <option disabled hidden></option>
               <option value={'Да'}>Да</option>
               <option value={'Нет'}>Нет</option>
             </select>
@@ -307,15 +308,15 @@ for (let key in options){
           <div className="reg__form_input_combobox__places">
           <label>Место вступления</label>
             <select value={formInput.PlaceIssue} onChange={(e) => setFormInput({ ...formInput, PlaceIssue: e.target.value })}>
-              <option ></option> 
-              {entrPlcs.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
+              <option disabled hidden></option> 
+              {entrPlcs.map((item)=>{ return <option value={item.id}>{item.val}</option>})}
             </select>
           </div>
-          <div className="reg__form_input_combobox__placesYchet">
+          <div className="reg__form_input_combobox__placesYchet" id='mozilla_placesYchet'>
             <label>Место постановки на учет</label>
             <select value={formInput.PlaceYchet} onChange={(e) => setFormInput({ ...formInput, PlaceYchet: e.target.value })}>
-              <option ></option> 
-              {regPlcs.map((item, index)=>{ return <option value={index+1}>{item}</option>})}
+              <option disabled hidden></option> 
+              {regPlcs.map((item)=>{ return <option value={item.id}>{item.val}</option>})}
             </select>
           </div>
         </container>

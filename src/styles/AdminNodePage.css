@@ -52,10 +52,11 @@
 .adminNode_page .main__span {
   cursor:pointer;
   transition-duration: 300ms;
-  &.act {
+}
+
+.adminNode_page .main__span.act {
   color:rgb(175, 98, 3);
   letter-spacing: 0.020em;
-}
 }
 
 .hide {
@@ -67,6 +68,10 @@
   &.hide {
   display: none;
 }
+}
+
+.main__span__edit.hide{
+  display: none;
 }
 
 .adminNode_page .main__span__edit:hover{
@@ -141,7 +146,12 @@
   margin-top: 5%;
   /* border: 1px solid green;*/
  }
- .adminNode_page .main__ul li:nth-child(6) {
+ .adminNode_page  .main__ul li:nth-child(6) {
+  width: 100%;
+  margin-top: 5%;
+  /* border: 1px solid green;*/
+ }
+ .adminNode_page .main__ul li:nth-child(7) {
   width: 100%;
   margin-top: 5%;
   color:brown;
@@ -191,9 +201,11 @@
   }
 }
 
+.adminNode_page .OtchetBranch.hide{
+    display: none;
+}
 
 .adminNode_page .Otchet{
-
   font-family: Noto sans;
   color: black;
   width: 30%;
@@ -205,9 +217,10 @@
   margin-top: 1%;
   margin-right: 10%;
   margin-bottom: 1%;
-  &.hide {
+}
+
+.adminNode_page .Otchet.hide{
     display: none;
-  }
 }
 
 .adminNode_page .OtchetFilter{
@@ -217,12 +230,13 @@
   display: flex;
   justify-content: space-between;
   font-size: 14px;
-float: right;
+  float: right;
   margin: 1% 9% 1% 0;
   cursor: pointer;
-  &.hide {
+}
+
+.adminNode_page .OtchetFilter.hide{
     display: none;
-  }
 }
 
 .otchetbranch_input{

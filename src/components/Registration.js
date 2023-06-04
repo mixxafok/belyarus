@@ -103,6 +103,36 @@ export function Registration ({options}){
 const handleForm = () =>{
    console.log(formInput); 
   fetchRegistration();
+  setFormInput({
+    // Login: '',
+    // Password: '',
+    // RepeatPassword: '',
+    // Rule: '',
+    // Vznos: '',
+     Surname: '', 
+     Name: '',
+     Parent: '',
+     NumBilet: 0,
+    // DateStart: '',
+    // DateFinish: '',
+     dateIssue: '',
+     StatusBilet: '2',
+     StatusMember: '',
+     Sex: '',
+     DateBirth: '',
+     PlaceIssue:'',
+     Education: '',
+     SocialGroup: '',
+     SphereActivity: '',
+     PlaceJob: '',
+     PostJob: '',
+     StatusPart:'',
+     Deputat: '',
+     RegistrationAddress:'',
+     LivingAddress:'',
+     TelephoneNumber:'',
+     Place: '' 
+   })
   // ДОБАВИТЬ ОЧИТСКУ forminput
 }
 
@@ -289,7 +319,7 @@ const fetchRegistration = async ()=>{
               {entrPlcs.map((item, index)=>{ return <option value={item.id}>{item.val}</option>})}
             </select>
           </div>
-          <div className="reg__form_input_combobox__placesYchet">
+          <div className="reg__form_input_combobox__placesYchet" id='mozilla_placesYchet'>
             <label>Место постановки на учет</label>
             <select  value={formInput.Place} onChange={(e) => setFormInput({ ...formInput, Place: e.target.value })}>
               <option disabled hidden></option> 

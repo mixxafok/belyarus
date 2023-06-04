@@ -74,11 +74,20 @@
 }
 }
 
+.user_page .main__span.act {
+  cursor:pointer;
+  transition-duration: 300ms;
+  color:rgb(175, 98, 3);
+  letter-spacing: 0.020em;
+}
+
 .main__span__edit{
   cursor:default;
-  &.hide {
-  display: none;
 }
+
+.main__span__edit.hide{
+  display: none;
+
 }
 
 .user_page .main__span__edit:hover{

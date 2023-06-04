@@ -127,6 +127,7 @@ label {
   justify-content: space-between;
   width: 80%;
   margin-top: 1%;
+  
 }
 
 .Statusts{
@@ -409,4 +410,26 @@ label {
     transition: 50ms;
 }
   
+@-moz-document url-prefix() {
+  .oper_reg__form_input_Vznos{
+    margin-bottom: 5%;
+  }
+  .reg__form_input_combobox__social{
+    margin-bottom: 3%;
+  }
+  #mozilla_placesYchet{
+    margin-bottom: 3%;
+  }
+  .reg__form_input_dateBirthday input[type=date]
+  {
+    padding-left: 3%;
+  }
+  .reg__form_input_date input[type=date]
+  {
+    padding-left: 3%;
+  }
+  .NumBlietVznos{
+    margin-bottom: 3%;
+  }
+}
 

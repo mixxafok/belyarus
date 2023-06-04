@@ -23,7 +23,7 @@ export function PersonalCardEdit({setPersoncardEdit,col, infoCard } ){
        <li>Место вступления: {item.placeIssue}</li>
        <li>Статус членства: {item.statusMember}</li>
        <li>Место постановки на учет: {item.uchetPlace}</li>
-       <li>Образование: {item.education}</li>
+       <li>Образование: {item.educarion}</li>
        <li>Социальная категория: {item.socialGroup}</li>
        <li>Сфера деятельности: {item.sphereActivity}</li>
        <li>Место работы: {item.placeJob} </li>

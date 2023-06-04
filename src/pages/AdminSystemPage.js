@@ -9,12 +9,13 @@ import {EditCardSystem} from '../components/AdminSystem/EditCardSystem.js';
 import { BranchsSystem } from "../components/AdminSystem/BranchsSystem.js";
 import { SpisokUsersSystem } from "../components/AdminSystem/SpisokUsersSystem.js";
 import Up from '../icons/up.png';
+import Repeat from '../icons/repeat.png';
 import { LogPassUserSystem } from "../components/AdminSystem/LogPassUserSystem.js";
 import '../styles/AdminSystemPage.css';
 import '../styles/Header.css';
 import '../styles/Table.css';
 import '../styles/PersonalCardSystem.css';
-import { fetchPOO, fetchPause, fetchNO, fetchSparvka, fetchBranch } from "../components/fetchs.js";
+import { fetchPOO, fetchPause, fetchNO, fetchSparvka, fetchBranch, fetchOne, fetchOptions } from "../components/fetchs.js";
 
 
 export function AdminSystemPage(){
@@ -101,7 +102,7 @@ export function AdminSystemPage(){
           setTableHideNO(true);
           setTableHideBranch(true);
           fetchPOO({setb});
-          fetchOptions();
+          fetchOptions({setOptions});
           // подгрузка таблицы РОО
     }
     else if (cols == 'col3'){
@@ -159,7 +160,7 @@ export function AdminSystemPage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
-          fetchOptions();
+          fetchOptions({setOptions});
     }
     else if ( cols == 'col6') {
       setcol_0(false);
@@ -178,7 +179,7 @@ export function AdminSystemPage(){
       setTableHidePause(true);
       setTableHideNO(true);
       setTableHideBranch(true);
-      fetchOptions();
+      fetchOptions({setOptions});
     }
     else if ( cols == 'col7') {
       setcol_0(false);
@@ -235,7 +236,7 @@ export function AdminSystemPage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
-          fetchOptions();
+          fetchOptions({setOptions});
     }
     else if ( cols == 'col10') {
       setcol_0(false);
@@ -254,7 +255,7 @@ export function AdminSystemPage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
-          fetchOptions();
+          fetchOptions({setOptions});
     }
    }
 
@@ -355,21 +356,21 @@ export function AdminSystemPage(){
   //   await setb(q);
   // };
 
-   const fetchOne = async (itemid)=>{
-    const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/GetOne?id=${itemid}`, {
-      method: "get",
-    });
-    let q = await response.json();
-    await setInfoCard([q]);
-  };
+  //  const fetchOne = async (itemid)=>{
+  //   const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/GetOne?id=${itemid}`, {
+  //     method: "get",
+  //   });
+  //   let q = await response.json();
+  //   await setInfoCard([q]);
+  // };
 
-  const fetchOptions = async ()=>{
-    const response = await fetch("http://secondsin-001-site1.dtempurl.com/UserPage/GetOptions/", {
-      method: "get",
-    });
-    let q = await response.json();
-    await setOptions(q);
-  };
+  // const fetchOptions = async ()=>{
+  //   const response = await fetch("http://secondsin-001-site1.dtempurl.com/UserPage/GetOptions/", {
+  //     method: "get",
+  //   });
+  //   let q = await response.json();
+  //   await setOptions(q);
+  // };
 //fetch
 
 
@@ -377,7 +378,7 @@ export function AdminSystemPage(){
    let tablePOO = b.map(function(item,index) {
      return <tr key={item.id}>
        <td> {index+1}</td>
-        <td className="table__surname"><p  onClick={()=>{ fetchOne(item.id); setPersoncardEdit(!personcardEdit); }} className="table_span__surname">{item.surname}</p></td>
+        <td className="table__surname"><p  onClick={()=>{ fetchOne(item.id, {setInfoCard}); setPersoncardEdit(!personcardEdit); }} className="table_span__surname">{item.surname}</p></td>
         <td>{item.name}</td>
         <td>{item.parent}</td>
         <td>{item.numBilet}</td>
@@ -389,7 +390,7 @@ export function AdminSystemPage(){
   let tableNO = b.map(function(item,index) {
    return <tr key={item.id}>
      <td> {index+1}</td>
-      <td className="table__surname"><p onClick={()=>{ fetchOne(item.id); setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
+      <td className="table__surname"><p onClick={()=>{ fetchOne(item.id, {setInfoCard}); setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
       <td>{item.name}</td>
       <td>{item.parent}</td>
       <td>{item.dateFinish}</td>
@@ -399,7 +400,7 @@ export function AdminSystemPage(){
  let tablePause = b.map(function(item,index) {
    return <tr key={item.id}>
      <td> {index+1}</td>
-      <td className="table__surname"><p onClick={()=>{ fetchOne(item.id); setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
+      <td className="table__surname"><p onClick={()=>{ fetchOne(item.id, {setInfoCard}); setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
       <td>{item.name}</td>
         <td>{item.parent}</td>
         <td>{item.numBilet}</td>
@@ -413,7 +414,7 @@ let chec = true;
  let tableBranch = foundUsers.sort((a,b)=>a.surname.localeCompare(b.surname)).map(function(item,index) {
   return <tr key={item.id}>
     <td> {index+1}</td>
-     <td className="table__surname"><p onClick={()=>{ fetchOne(item.id); setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
+     <td className="table__surname"><p onClick={()=>{ fetchOne(item.id, {setInfoCard}); setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
      <td>{item.name}</td>
        <td>{item.parent}</td>
        <td><input type="checkbox" name="name1" checked={chec}  /*onChange={this.toggleChange} */ /></td>
@@ -504,6 +505,7 @@ const handleForm = () =>{
       </div>
 
       <div className={`OtchetBranch ${(tablehideBranch ) ? 'hide' : ''}`}>
+      <span style={{marginRight: '1%', marginTop: '3px', cursor:'pointer'}} onClick={()=> setFoundUsers(b)}><img src={Repeat} width='20px'/></span>
           <div className="adminnode__Button" onClick={()=> {handleForm()}}>
             <button >Сохранить</button>
           </div>
@@ -518,12 +520,12 @@ const handleForm = () =>{
           type='month'
           value={inputDate}
           onChange={e=>setInputDate( e.target.value)}
-          placeholder="Введите фамилию"
+          placeholder="Введите дату"
           />
           </div>
           <div className="otchetbranch_word">
-            <p onClick={()=>fetchPOOWord()}>Отчет в Word</p>
-            <p onClick={()=>fetchPOOExcel()}>Отчет в Excel</p>
+            <p >Отчет в Word</p>
+            <p >Отчет в Excel</p>
           </div>
       </div>
 

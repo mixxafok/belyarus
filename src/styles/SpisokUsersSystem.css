@@ -46,3 +46,12 @@
   color: white;
   
 }
+
+@-moz-document url-prefix() {
+  .SpisokUsersSystem .tableUsers {
+    font-family: 'Segoe UI';
+    font-size: 14px;
+    font-weight: bold;
+    /* table-layout: fixed; */
+  }
+}

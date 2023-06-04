@@ -3,7 +3,7 @@ import '../../styles/Branchs.css'
 import '../../styles/Table.css'
 import { Raions, Novopolotsk, Polotsk, Oblasti } from '../FIO.js'
 
-export  function BranchsSystem() {
+export  function Branchs() {
   const [openCity, setOpenCity] = useState(false)
   const [openRaion, setOpenRaion] = useState(false)
   const [openOblast, setOpenOblast] = useState(false)

@@ -42,7 +42,7 @@
   font-family: Montserrat-SemiBold;
   color: black;
   border-right: 1px solid rgb(218,172,83);
- height: 100vh;
+  height: 100vh;
   font-size: 16px;
   width: 100%;
   margin-top: 0;
@@ -59,17 +59,22 @@
 .oper_page .main__span {
   cursor:pointer;
   transition-duration: 300ms;
-  &.act {
+}
+
+.oper_page .main__span.act {
+  cursor:pointer;
+  transition-duration: 300ms;
   color:rgb(175, 98, 3);
   letter-spacing: 0.020em;
-}
+
 }
 
 .main__span__edit{
   cursor:default;
-  &.hide {
-  display: none;
 }
+
+.main__span__edit.hide{
+  display: none;
 }
 
 .oper_page .main__span__edit:hover{

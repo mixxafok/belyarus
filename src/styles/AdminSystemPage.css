@@ -52,10 +52,11 @@
 .adminSystem_page  .main__span {
   cursor:pointer;
   transition-duration: 300ms;
-  &.act {
+}
+
+.adminSystem_page  .main__span.act {
   color:rgb(175, 98, 3);
   letter-spacing: 0.020em;
-}
 }
 
 .hide {
@@ -81,7 +82,8 @@
 }
 
 .adminSystem_page  .main__ul div li .main__span:hover{
-  font-size: 15px;
+  letter-spacing: 0.020em;
+  font-size: 14px;
   transition-duration: 300ms;
 }
 
@@ -202,6 +204,9 @@
   }
 }
 
+.adminSystem_page .OtchetBranch.hide{
+    display: none;
+}
 
 .adminSystem_page  .Otchet{
 
@@ -221,6 +226,10 @@
   }
 }
 
+.adminSystem_page  .Otchet.hide{
+  display: none;
+}
+
 .adminSystem_page .OtchetFilter{
   font-family: Noto sans;
   color: black;
@@ -236,6 +245,10 @@ float: right;
   }
 }
 
+.adminSystem_page .OtchetFilter.hide{
+  display: none;
+}
+
 .adminSystem_page .otchetbranch_input{
   display: flex;
   width: 45%;
@@ -244,7 +257,7 @@ float: right;
 }
 
 .adminSystem_page .otchetbranch_input input[type=search] {
-  width: 42%;
+  width: 43%;
   height: calc(1.3rem + 2px);
   padding: 0.375rem 0.70rem ;
   border: 1px solid #bdbdbd;
