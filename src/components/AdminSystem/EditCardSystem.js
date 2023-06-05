@@ -5,13 +5,13 @@ import Ava from '../../img/ava.png';
 export function EditCardSystem ({infoCard, options}){
 
   let data =new Date( infoCard[0].dateStart) //перевод даты из дд.мм.гггг 
-  let dateStart = `${data.getFullYear()}-${data.getMonth()}-${data.getDate()}`//в гггг-мм-дд для input[date]
+  let dateStart = `${data.getFullYear()}-${('0' + data.getMonth()).slice(-2)}-${('0' + data.getDate()).slice(-2)}`//в гггг-мм-дд для input[date]
 
   let data1 =new Date( infoCard[0].dateBirth) //перевод даты из дд.мм.гггг 
-  let dateBirth= `${data1.getFullYear()}-${data1.getMonth()}-${data1.getDate()}`//в гггг-мм-дд для input[date]
-
+  let dateBirth= `${data1.getFullYear()}-${('0' + data1.getMonth()).slice(-2)}-${('0' + data1.getDate()).slice(-2)}`//в гггг-мм-дд для input[date]
+  
   let data2 =new Date( infoCard[0].dateIssue) //перевод даты из дд.мм.гггг 
-  let dateIssue= `${data2.getFullYear()}-${data2.getMonth()}-${data2.getDate()}`//в гггг-мм-дд для input[date]
+  let dateIssue= `${data2.getFullYear()}-${('0' + data2.getMonth()).slice(-2)}-${('0' + data2.getDate()).slice(-2)}`//в гггг-мм-дд для input[date]
 
     const [formInput, setFormInput] = useState({
       Id:infoCard[0].id,
@@ -30,9 +30,9 @@ export function EditCardSystem ({infoCard, options}){
       StatusMember: infoCard[0].statusMemberId,
       Sex: infoCard[0].sex,
       DateBirth: `${dateBirth}`,
-      StatusPart: `${infoCard[0].partStatus}`,
+      StatusPart: infoCard[0].partStatus,
       Deputat: infoCard[0].deputat,
-      PlaceYchet: `${infoCard[0].uchetId}`,
+      PlaceYchet: infoCard[0].uchetId,
       PlaceIssue: infoCard[0].placeId,
       Education: infoCard[0].educationId,
       SocialGroup: infoCard[0].socId,
@@ -56,7 +56,7 @@ const handleForm = () =>{
 
 const fetchEditCard = async ()=>{
   try{
-    const response = await fetch("http://localhost:5059/UserPage/ChangeUsr/", {
+    const response = await fetch("http://secondsin-001-site1.dtempurl.com/UserPage/ChangeUsr/", {
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -73,7 +73,6 @@ const fetchEditCard = async ()=>{
     console.log(err)
   }
 };//запрос fetch POST
-
 
 //обработка options
 const educ = [];

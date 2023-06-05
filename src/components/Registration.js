@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
 import '../styles/Registration.css';
 import Ava from '../img/ava.png';
-import view from '../icons/eye.png';
-import no_view from '../icons/no-view.png';
 
 export function Registration ({options}){
 
@@ -102,37 +100,50 @@ export function Registration ({options}){
 
 const handleForm = () =>{
    console.log(formInput); 
-  fetchRegistration();
-  setFormInput({
-    // Login: '',
-    // Password: '',
-    // RepeatPassword: '',
-    // Rule: '',
-    // Vznos: '',
-     Surname: '', 
-     Name: '',
-     Parent: '',
-     NumBilet: 0,
-    // DateStart: '',
-    // DateFinish: '',
-     dateIssue: '',
-     StatusBilet: '2',
-     StatusMember: '',
-     Sex: '',
-     DateBirth: '',
-     PlaceIssue:'',
-     Education: '',
-     SocialGroup: '',
-     SphereActivity: '',
-     PlaceJob: '',
-     PostJob: '',
-     StatusPart:'',
-     Deputat: '',
-     RegistrationAddress:'',
-     LivingAddress:'',
-     TelephoneNumber:'',
-     Place: '' 
-   })
+   if( formInput.Surname !== '' && formInput.Name !== '' && formInput.Parent !== ''
+   && formInput.NumBilet !== '' && formInput.StatusBilet !== '' && formInput.Sex !== ''
+   && formInput.DateBirth !== '' && formInput.DateIssue !== '' && formInput.PlaceIssue !== ''
+   && formInput.StatusMember !== '' && formInput.Education !== '' && formInput.SocialGroup !== ''
+   && formInput.SphereActivity !== '' && formInput.StatusPart !== '' && formInput.Deputat !== '' )
+   {
+    fetchRegistration(); 
+    setFormInput({
+      // Login: '',
+      // Password: '',
+      // RepeatPassword: '',
+      // Rule: '',
+      // Vznos: '',
+       Surname: '', 
+       Name: '',
+       Parent: '',
+       NumBilet: 0,
+      // DateStart: '',
+      // DateFinish: '',
+       dateIssue: '',
+       StatusBilet: '2',
+       StatusMember: '',
+       Sex: '',
+       DateBirth: '',
+       PlaceIssue:'',
+       Education: '',
+       SocialGroup: '',
+       SphereActivity: '',
+       PlaceJob: '',
+       PostJob: '',
+       StatusPart:'',
+       Deputat: '',
+       RegistrationAddress:'',
+       LivingAddress:'',
+       TelephoneNumber:'',
+       Place: '' 
+     });
+     alert('Член партии зарегистрирован')
+   } 
+  else {
+    alert('Не все поля заполнены')
+  }
+  
+
   // ДОБАВИТЬ ОЧИТСКУ forminput
 }
 
@@ -151,7 +162,7 @@ const fetchRegistration = async ()=>{
 
     let q = await response.json();
     await console.log(JSON.stringify(q));
-    alert('Член партии зарегистрирован')
+
   }
   catch(err){
     console.log(err)

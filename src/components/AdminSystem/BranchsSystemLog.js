@@ -58,7 +58,7 @@ export  function BranchsSystemLog() {
 /*
   const fetchPOO = async ()=>{
     try{
-     const response = await fetch("http://localhost:5059/UserPage/tablePOO/", {
+     const response = await fetch("http://secondsin-001-site1.dtempurl.com/UserPage/tablePOO/", {
        method: "get",
       "content-type" : "application/json; charset=utf-8"
      });

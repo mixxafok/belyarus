@@ -5,14 +5,13 @@ import Ava from '../../img/ava.png';
 export function EditCardNode ({infoCard, options}){
 
   let data =new Date( infoCard[0].dateStart) //перевод даты из дд.мм.гггг 
-  let dateStart = `${data.getFullYear()}-${data.getMonth()}-${data.getDate()}`//в гггг-мм-дд для input[date]
+  let dateStart = `${data.getFullYear()}-${('0' + data.getMonth()).slice(-2)}-${('0' + data.getDate()).slice(-2)}`//в гггг-мм-дд для input[date]
 
   let data1 =new Date( infoCard[0].dateBirth) //перевод даты из дд.мм.гггг 
-  let dateBirth= `${data1.getFullYear()}-${data1.getMonth()}-${data1.getDate()}`//в гггг-мм-дд для input[date]
-
+  let dateBirth= `${data1.getFullYear()}-${('0' + data1.getMonth()).slice(-2)}-${('0' + data1.getDate()).slice(-2)}`//в гггг-мм-дд для input[date]
+  
   let data2 =new Date( infoCard[0].dateIssue) //перевод даты из дд.мм.гггг 
-  let dateIssue= `${data2.getFullYear()}-${data2.getMonth()}-${data2.getDate()}`//в гггг-мм-дд для input[date]
-
+  let dateIssue= `${data2.getFullYear()}-${('0' + data2.getMonth()).slice(-2)}-${('0' + data2.getDate()).slice(-2)}`//в гггг-мм-дд для input[date]
     const [formInput, setFormInput] = useState({
       Id:infoCard[0].id,
       // Login: '',

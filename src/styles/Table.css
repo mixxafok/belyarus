@@ -8,11 +8,10 @@
   cursor: default;
   table-layout: fixed;
   font-size: 16px;
-  &.hide{
-    display:none;
-    
-  }
+}
 
+.tablePOO.hide {
+  display:none;
 }
 
  thead td{
