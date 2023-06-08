@@ -147,6 +147,7 @@
   margin-top: 1%;
   margin-right: 10%;
   margin-bottom: 1%;
+  cursor: pointer;
 }
 
 .oper_page .OtchetHide{
@@ -165,6 +166,7 @@
   margin-top: 1%;
   margin-right: 10%;
   margin-bottom: 1%;
+  cursor: pointer;
 }
 
 .oper_page .OtchetBranchHide{
@@ -188,7 +190,7 @@
   display: none;
 }
 
-.otchetbranch_word{
+.oper_page .otchetbranch_word{
   display: flex;
   justify-content: space-between;
   width: 28%;
@@ -196,25 +198,25 @@
 
 .otchetbranch_input{
   display: flex;
-  width: 45%;
+  width: 47%;
   margin-right: 5%;
   justify-content: space-between;
 }
 
-.otchetbranch_input input[type=search] {
-  width: 42%;
-  height: calc(1.3rem + 2px);
-  padding: 0.375rem 0.75rem;
+.oper_page .otchetbranch_input select {
+  margin-left: 2%;
+  width: 28%;
+  height: 100%;
   border: 1px solid #bdbdbd;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-.otchetbranch_input input[type=date] {
+
+/* .otchetbranch_input input[type=date] {
   width: 35%;
   height: calc(1.3rem + 2px);
   padding: 0.375rem 0.75rem;
-}
-
+} */
 
 
 .adminnode__Button{
@@ -223,7 +225,8 @@
   border-radius: 8px;
   text-align: center;
   transition: 50ms;
-  margin-right: 10%;
+  margin-right: 8%;
+  height: 50%;
 }
 
 .adminnode__Button:active {

@@ -1,18 +1,17 @@
-.personalCard{
+.adminpersonalCard{
   display: flex;
   flex-direction: column;
 
 }
 
-.PersonalCard_main {
+.adminPersonalCard_main {
   display: flex;
   flex-direction: row;
-  height: 100%;
+ 
  /* background-color:black;*/
   flex-grow: 0;
   flex-shrink: 1;
   flex-basis: auto;
-
   position: fixed;
   top: 0;
   left: 0;
@@ -29,7 +28,7 @@
   }
 }
 
-.cancel{
+.admincancel{
   color: rgb(192,19,39);
   margin-top: 1%;
   margin-left: 4%;
@@ -38,8 +37,11 @@
   font-family: Montserrat-SemiBold;
 }
 
-.div_1{
-  height: 590px;
+.admindiv_1{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 90%;
   width: 50%;
   background-color:rgb(83,159,97);
   background-color:rgb(0, 0, 0);
@@ -51,11 +53,15 @@
   border-radius: 50px;
 }
 
-.oper_page .div_1__Avatar{
+.admindiv1_avatar_fio{
+  display: flex;
+  flex-direction: column;
+  justify-content:space-between
+}
+
+.admindiv_1__Avatar{
   border: 1px solid white;
-  margin:  auto ;
-  margin-top: 20%;
-  margin-bottom: 2%;
+  margin: 0 auto ;
  /* width: 23.3mm;
   height: 31mm;*/
   width: 46.6mm;
@@ -63,43 +69,42 @@
   object-fit: cover;
 }
 
-.div_1__FIO{
+.admindiv_1__FIO{
   color: White;
   text-align: center;
   font-family: Montserrat-SemiBold;
   font-size: 16px;
 }
 
-.div_1__bilet{
+.admindiv_1__bilet{
   font-size: 14px;
   display: flex;
   flex-direction: row;
-  margin-top: 19%;
   justify-content: space-around;
   width: 70%;
   text-align: center;
   font-family: Montserrat-SemiBold;
   text-decoration: underline;
   margin-left: 10%;
-
+  margin-bottom: 1.5%;
 }
 
-.div_1__bilet span {
+.admindiv_1__bilet span {
   cursor: pointer;
   transition: 200ms;
 }
 
-.div_1__bilet span:hover{
+.admindiv_1__bilet span:hover{
   transition: 200ms;
 
   font-size: 16px;
 }
 
-.div_2{
+.admindiv_2{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 590px;
+  height: 90%;
   width: 50%;
   background-color:rgb(83,159,97);
   background-color:rgb(218, 173, 83);
@@ -112,33 +117,34 @@
   
 }
 
-.div_2__ul{
+.admindiv_2__ul{
   font-family: Montserrat-SemiBold;
   margin-left: 3%;
   margin-top: 5%;
   color:rgb(244,244,244);
   cursor: default;
+  font-size: 14px;
 }
 
-.div_2__edits {
+.admindiv_2__edits {
   font-family: Montserrat-SemiBold;
   font-size: 14px;
-  margin: 6% 0 2% 5%;
+  margin: 0% 0 2% 5%;
   text-align: center;
   text-decoration: underline;
 }
 
-.div_2__edits span {
+.admindiv_2__edits span {
   cursor: pointer;
   transition: 200ms;
 }
 
-.div_2__edits span:hover {
+.admindiv_2__edits span:hover {
   transition: 200ms;
   color:rgb(218, 173, 83);
   font-size: 15px;
   
 }
-.span1 {
+.adminspan1 {
 color: rgb(218, 173, 83);
 }

@@ -8,17 +8,6 @@
   cursor: pointer;
 }
 
-.PlaceIssue::before{
-  content: "- "
-}
-
-.OblastiHide{
-display: none;
-}
-
-.CityHide{
-display: none;
-}
 
 .selectedRaion{
   text-decoration: underline;
@@ -35,16 +24,7 @@ display: none;
   font-size: 14px;
 
 }
-.Placemargin2{
-  margin-left: 4%;
-  font-size: 14px;
-  margin-bottom: 1%;
-}
-.Placemargin3{
-  margin-left: 8%;
-  font-size: 14px;
-  margin-bottom: 1%;
-}
+
 .PlacemarginHide{
   display: none;
 }
@@ -68,6 +48,26 @@ display: none;
   border: 1px solid #bdbdbd;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.input_openIditYzel{
+  margin-left: 1%;
+}
+
+.BranchsAdd_button{
+  background-color:rgba(218, 173, 83, 0.746);
+  width: 10%;
+  border-radius: 8px;
+  margin-top: 0.5%;
+  text-align: center;
+  transition: 50ms;
+  font-size: 14px;
+}
+
+.BranchsAdd_button:active{
+  box-shadow:0px 0px 2px 1px black;
+  opacity: 1;
+  transition: 50ms;
 }
 
 

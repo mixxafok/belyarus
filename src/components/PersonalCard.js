@@ -1,6 +1,6 @@
 import React from "react";
 import Avatar from '../img/ava.png';
-import '../styles/PersonalCardEdit.css';
+import '../styles/PersonalCardSystem.css';
 
 
 export function PersonalCard({setPersoncard, infoCard, setInfoCard} ){
@@ -35,18 +35,51 @@ export function PersonalCard({setPersoncard, infoCard, setInfoCard} ){
     </ul>
   });
 
+  const fetchPersonWord = async (id) =>{
+    try{
+    const responce = await fetch(`http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPersonWord?id=${id}`,{
+      method: 'get'
+    })
+    await alert('Файл успешно скачан')
+  }
+    catch(err){
+      console.log(err);
+      alert('Не удалось скачать файл')
+    }
+   //console.log(id)
+  }
+  const fetchPersonExcel = async (id) =>{
+    try{
+    const responce = await fetch(`http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPersonExel?id=${id}`,{
+      method: 'get'
+    })
+   await alert('Файл успешно скачан')
+    }
+    catch(err){
+      console.log(err);
+      alert('Не удалось скачать файл')
+    }
+  }
 
   return (
-      <main className="PersonalCard_main">
-        <div className="div_1">
-          <p className="cancel" onClick={()=> {setPersoncard(); setInfoCard([]);}}>X</p>
-          <img src={Avatar} className="div_1__Avatar" alt="no img" width='23.3mm' height='31mm'></img>
-          <div className="div_1__FIO">{fioMember}</div>
+    <main className="adminPersonalCard_main">
+    <div className="admindiv_1">
+      <p className="admincancel" onClick={()=>setPersoncard()}>X</p>
+      <div className="admindiv1_avatar_fio">
+        <img src={Avatar} className="admindiv_1__Avatar" alt="no img" ></img>
+        <div className="admindiv_1__FIO">{fioMember}</div>
+      </div>
+      <div className="admindiv_1__bilet" >
+        <span onClick={()=>{setPersoncard(); fetchPersonWord(infoCard[0].id) }}>Отчет Word</span>
+        <span onClick={()=>{setPersoncard(); fetchPersonExcel(infoCard[0].id) }}>Отчет Excel</span>
         </div>
+      </div>
+      
 
-        <div className="div_2">
-          {uli}
-        </div>
+    <div className="admindiv_2">
+    {/* <span className="" onClick={()=>{ setPersoncardEdit(); col('col6');  }}>Сформировать билет</span>  */}
+      {uli}
+    </div>
 
       </main>
   )

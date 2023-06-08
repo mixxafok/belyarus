@@ -76,22 +76,25 @@ export function PersonalCardSystem({setPersoncardEdit,col, infoCard } ){
   }
 
   return (
-      <main className="PersonalCard_main">
-        <div className="div_1">
-          <p className="cancel" onClick={()=>setPersoncardEdit()}>X</p>
-          <img src={Avatar} className="div_1__Avatar" alt="no img" ></img>
-          <div className="div_1__FIO">{fioMember}</div>
-          <div className="div_1__bilet" >
+      <main className="adminPersonalCard_main">
+        <div className="admindiv_1">
+          <p className="admincancel" onClick={()=>setPersoncardEdit()}>X</p>
+          <div className="admindiv1_avatar_fio">
+            <img src={Avatar} className="admindiv_1__Avatar" alt="no img" ></img>
+            <div className="admindiv_1__FIO">{fioMember}</div>
+          </div>
+          <div className="admindiv_1__bilet" >
             <span onClick={()=>{setPersoncardEdit(); fetchBilet(infoCard[0].id) }}>Сформировать билет</span>
             <span onClick={()=>{setPersoncardEdit(); fetchPersonWord(infoCard[0].id) }}>Отчет Word</span>
             <span onClick={()=>{setPersoncardEdit(); fetchPersonExcel(infoCard[0].id) }}>Отчет Excel</span>
             </div>
-        </div>
+          </div>
+          
 
-        <div className="div_2">
+        <div className="admindiv_2">
         {/* <span className="" onClick={()=>{ setPersoncardEdit(); col('col6');  }}>Сформировать билет</span>  */}
           {uli}
-         <div className="div_2__edits" > <span onClick={()=>{ setPersoncardEdit(); col('col6');  }}>Редактировать личную карточку</span></div> 
+         <div className="admindiv_2__edits" > <span onClick={()=>{ setPersoncardEdit(); col('col6');  }}>Редактировать личную карточку</span></div> 
         </div>
 
       </main>

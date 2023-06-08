@@ -199,9 +199,7 @@
   margin-top: 1%;
   margin-right: 10%;
   margin-bottom: 1%;
-  &.hide {
-    display: none;
-  }
+  cursor: pointer;
 }
 
 .adminSystem_page .OtchetBranch.hide{
@@ -221,9 +219,7 @@
   margin-top: 1%;
   margin-right: 10%;
   margin-bottom: 1%;
-  &.hide {
-    display: none;
-  }
+  cursor: pointer;
 }
 
 .adminSystem_page  .Otchet.hide{
@@ -235,14 +231,13 @@
   color: black;
   width: 30%;
   display: flex;
+  flex-flow: row;
   justify-content: space-between;
   font-size: 14px;
-float: right;
-  margin: 1% 9% 1% 0;
+  float: right;
+  margin: 1% 6% 1% 0;
   cursor: pointer;
-  &.hide {
-    display: none;
-  }
+
 }
 
 .adminSystem_page .OtchetFilter.hide{
@@ -251,9 +246,15 @@ float: right;
 
 .adminSystem_page .otchetbranch_input{
   display: flex;
-  width: 45%;
+  width: 47%;
   margin-right: 5%;
   justify-content: space-between;
+}
+
+.adminSystem_page .otchetbranch_word{
+  display: flex;
+  justify-content: space-between;
+  width: 28%;
 }
 
 .adminSystem_page .otchetbranch_input input[type=search] {
@@ -265,10 +266,13 @@ float: right;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-.adminSystem_page .otchetbranch_input input[type=date] {
-  width: 35%;
-  height: calc(1.3rem + 2px);
-  padding: 0.375rem 0.75rem;
+.adminSystem_page .otchetbranch_input select {
+  margin-left: 2%;
+  width: 28%;
+  height: 100%;
+  border: 1px solid #bdbdbd;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 /*

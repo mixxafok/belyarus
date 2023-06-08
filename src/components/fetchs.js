@@ -11,7 +11,7 @@ export  const fetchPOO = async ({setb}) =>{
   }
   catch(err){
     console.log(err)
-    alert('Не удалось загрузить список пользователей')
+    alert('Не удалось загрузить список членов партии')
   }
  };
 
@@ -26,7 +26,7 @@ export const fetchPause = async ({setb})=>{
   }
   catch(err){
     console.log(err)
-    alert('Не удалось загрузить список пользователей')
+    alert('Не удалось загрузить список членов партии')
   }
 };
 
@@ -41,7 +41,7 @@ export const fetchNO = async ({setb})=>{
   }
   catch(err){
     console.log(err)
-    alert('Не удалось загрузить список пользователей')
+    alert('Не удалось загрузить список членов партии')
   }
 };
 

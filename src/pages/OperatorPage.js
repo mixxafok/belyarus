@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { FindFilterEdit } from "../components/FindFilterEdit.js";
-import {PersonalCardEdit} from '../components/PersonalCardEdit';
+import {PersonalCardEdit} from '../components/PersonalCardEdit.js';
 import Icon from '../icons/partIcon.js';
 import question from '../icons/question.png';
 import {Registration} from '../components/Registration.js';
 import {EditCard} from '../components/Operator/EditCard.js';
 import Up from '../icons/up.png';
+import Repeat from '../icons/repeat.png';
 import '../styles/OperatorPage.css';
 import '../styles/Header.css';
 import '../styles/Table.css';
@@ -33,8 +34,12 @@ export function OperatorPage(){
 
   const[personcardEdit, setPersoncardEdit] = useState(false)
   const[inputSearch, setInputSearch] = useState('')
-  const[inputDate, setInputDate] = useState('')
+  const[inputDate, setInputDate] = useState({
+    VznosMonth:'',
+    VznosYear:''
+  })
   const[foundUsers, setFoundUsers] = useState(b)
+  console.log(inputDate)
   //нажатие на меню
   function col (cols){
     if (cols == 'col1') {
@@ -157,7 +162,7 @@ export function OperatorPage(){
 //fetch
  const fetchPOOWord = async () =>{
   try{
-    const response = await fetch('',{
+    await fetch('',{
     method: 'get'
   });
   alert('Файл успешно скачан')
@@ -168,28 +173,28 @@ export function OperatorPage(){
   }
  }
  const fetchPausedWord = async () =>{
-  const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedWord/',{
+    await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedWord/',{
     method: 'get'
   });
  }
  const fetchNOWord = async () =>{
-  const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetKickedWord/',{
+    await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetKickedWord/',{
     method: 'get'
   });
  }
 
  const fetchPausedExcel = async () =>{
-  const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedExel/',{
+    await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedExel/',{
     method: 'get'
   });
  }
  const fetchPOOExcel = async () =>{
-  const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedExel/',{
+    await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedExel/',{
     method: 'get'
   });
  }
  const fetchNOExcel = async () =>{
-  const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetKickedExel/',{
+    await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetKickedExel/',{
     method: 'get'
   });
  }
@@ -292,12 +297,11 @@ const handleForm = () =>{
         <li className="main__li_5"><span className={`main__span ${col_5 ? 'act' : ''}`} 
         onClick={()=>{col('col5')}}>Зарегистрировать <br/> члена партии</span></li>
          <li className="main__li_7"><span className={`main__span ${col_7 ? 'act' : ''}`} 
-        onClick={()=>{col('col7')}}>Взносы</span></li>
+        onClick={()=>{col('col7')}}>Уплата Взносов</span></li>
         <li className="main__li_6"><span className={`main__span__edit ${col_6 ? '' : 'hide'}`} 
         onClick={()=>{col('col6')}}>Режим редактирования <br/>учетной карточки</span></li>
       </ul>
       </div>
-
 
 
     {personcardEdit ? <PersonalCardEdit setPersoncardEdit ={setPersoncardEdit} col={col} infoCard={infoCard} /> : null}
@@ -318,6 +322,7 @@ const handleForm = () =>{
       </div>
 
       <div className={` ${(tablehideBranch ) ? 'OtchetBranchHide' : 'OtchetBranch'}`}>
+      <span style={{marginRight: '1%', marginTop: '3px', cursor:'pointer'}} onClick={()=> setFoundUsers(b)}><img src={Repeat} alt='☺' width='20px'/></span>
           <div className="adminnode__Button" onClick={()=> {handleForm()}}>
             <button >Сохранить</button>
           </div>
@@ -328,12 +333,33 @@ const handleForm = () =>{
           onChange={e=>setInputSearch( e.target.value)}
           placeholder="Введите фамилию"
           />
-          <input
-          type='month'
-          value={inputDate}
-          onChange={e=>setInputDate( e.target.value)}
-          placeholder="Введите дату"
-          />
+            {/* <DatePicker 
+          // className="datepicker"
+          defaultvalue={inputDate}
+          onChange={value=>setInputDate(value)}
+          valueFormat={{ month: "long" , year: "numeric" }}
+          calendarProps={{ views: ["year", "decade", "century"] }}
+          /> */}
+            <select className='month' value={inputDate.VznosMonth} onChange={(e) => setInputDate({ ...inputDate, VznosMonth: e.target.value })}>
+             <option value='' disabled selected>Месяц</option> 
+             <option value={1}>Январь</option>
+             <option value={2}>Февраль</option>
+             <option value={3}>Март</option>
+             <option value={4}>Апрель</option>
+             <option value={5}>Май</option>
+             <option value={6}>Июнь</option>
+             <option value={7}>Июль</option>
+             <option value={8}>Август</option>
+             <option value={9}>Сентябрь</option>
+             <option value={10}>Октябрь</option>
+             <option value={11}>Ноябрь</option>
+             <option value={12}>Декабрь</option>
+            </select>
+            <select className='year' value={inputDate.VznosYear} onChange={(e) => setInputDate({ ...inputDate, VznosYear: e.target.value })}>
+              <option value='' disabled selected>год</option> 
+             <option value={2023}>2023</option>
+             <option value={2024}>2024</option>
+            </select>
           </div>
           <div className="otchetbranch_word">
             <p>Отчет в Word</p>

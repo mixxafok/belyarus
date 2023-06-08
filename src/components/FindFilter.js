@@ -16,8 +16,10 @@ export function FindFilter({b,tablefindfilter, options}){
     NumBilet: '',
     StatusBilet: '',
     Sex: '',
-    DateBirth: '',
-    DateIssue: '',
+    DateBirthFrom: '',
+    DateBirthTo: '',
+    DateIssueFrom: '',
+    DateIssueTo: '',
     PlaceIssue:'',
     StatusMember: '',
     PlaceYchet: '',
@@ -57,8 +59,10 @@ export function FindFilter({b,tablefindfilter, options}){
         NumBilet: '',
         StatusBilet: '',
         Sex: '',
-        DateBirth: '',
-        DateIssue: '',
+        DateBirthFrom: '',
+        DateBirthTo: '',
+        DateIssueFrom: '',
+        DateIssueTo: '',
         PlaceIssue:'',
         StatusMember: '',
         PlaceYchet: '',
@@ -92,7 +96,7 @@ export function FindFilter({b,tablefindfilter, options}){
           body: JSON.stringify(formInput)
         })
         let q = await responce.json();
-        await setFoundUsers([q]);
+        await setFoundUsers(q);
         console.log(foundUsers)
       }
       catch(err){
@@ -249,21 +253,43 @@ export function FindFilter({b,tablefindfilter, options}){
         </div>
         
         <div className="form_input_date" >
-        <label>Дата рождения</label>
-        <input 
-          value={formInput.DateBirth} 
-          onChange={(e) => setFormInput({ ...formInput, DateBirth: e.target.value })} 
-          type="date" 
-          min="1923-01-01"/>
+          <label>Дата рождения</label>
+          <div className="form_input_date_1">
+            <span>От:</span>
+            <input 
+              value={formInput.DateBirthFrom} 
+              onChange={(e) => setFormInput({ ...formInput, DateBirthFrom: e.target.value })} 
+              type="date" 
+              min="1923-01-01"/>
+          </div> 
+          <div className="form_input_date_1">
+          <span>До:</span>
+            <input 
+              value={formInput.DateBirthTo} 
+              onChange={(e) => setFormInput({ ...formInput, DateBirthTo: e.target.value })} 
+              type="date" 
+              min="1923-01-01"/>
+          </div>
         </div>
 
         <div className="form_input_date">
-        <label>Дата вступления</label>
-        <input 
-          value={formInput.DateIssue}
-          onChange={(e) => setFormInput({ ...formInput, DateIssue: e.target.value })} 
-          type="date" 
-          min="2023-01-01"/>
+          <label>Дата вступления</label>
+          <div className="form_input_date_1">
+            <span>От: </span>
+            <input 
+              value={formInput.DateIssueFrom}
+              onChange={(e) => setFormInput({ ...formInput, DateIssueFrom: e.target.value })} 
+              type="date" 
+              min="2023-01-01"/>
+          </div>
+          <div className="form_input_date_1">
+            <span>До:</span>
+            <input 
+              value={formInput.DateIssueTo}
+              onChange={(e) => setFormInput({ ...formInput, DateIssueTo: e.target.value })} 
+              type="date" 
+              min="2023-01-01"/>
+          </div>
         </div>
 
         <div className="form_input_combobox">

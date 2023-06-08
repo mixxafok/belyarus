@@ -11,7 +11,8 @@ export  function LogPassUserSystem() {
     Login: '',
     Rule: '1',
     Password: '',
-    RepeatPassword: ''
+    RepeatPassword: '',
+    Yzel: ''
   })
 
   const fetchLogPassUser = async () =>{
@@ -81,6 +82,12 @@ export  function LogPassUserSystem() {
             <option value={3}>Администратор узла</option>
             <option value={4}>Администратор системы</option>
           </select>
+          <label>Подконтрольный узел</label>
+          <input disabled
+            className='LogPassUser_inputYzel'
+            type='text'
+            value={formInput.Yzel}
+          />
           <label>Пароль</label>
           <input 
             className='LogPassUser_input'
@@ -98,7 +105,7 @@ export  function LogPassUserSystem() {
           </div>
 
           <div className='LogPassUser__div2'>
-          <BranchsSystemLog/>
+          <BranchsSystemLog formInput={formInput} setFormInput={setFormInput}/>
         </div>
       </container>
     </div>

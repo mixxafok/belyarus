@@ -121,7 +121,7 @@ label {
 
 
 .form_input_date {
-  width: 50%;
+  width: 57%;
   display: flex;
   flex-direction: column;
   justify-content:baseline;
@@ -147,6 +147,23 @@ label {
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
+.form_input_date_1{
+  display: flex;
+  flex-direction:row ;
+  margin-top: 3%;
+}
+
+
+.form_input_date_1 span{
+  display: flex;
+  flex-direction:row ;
+  font-size: 14px;
+  margin-right: 3%;
+  align-items: center;
+  width: 20%;
+}
+
 
 .Button{
   background-color:rgba(218, 173, 83, 0.746);

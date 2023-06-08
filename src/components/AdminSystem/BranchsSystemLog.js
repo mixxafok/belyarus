@@ -1,95 +1,221 @@
 import React, {useState} from 'react'
 import '../../styles/Branchs.css'
 import '../../styles/Table.css'
-import { Raions, Novopolotsk, Polotsk, Oblasti } from '../FIO.js'
+import Close from '../../icons/close.png'
+import Edit from '../../icons/edit-text.png'
+import Arrow from '../../icons/arrow.png'
+import Plus from '../../icons/more.png'
 
-export  function BranchsSystemLog() {
-  const [openCity, setOpenCity] = useState(false)
+export  function BranchsSystemLog({formInput, setFormInput}) {
   const [openRaion, setOpenRaion] = useState(false)
   const [openOblast, setOpenOblast] = useState(false)
   const [openRespublic,setOpenRespublic] = useState(false)
-  const [respublic, setRespublic] = useState(false)
-  const [oblasti, setOblasti] = useState(false)
-  const [raions, setRaions] = useState(false)
-  const [city, setCity]  = useState(false)
-  const [InputYzel, setInputYzel] = useState('')
+  const [yzels, setYzels] = useState([])
+  const [raionYzels, setRaionYzels] = useState([])
+  const [otdelYzels, setOtdelYzels] = useState([])
+  const [InputYzel, setInputYzel] = useState({
+    parentId: 0,
+    title: ''
+  })
   const [LabelYzel, setLabelYzel] = useState('')
+  const [openEditYzel, setOpenEditYzel] = useState(false)
 
-  //открытие выпадающего списка
-  const raion = Raions.map(item => {
-    return <li key={item.id} className={(LabelYzel == item.raion && openRaion) ? 'selectedRaion' : 'selectedRaionNull'}
-            onClick={()=> { setLabelYzel(item.raion); setOpenRaion(!openRaion) } }>
-           <span >{item.raion}</span> 
-          </li>
-  })
-  
-  const oblast = Oblasti.map(item => {
-    return <li key={item.id} className={(LabelYzel == item.oblast && openOblast) ? 'selectedRaion' : 'selectedRaionNull'}
-            onClick={()=> { setLabelYzel(item.oblast);  setOpenOblast(!openOblast) } }>
-           <span >{item.oblast}</span> 
-          </li>
-  })
+  const [LabelYzelOblast,setLabelYzelOblast] = useState('') 
+  const [LabelYzelRaion,setLabelYzelRaion] = useState('')
 
-  const [p, setp] = useState([])
-  const otdel =  Novopolotsk.map(item => {
-        return <li key={item.id} className={(LabelYzel == item.city && openCity) ? 'selectedRaion' : 'selectedRaionNull'}
-        onClick={()=> { setLabelYzel(item.city); /*otdel(item.id)*/; setOpenCity(true) } }>
-        <span> {item.city}</span>
-        </li>
-        })
 
-/*  const regPlcs = [];
-  const entrPlcs = [];
-  for (let key in options){
-    if(key == 'regPlcs'){
-      for (let ked of options['regPlcs']){
-        regPlcs.push( ked.val)
-        continue
-        }
+  function openCloseYzel (open) {
+    if(open == 'world'){
+      setOpenRespublic(false)
+      setOpenOblast(false)
+      setOpenRaion(false)
+      setLabelYzel('')
+      setFormInput({...formInput, Yzel: ''});
     }
-    if(key == 'entrPlcs'){
-      for (let ked of options['entrPlcs']){
-        entrPlcs.push( ked.val)
-        continue
-        }
+    if(open == 'respublic'){
+      setOpenRespublic(!openRespublic)
+      setOpenOblast(false)
+      setOpenRaion(false)
+      fetchYzel(1,false)
+      setLabelYzelOblast('')
+    }
+    if(open == 'oblasti'){
+      setOpenRespublic(false)
+      setOpenOblast(!openOblast)
+      setOpenRaion(false)
+      setLabelYzelRaion('')
+    }
+    if(open == 'raion'){
+      setOpenRespublic(false)
+      setOpenOblast(false)
+      setOpenRaion(!openRaion)
     }
   }
-*/
-/*
-  const fetchPOO = async ()=>{
-    try{
-     const response = await fetch("http://secondsin-001-site1.dtempurl.com/UserPage/tablePOO/", {
+
+  //открытие выпадающего списка
+
+  const oblast = yzels.map((item) => { {
+    return <li key={item.id} className={ LabelYzel == item.title ? 'selectedRaion' : 'selectedRaionNull'}>
+           <span onClick={()=>{openCloseYzel('oblasti'); fetchRaionYzel(item.id, item.isEndNode);
+            setFormInput({...formInput, Yzel: item.title}); setLabelYzelOblast(' - ' + item.title)}}>
+            {item.title}
+            </span> 
+
+          </li>
+   }
+  })
+
+  const raion = raionYzels.map((item) => { {
+    return <li key={item.id} className={ LabelYzel == item.title ? 'selectedRaion' : 'selectedRaionNull'}>
+           <span onClick={()=> {openCloseYzel('raion'); fetchOtdelYzel(item.id, item.isEndNode);
+            setFormInput({...formInput, Yzel: item.title}); setLabelYzelRaion(' - ' + item.title) }}>
+            {item.title}
+            </span> 
+
+          </li>
+   }
+  })
+  const otdel = otdelYzels.map((item) => { {
+    return <li key={item.id} className={ LabelYzel == item.title ? 'selectedRaion' : 'selectedRaionNull'}>
+           <span onClick={()=> {setFormInput({...formInput, Yzel: item.title}); }}>
+            {item.title}
+            </span> 
+
+          </li>
+   }
+  })
+
+
+  const fetchYzel = async (itemid, itemisEndNode)=>{
+    if(!itemisEndNode){
+      try{
+     const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/getChildrens?id=${itemid}`, {
        method: "get",
       "content-type" : "application/json; charset=utf-8"
      });
      let q = await response.json();
-     await setb(q);
+     await setYzels(q);
+     // console.log(q[0].isEndNode)
+   
     }
     catch(err){
       console.log(err)
+      setYzels([]);
     }
-   };
-*/
+   }
+   else{
+    return setYzels([]);
+   }
+  }
+
+  const fetchRaionYzel = async (itemid, itemisEndNode)=>{
+    if(!itemisEndNode){
+      try{
+     const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/getChildrens?id=${itemid}`, {
+       method: "get",
+      "content-type" : "application/json; charset=utf-8"
+     });
+     let q = await response.json();
+     await setRaionYzels(q);
+     // console.log(q[0].isEndNode)
+    }
+    catch(err){
+      console.log(err)
+      setRaionYzels([]);
+    }
+   }
+   else{
+    return setRaionYzels([]);
+   }
+  }
+
+  const fetchOtdelYzel = async (itemid, itemisEndNode)=>{
+    if(!itemisEndNode){
+      try{
+     const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/getChildrens?id=${itemid}`, {
+       method: "get",
+      "content-type" : "application/json; charset=utf-8"
+     });
+     let q = await response.json();
+     await setOtdelYzels(q);
+     // console.log(q[0].isEndNode)
+   
+    }
+    catch(err){
+      console.log(err)
+      setOtdelYzels([]);
+    }
+   }
+   else{
+    return setOtdelYzels([]);
+   }
+  }
+
+  const RemoveYzel = (titleYzel, isEndNodeYzel) =>{
+    if(isEndNodeYzel){
+      if( window.confirm('Вы точно хотите удалить этот узел?')){
+       setYzels(yzels.filter(tem => tem.title != titleYzel));
+       }
+    } 
+    else{alert('Узел не пустой')}
+  }
+
+  const fetchAddYzel = async ()=>{
+      try{
+      await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/addNode/`, {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json;charset=utf-8',  
+      },
+      body: JSON.stringify(InputYzel)
+     }); 
+     
+     fetchYzel(InputYzel.parentId)
+    }
+    catch(err){
+      console.log(err)
+     alert('Ошибка: организация не добавлена')
+    }
+  }
+
+  const handleForm = ()=>{
+    fetchAddYzel();
+    setInputYzel({...InputYzel, title: ''})
+    console.log(InputYzel)
+  } 
+
 
 
   return (
     <div>
-        {/* Республика Беларусь &gt; Минский район &gt; Молодечно &gt; Отделение Воложино 7 */}
       <div className='branchs'>
         <div>
-          <span onClick={()=>{ setRespublic(!respublic); setOpenRespublic(!openRespublic); setOpenOblast(false); setOpenRaion(false); setLabelYzel('Республика Беларусь')}}
-          className={ (respublic && !openOblast && LabelYzel == 'Республика Беларусь') ? 'selectedRaion' : 'selectedRaionNull'}>Республика Беларусь</span>
+            {(openRespublic || openOblast || openRaion) ? 
+              <span onClick={()=>{
+                if(openRaion){openCloseYzel('oblasti')}
+                else if (openOblast){openCloseYzel('respublic')}
+                else {openCloseYzel('world')}
+                }}>
+                <img src={Arrow} alt='←' width='14px' style={{display: 'inline', marginRight: '1%'}}/>
+              </span>
+              :
+              <span onClick={()=>{ openCloseYzel('respublic'); setFormInput({...formInput, Yzel: 'Республика Беларусь'}); }}>
+                <img src={Plus} alt='+' width='14px' style={{display: 'inline', marginRight: '1%'}}/>
+              </span>
+            }
+            
+          <span /*className={( LabelYzel == 'Республика Беларусь') ? 'selectedRaion' : 'selectedRaionNull'}*/>Республика Беларусь</span> 
+          <span > {LabelYzelOblast}</span> 
+          <span > {LabelYzelRaion}</span> 
         </div> 
-        <div className= {openRespublic ? 'Placemargin1' : 'PlacemarginHide'}>
-          <span>{oblast}</span>
-            <div className={openOblast ? 'Placemargin2' : 'CityHide'}>
-              <span>{raion}</span>
-                <div className={openRaion ? 'Placemargin3' : 'CityHide'}>
-                  <span>{otdel}</span>
-                </div>  
-            </div>
+        <div className='Placemargin1'>
+          <span className= {openRespublic ? 'Placemargin1' : 'PlacemarginHide'}>{oblast}</span>
+          <span className= {openOblast ? 'Placemargin1' : 'PlacemarginHide'}>{raion}</span>
+          <span className= {openRaion ? 'Placemargin1' : 'PlacemarginHide'}>{otdel}</span>
         </div>
       </div>
+    
     </div>
   )
 }

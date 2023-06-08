@@ -17,7 +17,8 @@ export function EditCardNode ({infoCard, options}){
       // Login: '',
       // Password: '',
       // Rule: '',
-      Vznos: '',
+      VznosMonth: '',
+      VznosYear: '',
       Surname: infoCard[0].name, 
       Name: infoCard[0].surname,
       Parent: infoCard[0].parent,
@@ -246,13 +247,28 @@ for (let key in options){
 <br/>
 <hr/>
         <container className='NumBlietVznos'> 
+          <label>Уплата членских взносов</label>
           <div className="oper_reg__form_input_Vznos">
-            <label>Уплата членских взносов</label>
-            <input 
-              value={formInput.Vznos} 
-              onChange={(e) => setFormInput({ ...formInput, Vznos: e.target.value })} 
-              type="month" 
-              min="2023-01-01"/>
+          <select className='month' value={formInput.VznosMonth} onChange={(e) => setFormInput({ ...formInput, VznosMonth: e.target.value })}>
+             <option value='' disabled selected>Месяц</option> 
+             <option value={1}>Январь</option>
+             <option value={2}>Февраль</option>
+             <option value={3}>Март</option>
+             <option value={4}>Апрель</option>
+             <option value={5}>Май</option>
+             <option value={6}>Июнь</option>
+             <option value={7}>Июль</option>
+             <option value={8}>Август</option>
+             <option value={9}>Сентябрь</option>
+             <option value={10}>Октябрь</option>
+             <option value={11}>Ноябрь</option>
+             <option value={12}>Декабрь</option>
+            </select>
+            <select className='year' value={formInput.VznosYear} onChange={(e) => setFormInput({ ...formInput, VznosYear: e.target.value })}>
+              <option value='' disabled selected>год</option> 
+             <option value={2023}>2023</option>
+             <option value={2024}>2024</option>
+            </select>
           </div>
         </container>
 

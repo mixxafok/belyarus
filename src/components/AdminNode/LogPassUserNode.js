@@ -10,6 +10,7 @@ export  function LogPassUserNode() {
     Parent: '',
     Login: '',
     Rule: '1',
+    Yzel: '',
     Password: '',
     RepeatPassword: ''
   })
@@ -79,6 +80,12 @@ export  function LogPassUserNode() {
             <option selected value={1} >Информационный пользователь</option>
             <option value={2}>Оператор</option>
           </select>
+          <label>Подконтрольный узел</label>
+          <input disabled
+            className='LogPassUser_inputYzel'
+            type='text'
+            value={formInput.Yzel}
+          />
           <label>Пароль</label>
           <input 
             className='LogPassUser_input'
@@ -96,7 +103,7 @@ export  function LogPassUserNode() {
           </div>
 
           <div className='LogPassUser__div2'>
-          <BranchsSystemLog/>
+          <BranchsSystemLog  formInput={formInput} setFormInput={setFormInput}/>
         </div>
       </container>
     </div>

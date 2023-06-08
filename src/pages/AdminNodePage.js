@@ -10,6 +10,7 @@ import { Branchs } from "../components/AdminNode/Branchs.js";
 import { SpisokUsersNode } from "../components/AdminNode/SpisokUsersNode.js";
 import { LogPassUserNode } from "../components/AdminNode/LogPassUserNode.js";
 import Up from '../icons/up.png';
+import Repeat from '../icons/repeat.png';
 import '../styles/AdminNodePage.css';
 import '../styles/Header.css';
 import '../styles/Table.css';
@@ -40,7 +41,10 @@ export function AdminNodePage(){
   const [options, setOptions] = useState([]);
   const[personcardEdit, setPersoncardEdit] = useState(false)
   const[inputSearch, setInputSearch] = useState('')
-  const[inputDate, setInputDate] = useState('')
+  const[inputDate, setInputDate] = useState({
+    VznosMonth:'',
+    VznosYear:''
+  })
   const[foundUsers, setFoundUsers] = useState(b)
   //нажатие на меню
   function col (cols){
@@ -74,6 +78,7 @@ export function AdminNodePage(){
           setcol_7(false);
           setcol_8(false);
           setcol_9(false);
+          setcol_10(false);
           setTableHidePOO(!tablehidePOO);
           setTableFindFilter(true);
           setTableHidePause(true);
@@ -92,6 +97,7 @@ export function AdminNodePage(){
           setcol_7(false);
           setcol_8(false);
           setcol_9(false);
+          setcol_10(false);
           setTableHidePOO(true);
           setTableFindFilter(!tablefindfilter);
           setTableHidePause(true);
@@ -112,6 +118,7 @@ export function AdminNodePage(){
           setcol_7(false);
           setcol_8(false);
           setcol_9(false);
+          setcol_10(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(!tablehidePause);
@@ -131,6 +138,7 @@ export function AdminNodePage(){
           setcol_7(false);
           setcol_8(false);
           setcol_9(false);
+          setcol_10(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(true);
@@ -148,6 +156,7 @@ export function AdminNodePage(){
           setcol_7(false);
           setcol_8(false);
           setcol_9(false);
+          setcol_10(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(true);
@@ -165,6 +174,7 @@ export function AdminNodePage(){
       setcol_6(!col_6);
       setcol_7(false);
       setcol_8(false);
+      setcol_10(false);
       setTableHidePOO(true);
       setTableFindFilter(true);
       setTableHidePause(true);
@@ -183,6 +193,7 @@ export function AdminNodePage(){
           setcol_7(!col_7);
           setcol_8(false);
           setcol_9(false);
+          setcol_10(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(true);
@@ -201,6 +212,7 @@ export function AdminNodePage(){
           setcol_7(false);
           setcol_8(!col_8);
           setcol_9(false);
+          setcol_10(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(true);
@@ -219,6 +231,7 @@ export function AdminNodePage(){
           setcol_7(false);
           setcol_8(false);
           setcol_9(!col_9);
+          setcol_10(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(true);
@@ -263,7 +276,7 @@ export function AdminNodePage(){
 
  const fetchPOOWord = async () =>{
   try{
-    const response = await fetch('',{
+    await fetch('',{
     method: 'get'
   });
   alert('Файл успешно скачан')
@@ -274,85 +287,32 @@ export function AdminNodePage(){
   }
  }
  const fetchPausedWord = async () =>{
-  const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedWord/',{
+  await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedWord/',{
     method: 'get'
   });
  }
  const fetchNOWord = async () =>{
-  const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetKickedWord/',{
+  await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetKickedWord/',{
     method: 'get'
   });
  }
 
  const fetchPausedExcel = async () =>{
-  const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedExel/',{
+  await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedExel/',{
     method: 'get'
   });
  }
  const fetchPOOExcel = async () =>{
-  const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedExel/',{
+   await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedExel/',{
     method: 'get'
   });
  }
  const fetchNOExcel = async () =>{
-  const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetKickedExel/',{
+     await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetKickedExel/',{
     method: 'get'
   });
  }
 
-  //  const fetchPOO = async () =>{
-  //   try{
-  //    const response = await fetch("http://localhost:5059/UserPage/tablePOO/", {
-  //      method: "get",
-  //     "content-type" : "application/json; charset=utf-8"
-  //    });
-  //    let q = await response.json();
-  //    await setb(q);
-  //   }
-  //   catch(err){
-  //     console.log(err)
-  //   }
-  //  };
-
-  //  const fetchNO = async ()=>{
-  //    const response = await fetch("http://localhost:5059/UserPage/tableNO/", {
-  //      method: "get",
-  //    });
-  //    let q = await response.json();
-  //    await setb(q);
-  //  };
-
-  //  const fetchPause = async ()=>{
-  //    const response = await fetch("http://localhost:5059/UserPage/tablePause/", {
-  //      method: "get",
-  //    });
-  //    let q = await response.json();
-  //    await setb(q);
-  //  };
-
-  //  const fetchBranch = async ()=>{
-  //   const response = await fetch("http://localhost:5059/UserPage/tablePOO/", {
-  //     method: "get",
-  //   });
-  //   let q = await response.json();
-  //   await setb(q);
-  // };
-
-  //  const fetchOne = async (itemid)=>{
-  //   const response = await fetch(`http://localhost:5059/UserPage/GetOne?id=${itemid}`, {
-  //     method: "get",
-  //   });
-  //   let q = await response.json();
-  //   await setInfoCard([q]);
-  // };
-
-  // const fetchOptions = async ()=>{
-  //   const response = await fetch("http://localhost:5059/UserPage/GetOptions/", {
-  //     method: "get",
-  //   });
-  //   let q = await response.json();
-  //   await setOptions(q);
-  // };
 //fetch
 
 
@@ -489,6 +449,7 @@ const handleForm = () =>{
       </div>
 
       <div className={`OtchetBranch ${(tablehideBranch ) ? 'hide' : ''}`}>
+      <span style={{marginRight: '1%', marginTop: '3px', cursor:'pointer'}} onClick={()=> setFoundUsers(b)}><img src={Repeat} alt='☺' width='20px'/></span>
           <div className="adminnode__Button" onClick={()=> {handleForm()}}>
             <button >Сохранить</button>
           </div>
@@ -499,12 +460,26 @@ const handleForm = () =>{
           onChange={e=>setInputSearch( e.target.value)}
           placeholder="Введите фамилию"
           />
-          <input
-          type='month'
-          value={inputDate}
-          onChange={e=>setInputDate( e.target.value)}
-          placeholder="Введите дату"
-          />
+          <select className='month' value={inputDate.VznosMonth} onChange={(e) => setInputDate({ ...inputDate, VznosMonth: e.target.value })}>
+             <option value='' disabled selected>Месяц</option> 
+             <option value={1}>Январь</option>
+             <option value={2}>Февраль</option>
+             <option value={3}>Март</option>
+             <option value={4}>Апрель</option>
+             <option value={5}>Май</option>
+             <option value={6}>Июнь</option>
+             <option value={7}>Июль</option>
+             <option value={8}>Август</option>
+             <option value={9}>Сентябрь</option>
+             <option value={10}>Октябрь</option>
+             <option value={11}>Ноябрь</option>
+             <option value={12}>Декабрь</option>
+            </select>
+            <select className='year' value={inputDate.VznosYear} onChange={(e) => setInputDate({ ...inputDate, VznosYear: e.target.value })}>
+              <option value='' disabled selected>год</option> 
+             <option value={2023}>2023</option>
+             <option value={2024}>2024</option>
+            </select>
           </div>
           <div className="otchetbranch_word">
             <p>Отчет в Word</p>
@@ -583,7 +558,7 @@ const handleForm = () =>{
      { (col_5) ? <Registration options={options}/> : null}
      {/* { (col_6) ? <EditCard infoCard={infoCard} options={options} /> : null} */}
      { (col_6) ? <EditCardNode infoCard={infoCard} options={options} /> : null}
-     { (col_8) ? <Branchs options={options} tablePOO={tablePOO} tablehidePOO={tablehidePOO}/> : null}
+     { (col_8) ? <Branchs options={options} /> : null}
      { (col_9) ? <SpisokUsersNode options={options}/> : null}
      { (col_10) ? <LogPassUserNode /> : null}
      </div>
