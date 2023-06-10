@@ -205,9 +205,9 @@ export  function BranchsSystemLog({formInput, setFormInput}) {
               </span>
             }
             
-          <span /*className={( LabelYzel == 'Республика Беларусь') ? 'selectedRaion' : 'selectedRaionNull'}*/>Республика Беларусь</span> 
-          <span > {LabelYzelOblast}</span> 
-          <span > {LabelYzelRaion}</span> 
+          <span className='branchs__span__cursor_default' /*className={( LabelYzel == 'Республика Беларусь') ? 'selectedRaion' : 'selectedRaionNull'}*/>Республика Беларусь</span> 
+          <span className='branchs__span__cursor_default'> {LabelYzelOblast}</span> 
+          <span className='branchs__span__cursor_default'> {LabelYzelRaion}</span> 
         </div> 
         <div className='Placemargin1'>
           <span className= {openRespublic ? 'Placemargin1' : 'PlacemarginHide'}>{oblast}</span>

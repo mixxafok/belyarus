@@ -7,6 +7,9 @@
 .branchs span {
   cursor: pointer;
 }
+.branchs span.branchs__span__cursor_default{
+  cursor:default;
+}
 
 
 .selectedRaion{

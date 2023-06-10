@@ -160,6 +160,12 @@
   color:brown;
   /* border: 1px solid green;*/
  }
+ .adminSystem_page  .main__ul li:nth-child(8) {
+  width: 100%;
+  margin-top: 5%;
+  color:brown;
+  /* border: 1px solid green;*/
+ }
 
  .start_fixed{
   position: fixed;

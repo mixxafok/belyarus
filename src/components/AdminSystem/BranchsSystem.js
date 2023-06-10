@@ -18,7 +18,10 @@ export  function BranchsSystem() {
     title: ''
   })
   const [LabelYzel, setLabelYzel] = useState('')
-  const [openEditYzel, setOpenEditYzel] = useState(false)
+  const [openEditYzel, setOpenEditYzel] = useState({
+    id:0,
+    isOpen: false
+  })
 
   const [LabelYzelOblast,setLabelYzelOblast] = useState('') 
   const [LabelYzelRaion,setLabelYzelRaion] = useState('')
@@ -59,10 +62,10 @@ export  function BranchsSystem() {
             setLabelYzel(item.title); setInputYzel({...InputYzel, parentId: item.id}); setLabelYzelOblast(' - ' + item.title)}}>
             {item.title}
             </span> 
-            <span key={item.id} onClick={()=>{setOpenEditYzel(!openEditYzel)}} >
-              <img src={Edit} alt='X' width='11px' style={{display: 'inline', marginLeft: '2%'}}/>
+            <span key={item.id} onClick={()=>{setOpenEditYzel({... openEditYzel, id: item.id, isOpen: !openEditYzel.isOpen});}} >
+              <img src={Edit} alt='☺' width='11px' style={{display: 'inline', marginLeft: '2%'}}/>
             </span> 
-            {(openEditYzel && item.id) ? ( <input className='input_openIditYzel' type='text' placeholder={item.title} onChange={e=>item.title = e.target.value}/> ) : null}
+            {(openEditYzel.isOpen && item.id == openEditYzel.id) ? ( <input className='input_openIditYzel' type='text' placeholder={item.title} onChange={e=>item.title = e.target.value}/> ) : null}
             <span onClick={()=>{RemoveYzel(item.title, item.isEndNode )}}> 
               <img src={Close} alt='X' width='9px' style={{display: 'inline', marginLeft: '2%'}}/>
             </span>
@@ -76,10 +79,10 @@ export  function BranchsSystem() {
             setLabelYzel(item.title); setInputYzel({...InputYzel, parentId: item.id}); setLabelYzelRaion(' - ' + item.title) }}>
             {item.title}
             </span> 
-            <span key={item.id} onClick={()=>{setOpenEditYzel(!openEditYzel)}} >
-              <img src={Edit} alt='X' width='11px' style={{display: 'inline', marginLeft: '2%'}}/>
+            <span key={item.id} onClick={()=>{setOpenEditYzel({... openEditYzel, id: item.id, isOpen: !openEditYzel.isOpen})}} >
+              <img src={Edit} alt='☺' width='11px' style={{display: 'inline', marginLeft: '2%'}}/>
             </span> 
-            {(openEditYzel && item.id) ? ( <input className='input_openIditYzel' type='text' placeholder={item.title} onChange={e=>item.title = e.target.value}/> ) : null}
+            {(openEditYzel.isOpen && item.id == openEditYzel.id) ? ( <input className='input_openIditYzel' type='text' placeholder={item.title} onChange={e=>item.title = e.target.value}/> ) : null}
             <span onClick={()=>{RemoveYzel(item.title, item.isEndNode )}}> 
               <img src={Close} alt='X' width='9px' style={{display: 'inline', marginLeft: '2%'}}/>
             </span>
@@ -91,10 +94,10 @@ export  function BranchsSystem() {
            <span onClick={()=> {setLabelYzel(item.title); setInputYzel({...InputYzel, parentId: item.id}) }}>
             {item.title}
             </span> 
-            <span key={item.id} onClick={()=>{setOpenEditYzel(!openEditYzel)}} >
-              <img src={Edit} alt='X' width='11px' style={{display: 'inline', marginLeft: '2%'}}/>
+            <span key={item.id} onClick={()=>{setOpenEditYzel({... openEditYzel, id: item.id, isOpen: !openEditYzel.isOpen})}} >
+              <img src={Edit} alt='☺' width='11px' style={{display: 'inline', marginLeft: '2%'}}/>
             </span> 
-            {(openEditYzel && item.id) ? ( <input className='input_openIditYzel' type='text' placeholder={item.title} onChange={e=>item.title = e.target.value}/> ) : null}
+            {(openEditYzel.isOpen && item.id == openEditYzel.id) ? ( <input className='input_openIditYzel' type='text' placeholder={item.title} onChange={e=>item.title = e.target.value}/> ) : null}
             <span onClick={()=>{RemoveYzel(item.title, item.isEndNode )}}> 
               <img src={Close} alt='X' width='9px' style={{display: 'inline', marginLeft: '2%'}}/>
             </span>
@@ -187,8 +190,9 @@ export  function BranchsSystem() {
       },
       body: JSON.stringify(InputYzel)
      }); 
-     
-     fetchYzel(InputYzel.parentId)
+     if(openRespublic)fetchYzel(InputYzel.parentId)
+     if(openOblast) fetchRaionYzel(InputYzel.parentId)
+     if(openRaion) fetchOtdelYzel(InputYzel.parentId)
     }
     catch(err){
       console.log(err)
@@ -222,18 +226,17 @@ export  function BranchsSystem() {
               </span>
             }
             
-          <span /*className={( LabelYzel == 'Республика Беларусь') ? 'selectedRaion' : 'selectedRaionNull'}*/>Республика Беларусь</span> 
-          <span > {LabelYzelOblast}</span> 
-          <span > {LabelYzelRaion}</span> 
+          <span className='branchs__span__cursor_default'/*className={( LabelYzel == 'Республика Беларусь') ? 'selectedRaion' : 'selectedRaionNull'}*/>Республика Беларусь</span> 
+          <span className='branchs__span__cursor_default'> {LabelYzelOblast}</span> 
+          <span className='branchs__span__cursor_default'> {LabelYzelRaion}</span> 
         </div> 
         <div className='Placemargin1'>
           <span className= {openRespublic ? 'Placemargin1' : 'PlacemarginHide'}>{oblast}</span>
           <span className= {openOblast ? 'Placemargin1' : 'PlacemarginHide'}>{raion}</span>
           <span className= {openRaion ? 'Placemargin1' : 'PlacemarginHide'}>{otdel}</span>
         </div>
-          
-        
       </div>
+      
       <div className='branchs_input'>
           <label >Добавить узел в &lt;&lt; <span style={{color: 'brown'}}>{LabelYzel}</span>  &gt;&gt; </label>
           <input className='input_addYzel'
