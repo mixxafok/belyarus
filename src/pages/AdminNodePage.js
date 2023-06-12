@@ -8,6 +8,7 @@ import {Registration} from '../components/Registration.js';
 import {EditCardNode} from '../components/AdminNode/EditCardNode.js';
 import { Branchs } from "../components/AdminNode/Branchs.js";
 import { SpisokUsersNode } from "../components/AdminNode/SpisokUsersNode.js";
+import { LogPassUserNodeEdit} from "../components/AdminNode/LogPassUserNodeEdit.js"
 import { LogPassUserNode } from "../components/AdminNode/LogPassUserNode.js";
 import Up from '../icons/up.png';
 import Repeat from '../icons/repeat.png';
@@ -30,6 +31,7 @@ export function AdminNodePage(){
   const [col_8, setcol_8] = useState(false)
   const [col_9, setcol_9] = useState(false)
   const [col_10, setcol_10] = useState(false)
+  const [col_11, setcol_11] = useState(false)
   const [col_0, setcol_0] = useState(false)
   const [hideLi, setHideLi] = useState(true)
   const [tablehidePOO, setTableHidePOO] = useState(true)
@@ -79,6 +81,7 @@ export function AdminNodePage(){
           setcol_8(false);
           setcol_9(false);
           setcol_10(false);
+          setcol_11(false);
           setTableHidePOO(!tablehidePOO);
           setTableFindFilter(true);
           setTableHidePause(true);
@@ -98,6 +101,7 @@ export function AdminNodePage(){
           setcol_8(false);
           setcol_9(false);
           setcol_10(false);
+          setcol_11(false);
           setTableHidePOO(true);
           setTableFindFilter(!tablefindfilter);
           setTableHidePause(true);
@@ -119,6 +123,7 @@ export function AdminNodePage(){
           setcol_8(false);
           setcol_9(false);
           setcol_10(false);
+          setcol_11(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(!tablehidePause);
@@ -139,6 +144,7 @@ export function AdminNodePage(){
           setcol_8(false);
           setcol_9(false);
           setcol_10(false);
+          setcol_11(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(true);
@@ -157,6 +163,7 @@ export function AdminNodePage(){
           setcol_8(false);
           setcol_9(false);
           setcol_10(false);
+          setcol_11(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(true);
@@ -175,6 +182,7 @@ export function AdminNodePage(){
       setcol_7(false);
       setcol_8(false);
       setcol_10(false);
+      setcol_11(false);
       setTableHidePOO(true);
       setTableFindFilter(true);
       setTableHidePause(true);
@@ -194,6 +202,7 @@ export function AdminNodePage(){
           setcol_8(false);
           setcol_9(false);
           setcol_10(false);
+          setcol_11(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(true);
@@ -213,6 +222,7 @@ export function AdminNodePage(){
           setcol_8(!col_8);
           setcol_9(false);
           setcol_10(false);
+          setcol_11(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(true);
@@ -232,6 +242,7 @@ export function AdminNodePage(){
           setcol_8(false);
           setcol_9(!col_9);
           setcol_10(false);
+          setcol_11(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(true);
@@ -251,12 +262,32 @@ export function AdminNodePage(){
           setcol_8(false);
           setcol_9(false);
           setcol_10(!col_10);
+          setcol_11(false);
           setTableHidePOO(true);
           setTableFindFilter(true);
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
           fetchOptions({setOptions});
+    }
+    else if ( cols == 'col11') {
+      setcol_0(false);
+          setcol_1(false); 
+          setcol_2(false); 
+          setcol_3(false); 
+          setcol_4(false);
+          setcol_5(false);
+          setcol_6(false);
+          setcol_7(false);
+          setcol_8(false);
+          setcol_9(false);
+          setcol_10(false);
+          setcol_11(!col_11);
+          setTableHidePOO(true);
+          setTableFindFilter(true);
+          setTableHidePause(true);
+          setTableHideNO(true);
+          setTableHideBranch(true);
     }
    }
 
@@ -424,6 +455,8 @@ const handleForm = () =>{
         onClick={()=>{col('col9')}}>Список пользователей системы</span></li>
         <li className="main__li_10"><span className={`main__span ${col_10 ? 'act' : ''}`} 
         onClick={()=>{col('col10')}}>Зарегистрировать <br/> пользователя</span></li>
+        <li className="main__li_11"><span className={`main__span__edit ${col_11 ? '' : 'hide'}`} 
+        onClick={()=>{col('col11')}}>Режим редактирования <br/>учетной карточки</span></li>
         <li className="main__li_6"><span className={`main__span__edit ${col_6 ? '' : 'hide'}`} 
         onClick={()=>{col('col6')}}>Режим редактирования <br/>учетной карточки</span></li>
       </ul>
@@ -559,8 +592,9 @@ const handleForm = () =>{
      {/* { (col_6) ? <EditCard infoCard={infoCard} options={options} /> : null} */}
      { (col_6) ? <EditCardNode infoCard={infoCard} options={options} /> : null}
      { (col_8) ? <Branchs options={options} /> : null}
-     { (col_9) ? <SpisokUsersNode options={options}/> : null}
+     { (col_9) ? <SpisokUsersNode col={col}/> : null}
      { (col_10) ? <LogPassUserNode /> : null}
+     { (col_11) ? <LogPassUserNodeEdit  /> : null}
      </div>
 
     </main>

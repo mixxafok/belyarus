@@ -47,10 +47,10 @@ export  function SpisokUsersSystem({col}) {
   let tableUsers = uzels.sort((a,b)=>a.surname.localeCompare(b.surname)).map(function(item,index) {
     return <tr key={item.id}>
       <td> {index+1}</td>
-        <td>{item.surname}</td>
+        <td className="table__surname"><p onClick={()=>{col('col11') }} className="table_span__surname">{item.surname}</p></td>
         <td>{item.name}</td>
         <td>{item.parent}</td>
-        <td className="table__surname"><p onClick={()=>{col('col11') }} className="table_span__surname">{item.yzel}</p></td>
+        <td> {item.yzel}</td>
         <td>{item.lastdate}</td>
     </tr>
   });

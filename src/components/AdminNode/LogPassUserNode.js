@@ -4,6 +4,7 @@ import { BranchsSystemLog } from '../AdminSystem/BranchsSystemLog'
 
 export  function LogPassUserNode() {
 
+  const [hidden, setHidden] = useState(true)
   const [formInput, setFormInput] = useState({
     Surname: '',
     Name: '',
@@ -89,19 +90,27 @@ export  function LogPassUserNode() {
           <label>Пароль</label>
           <input 
             className='LogPassUser_input'
-            type='password'
+            type={hidden ? 'password' : ' text'}
             value={formInput.Password}
             onChange={e=>setFormInput({...formInput, Password: e.target.value})}
           />
           <label>Повторите пароль</label>
           <input 
             className='LogPassUser_input'
-            type='password'
+            type={hidden ? 'password' : ' text'}
             value={formInput.RepeatPassword}
             onChange={e=>setFormInput({...formInput, RepeatPassword: e.target.value})}
           />
+          <div>
+            <label>Показать пароль</label>
+          <input
+            type='checkbox'
+            onClick={()=>setHidden(!hidden)}
+          />
           </div>
-
+          
+          </div>
+          
           <div className='LogPassUser__div2'>
           <BranchsSystemLog  formInput={formInput} setFormInput={setFormInput}/>
         </div>

@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 import '../../styles/LogPassUser.css'
-import { BranchsSystemLog } from './BranchsSystemLog'
+import { BranchsSystemLog } from '../AdminSystem/BranchsSystemLog'
 
-export  function LogPassUserSystem() {
+export  function LogPassUserNodeEdit() {
   const [hidden, setHidden] = useState(true)
   const [formInput, setFormInput] = useState({
     Surname: '',
@@ -43,33 +43,33 @@ export  function LogPassUserSystem() {
   return (
     <div className='LogPassUser'>
 
-      <button className='LogPassUser_button' onClick={()=>handleForm()}>Добавить</button>
+      <button className='LogPassUser_button' onClick={()=>handleForm()}>Сохранить</button>
 
       <container className='LogPassUser_container'>
         <div className='LogPassUser__div1'>
           <label>Фамилия</label>
-          <input required='required'
+          <input disabled
             className='LogPassUser_input'
             type='text'
             value={formInput.Surname}
             onChange={e=>setFormInput({...formInput, Surname: e.target.value})}
           />
           <label>Имя</label>
-          <input 
+          <input disabled
             className='LogPassUser_input'
             type='text'
             value={formInput.Name}
             onChange={e=>setFormInput({...formInput, Name: e.target.value})}
           />
           <label>Отчество</label>
-          <input 
+          <input disabled
             className='LogPassUser_input'
             type='text'
             value={formInput.Parent}
             onChange={e=>setFormInput({...formInput, Parent: e.target.value})}
           />
           <label>Логин</label>
-          <input 
+          <input disabled
             className='LogPassUser_input'
             type='text'
             value={formInput.Login}
@@ -79,8 +79,6 @@ export  function LogPassUserSystem() {
           <select  value={formInput.Rule} onChange={e=>setFormInput({...formInput, Rule: e.target.value})} className='LogPassUser_select' >
             <option selected value={1} >Информационный пользователь</option>
             <option value={2}>Оператор</option>
-            <option value={3}>Администратор узла</option>
-            <option value={4}>Администратор системы</option>
           </select>
           <label>Подконтрольный узел</label>
           <input disabled
@@ -89,19 +87,19 @@ export  function LogPassUserSystem() {
             value={formInput.Yzel}
           />
           <label>Пароль</label>
-          <input 
+          <input disabled
             className='LogPassUser_input'
             type={hidden ? 'password' : 'text'}
             value={formInput.Password}
             onChange={e=>setFormInput({...formInput, Password: e.target.value})}
           />
           <label>Повторите пароль</label>
-          <input 
+          <input disabled
             className='LogPassUser_input'
             type={hidden ? 'password' : 'text'}
             value={formInput.RepeatPassword}
             onChange={e=>setFormInput({...formInput, RepeatPassword: e.target.value})}
-          />
+          /> 
             <div>
               <label>Показать пароль</label>
               <input

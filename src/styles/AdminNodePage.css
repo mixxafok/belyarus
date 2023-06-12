@@ -46,7 +46,6 @@
 
 .adminNode_page .tables {
   width: 100%;
-
 }
 
 .adminNode_page .main__span {
@@ -152,6 +151,12 @@
   /* border: 1px solid green;*/
  }
  .adminNode_page .main__ul li:nth-child(7) {
+  width: 100%;
+  margin-top: 5%;
+  color:brown;
+  /* border: 1px solid green;*/
+ }
+ .adminNode_page .main__ul li:nth-child(8) {
   width: 100%;
   margin-top: 5%;
   color:brown;

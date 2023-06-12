@@ -3,7 +3,7 @@ import '../../styles/LogPassUser.css'
 import { BranchsSystemLog } from './BranchsSystemLog'
 
 export  function LogPassUserSystemEdit() {
-
+  const [hidden, setHidden] = useState(true)
   const [formInput, setFormInput] = useState({
     Surname: '',
     Name: '',
@@ -91,17 +91,24 @@ export  function LogPassUserSystemEdit() {
           <label>Пароль</label>
           <input 
             className='LogPassUser_input'
-            type='password'
+            type={hidden ? 'password' : 'text'}
             value={formInput.Password}
             onChange={e=>setFormInput({...formInput, Password: e.target.value})}
           />
           <label>Повторите пароль</label>
           <input 
             className='LogPassUser_input'
-            type='password'
+            type={hidden ? 'password' : 'text'}
             value={formInput.RepeatPassword}
             onChange={e=>setFormInput({...formInput, RepeatPassword: e.target.value})}
           />
+          <div>
+            <label>Показать пароль</label>
+          <input
+            type='checkbox'
+            onClick={()=>setHidden(!hidden)}
+          />
+          </div>
           </div>
 
           <div className='LogPassUser__div2'>

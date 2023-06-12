@@ -4,7 +4,7 @@ import { uzels } from '../FIO'
 import Up from '../../icons/up.png'
 
 
-export  function SpisokUsersNode() {
+export  function SpisokUsersNode({col}) {
 
   const [seletedLi1, setSelectedLi1] = useState(true)
   const [seletedLi2, setSelectedLi2] = useState(true)
@@ -47,7 +47,7 @@ export  function SpisokUsersNode() {
   let tableUsers = uzels.sort((a,b)=>a.surname.localeCompare(b.surname)).map(function(item,index) {
     return <tr key={item.id}>
       <td> {index+1}</td>
-       <td className="table__surname"><p className="table_span__surname">{item.surname}</p></td>
+      <td className="table__surname"><p onClick={()=>{col('col11') }} className="table_span__surname">{item.surname}</p></td>
        <td>{item.name}</td>
          <td>{item.parent}</td>
          <td>{item.yzel}</td>
