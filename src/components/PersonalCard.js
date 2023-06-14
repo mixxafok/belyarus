@@ -3,7 +3,7 @@ import Avatar from '../img/ava.png';
 import '../styles/PersonalCardSystem.css';
 
 
-export function PersonalCard({setPersoncard, infoCard, setInfoCard} ){
+export function PersonalCard({setPersoncard, infoCard} ){
 
   let fioMember = infoCard.map((tem) => {
     return (
@@ -12,8 +12,8 @@ export function PersonalCard({setPersoncard, infoCard, setInfoCard} ){
   })
 
   let uli = infoCard.map((item) => {
-    return <ul className="div_2__ul">
-       <li>Номер партийного билета: <span className="span1">{item.numBilet}</span> </li>
+    return <ul className="admindiv_2__ul">
+       <li>Номер партийного билета: <span className="adminspan1">{item.numBilet}</span> </li>
        <li>Дата выдачи билета: {item.dateStart}</li>
        <li>Статус билета: {item.statusBilet}</li>
        <li>Пол: {item.sex}</li>
@@ -70,14 +70,13 @@ export function PersonalCard({setPersoncard, infoCard, setInfoCard} ){
         <div className="admindiv_1__FIO">{fioMember}</div>
       </div>
       <div className="admindiv_1__bilet" >
-        <span onClick={()=>{setPersoncard(); fetchPersonWord(infoCard[0].id) }}>Отчет Word</span>
-        <span onClick={()=>{setPersoncard(); fetchPersonExcel(infoCard[0].id) }}>Отчет Excel</span>
+        <span onClick={()=>{ fetchPersonWord(infoCard[0].id) }}>Отчет Word</span>
+        <span onClick={()=>{ fetchPersonExcel(infoCard[0].id) }}>Отчет Excel</span>
         </div>
       </div>
       
 
     <div className="admindiv_2">
-    {/* <span className="" onClick={()=>{ setPersoncardEdit(); col('col6');  }}>Сформировать билет</span>  */}
       {uli}
     </div>
 

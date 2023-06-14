@@ -34,7 +34,8 @@
     animation-duration: 10s;
     animation-iteration-count:infinite;
     animation-timing-function:cubic-bezier(0.5, 0.5, 0.165, 1); /*infinity*/
-
+    width: 7%;
+  /* border: 1px solid red; */
 }
 /*
 @keyframes rotation {
@@ -124,6 +125,13 @@
   .Header__exit{
   font-size: 7px;
   }
+  .ICON{
+    width: 14%;
+  }
+  .spravka {
+    width: 8px;
+    height: 8px;
+  }
 }
 
 @media screen and (min-width: 384px) {
@@ -145,16 +153,24 @@
   .Header__exit{
     font-size: 8px;
     }
+    .ICON{
+      width: 14%;
+    }
+    .spravka {
+      width: 10px;
+      height: 10px;
+    }
+
 }
 
 @media screen and (min-width: 448px) {
   .Header__text{
-    font-size: 14px;
-    width: 200px;
+    font-size: 10px;
+    width: 120px;
   }
 
   .Header__nameUser{
-    font-size: 9px;
+    font-size: 8px;
     font-weight: bold;
   }
   
@@ -164,14 +180,75 @@
   }
 
   .Header__exit{
-    font-size: 9px;
+    font-size: 8px;
+    }
+    .ICON{
+      width: 12%;
+    }
+    .spravka {
+      width: 10px;
+      height: 10px;
     }
 }
 
-@media screen and (min-width: 576px) {
+@media screen and (min-width: 615px) {
+  .Header__text{
+    font-size: 14px;
+    width: 25%;
+  }
+
+  .Header__nameUser{
+    font-size: 10px;
+    font-weight: bold;
+  }
+  
+  .Header__ruleUser{
+    font-size: 9px;
+    font-weight:300;
+  }
+
+  .Header__exit{
+    font-size: 10px;
+    }
+  .ICON{
+    width: 10%;
+  }
+  .spravka {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+@media screen and (min-width: 720px) {
+  .Header__text{
+    font-size: 18px;
+    width: 30%;
+  }
+
+  .Header__nameUser{
+    font-size: 10px;
+    font-weight: bold;
+  }
+  
+  .Header__ruleUser{
+    font-size: 9px;
+    font-weight:300;
+  }
+
+  .Header__exit{
+    font-size: 10px;
+    }
+
+    .spravka {
+      width: 12px;
+      height: 12px;
+    }
+}
+
+@media screen and (min-width: 820px) {
   .Header__text{
     font-size: 20px;
-    width: 45%;
+    width: 30%;
   }
 
   .Header__nameUser{
@@ -180,58 +257,73 @@
   }
   
   .Header__ruleUser{
-    font-size: 10px;
+    font-size: 9px;
     font-weight:300;
   }
 
   .Header__exit{
-    font-size: 12px;
+    font-size: 11px;
     }
-}
-
-@media screen and (min-width: 672px) {
-  .Header__text{
-    font-size: 22px;
-    width: 40%;
-  }
-
-  .Header__nameUser{
-    font-size: 12px;
-    font-weight: bold;
-  }
-  
-  .Header__ruleUser{
-    font-size: 10px;
-    font-weight:300;
-  }
-
-  .Header__exit{
-    font-size: 12px;
+    .ICON {
+      width: 8%;
     }
-}
-
-@media screen and (min-width: 768px) {
-  .Header__text{
-    font-size: 24px;
-    width: 35%;
-  }
-
-  .Header__nameUser{
-    font-size: 13px;
-    font-weight: bold;
-  }
-  
-  .Header__ruleUser{
-    font-size: 10px;
-    font-weight:300;
-  }
-
-  .Header__exit{
-    font-size: 13px;
+    .spravka {
+      width: 12px;
+      height: 12px;
     }
 }
 
 @media screen and (min-width: 992px) {
+  .Header__text{
+    font-size: 22px;
+    width: 300px;
+  }
+
+  .Header__nameUser{
+    font-size: 12px;
+    font-weight: bold;
+  }
+  
+  .Header__ruleUser{
+    font-size: 9px;
+    font-weight:300;
+  }
+
+  .Header__exit{
+    font-size: 11px;
+    }
+    .spravka {
+      width: 14px;
+      height: 14px;
+    }
+
+}
+
+@media screen and (min-width: 1200px) {
+  .Header__text{
+    font-size: 26px;
+    width: 350px;
+  }
+
+  .Header__nameUser{
+    font-size: 15px;
+    font-weight: bold;
+  }
+  
+  .Header__ruleUser{
+    font-size: 12px;
+    font-weight:300;
+  }
+
+  .Header__exit{
+    font-size: 13px;
+    }
+    .ICON {
+      width: 7%;
+    }
+}
+
+@media screen and (min-width: 1400px) {
   .Header__text{
     font-size: 30px;
     width: 350px;
@@ -249,5 +341,78 @@
 
   .Header__exit{
     font-size: 14px;
+    }
+}
+
+@media screen and (min-width: 1780px) {
+  .Header__text{
+    font-size: 34px;
+    width: 400px;
+  }
+
+  .Header__nameUser{
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .Header__ruleUser{
+    font-size: 14px;
+    font-weight:300;
+  }
+
+  .Header__exit{
+    font-size: 16px;
+    }
+    .spravka {
+      width: 24px;
+      height: 24px;
+    }
+}
+
+@media screen and (min-width: 2000px) {
+  .Header__text{
+    font-size: 38px;
+    width: 450px;
+  }
+
+  .Header__nameUser{
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .Header__ruleUser{
+    font-size: 18px;
+    font-weight:300;
+  }
+
+  .Header__exit{
+    font-size: 19px;
+    }
+    .ICON{
+      width: 7%;
+    }
+}
+
+@media screen and (min-width: 2500px) {
+  .Header__text{
+    font-size: 38px;
+    width: 450px;
+  }
+
+  .Header__nameUser{
+    font-size: 22px;
+    font-weight: bold;
+  }
+  
+  .Header__ruleUser{
+    font-size: 20px;
+    font-weight:300;
+  }
+
+  .Header__exit{
+    font-size: 21px;
+    }
+    .ICON{
+      width: 6%;
     }
 }

@@ -11,7 +11,8 @@ import Repeat from '../icons/repeat.png';
 import '../styles/OperatorPage.css';
 import '../styles/Header.css';
 import '../styles/Table.css';
-import '../styles/PersonalCardEdit.css';
+import '../styles/PersonalCardSystem.css';
+import '../styles/mediaOper.css';
 import { fetchPOO, fetchPause, fetchNO, fetchBranch, fetchOptions, fetchSparvka, fetchOne } from "../components/fetchs.js";
 
 export function OperatorPage(){ 

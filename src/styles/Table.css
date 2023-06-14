@@ -29,7 +29,15 @@
 }
 
 thead td:first-child{
-  width: 5%;
+  width: 7%;
+}
+
+thead td:nth-child(5){
+  width: 12%;
+}
+
+thead td:nth-child(6){
+  width: 14%;
 }
 
 .table_span__surname:hover {
@@ -45,7 +53,7 @@ tbody td {
   padding: 8px;
   font-weight: 600;
   background-color:#ddddddae;
-
+  font-size: 16px;
 }
  
 /*table tr:nth-child(even){background-color: #f2f2f2;}*/

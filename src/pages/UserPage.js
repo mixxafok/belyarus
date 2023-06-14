@@ -9,7 +9,8 @@ import { fetchPOO, fetchPause, fetchNO, fetchOne, fetchOptions, fetchSparvka } f
 import '../styles/UserPage.css';
 import '../styles/Header.css'; 
 import '../styles/Table.css';
-import '../styles/PersonalCard.css';
+import '../styles/PersonalCardSystem.css';
+import '../styles/mediaUser.css'
 
 export function UserPage(){
   const [infoCard,setInfoCard] = useState([]) // для персональной карточки
@@ -164,7 +165,7 @@ export function UserPage(){
     <div className="user_page">
       <header className="header_UserPage">
 
-      <div className="ICON"> <Icon height="20px" width="20px"/></div>
+      <div className="ICON"> <Icon  width="100%"/></div>
 
         <div className="Header__text">
          <p className="Header__text_2">Белорусская партия «Белая Русь»</p> 
@@ -179,7 +180,7 @@ export function UserPage(){
       </header>
 
       <main>
-        <div className="spisok">
+        <div className="spisok" >
         <ul className="main__ul">
           <li className="main__li_1"><span className={`main__span ${col_1 ? 'act' : ''}`} 
           onClick={()=>{col('col1')}}>Список членов партии <br/> "Белая Русь"</span></li>

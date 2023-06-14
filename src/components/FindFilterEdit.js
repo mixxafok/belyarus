@@ -368,7 +368,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col}){
     <table className={`tablePOO `}> 
     <thead>
        <tr>
-          <td>Номер</td>
+          <td>№</td>
           <td>Фамилия</td>
           <td>Имя</td>
           <td>Отчество</td>

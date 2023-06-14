@@ -78,7 +78,6 @@ export function PersonalCardEdit({setPersoncardEdit,col, infoCard } ){
       
 
     <div className="admindiv_2">
-    {/* <span className="" onClick={()=>{ setPersoncardEdit(); col('col6');  }}>Сформировать билет</span>  */}
       {uli}
      <div className="admindiv_2__edits" > <span onClick={()=>{ setPersoncardEdit(); col('col6');  }}>Редактировать личную карточку</span></div> 
     </div>

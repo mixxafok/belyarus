@@ -1,6 +1,6 @@
 import React from "react";
 import Avatar from '../../img/ava.png';
-import '../../styles/PersonalCardEdit.css';
+import '../../styles/PersonalCardSystem.css';
 
 
 export function PersonalCardSystem({setPersoncardEdit,col, infoCard } ){
@@ -12,8 +12,8 @@ export function PersonalCardSystem({setPersoncardEdit,col, infoCard } ){
   })
 
   let uli = infoCard.map((item) => {
-    return <ul className="div_2__ul">
-       <li>Номер партийного билета: <span className="span1">{item.numBilet}</span> </li>
+    return <ul className="admindiv_2__ul">
+       <li>Номер партийного билета: <span className="adminspan1">{item.numBilet}</span> </li>
        <li>Дата выдачи билета: {item.dateStart}</li>
        <li>Статус билета: {item.statusBilet}</li>
        <li>Пол: {item.sex}</li>
@@ -92,7 +92,6 @@ export function PersonalCardSystem({setPersoncardEdit,col, infoCard } ){
           
 
         <div className="admindiv_2">
-        {/* <span className="" onClick={()=>{ setPersoncardEdit(); col('col6');  }}>Сформировать билет</span>  */}
           {uli}
          <div className="admindiv_2__edits" > <span onClick={()=>{ setPersoncardEdit(); col('col6');  }}>Редактировать личную карточку</span></div> 
         </div>

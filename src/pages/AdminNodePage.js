@@ -15,7 +15,7 @@ import Repeat from '../icons/repeat.png';
 import '../styles/AdminNodePage.css';
 import '../styles/Header.css';
 import '../styles/Table.css';
-import '../styles/PersonalCardEdit.css';
+import '../styles/PersonalCardSystem.css';
 import { fetchPOO, fetchPause, fetchNO, fetchSparvka, fetchOne, fetchBranch, fetchOptions } from "../components/fetchs.js";
 
 
