@@ -257,7 +257,7 @@
   }
   
   .Header__ruleUser{
-    font-size: 9px;
+    font-size: 10px;
     font-weight:300;
   }
 
@@ -280,17 +280,17 @@
   }
 
   .Header__nameUser{
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
   }
   
   .Header__ruleUser{
-    font-size: 9px;
+    font-size: 12px;
     font-weight:300;
   }
 
   .Header__exit{
-    font-size: 11px;
+    font-size: 13px;
     }
     .spravka {
       width: 14px;
@@ -356,16 +356,16 @@
   }
   
   .Header__ruleUser{
-    font-size: 14px;
+    font-size: 16px;
     font-weight:300;
   }
 
   .Header__exit{
-    font-size: 16px;
+    font-size: 17px;
     }
     .spravka {
-      width: 24px;
-      height: 24px;
+      width: 20px;
+      height: 20px;
     }
 }
 
@@ -414,5 +414,9 @@
     }
     .ICON{
       width: 6%;
+    }
+    .spravka {
+      width: 24px;
+      height: 24px;
     }
 }

@@ -251,7 +251,6 @@ export function AdminSystemPage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
-          fetchOptions({setOptions});
     }
     else if ( cols == 'col10') {
       setcol_0(false);

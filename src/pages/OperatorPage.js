@@ -323,7 +323,7 @@ const handleForm = () =>{
       </div>
 
       <div className={` ${(tablehideBranch ) ? 'OtchetBranchHide' : 'OtchetBranch'}`}>
-      <span style={{marginRight: '1%', marginTop: '3px', cursor:'pointer'}} onClick={()=> setFoundUsers(b)}><img src={Repeat} alt='☺' width='20px'/></span>
+      <span className="otchetbranch_img_repeat"  onClick={()=> setFoundUsers(b)}><img src={Repeat} alt='☺'/></span>
           <div className="adminnode__Button" onClick={()=> {handleForm()}}>
             <button >Сохранить</button>
           </div>
@@ -437,7 +437,7 @@ const handleForm = () =>{
         </tbody>
      </table>
 
-     { (col_2) ? <FindFilterEdit b={b} options={options} col={col}/> : null}
+     { (col_2) ? <FindFilterEdit b={b} options={options} col={col} infoCard={infoCard} setInfoCard={setInfoCard}/> : null}
      { (col_5) ? <Registration options={options}/> : null}
      { (col_6) ? <EditCard infoCard={infoCard} options={options} /> : null}
      </div>

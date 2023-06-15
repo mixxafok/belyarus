@@ -286,6 +286,25 @@
   .user_page .OtchetFilter{
     font-size: 8px;
   }
+  .admindiv_1__FIO{
+    font-size: 12px;
+  }
+  .admindiv_1__bilet{
+    font-size: 10px;
+  }
+  .admindiv_1__bilet span:hover{
+    font-size: 12px;
+  }
+  .admindiv_2__ul{
+    font-size: 10px;
+  }
+  .admindiv_2__edits{
+    font-size: 10px;
+  }
+  .admincancel{
+    padding-top: 1%;
+    margin-left: 5%;
+  }
   thead td:first-child{
     width: 7%;
   }
@@ -331,6 +350,31 @@
   }
   .user_page .OtchetFilter{
     font-size: 7px;
+  }
+  .admindiv_1{
+    margin: 1% -3% 3% 3%;
+  }
+  .admindiv_2{
+    margin: 1% 3% 3% -3%;
+  }
+  .admindiv_1__FIO{
+    font-size: 12px;
+  }
+  .admindiv_1__bilet{
+    font-size: 10px;
+  }
+  .admindiv_1__bilet span:hover{
+    font-size: 12px;
+  }
+  .admindiv_2__ul{
+    font-size: 10px;
+    margin-top: 8%;
+  }
+  .admindiv_2__edits{
+    font-size: 10px;
+  }
+  .admincancel{
+    margin-left: 6%;
   }
   thead td:first-child{
     width: 7%;

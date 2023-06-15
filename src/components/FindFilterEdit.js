@@ -2,11 +2,11 @@ import React, {useState} from "react";
 import '../styles/Table.css';
 import '../styles/Findfilter.css';
 import {PersonalCardEdit} from './PersonalCardEdit.js';
+import { fetchOne } from "./fetchs";
 
-export function FindFilterEdit({b,tablefindfilter, options, col}){
+export function FindFilterEdit({b,tablefindfilter, options, col, infoCard,setInfoCard}){
 
   const[personcardEdit, setPersoncardEdit] = useState(false);
-  const [infoCard,setInfoCard] = useState([])
   const [foundUsers, setFoundUsers] = useState([]);
   const [formInput, setFormInput] = useState({
     Surname: '', 
@@ -34,9 +34,10 @@ export function FindFilterEdit({b,tablefindfilter, options, col}){
       console.log(formInput)
      if( formInput.Surname !== '' || formInput.Name !== '' || formInput.Parent !== ''
       || formInput.NumBilet !== '' || formInput.StatusBilet !== '' || formInput.Sex !== ''
-      || formInput.DateBirth !== '' || formInput.DateIssue !== '' || formInput.PlaceIssue !== ''
-      || formInput.StatusMember !== '' || formInput.Education !== '' || formInput.SocialGroup !== ''
-      || formInput.SphereActivity !== '' || formInput.StatusPart !== '' || formInput.Deputat !== '' )  fetchPost();
+      || formInput.DateBirthTo !== '' || formInput.DateIssueTo !== '' || formInput.PlaceIssue !== ''
+      || formInput.DateBirthFrom !== '' || formInput.DateIssueFrom !== '' || formInput.StatusMember !== ''
+      || formInput.Education !== '' || formInput.SocialGroup !== ''|| formInput.SphereActivity !== ''
+      || formInput.StatusPart !== '' || formInput.Deputat !== '' )  fetchPost();
      else setFoundUsers(b);
       // if ( formInput.Name !== '' || formInput.Surname !== '' || formInput.Parent !== '' || formInput.NumBilet !== ''|| formInput.StatusBilet !== '') {
       //   const results = b.filter((result) => {
@@ -74,15 +75,6 @@ export function FindFilterEdit({b,tablefindfilter, options, col}){
   
     }
 
-// get одного пользователя
-    const fetchOne = async (itemid)=>{
-      const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/GetOne?id=${itemid}`, {
-        method: "get",
-      });
-      let q = await response.json();
-      await setInfoCard([q]);
-    };
-
 // post для поиска
     const fetchPost = async () => {
       try{
@@ -108,7 +100,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col}){
     foundUsers.map((user,index) => (
       <tr key={user.id}>
       <td> {index+1}</td>
-       <td className="table__surname"><p onClick={()=>{fetchOne(user.id); setPersoncardEdit(!personcardEdit);}} className="table_span__surname">{user.surname}</p></td>
+       <td className="table__surname"><p onClick={()=>{fetchOne(user.id, {setInfoCard}); setPersoncardEdit(!personcardEdit);}} className="table_span__surname">{user.surname}</p></td>
        <td>{user.name}</td>
        <td>{user.parent}</td>
        <td>{user.numBilet}</td>
@@ -240,7 +232,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col}){
         <div className="form_input_combobox">
         <label>Статус билета</label>
         <select  className="select" value={formInput.StatusBilet} onChange={(e) => setFormInput({ ...formInput, StatusBilet: e.target.value })}> 
-          <option disabled hidden></option>
+          <option  ></option>
           {crdSt.map((item)=>{ return <option value={item.id}>{item.val}</option>})} 
         </select>
         </div>
@@ -248,7 +240,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col}){
         <div className="form_input_combobox">
         <label>Пол</label>
         <select className="select" value={formInput.Sex} onChange={(e) => setFormInput({ ...formInput, Sex: e.target.value })}> 
-          <option disabled hidden></option>
+          <option  ></option>
           <option value={true}>Мужской</option>
           <option value={false}>Женский</option>
         </select>
@@ -297,7 +289,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col}){
         <div className="form_input_combobox">
         <label>Место вступления</label>
         <select className="select" value={formInput.PlaceIssue} onChange={(e) => setFormInput({ ...formInput, PlaceIssue: e.target.value })}>
-          <option disabled hidden></option> 
+          <option  ></option> 
           {entrPlcs.map((item)=>{ return <option value={item.id}>{item.val}</option>})} 
         </select>
         </div>
@@ -305,7 +297,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col}){
         <div className="form_input_combobox">
         <label>Статус членства</label>
         <select className="select" value={formInput.StatusMember} onChange={(e) => setFormInput({ ...formInput, StatusMember: e.target.value })}>
-          <option disabled hidden></option> 
+          <option  ></option> 
           {mbrSt.map((item)=>{ return <option value={item.id}>{item.val}</option>})} 
         </select>
         </div>
@@ -313,7 +305,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col}){
         <div className="form_input_combobox">
         <label>Место постановки на учет</label>
         <select className="select" value={formInput.PlaceYchet} onChange={(e) => setFormInput({ ...formInput, PlaceYchet: e.target.value })}>
-          <option disabled hidden></option> 
+          <option  ></option> 
           {regPlcs.map((item)=>{ return <option value={item.id}>{item.val}</option>})} 
         </select>
         </div>
@@ -329,7 +321,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col}){
         <div className="form_input_combobox">
         <label>Социальная категория</label>
         <select className="select" value={formInput.SocialGroup} onChange={(e) => setFormInput({ ...formInput, SocialGroup: e.target.value })}>
-          <option disabled hidden></option> 
+          <option  ></option> 
           {socs.map((item)=>{ return <option value={item.id}>{item.val}</option>})} 
         </select>
         </div>
@@ -337,7 +329,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col}){
         <div className="form_input_combobox">
         <label>Сфера деятельности</label>
         <select className="select" value={formInput.SphereActivity} onChange={(e) => setFormInput({ ...formInput, SphereActivity: e.target.value })}>
-          <option disabled hidden></option> 
+          <option  ></option> 
           {acts.map((item)=>{ return <option value={item.id}>{item.val}</option>})} 
         </select>
         </div>
@@ -345,7 +337,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col}){
         <div className="form_input_combobox">
         <label>Статус в партии</label>
         <select className="select" value={formInput.StatusPart} onChange={(e) => setFormInput({ ...formInput, StatusPart: e.target.value })}>
-          <option disabled hidden></option> 
+          <option  ></option> 
           {partPoss.map((item)=>{ return <option value={item.id}>{item.val}</option>})} 
         </select>
         </div>
@@ -353,7 +345,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col}){
         <div className="form_input_combobox">
         <label>Избирался ли депутатом</label>
         <select className="select" value={formInput.Deputat} onChange={(e) => setFormInput({ ...formInput, Deputat: e.target.value })}> 
-          <option disabled hidden></option>
+          <option  ></option>
           <option value={true}>Да</option>
           <option value={false}>Нет</option>
         </select>

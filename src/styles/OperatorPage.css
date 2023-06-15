@@ -201,15 +201,28 @@
   width: 47%;
   margin-right: 5%;
   justify-content: space-between;
+  
 }
 
+.oper_page .otchetbranch_input input{
+  height: 100%;
+  padding: 0.2rem 0.5rem;
+}
 .oper_page .otchetbranch_input select {
+  padding: 0.1rem 0.5rem;
   margin-left: 2%;
   width: 28%;
   height: 100%;
   border: 1px solid #bdbdbd;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.oper_page .otchetbranch_img_repeat{
+  margin-right: 1%;
+  margin-top: 3px;
+  cursor: pointer;
+  width: 20px;
 }
 
 /* .otchetbranch_input input[type=date] {
@@ -225,8 +238,10 @@
   border-radius: 8px;
   text-align: center;
   transition: 50ms;
+  margin: 0 auto;
   margin-right: 8%;
   height: 50%;
+ 
 }
 
 .adminnode__Button:active {

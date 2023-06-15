@@ -4,37 +4,6 @@ import Ava from '../img/ava.png';
 
 export function Registration ({options}){
 
-  const [formInput, setFormInput] = useState({
-   // Login: '',
-   // Password: '',
-   // RepeatPassword: '',
-   // Rule: '',
-   // Vznos: '',
-    Surname: '', 
-    Name: '',
-    Parent: '',
-    NumBilet: 0,
-   // DateStart: '',
-   // DateFinish: '',
-    dateIssue: '',
-    StatusBilet: '2',
-    StatusMember: '',
-    Sex: '',
-    DateBirth: '',
-    PlaceIssue:'',
-    Education: '',
-    SocialGroup: '',
-    SphereActivity: '',
-    PlaceJob: '',
-    PostJob: '',
-    StatusPart:'',
-    Deputat: '',
-    RegistrationAddress:'',
-    LivingAddress:'',
-    TelephoneNumber:'',
-    Place: '' 
-  })
-
   //обработка options
   const educ = [];
   const socs = [];
@@ -97,6 +66,39 @@ export function Registration ({options}){
   }
 //обработка options
 
+  const [formInput, setFormInput] = useState({
+   // Login: '',
+   // Password: '',
+   // RepeatPassword: '',
+   // Rule: '',
+   // Vznos: '',
+    Surname: '', 
+    Name: '',
+    Parent: '',
+    NumBilet: 0,
+   // DateStart: '',
+   // DateFinish: '',
+    dateIssue: '',
+    StatusBilet: '',
+    StatusMember: '',
+    Sex: '',
+    DateBirth: '',
+    PlaceIssue:'',
+    Education: '',
+    SocialGroup: '',
+    SphereActivity: '',
+    PlaceJob: '',
+    PostJob: '',
+    StatusPart:'',
+    Deputat: '',
+    RegistrationAddress:'',
+    LivingAddress:'',
+    TelephoneNumber:'',
+    Place: '' 
+  })
+
+
+
 
 const handleForm = () =>{
    console.log(formInput); 
@@ -120,7 +122,7 @@ const handleForm = () =>{
       // DateStart: '',
       // DateFinish: '',
        dateIssue: '',
-       StatusBilet: '2',
+       StatusBilet: '',
        StatusMember: '',
        Sex: '',
        DateBirth: '',
@@ -165,9 +167,8 @@ const fetchRegistration = async ()=>{
 
   }
   catch(err){
-    console.log(err)
-    alert('Ошибка с отправкой данных')
-  }
+    console.log(err) 
+   }
 };//запрос fetch POST
 
 
@@ -284,14 +285,15 @@ const fetchRegistration = async ()=>{
           <div className="reg__form_input_combobox__places">
             <label>Статус билета</label>
             <select value={formInput.StatusBilet} onChange={(e) => setFormInput({ ...formInput, StatusBilet: e.target.value })}> 
-              <option selected value={2}  >Не изготовлен</option>
+            <option disabled hidden></option>
+            {crdSt.filter((item,index) => {return index== 1}).map((item)=>{return <option value={item.id}>{item.val}</option> })}
             </select>
           </div>
           <div className="reg__form_input_combobox__placesYchet">
             <label>Статус членства</label>
             <select value={formInput.StatusMember} onChange={(e) => setFormInput({ ...formInput, StatusMember: e.target.value })}>
               <option disabled hidden></option> 
-              {mbrSt.map((item, index)=>{ return <option value={item.id}>{item.val}</option>})}
+              {mbrSt.map((item)=>{ return <option value={item.id}>{item.val}</option>})}
             </select>
           </div>
         </container>
@@ -301,11 +303,11 @@ const fetchRegistration = async ()=>{
             <label>Статус в партии</label>
             <select value={formInput.StatusPart} onChange={(e) => setFormInput({ ...formInput, StatusPart: e.target.value })}>
               <option disabled hidden></option> 
-              {partPoss.map((item, index)=>{ return <option value={item.id}>{item.val}</option>})}
+              {partPoss.map((item)=>{ return <option value={item.id}>{item.val}</option>})}
             </select>
           </div>
           <div className="reg__form_input_combobox__deputat">
-            <label>Избирался ли депутатом</label>
+            <label >Избирался депутатом</label>
             <select value={formInput.Deputat} onChange={(e) => setFormInput({ ...formInput, Deputat: e.target.value })}> 
               <option disabled hidden></option>
               <option value={'Да'}>Да</option>
@@ -313,7 +315,7 @@ const fetchRegistration = async ()=>{
             </select>
           </div>
           <div className="reg__form_input_date">
-            <label>Дата вступления</label>
+            <label >Дата вступления</label>
             <input 
               value={formInput.dateIssue}
               onChange={(e) => setFormInput({ ...formInput, dateIssue: e.target.value })} 
@@ -327,14 +329,14 @@ const fetchRegistration = async ()=>{
           <label>Место вступления</label>
             <select value={formInput.PlaceIssue} onChange={(e) => setFormInput({ ...formInput, PlaceIssue: e.target.value })}>
               <option disabled hidden></option> 
-              {entrPlcs.map((item, index)=>{ return <option value={item.id}>{item.val}</option>})}
+              {entrPlcs.map((item)=>{ return <option value={item.id}>{item.val}</option>})}
             </select>
           </div>
           <div className="reg__form_input_combobox__placesYchet" id='mozilla_placesYchet'>
             <label>Место постановки на учет</label>
             <select  value={formInput.Place} onChange={(e) => setFormInput({ ...formInput, Place: e.target.value })}>
               <option disabled hidden></option> 
-              {regPlcs.map((item, index)=>{ return <option value={item.id}>{item.val}</option>})}
+              {regPlcs.map((item)=>{ return <option value={item.id}>{item.val}</option>})}
             </select>
           </div>
         </container>

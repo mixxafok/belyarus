@@ -295,7 +295,7 @@ export function FindFilter({b,tablefindfilter, options}){
         <div className="form_input_combobox">
         <label>Место вступления</label>
         <select className="select" value={formInput.PlaceIssue} onChange={(e) => setFormInput({ ...formInput, PlaceIssue: e.target.value })}>
-          <option disabled hidden></option> 
+          <option  ></option> 
           {entrPlcs.map((item)=>{ return <option value={item.id}>{item.val}</option>})} 
         </select>
         </div>
@@ -303,7 +303,7 @@ export function FindFilter({b,tablefindfilter, options}){
         <div className="form_input_combobox">
         <label>Статус членства</label>
         <select className="select" value={formInput.StatusMember} onChange={(e) => setFormInput({ ...formInput, StatusMember: e.target.value })}>
-          <option disabled hidden></option> 
+          <option  ></option> 
           {mbrSt.map((item)=>{ return <option value={item.id}>{item.val}</option>})} 
         </select>
         </div>
@@ -311,7 +311,7 @@ export function FindFilter({b,tablefindfilter, options}){
         <div className="form_input_combobox">
         <label>Место постановки на учет</label>
         <select className="select" value={formInput.PlaceYchet} onChange={(e) => setFormInput({ ...formInput, PlaceYchet: e.target.value })}>
-          <option disabled hidden></option> 
+          <option  ></option> 
           {regPlcs.map((item)=>{ return <option value={item.id}>{item.val}</option>})} 
         </select>
         </div>
@@ -319,7 +319,7 @@ export function FindFilter({b,tablefindfilter, options}){
         <div className="form_input_combobox">
         <label>Образование</label>
         <select className="select" value={formInput.Education} onChange={(e) => setFormInput({ ...formInput, Education: e.target.value })}>
-          <option disabled hidden></option> 
+          <option  ></option> 
           {educ.map((item)=>{ return <option value={item.id}>{item.val}</option>})} 
         </select>
         </div>
@@ -327,7 +327,7 @@ export function FindFilter({b,tablefindfilter, options}){
         <div className="form_input_combobox">
         <label>Социальная категория</label>
         <select className="select" value={formInput.SocialGroup} onChange={(e) => setFormInput({ ...formInput, SocialGroup: e.target.value })}>
-          <option disabled hidden></option> 
+          <option  ></option> 
           {socs.map((item)=>{ return <option value={item.id}>{item.val}</option>})} 
         </select>
         </div>
@@ -335,7 +335,7 @@ export function FindFilter({b,tablefindfilter, options}){
         <div className="form_input_combobox">
         <label>Сфера деятельности</label>
         <select className="select" value={formInput.SphereActivity} onChange={(e) => setFormInput({ ...formInput, SphereActivity: e.target.value })}>
-          <option disabled hidden></option> 
+          <option  ></option> 
           {acts.map((item)=>{ return <option value={item.id}>{item.val}</option>})} 
         </select>
         </div>
@@ -343,7 +343,7 @@ export function FindFilter({b,tablefindfilter, options}){
         <div className="form_input_combobox">
         <label>Статус в партии</label>
         <select className="select" value={formInput.StatusPart} onChange={(e) => setFormInput({ ...formInput, StatusPart: e.target.value })}>
-          <option disabled hidden></option> 
+          <option  ></option> 
           {partPoss.map((item)=>{ return <option value={item.id}>{item.val}</option>})} 
         </select>
         </div>
@@ -351,7 +351,7 @@ export function FindFilter({b,tablefindfilter, options}){
         <div className="form_input_combobox">
         <label>Избирался ли депутатом</label>
         <select className="select" value={formInput.Deputat} onChange={(e) => setFormInput({ ...formInput, Deputat: e.target.value })}> 
-          <option disabled hidden></option>
+          <option  ></option>
           <option value={true}>Да</option>
           <option value={false}>Нет</option>
         </select>

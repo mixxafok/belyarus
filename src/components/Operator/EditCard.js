@@ -5,13 +5,13 @@ import Ava from '../../img/ava.png';
 export function EditCard ({infoCard, options}){
 
   let data =new Date( infoCard[0].dateStart) //перевод даты из дд.мм.гггг 
-  let dateStart = `${data.getFullYear()}-${('0' + data.getMonth()).slice(-2)}-${('0' + data.getDate()).slice(-2)}`//в гггг-мм-дд для input[date]
+  let date_Start = `${data.getFullYear()}-${('0' + data.getMonth()).slice(-2)}-${('0' + data.getDate()).slice(-2)}`//в гггг-мм-дд для input[date]
 
   let data1 =new Date( infoCard[0].dateBirth) //перевод даты из дд.мм.гггг 
-  let dateBirth= `${data1.getFullYear()}-${('0' + data1.getMonth()).slice(-2)}-${('0' + data1.getDate()).slice(-2)}`//в гггг-мм-дд для input[date]
+  let date_Birth= `${data1.getFullYear()}-${('0' + data1.getMonth()).slice(-2)}-${('0' + data1.getDate()).slice(-2)}`//в гггг-мм-дд для input[date]
   
   let data2 =new Date( infoCard[0].dateIssue) //перевод даты из дд.мм.гггг 
-  let dateIssue= `${data2.getFullYear()}-${('0' + data2.getMonth()).slice(-2)}-${('0' + data2.getDate()).slice(-2)}`//в гггг-мм-дд для input[date]
+  let date_Issue= `${data2.getFullYear()}-${('0' + data2.getMonth()).slice(-2)}-${('0' + data2.getDate()).slice(-2)}`//в гггг-мм-дд для input[date]
 
     const [formInput, setFormInput] = useState({
       Id:infoCard[0].id,
@@ -20,17 +20,17 @@ export function EditCard ({infoCard, options}){
       // Rule: '',
       VznosMonth: '',
       VznosYear: '',
-      Surname: infoCard[0].name, 
-      Name: infoCard[0].surname,
+      Surname: infoCard[0].surname, 
+      Name: infoCard[0].name,
       Parent: infoCard[0].parent,
       NumBilet: infoCard[0].numBilet,
-      DateStart: `${dateStart}`,
+      DateStart: `${date_Start}`,
      // DateFinish: ``,
-      DateIssue: `${dateIssue}`,
+      DateIssue: `${date_Issue}`,
       StatusBilet: infoCard[0].statusBiletId,
       StatusMember: infoCard[0].statusMemberId,
       Sex: infoCard[0].sex,
-      DateBirth: `${dateBirth}`,
+      DateBirth: `${date_Birth}`,
       StatusPart: `${infoCard[0].partStatus}`,
       Deputat: infoCard[0].deputat,
       PlaceYchet: `${infoCard[0].uchetId}`,
@@ -59,7 +59,7 @@ const handleForm = () =>{
 
 const fetchEditCard = async (itemid)=>{
   try{
-    const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/ChangeUsr?id=${itemid}`, {
+    const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/changeUser?id=${itemid}`, {
       method: 'post',
       headers: {
         'Accept': 'application/json',
