@@ -13,12 +13,8 @@ export  function BranchsSystemLog({formInput, setFormInput}) {
   const [yzels, setYzels] = useState([])
   const [raionYzels, setRaionYzels] = useState([])
   const [otdelYzels, setOtdelYzels] = useState([])
-  const [InputYzel, setInputYzel] = useState({
-    parentId: 0,
-    title: ''
-  })
+
   const [LabelYzel, setLabelYzel] = useState('')
-  const [openEditYzel, setOpenEditYzel] = useState(false)
 
   const [LabelYzelOblast,setLabelYzelOblast] = useState('') 
   const [LabelYzelRaion,setLabelYzelRaion] = useState('')
@@ -30,13 +26,13 @@ export  function BranchsSystemLog({formInput, setFormInput}) {
       setOpenOblast(false)
       setOpenRaion(false)
       setLabelYzel('')
-      setFormInput({...formInput, Yzel: ''});
+      setFormInput({...formInput, Yzel: '', nodeId: 0});
     }
     if(open == 'respublic'){
       setOpenRespublic(!openRespublic)
       setOpenOblast(false)
       setOpenRaion(false)
-      fetchYzel(1,false)
+      fetchYzel(3002,false)
       setLabelYzelOblast('')
     }
     if(open == 'oblasti'){
@@ -57,7 +53,7 @@ export  function BranchsSystemLog({formInput, setFormInput}) {
   const oblast = yzels.map((item) => { {
     return <li key={item.id} className={ LabelYzel == item.title ? 'selectedRaion' : 'selectedRaionNull'}>
            <span onClick={()=>{openCloseYzel('oblasti'); fetchRaionYzel(item.id, item.isEndNode);
-            setFormInput({...formInput, Yzel: item.title}); setLabelYzelOblast(' - ' + item.title)}}>
+            setFormInput({...formInput, nodeId: item.id, Yzel: item.title}); setLabelYzelOblast(' - ' + item.title)}}>
             {item.title}
             </span> 
 
@@ -68,7 +64,7 @@ export  function BranchsSystemLog({formInput, setFormInput}) {
   const raion = raionYzels.map((item) => { {
     return <li key={item.id} className={ LabelYzel == item.title ? 'selectedRaion' : 'selectedRaionNull'}>
            <span onClick={()=> {openCloseYzel('raion'); fetchOtdelYzel(item.id, item.isEndNode);
-            setFormInput({...formInput, Yzel: item.title}); setLabelYzelRaion(' - ' + item.title) }}>
+            setFormInput({...formInput, nodeId: item.id, Yzel: item.title}); setLabelYzelRaion(' - ' + item.title) }}>
             {item.title}
             </span> 
 
@@ -77,7 +73,7 @@ export  function BranchsSystemLog({formInput, setFormInput}) {
   })
   const otdel = otdelYzels.map((item) => { {
     return <li key={item.id} className={ LabelYzel == item.title ? 'selectedRaion' : 'selectedRaionNull'}>
-           <span onClick={()=> {setFormInput({...formInput, Yzel: item.title}); }}>
+           <span onClick={()=> {setFormInput({...formInput, nodeId: item.id, Yzel: item.title}); }}>
             {item.title}
             </span> 
 
@@ -151,42 +147,6 @@ export  function BranchsSystemLog({formInput, setFormInput}) {
    }
   }
 
-  const RemoveYzel = (titleYzel, isEndNodeYzel) =>{
-    if(isEndNodeYzel){
-      if( window.confirm('Вы точно хотите удалить этот узел?')){
-       setYzels(yzels.filter(tem => tem.title != titleYzel));
-       }
-    } 
-    else{alert('Узел не пустой')}
-  }
-
-  const fetchAddYzel = async ()=>{
-      try{
-      await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/addNode/`, {
-      method: 'post',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json;charset=utf-8',  
-      },
-      body: JSON.stringify(InputYzel)
-     }); 
-     
-     fetchYzel(InputYzel.parentId)
-    }
-    catch(err){
-      console.log(err)
-     alert('Ошибка: организация не добавлена')
-    }
-  }
-
-  const handleForm = ()=>{
-    fetchAddYzel();
-    setInputYzel({...InputYzel, title: ''})
-    console.log(InputYzel)
-  } 
-
-
-
   return (
     <div>
       <div className='branchs'>
@@ -200,7 +160,7 @@ export  function BranchsSystemLog({formInput, setFormInput}) {
                 <img src={Arrow} alt='←' width='14px' style={{display: 'inline', marginRight: '1%'}}/>
               </span>
               :
-              <span onClick={()=>{ openCloseYzel('respublic'); setFormInput({...formInput, Yzel: 'Республика Беларусь'}); }}>
+              <span onClick={()=>{ openCloseYzel('respublic'); setFormInput({...formInput, nodeId: 3002, Yzel: 'Республика Беларусь'}); }}>
                 <img src={Plus} alt='+' width='14px' style={{display: 'inline', marginRight: '1%'}}/>
               </span>
             }

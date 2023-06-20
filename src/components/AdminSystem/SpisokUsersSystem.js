@@ -72,7 +72,7 @@ export  function SpisokUsersSystem({col}) {
               <td>Фамилия</td>
               <td>Имя</td>
               <td>Отчество</td>
-              <td>Подконтрольный узел</td>
+              <td >Подконтрольный узел</td>
               <td>Последняя дата входа</td>
            </tr>
         </thead>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { FindFilterEdit } from "../components/FindFilterEdit.js";
 import {PersonalCardEdit} from '../components/PersonalCardEdit.js';
@@ -40,7 +40,18 @@ export function OperatorPage(){
     VznosYear:''
   })
   const[foundUsers, setFoundUsers] = useState(b)
-  console.log(inputDate)
+  const [a,seta] = useState(JSON.parse(localStorage.getItem("LoginPassword")) )
+
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("LoginPassword");
+    console.log(loggedInUser)
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      seta(foundUser);
+      console.log(foundUser)
+    }
+    
+  }, []);
   //нажатие на меню
   function col (cols){
     if (cols == 'col1') {
@@ -156,8 +167,10 @@ export function OperatorPage(){
 
    const navigateTo = useNavigate();
    function Exit(){
-     if (window.confirm('Вы точно хотите выйти?'))
-       navigateTo('/');
+    if (window.confirm('Вы точно хотите выйти?')){
+      navigateTo('/');
+      localStorage.clear()
+     }
    };
  
 //fetch
@@ -277,8 +290,8 @@ const handleForm = () =>{
       </div>
 
       <div className="Header__nav">
-        <p className="Header__nameUser">Карпатов Николай Александрович</p> 
-        <p className="Header__ruleUser" >Оператор &nbsp;<span onClick={()=>fetchSparvka()}><img className="spravka" src={question} alt="?" width="13px"  /></span> </p>
+        <p className="Header__nameUser">{a.surname + ' ' + a.name + ' ' + a.parent }</p> 
+        <p className="Header__ruleUser" >{a.role} &nbsp;<span onClick={()=>fetchSparvka()}><img className="spravka" src={question} alt="?" width="13px"  /></span> </p>
         <p className="Header__exit" onClick={()=> Exit()}>Выход  </p>
       </div>
   

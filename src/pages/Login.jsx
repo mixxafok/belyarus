@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "../styles/Login.css";
-import {fio} from '../components/FIO.js';
 
 
-export  function Login() {
+export  function Login({LoginPassword,setLoginPassword}) {
   
   const navigateTo = useNavigate();
 
@@ -12,30 +11,62 @@ export  function Login() {
     login: "",
     password: ""
   })
-
-  const handleForm = () =>{
-    console.log(formInput);
-    setFormInput({
-      login: '',
-      password: ''
-    })
-
-  
-    if (formInput.login === "adminsystem" && formInput.password === "adminsystem") {
-      navigateTo('/AdminSystemPage')
-    }
-    else if (formInput.login === "adminnode" && formInput.password === "adminnode") {
-      navigateTo('/AdminNodePage')
-    }
-    else if (formInput.login === "oper" && formInput.password === "oper") {
-      navigateTo('/OperatorPage')
-    }
-    else if (formInput.login === fio[0].name && formInput.password === fio[0].surname) {
-      navigateTo('/UserPage')
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("LoginPassword");
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setLoginPassword(foundUser);
+      if (foundUser.role === "Администратор системы" ) {
+        navigateTo('/AdminSystemPage')
       }
-    else alert('Неверный логин или пароль')
-  }
+      console.log(foundUser)
+    }
+    
+  }, []);
 
+  const fetchLoginPassword = async () => {
+
+    try{
+      const responce = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/Login/', {
+        method: 'post',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json;charset=utf-8',  
+        },
+        body: JSON.stringify(formInput)
+      })
+         let q = await responce.json();
+      //  await setLoginPassword([q]);
+        // console.log(b)
+        setLoginPassword(q)
+        // store the user in localStorage
+        localStorage.setItem('LoginPassword', JSON.stringify(q) )
+       // console.log(q)
+       
+        if (q.role === "Администратор системы" ) {
+          navigateTo('/AdminSystemPage')
+        }
+        else if (q.role === "Администратор узла") {
+          navigateTo('/AdminNodePage')
+        }
+        else if (q.role === "Оператор") {
+          navigateTo('/OperatorPage')
+        }
+        else if (q.role === "Информационный пользователь") {
+          navigateTo('/UserPage')
+          }
+        else {
+          setFormInput({
+            login: '',
+            password: ''
+          })
+          alert('Неверный логин или пароль')
+        }
+    }
+    catch(err){
+      console.log(err);
+    }
+  };
 
     return (
       <div className="   relative flex flex-col flex-grow justify-center min-h-screen overflow-hidden">
@@ -43,7 +74,7 @@ export  function Login() {
           <h1 className="text-2xl font-semibold text-center text-grey-700   ">
             Белорусская партия «Белая Русь»
           </h1>
-          <form >
+          
               <div className="mb-2">
                   <label
                       for = 'login'
@@ -73,11 +104,11 @@ export  function Login() {
                   />
               </div>
               <div className="mt-6">
-                  <button onClick={() => { handleForm() }} className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
+                  <button onClick={() => {fetchLoginPassword(); }} className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
                       Войти
                   </button>
               </div>
-          </form>
+          
           
       </div>
   </div>

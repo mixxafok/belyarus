@@ -5,8 +5,9 @@ import Close from '../../icons/close.png'
 import Edit from '../../icons/edit-text.png'
 import Arrow from '../../icons/arrow.png'
 import Plus from '../../icons/more.png'
+import Save from '../../icons/save.png'
 
-export  function BranchsSystem() {
+export  function BranchsSystem({respublic}) {
   const [openRaion, setOpenRaion] = useState(false)
   const [openOblast, setOpenOblast] = useState(false)
   const [openRespublic,setOpenRespublic] = useState(false)
@@ -15,6 +16,10 @@ export  function BranchsSystem() {
   const [otdelYzels, setOtdelYzels] = useState([])
   const [InputYzel, setInputYzel] = useState({
     parentId: 0,
+    nazva: ''
+  })
+  const [InputEditYzel, setInputEditYzel] = useState({
+    id: 0,
     title: ''
   })
   const [LabelYzel, setLabelYzel] = useState('')
@@ -25,20 +30,21 @@ export  function BranchsSystem() {
 
   const [LabelYzelOblast,setLabelYzelOblast] = useState('') 
   const [LabelYzelRaion,setLabelYzelRaion] = useState('')
-
+  //console.log(respublic[0].id)
 
   function openCloseYzel (open) {
     if(open == 'world'){
       setOpenRespublic(false)
       setOpenOblast(false)
       setOpenRaion(false)
+
       setLabelYzel('')
     }
     if(open == 'respublic'){
       setOpenRespublic(!openRespublic)
       setOpenOblast(false)
       setOpenRaion(false)
-      fetchYzel(1,false)
+      fetchYzel(respublic.id, false)
       setLabelYzelOblast('')
     }
     if(open == 'oblasti'){
@@ -65,8 +71,12 @@ export  function BranchsSystem() {
             <span key={item.id} onClick={()=>{setOpenEditYzel({... openEditYzel, id: item.id, isOpen: !openEditYzel.isOpen});}} >
               <img src={Edit} alt='☺' width='11px' style={{display: 'inline', marginLeft: '2%'}}/>
             </span> 
-            {(openEditYzel.isOpen && item.id == openEditYzel.id) ? ( <input className='input_openIditYzel' type='text' placeholder={item.title} onChange={e=>item.title = e.target.value}/> ) : null}
-            <span onClick={()=>{RemoveYzel(item.title, item.isEndNode )}}> 
+            {(openEditYzel.isOpen && item.id == openEditYzel.id) ? (<span  >
+             <span key={item.id} onClick={()=>{fetchEditYzel()}}><img src={Save} alt='☺' width='12px' style={{display: 'inline', marginLeft: '2%'}}/></span> 
+              <input className='input_openIditYzel' type='text' placeholder={item.title}
+             onChange={e=>setInputEditYzel ({...InputEditYzel, id: item.id, title: e.target.value})}/>
+            </span>    ) : null}
+            <span onClick={()=>{RemoveYzel(item.title, item.isEndNode, item.id )}}> 
               <img src={Close} alt='X' width='9px' style={{display: 'inline', marginLeft: '2%'}}/>
             </span>
           </li>
@@ -82,8 +92,12 @@ export  function BranchsSystem() {
             <span key={item.id} onClick={()=>{setOpenEditYzel({... openEditYzel, id: item.id, isOpen: !openEditYzel.isOpen})}} >
               <img src={Edit} alt='☺' width='11px' style={{display: 'inline', marginLeft: '2%'}}/>
             </span> 
-            {(openEditYzel.isOpen && item.id == openEditYzel.id) ? ( <input className='input_openIditYzel' type='text' placeholder={item.title} onChange={e=>item.title = e.target.value}/> ) : null}
-            <span onClick={()=>{RemoveYzel(item.title, item.isEndNode )}}> 
+            {(openEditYzel.isOpen && item.id == openEditYzel.id) ? (<span  >
+             <span key={item.id} onClick={()=>{fetchEditYzel()}}><img src={Save} alt='☺' width='12px' style={{display: 'inline', marginLeft: '2%'}}/></span> 
+              <input className='input_openIditYzel' type='text' placeholder={item.title}
+             onChange={e=>setInputEditYzel ({...InputEditYzel, id: item.id, title: e.target.value})}/>
+            </span>    ) : null}
+            <span onClick={()=>{RemoveYzel(item.title, item.isEndNode, item.id )}}> 
               <img src={Close} alt='X' width='9px' style={{display: 'inline', marginLeft: '2%'}}/>
             </span>
           </li>
@@ -97,8 +111,12 @@ export  function BranchsSystem() {
             <span key={item.id} onClick={()=>{setOpenEditYzel({... openEditYzel, id: item.id, isOpen: !openEditYzel.isOpen})}} >
               <img src={Edit} alt='☺' width='11px' style={{display: 'inline', marginLeft: '2%'}}/>
             </span> 
-            {(openEditYzel.isOpen && item.id == openEditYzel.id) ? ( <input className='input_openIditYzel' type='text' placeholder={item.title} onChange={e=>item.title = e.target.value}/> ) : null}
-            <span onClick={()=>{RemoveYzel(item.title, item.isEndNode )}}> 
+            {(openEditYzel.isOpen && item.id == openEditYzel.id) ? (<span  >
+             <span key={item.id} onClick={()=>{fetchEditYzel()}}><img src={Save} alt='☺' width='12px' style={{display: 'inline', marginLeft: '2%'}}/></span> 
+              <input className='input_openIditYzel' type='text' placeholder={item.title}
+             onChange={e=>setInputEditYzel ({...InputEditYzel, id: item.id, title: e.target.value})}/>
+            </span>    ) : null}
+            <span onClick={()=>{RemoveYzel(item.title, item.isEndNode, item.id )}}> 
               <img src={Close} alt='X' width='9px' style={{display: 'inline', marginLeft: '2%'}}/>
             </span>
           </li>
@@ -171,18 +189,34 @@ export  function BranchsSystem() {
    }
   }
 
-  const RemoveYzel = (titleYzel, isEndNodeYzel) =>{
+  const RemoveYzel = async(titleYzel, isEndNodeYzel, itemid) =>{
     if(isEndNodeYzel){
       if( window.confirm('Вы точно хотите удалить этот узел?')){
-       setYzels(yzels.filter(tem => tem.title != titleYzel));
+      // setYzels(yzels.filter(tem => tem.title != titleYzel));
+       try{
+        await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/DeleteNode?id=${itemid}`, {
+        method: 'post',
+        headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json;charset=utf-8',  
+          },
+        }); 
+        if(openRespublic)fetchYzel(InputYzel.parentId)
+        if(openOblast) fetchRaionYzel(InputYzel.parentId)
+        if(openRaion) fetchOtdelYzel(InputYzel.parentId)
        }
+       catch(err){
+        console.log(err)
+       }
+       
+      }
     } 
     else{alert('Узел не пустой')}
   }
 
   const fetchAddYzel = async ()=>{
       try{
-      await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/addNode/`, {
+      await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/addEndNode/`, {
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -190,23 +224,40 @@ export  function BranchsSystem() {
       },
       body: JSON.stringify(InputYzel)
      }); 
-     if(openRespublic)fetchYzel(InputYzel.parentId)
+     if(openRespublic) fetchYzel(InputYzel.parentId)
      if(openOblast) fetchRaionYzel(InputYzel.parentId)
      if(openRaion) fetchOtdelYzel(InputYzel.parentId)
+     setInputYzel({...InputYzel, nazva: ''})
+     console.log(InputYzel)
     }
     catch(err){
       console.log(err)
      alert('Ошибка: организация не добавлена')
     }
   }
-
-  const handleForm = ()=>{
-    fetchAddYzel();
-    setInputYzel({...InputYzel, title: ''})
-    console.log(InputYzel)
-  } 
-
-
+  
+  const fetchEditYzel = async ()=>{
+    try{
+    await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/ChangeNode/`, {
+    method: 'post',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json;charset=utf-8',  
+    },
+    body: JSON.stringify(InputEditYzel)
+   }); 
+   if(openRespublic) fetchYzel(InputYzel.parentId)
+   if(openOblast) fetchRaionYzel(InputYzel.parentId)
+   if(openRaion) fetchOtdelYzel(InputYzel.parentId)
+  // setInputYzel({...InputEditYzel, title: ''})
+   console.log(InputEditYzel)
+  }
+  catch(err){
+    console.log(err)
+   alert('Ошибка: организация не добавлена')
+  }
+}
+  
 
   return (
     <div>
@@ -221,7 +272,7 @@ export  function BranchsSystem() {
                 <img src={Arrow} alt='←' width='14px' style={{display: 'inline', marginRight: '1%'}}/>
               </span>
               :
-              <span onClick={()=>{ openCloseYzel('respublic'); setLabelYzel('Республика Беларусь');setInputYzel({...InputYzel, parentId: 1}) }}>
+              <span onClick={()=>{ openCloseYzel('respublic'); setLabelYzel('Республика Беларусь');setInputYzel({...InputYzel, parentId: 3002}) }}>
                 <img src={Plus} alt='+' width='14px' style={{display: 'inline', marginRight: '1%'}}/>
               </span>
             }
@@ -241,10 +292,10 @@ export  function BranchsSystem() {
           <label >Добавить узел в &lt;&lt; <span style={{color: 'brown'}}>{LabelYzel}</span>  &gt;&gt; </label>
           <input className='input_addYzel'
             type='search'
-            value={InputYzel.title}
-            onChange={e=>setInputYzel({...InputYzel, title: e.target.value})}
+            value={InputYzel.nazva}
+            onChange={e=>setInputYzel({...InputYzel, nazva: e.target.value})}
           />
-           <button className='BranchsAdd_button' onClick={()=>{handleForm() }}>Добавить</button>
+           <button className='BranchsAdd_button' onClick={()=>{fetchAddYzel() }}>Добавить</button>
         </div>
     </div>
   )

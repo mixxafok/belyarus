@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { FindFilterEdit } from "../components/FindFilterEdit.js";
 import {PersonalCardSystem} from '../components/AdminSystem/PersonalCardSystem.js';
@@ -20,6 +20,7 @@ import { fetchPOO, fetchPause, fetchNO, fetchSparvka, fetchBranch, fetchOne, fet
 
 
 export function AdminSystemPage(){
+
   const [infoCard,setInfoCard] = useState([]) // для персональной карточки
   const [col_1, setcol_1] = useState(false)
   const [col_2, setcol_2] = useState(false)
@@ -48,6 +49,21 @@ export function AdminSystemPage(){
     VznosYear:''
   })
   const[foundUsers, setFoundUsers] = useState(b)
+  const [respublic, setRuspublic] = useState([])
+  const [a,seta] = useState(JSON.parse(localStorage.getItem("LoginPassword")) )
+
+  // useEffect(() => {
+  //   const loggedInUser = localStorage.getItem("LoginPassword");
+  //   console.log(loggedInUser)
+  //   if (loggedInUser) {
+  //     const foundUser = JSON.parse(loggedInUser);
+  //     seta(foundUser);
+  //     console.log(foundUser)
+  //   }
+    
+  // }, []);
+  
+  
   //нажатие на меню
   function col (cols){
     if (cols == 'col0') {
@@ -111,7 +127,7 @@ export function AdminSystemPage(){
           setTableHideBranch(true);
           fetchPOO({setb});
           fetchOptions({setOptions});
-          // подгрузка таблицы РОО
+          
     }
     else if (cols == 'col3'){
       
@@ -231,7 +247,7 @@ export function AdminSystemPage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
-          fetchBranch({setb});
+          fetchYzelRespublic ();
     }
     else if ( cols == 'col9') {
       setcol_0(false);
@@ -294,8 +310,10 @@ export function AdminSystemPage(){
 
    const navigateTo = useNavigate();
    function Exit(){
-     if (window.confirm('Вы точно хотите выйти?'))
-       navigateTo('/');
+    if (window.confirm('Вы точно хотите выйти?')){
+      navigateTo('/');
+      localStorage.clear()
+     }
    };
  
 
@@ -350,6 +368,23 @@ export function AdminSystemPage(){
       method: 'get'
     });
    }
+
+   const fetchYzelRespublic = async ()=>{
+    
+      try{
+     const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/getFirstNode/`, {
+       method: "get",
+      "content-type" : "application/json; charset=utf-8"
+     });
+     let q = await response.json();
+     await setRuspublic(q);
+     // console.log(q[0].isEndNode)
+    }
+    catch(err){
+      console.log(err)
+      
+    }
+  }
 //fetch
 
 
@@ -428,8 +463,8 @@ const handleForm = () =>{
        <p className="Header__text_2">Белорусская партия «Белая Русь»</p> 
       </div>
       <div className="Header__nav">
-        <p className="Header__nameUser">Котикова Алиса Геннадьевна</p> 
-        <p className="Header__ruleUser" >Администратор системы &nbsp; <span onClick={()=>fetchSparvka()}><img className="spravka" src={question} alt="?" width="13px" /></span> </p>
+        <p className="Header__nameUser">{a.surname + ' ' + a.name + ' ' + a.parent }</p> 
+        <p className="Header__ruleUser" >{a.role} &nbsp; <span onClick={()=>fetchSparvka()}><img className="spravka" src={question} alt="?" width="13px" /></span> </p>
         <p className="Header__exit" onClick={()=> Exit()}>Выход  </p>
       </div>
     </header>
@@ -595,7 +630,7 @@ const handleForm = () =>{
      { (col_5) ? <Registration options={options}/> : null}
      {/* { (col_6) ? <EditCard infoCard={infoCard} options={options} /> : null} */}
      { (col_6) ? <EditCardSystem infoCard={infoCard} options={options} /> : null}
-     { (col_8) ? <BranchsSystem options={options} /> : null}
+     { (col_8) ? <BranchsSystem options={options} respublic={respublic}/> : null}
      { (col_9) ? <SpisokUsersSystem col={col}/> : null}
      { (col_10) ? <LogPassUserSystem /> : null}
      { (col_11) ? <LogPassUserSystemEdit /> : null}

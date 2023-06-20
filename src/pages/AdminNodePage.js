@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { FindFilterEdit } from "../components/FindFilterEdit.js";
 import {PersonalCardEdit} from '../components/PersonalCardEdit';
@@ -48,6 +48,18 @@ export function AdminNodePage(){
     VznosYear:''
   })
   const[foundUsers, setFoundUsers] = useState(b)
+  const [a,seta] = useState(JSON.parse(localStorage.getItem("LoginPassword")) )
+
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("LoginPassword");
+    console.log(loggedInUser)
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      seta(foundUser);
+      console.log(foundUser)
+    }
+    
+  }, []);
   //нажатие на меню
   function col (cols){
     if (cols == 'col0') {
@@ -293,8 +305,10 @@ export function AdminNodePage(){
 
    const navigateTo = useNavigate();
    function Exit(){
-     if (window.confirm('Вы точно хотите выйти?'))
-       navigateTo('/');
+    if (window.confirm('Вы точно хотите выйти?')){
+      navigateTo('/');
+      localStorage.clear()
+     }
    };
  
 
@@ -424,8 +438,8 @@ const handleForm = () =>{
        <p className="Header__text_2">Белорусская партия «Белая Русь»</p> 
       </div>
       <div className="Header__nav">
-        <p className="Header__nameUser">Котиков Алексей Геннадьевич</p> 
-        <p className="Header__ruleUser" >Администратор узла &nbsp;<span onClick={()=>fetchSparvka()}><img className="spravka" src={question} alt="?" width="13px" /></span></p>
+        <p className="Header__nameUser">{a.surname + ' ' + a.name + ' ' + a.parent }</p> 
+        <p className="Header__ruleUser" >{a.role} &nbsp;<span onClick={()=>fetchSparvka()}><img className="spravka" src={question} alt="?" width="13px" /></span></p>
         <p className="Header__exit" onClick={()=> Exit()}>Выход  </p>
       </div>
     </header>

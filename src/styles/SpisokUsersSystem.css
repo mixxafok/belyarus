@@ -31,6 +31,15 @@
 
 .SpisokUsersSystem td:first-child {
   width: 5%;
+  
+}
+
+.SpisokUsersSystem td:nth-child(5) {
+  width: 40%;
+}
+
+.SpisokUsersSystem tbody td{
+  font-size: 14px;
 }
 
 .SpisokUsersSystem thead td{
