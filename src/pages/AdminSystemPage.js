@@ -7,21 +7,25 @@ import question from '../icons/question.png';
 import {Registration} from '../components/Registration.js';
 import {EditCardSystem} from '../components/AdminSystem/EditCardSystem.js';
 import { BranchsSystem } from "../components/AdminSystem/BranchsSystem.js";
+import { BranchsSystemVznos } from "../components/AdminSystem/BranchsSystemVznos.js";
 import { SpisokUsersSystem } from "../components/AdminSystem/SpisokUsersSystem.js";
 import Up from '../icons/up.png';
 import Repeat from '../icons/repeat.png';
+import Search from '../icons/search.png';
 import { LogPassUserSystem } from "../components/AdminSystem/LogPassUserSystem.js";
 import { LogPassUserSystemEdit } from "../components/AdminSystem/LogPassUserSystemEdit.js";
 import '../styles/AdminSystemPage.css';
 import '../styles/Header.css';
 import '../styles/Table.css';
 import '../styles/PersonalCardSystem.css';
-import { fetchPOO, fetchPause, fetchNO, fetchSparvka, fetchBranch, fetchOne, fetchOptions } from "../components/fetchs.js";
+import '../styles/mediaAdminSystem.css';
+import { fetchPOO, fetchPause, fetchNO, fetchSparvka, fetchBranch, fetchOne, fetchOptions, fetchCurrentVznosi } from "../components/fetchs.js";
 
 
 export function AdminSystemPage(){
 
   const [infoCard,setInfoCard] = useState([]) // для персональной карточки
+  const [infoRegUser, setInfoRegUser] = useState([]) // для изменения данных пользователя LogPass
   const [col_1, setcol_1] = useState(false)
   const [col_2, setcol_2] = useState(false)
   const [col_3, setcol_3] = useState(false)
@@ -48,10 +52,12 @@ export function AdminSystemPage(){
     VznosMonth:'',
     VznosYear:''
   })
-  const[foundUsers, setFoundUsers] = useState(b)
+  const[foundUsers, setFoundUsers] = useState([])
   const [respublic, setRuspublic] = useState([])
   const [a,seta] = useState(JSON.parse(localStorage.getItem("LoginPassword")) )
-
+  const [selectYzelVznos, setSelectYzelVznos] = useState(false)
+  const [openBranchVznos, setOpenBranchVznos] =useState(false)
+  const [labelYzelVznos, setLabelYzelVznos] = useState('')
   // useEffect(() => {
   //   const loggedInUser = localStorage.getItem("LoginPassword");
   //   console.log(loggedInUser)
@@ -85,6 +91,7 @@ export function AdminSystemPage(){
       setTableHidePause(true);
       setTableHideNO(true);
       setTableHideBranch(true);
+      setSelectYzelVznos(false);
       fetchPOO({setb});
     }
     else if (cols == 'col1') {
@@ -105,6 +112,7 @@ export function AdminSystemPage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
+          setSelectYzelVznos(false);
           fetchPOO({setb});
     }
     else if (cols == 'col2'){
@@ -125,6 +133,7 @@ export function AdminSystemPage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
+          setSelectYzelVznos(false);
           fetchPOO({setb});
           fetchOptions({setOptions});
           
@@ -147,6 +156,7 @@ export function AdminSystemPage(){
           setTableHidePause(!tablehidePause);
           setTableHideNO(true);
           setTableHideBranch(true);
+          setSelectYzelVznos(false);
           fetchPause({setb});
         
     }
@@ -168,6 +178,7 @@ export function AdminSystemPage(){
           setTableHidePause(true);
           setTableHideNO(!tablehideNO);
           setTableHideBranch(true);
+          setSelectYzelVznos(false);
           fetchNO({setb});
     }
     else if ( cols == 'col5') {
@@ -187,6 +198,7 @@ export function AdminSystemPage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
+          setSelectYzelVznos(false);
           fetchOptions({setOptions});
     }
     else if ( cols == 'col6') {
@@ -207,27 +219,37 @@ export function AdminSystemPage(){
       setTableHidePause(true);
       setTableHideNO(true);
       setTableHideBranch(true);
+      setSelectYzelVznos(false);
       fetchOptions({setOptions});
     }
     else if ( cols == 'col7') {
       setcol_0(false);
-          setcol_1(false); 
-          setcol_2(false); 
-          setcol_3(false); 
-          setcol_4(false);
-          setcol_5(false);
-          setcol_6(false);
-          setcol_7(!col_7);
-          setcol_8(false);
-          setcol_9(false);
-          setcol_10(false);
-          setcol_11(false);
-          setTableHidePOO(true);
-          setTableFindFilter(true);
-          setTableHidePause(true);
-          setTableHideNO(true);
-          setTableHideBranch(!tablehideBranch);
-          fetchBranch({setb});
+      setcol_1(false); 
+      setcol_2(false); 
+      setcol_3(false); 
+      setcol_4(false);
+      setcol_5(false);
+      setcol_6(false);
+      setcol_7(!col_7);
+      setcol_8(false);
+      setcol_9(false);
+      setcol_10(false);
+      setcol_11(false);
+      setTableHidePOO(true);
+      setTableFindFilter(true);
+      setTableHidePause(true);
+      setTableHideNO(true); 
+      setTableHideBranch(true);
+      setOpenBranchVznos(true);
+      setSelectYzelVznos(!selectYzelVznos);
+      fetchYzelRespublic();
+    }
+    else if (cols == 'col7a'){
+               
+      //  fetchBranch({setb});
+      fetchCurrentVznosi({setFoundUsers});
+      setTableHideBranch(!tablehideBranch);
+      setOpenBranchVznos(false);
     }
     else if ( cols == 'col8') {
       setcol_0(false);
@@ -247,7 +269,8 @@ export function AdminSystemPage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
-          fetchYzelRespublic ();
+          setSelectYzelVznos(false);
+          fetchYzelRespublic();
     }
     else if ( cols == 'col9') {
       setcol_0(false);
@@ -267,6 +290,7 @@ export function AdminSystemPage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
+          setSelectYzelVznos(false);
     }
     else if ( cols == 'col10') {
       setcol_0(false);
@@ -286,6 +310,7 @@ export function AdminSystemPage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
+          setSelectYzelVznos(false);
     }
     else if ( cols == 'col11') {
       setcol_0(false);
@@ -305,6 +330,7 @@ export function AdminSystemPage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
+          setSelectYzelVznos(false);
     }
    }
 
@@ -318,17 +344,6 @@ export function AdminSystemPage(){
  
 
 //fetch
-  //  const fetchSparvka = async () =>{
-  //   try{
-  //     const pesponse = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetHelp/', {
-  //     method: 'get'
-  //   });
-  //   alert('Файл успешно загружен')
-  //   }
-  //   catch(err){
-  //     alert('Повторите попытку')
-  //   }
-  //  }
 
    const fetchPOOWord = async () =>{
     try{
@@ -385,6 +400,27 @@ export function AdminSystemPage(){
       
     }
   }
+
+  const fetchPostCurrentVznosi = async() =>{
+    try{
+       const response = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/CurrentVznosi/',{
+      method: "post",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json;charset=utf-8',  
+      },
+      body:JSON.stringify(foundUsers) 
+    });
+    const q = await response.json();
+    console.log(foundUsers)
+    }
+   catch(err){
+    console.log(err);
+    alert('Данные не сохранились')
+   }
+    
+  }
+  
 //fetch
 
 
@@ -437,7 +473,7 @@ let chec = true;
 //вывод таблиц
 
 
-const handleForm = () =>{
+const getInputSearch = () =>{
   console.log(inputDate)
 
   if ( inputSearch != '' ) {
@@ -520,11 +556,13 @@ const handleForm = () =>{
         <p onClick={()=>fetchNOExcel()}>Отчет в Excel</p>
       </div>
 
+      {!tablehideBranch ? <p className="span_YzelVznos">{labelYzelVznos}</p> : null}
       <div className={`OtchetBranch ${(tablehideBranch ) ? 'hide' : ''}`}>
       <span style={{marginRight: '1%', marginTop: '3px', cursor:'pointer'}} onClick={()=> setFoundUsers(b)}><img src={Repeat} alt='☺' width='20px'/></span>
-          <div className="adminnode__Button" onClick={()=> {handleForm()}}>
+          <div className="adminnode__Button" onClick={()=> {}}>
             <button >Сохранить</button>
           </div>
+          <div className="otchetbranch_input__search_icon" onClick={()=>{getInputSearch()}}><img src={Search} alt='о'/></div>
           <div className="otchetbranch_input">
             <input
           type='search'
@@ -609,8 +647,7 @@ const handleForm = () =>{
         <tbody>
            {tableNO}
         </tbody>
-     </table>
-
+     </table> 
      <table className={`tablePOO ${tablehideBranch ? 'hide' : ''}`}> 
      <a href='#start_table' className="start_fixed"><img src={Up} alt='↑' width='20px'/></a>
         <thead>
@@ -630,11 +667,12 @@ const handleForm = () =>{
      { (col_5) ? <Registration options={options}/> : null}
      {/* { (col_6) ? <EditCard infoCard={infoCard} options={options} /> : null} */}
      { (col_6) ? <EditCardSystem infoCard={infoCard} options={options} /> : null}
-     { (col_8) ? <BranchsSystem options={options} respublic={respublic}/> : null}
-     { (col_9) ? <SpisokUsersSystem col={col}/> : null}
+     { (col_8) ? <BranchsSystem  respublic={respublic}/> : null}
+     { (col_9) ? <SpisokUsersSystem col={col} infoRegUser={infoRegUser} setInfoRegUser={setInfoRegUser} /> : null}
      { (col_10) ? <LogPassUserSystem /> : null}
-     { (col_11) ? <LogPassUserSystemEdit /> : null}
-     </div>
+     { (col_11) ? <LogPassUserSystemEdit infoRegUser={infoRegUser} setInfoRegUser={setInfoRegUser}/> : null}
+     { (openBranchVznos && selectYzelVznos) ? <BranchsSystemVznos col={col} respublic={respublic} setLabelYzelVznos={setLabelYzelVznos}/> : null}
+     </div> 
 
     </main>
     

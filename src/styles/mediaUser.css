@@ -7,6 +7,17 @@
   .user_page .main__ul{
     font-size: 20px;
   }
+  .user_page  .main__span:hover{
+    /* letter-spacing: 0.020em; */
+    font-size: 21px;
+    transition-duration: 300ms;
+  }
+  .user_page  .main__ul div li .main__span{
+    font-size: 18px;
+  }
+  .user_page  .main__ul div li .main__span:hover{
+    font-size: 19px;
+  }
   thead td:first-child{
     width: 8%;
   }
@@ -37,6 +48,17 @@
 @media screen and (min-width: 1700px) {
   .user_page .main__ul{
     font-size: 20px;
+  }
+  .user_page  .main__span:hover{
+    /* letter-spacing: 0.020em; */
+    font-size: 21px;
+    transition-duration: 300ms;
+  }
+  .user_page  .main__ul div li .main__span{
+    font-size: 18px;
+  }
+  .user_page  .main__ul div li .main__span:hover{
+    font-size: 19px;
   }
   thead td:first-child{
     width: 9%;
@@ -75,7 +97,18 @@
 
 @media screen and (min-width: 2400px) {
   .user_page .main__ul{
+    font-size: 28px;
+  }
+  .user_page  .main__span:hover{
+    /* letter-spacing: 0.020em; */
+    font-size: 29px;
+    transition-duration: 300ms;
+  }
+  .user_page  .main__ul div li .main__span{
     font-size: 26px;
+  }
+  .user_page  .main__ul div li .main__span:hover{
+    font-size: 27px;
   }
   .user_page .Otchet {
     font-size: 24px;
@@ -148,6 +181,17 @@
 @media screen and (max-width: 1300px) {
   .user_page .main__ul{
     font-size: 14px;
+  }
+  .user_page  .main__span:hover{
+    /* letter-spacing: 0.020em; */
+    font-size: 15px;
+    transition-duration: 300ms;
+  }
+  .user_page  .main__ul div li .main__span{
+    font-size: 12px;
+  }
+  .user_page  .main__ul div li .main__span:hover{
+    font-size: 13px;
   }
   .user_page .OtchetFilter{
     font-size: 12px;
@@ -242,6 +286,11 @@
   .user_page .main__ul{
     font-size: 12px;
   }
+  .user_page  .main__span:hover{
+    /* letter-spacing: 0.020em; */
+    font-size: 13px;
+    transition-duration: 300ms;
+  }
   .user_page .OtchetFilter{
     font-size: 10px;
   }
@@ -282,6 +331,17 @@
 @media screen and (max-width: 900px){
   .user_page .main__ul{
     font-size: 10px;
+  }
+  .user_page  .main__span:hover{
+    /* letter-spacing: 0.020em; */
+    font-size: 11px;
+    transition-duration: 300ms;
+  }
+  .user_page  .main__ul div li .main__span{
+    font-size: 8px;
+  }
+  .user_page  .main__ul div li .main__span:hover{
+    font-size: 9px;
   }
   .user_page .OtchetFilter{
     font-size: 8px;
@@ -347,6 +407,17 @@
 @media screen and (max-width: 790px){
   .user_page .main__ul{
     font-size: 9px;
+  }
+  .user_page  .main__span:hover{
+    /* letter-spacing: 0.020em; */
+    font-size: 10px;
+    transition-duration: 300ms;
+  }
+  .user_page  .main__ul div li .main__span{
+    font-size: 7px;
+  }
+  .user_page  .main__ul div li .main__span:hover{
+    font-size: 6px;
   }
   .user_page .OtchetFilter{
     font-size: 7px;
@@ -429,6 +500,11 @@
 @media screen and (max-width: 640px){
   .user_page .main__ul{
     font-size: 8px;
+  }
+  .user_page  .main__span:hover{
+    /* letter-spacing: 0.020em; */
+    font-size: 9px;
+    transition-duration: 300ms;
   }
   .user_page .OtchetFilter{
     font-size: 6px;

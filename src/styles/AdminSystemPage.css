@@ -35,7 +35,7 @@
   font-family: Montserrat-SemiBold;
   color: black;
   border-right: 1px solid rgb(218,172,83);
- height: 100vh;
+  height: 100vh;
   font-size: 16px;
   width: 100%;
   margin-top: 0;
@@ -82,7 +82,6 @@
 }
 
 .adminSystem_page  .main__ul div li .main__span:hover{
-  letter-spacing: 0.020em;
   font-size: 14px;
   transition-duration: 300ms;
 }
@@ -281,6 +280,17 @@
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
+
+.otchetbranch_input__search_icon{
+  width: 14px;
+  margin: auto;
+  margin-right: 1%;
+}
+.adminSystem_page .span_YzelVznos{
+  text-align: center;
+  font-size: 16px;
+
+}
 /*
 @media screen and (min-width: 320px) {
   .oper_page .main__ul {

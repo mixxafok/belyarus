@@ -13,7 +13,7 @@ export  function LogPassUserSystem() {
     password: '',
     RepeatPassword: '',
     nodeId: '',
-    Yzel : ''
+    Yzel: ''
   })
 
   const fetchLogPassUser = async () =>{
@@ -38,7 +38,6 @@ export  function LogPassUserSystem() {
     else {
       alert('Пароли не совпадают')
     }
-
   }
 
   return (

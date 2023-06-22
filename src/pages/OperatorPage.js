@@ -8,6 +8,7 @@ import {Registration} from '../components/Registration.js';
 import {EditCard} from '../components/Operator/EditCard.js';
 import Up from '../icons/up.png';
 import Repeat from '../icons/repeat.png';
+import Search from '../icons/search.png';
 import '../styles/OperatorPage.css';
 import '../styles/Header.css';
 import '../styles/Table.css';
@@ -264,7 +265,7 @@ export function OperatorPage(){
 //вывод таблиц
 
 
-const handleForm = () =>{
+const getInputSearch = () =>{
   console.log(inputSearch)
 
   if ( inputSearch !== '' ) {
@@ -337,9 +338,10 @@ const handleForm = () =>{
 
       <div className={` ${(tablehideBranch ) ? 'OtchetBranchHide' : 'OtchetBranch'}`}>
       <span className="otchetbranch_img_repeat"  onClick={()=> setFoundUsers(b)}><img src={Repeat} alt='☺'/></span>
-          <div className="adminnode__Button" onClick={()=> {handleForm()}}>
+          <div className="adminnode__Button" onClick={()=> {}}>
             <button >Сохранить</button>
           </div>
+          <div className="otchetbranch_input__search_icon" onClick={()=>{getInputSearch()}}><img src={Search} alt='о'/></div>
           <div className="otchetbranch_input">
             <input
           type='search'

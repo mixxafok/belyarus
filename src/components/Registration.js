@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import '../styles/Registration.css';
 import Ava from '../img/ava.png';
+import { upload } from '@testing-library/user-event/dist/upload';
 
 export function Registration ({options}){
 
@@ -172,17 +173,48 @@ const fetchRegistration = async ()=>{
 };//запрос fetch POST
 
 
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [uploaded, setUploaded] = useState({
+    filePath:''
+  });
+
+  const handleChange = (event) => {
+    console.log(event.target.files);
+    const [file] = event.target.files;
+   // setSelectedFile(event.target.files[0]);
+    setSelectedFile(URL.createObjectURL(file))
+  }
+
+ const handleUpload = async () =>{
+    if(!selectedFile){
+      alert('please');
+      return;
+    };
+    const formData = new FormData();
+    formData.append('uploadFile', selectedFile);
+   const res = await fetch('https://www.example.com/uploadFile.php',{
+    method: "post",
+    headers: {
+      "Content-Type": "multipart/form-data"
+    },
+    body: formData
+   })
+   const data = await res.json()
+   setUploaded(data);
+  };
+
   return (
     <div className='registration'>
-     
+    
           <div className="reg__Button" onClick={()=>handleForm()}>
             <button >Сохранить</button>
           </div>
 
         <container className="Img_Fio">
           <div className='reg__form_input_img'>
-            <img src={Ava} alt='no' width='23.3mm' height='31mm' className='reg__img'></img>
-            <input type="file" name="file" className='file'/>
+            <img src={selectedFile} alt='' width='23.3mm' height='31mm' className='reg__img'></img>
+            <input type="file" onChange={handleChange}  className='file' accept='image/*,.png,.jpg' />
+            {/* <button onClick={handleUpload}>upload</button> */}
           </div>
 
         <container className="Img_Fio_SexBirthday">

@@ -79,7 +79,6 @@
 }
 
 .adminNode_page .main__span:hover{
-  letter-spacing: 0.020em;
   transition-duration: 300ms;
 }
 
@@ -273,6 +272,8 @@
   justify-content: space-between;
   width: 28%;
 }
+
+
 
 /*
 @media screen and (min-width: 320px) {

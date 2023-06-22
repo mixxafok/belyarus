@@ -2,21 +2,23 @@ import React, {useState} from 'react'
 import '../../styles/LogPassUser.css'
 import { BranchsSystemLog } from './BranchsSystemLog'
 
-export  function LogPassUserSystemEdit() {
+export  function LogPassUserSystemEdit({infoRegUser}) {
   const [hidden, setHidden] = useState(true)
   const [formInput, setFormInput] = useState({
-    Surname: '',
-    Name: '',
-    Parent: '',
-    Login: '',
-    Rule: '1',
-    Password: '',
-    RepeatPassword: '',
-    Yzel: ''
+    id: infoRegUser.id,
+    Surname: infoRegUser.surname,
+    Name: infoRegUser.name,
+    patronymic: infoRegUser.patronymic,
+    Login: infoRegUser.login,
+    Rule: infoRegUser.roleId,
+    Password: infoRegUser.password,
+    RepeatPassword: infoRegUser.password,
+  //  NodeId: '',
+    Yzel: infoRegUser.node
   })
 
   const fetchLogPassUser = async () =>{
-    const response = await fetch('',{
+    const response = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/UpdateRegUser/',{
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -31,7 +33,7 @@ export  function LogPassUserSystemEdit() {
   function handleForm (){
     if(formInput.Password === formInput.RepeatPassword){
       console.log(formInput);
-     // fetchLogPassUser();
+      fetchLogPassUser();
       alert('Пользователь успешно зарегистрирован')
     }
     else {
@@ -65,8 +67,8 @@ export  function LogPassUserSystemEdit() {
           <input 
             className='LogPassUser_input'
             type='text'
-            value={formInput.Parent}
-            onChange={e=>setFormInput({...formInput, Parent: e.target.value})}
+            value={formInput.patronymic}
+            onChange={e=>setFormInput({...formInput, patronymic: e.target.value})}
           />
           <label>Логин</label>
           <input 

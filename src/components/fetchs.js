@@ -89,7 +89,20 @@ export const fetchOptions = async ({setOptions})=>{
   }
   };
 
-
+export const fetchCurrentVznosi = async({setFoundUsers}) => {
+  try {
+    const response = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/CurrentVznosi/', {
+    method: "get"
+  });
+    const q = await response.json();
+    setFoundUsers(q);
+  }
+  catch(err){
+    console.log(err)
+    alert('Не удалось загрузить список со взносами')
+  }
+  
+}
 
 export const fetchSparvka = async () =>{
   try{

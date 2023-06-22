@@ -1,59 +1,120 @@
 import React, { useState } from 'react'
 import '../../styles/SpisokUsersSystem.css'
-import { uzels } from '../FIO'
 import Up from '../../icons/up.png'
 
 
-export  function SpisokUsersNode({col}) {
+export  function SpisokUsersNode({col, setInfoRegUser}) {
 
-  const [seletedLi1, setSelectedLi1] = useState(true)
-  const [seletedLi2, setSelectedLi2] = useState(true)
+ // const [seletedLi1, setSelectedLi1] = useState(true)
+ // const [seletedLi2, setSelectedLi2] = useState(true)
   const [seletedLi3, setSelectedLi3] = useState(true)
   const [seletedLi4, setSelectedLi4] = useState(true)
   const [tablehideUsers, setTableHideUsers] = useState(true)
-
+  const [Users, setUsers] = useState([]) 
   const setSelectedLi = (selectLi) =>
   {
-    // if(selectLi == 'li1'){
-    //   setSelectedLi1(true);
-    //   setSelectedLi2(!seletedLi2);
-    //   setSelectedLi3(!seletedLi3);
-    //   setSelectedLi4(!seletedLi4);
-    //   setTableHideUsers(!tablehideUsers)
-    // }
-    // if(selectLi == 'li2'){
-    //   setSelectedLi1(!seletedLi1);
-    //   setSelectedLi2(true);
-    //   setSelectedLi3(!seletedLi3);
-    //   setSelectedLi4(!seletedLi4);
-    //   setTableHideUsers(!tablehideUsers)
-    // }
+    if(selectLi == 'li1'){
+    //  setSelectedLi1(true);
+    //  setSelectedLi2(!seletedLi2);
+      setSelectedLi3(!seletedLi3);
+      setSelectedLi4(!seletedLi4);
+      setTableHideUsers(!tablehideUsers);
+    //  fetchGetAdminsSystem();
+    }
+    if(selectLi == 'li2'){
+    //  setSelectedLi1(!seletedLi1);
+    //  setSelectedLi2(true);
+      setSelectedLi3(!seletedLi3);
+      setSelectedLi4(!seletedLi4);
+      setTableHideUsers(!tablehideUsers);
+    //  fetchGetAdminsYzels();
+    }
     if(selectLi == 'li3'){
-      setSelectedLi1(!seletedLi1);
-      setSelectedLi2(!seletedLi2);
+    //  setSelectedLi1(!seletedLi1);
+    //  setSelectedLi2(!seletedLi2);
       setSelectedLi3(true);
       setSelectedLi4(!seletedLi4);
-      setTableHideUsers(!tablehideUsers)
+      setTableHideUsers(!tablehideUsers);
+      fetchGetOperators();
     }
     if(selectLi == 'li4'){
-      setSelectedLi1(!seletedLi1);
-      setSelectedLi2(!seletedLi2);
+    //  setSelectedLi1(!seletedLi1);
+    //  setSelectedLi2(!seletedLi2);
       setSelectedLi3(!seletedLi3);
       setSelectedLi4(true);
-      setTableHideUsers(!tablehideUsers)
+      setTableHideUsers(!tablehideUsers);
+      fetchGetInfoUsers();
     }
   }
 
-  let tableUsers = uzels.sort((a,b)=>a.surname.localeCompare(b.surname)).map(function(item,index) {
+  let tableUsers = Users.sort((a,b)=>a.surname.localeCompare(b.surname)).map(function(item,index) {
     return <tr key={item.id}>
       <td> {index+1}</td>
-      <td className="table__surname"><p onClick={()=>{col('col11') }} className="table_span__surname">{item.surname}</p></td>
-       <td>{item.name}</td>
-         <td>{item.parent}</td>
-         <td>{item.yzel}</td>
-         <td>{item.lastdate}</td>
+        <td className="table__surname"><p onClick={()=>{col('col11'); setInfoRegUser(item); }} className="table_span__surname">{item.surname}</p></td>
+        <td>{item.name}</td>
+        <td>{item.patronymic}</td>
+        <td> {item.node}</td>
+        <td>{item.lastdate}</td>
     </tr>
   });
+
+
+// const fetchGetAdminsSystem = async () =>{
+//   setUsers([]);
+//   try{
+//     const responce = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/GetSystemAdmins/', {
+//     method: "get"
+//     });
+//     const q = await responce.json()
+//     setUsers(q);
+//    // console.log(Users)
+//   }
+//   catch(err){
+//     console.log(err)
+//   }
+// }
+// const fetchGetAdminsYzels = async () =>{
+//   setUsers([]);
+//   try{
+//     const responce = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/GetNodeAdmins/', {
+//     method: "get"
+//     });
+//     const q = await responce.json()
+//     setUsers(q);
+//    // console.log(Users)
+//   }
+//   catch(err){
+//     console.log(err)
+//   }
+// }
+const fetchGetOperators = async () =>{
+  setUsers([]);
+  try{
+    const responce = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/GetOperators/', {
+    method: "get"
+    });
+    const q = await responce.json()
+    setUsers(q);
+   // console.log(Users)
+  }
+  catch(err){
+   console.log(err)
+  }
+}
+const fetchGetInfoUsers = async () =>{
+  setUsers([]);
+  try{
+    const responce = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/GetInfoUsers/', {
+    method: "get"
+    });
+    const q = await responce.json()
+    setUsers(q);
+   // console.log(Users)
+  }
+  catch(err){
+    console.log(err)
+  }
+}
 
   return (
     <div className='SpisokUsersSystem'>
@@ -72,7 +133,7 @@ export  function SpisokUsersNode({col}) {
               <td>Фамилия</td>
               <td>Имя</td>
               <td>Отчество</td>
-              <td>Подконтрольный узел</td>
+              <td >Подконтрольный узел</td>
               <td>Последняя дата входа</td>
            </tr>
         </thead>

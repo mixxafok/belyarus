@@ -11,18 +11,18 @@ export  function Login({LoginPassword,setLoginPassword}) {
     login: "",
     password: ""
   })
-  useEffect(() => {
-    const loggedInUser = localStorage.getItem("LoginPassword");
-    if (loggedInUser) {
-      const foundUser = JSON.parse(loggedInUser);
-      setLoginPassword(foundUser);
-      if (foundUser.role === "Администратор системы" ) {
-        navigateTo('/AdminSystemPage')
-      }
-      console.log(foundUser)
-    }
+ // useEffect(() => {
+   // const loggedInUser = localStorage.getItem("LoginPassword");
+    // if (loggedInUser) {
+    //   const foundUser = JSON.parse(loggedInUser);
+    //   setLoginPassword(foundUser);
+    //   if (foundUser.role === "Администратор системы" ) {
+    //     navigateTo('/AdminSystemPage')
+    //   }
+    //   console.log(foundUser)
+    // }
     
-  }, []);
+ // }, []);
 
   const fetchLoginPassword = async () => {
 

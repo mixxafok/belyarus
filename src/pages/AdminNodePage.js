@@ -12,10 +12,12 @@ import { LogPassUserNodeEdit} from "../components/AdminNode/LogPassUserNodeEdit.
 import { LogPassUserNode } from "../components/AdminNode/LogPassUserNode.js";
 import Up from '../icons/up.png';
 import Repeat from '../icons/repeat.png';
+import Search  from '../icons/search.png';
 import '../styles/AdminNodePage.css';
 import '../styles/Header.css';
 import '../styles/Table.css';
 import '../styles/PersonalCardSystem.css';
+import '../styles/mediaAdminNode.css';
 import { fetchPOO, fetchPause, fetchNO, fetchSparvka, fetchOne, fetchBranch, fetchOptions } from "../components/fetchs.js";
 
 
@@ -220,7 +222,7 @@ export function AdminNodePage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(!tablehideBranch);
-          fetchBranch({setb});
+        //  fetchBranch({setb});
 }
     else if ( cols == 'col8') {
       setcol_0(false);
@@ -240,7 +242,7 @@ export function AdminNodePage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
-          fetchBranch({setb});
+        //  fetchBranch({setb});
 }
     else if ( cols == 'col9') {
       setcol_0(false);
@@ -410,7 +412,7 @@ let chec = true;
 //вывод таблиц
 
 
-const handleForm = () =>{
+const getInputSearch = () =>{
   console.log(inputDate)
 
   if ( inputSearch != '' ) {
@@ -497,9 +499,10 @@ const handleForm = () =>{
 
       <div className={`OtchetBranch ${(tablehideBranch ) ? 'hide' : ''}`}>
       <span style={{marginRight: '1%', marginTop: '3px', cursor:'pointer'}} onClick={()=> setFoundUsers(b)}><img src={Repeat} alt='☺' width='20px'/></span>
-          <div className="adminnode__Button" onClick={()=> {handleForm()}}>
+          <div className="adminnode__Button" onClick={()=> {}}>
             <button >Сохранить</button>
           </div>
+          <div className="otchetbranch_input__search_icon" onClick={()=>{getInputSearch()}}><img src={Search} alt='о'/></div>
           <div className="otchetbranch_input">
             <input
           type='search'
@@ -605,7 +608,7 @@ const handleForm = () =>{
      { (col_5) ? <Registration options={options}/> : null}
      {/* { (col_6) ? <EditCard infoCard={infoCard} options={options} /> : null} */}
      { (col_6) ? <EditCardNode infoCard={infoCard} options={options} /> : null}
-     { (col_8) ? <Branchs options={options} /> : null}
+     { (col_8) ? <Branchs /> : null}
      { (col_9) ? <SpisokUsersNode col={col}/> : null}
      { (col_10) ? <LogPassUserNode /> : null}
      { (col_11) ? <LogPassUserNodeEdit  /> : null}
