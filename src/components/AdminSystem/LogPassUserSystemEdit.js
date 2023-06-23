@@ -2,13 +2,13 @@ import React, {useState} from 'react'
 import '../../styles/LogPassUser.css'
 import { BranchsSystemLog } from './BranchsSystemLog'
 
-export  function LogPassUserSystemEdit({infoRegUser}) {
+export  function LogPassUserSystemEdit({infoRegUser, options}) {
   const [hidden, setHidden] = useState(true)
   const [formInput, setFormInput] = useState({
     id: infoRegUser.id,
     Surname: infoRegUser.surname,
     Name: infoRegUser.name,
-    patronymic: infoRegUser.patronymic,
+    Parent: infoRegUser.parent,
     Login: infoRegUser.login,
     Rule: infoRegUser.roleId,
     Password: infoRegUser.password,
@@ -16,6 +16,17 @@ export  function LogPassUserSystemEdit({infoRegUser}) {
   //  NodeId: '',
     Yzel: infoRegUser.node
   })
+
+  const role = [];
+  for (let key in options){
+
+    if(key == 'roles'){
+      for (let ked of options['roles']){
+        role.push( ked)
+        continue
+        }
+    }
+  }
 
   const fetchLogPassUser = async () =>{
     const response = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/UpdateRegUser/',{
@@ -67,8 +78,8 @@ export  function LogPassUserSystemEdit({infoRegUser}) {
           <input 
             className='LogPassUser_input'
             type='text'
-            value={formInput.patronymic}
-            onChange={e=>setFormInput({...formInput, patronymic: e.target.value})}
+            value={formInput.Parent}
+            onChange={e=>setFormInput({...formInput, Parent: e.target.value})}
           />
           <label>Логин</label>
           <input 
@@ -79,10 +90,8 @@ export  function LogPassUserSystemEdit({infoRegUser}) {
           />
           <label>Роль в системе</label>
           <select  value={formInput.Rule} onChange={e=>setFormInput({...formInput, Rule: e.target.value})} className='LogPassUser_select' >
-            <option selected value={1} >Информационный пользователь</option>
-            <option value={2}>Оператор</option>
-            <option value={3}>Администратор узла</option>
-            <option value={4}>Администратор системы</option>
+          <option  ></option> 
+            {role.map((item)=>{ return <option value={item.id}>{item.val}</option>})}
           </select>
           <label>Подконтрольный узел</label>
           <input disabled

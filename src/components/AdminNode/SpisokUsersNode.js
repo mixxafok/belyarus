@@ -58,35 +58,6 @@ export  function SpisokUsersNode({col, setInfoRegUser}) {
     </tr>
   });
 
-
-// const fetchGetAdminsSystem = async () =>{
-//   setUsers([]);
-//   try{
-//     const responce = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/GetSystemAdmins/', {
-//     method: "get"
-//     });
-//     const q = await responce.json()
-//     setUsers(q);
-//    // console.log(Users)
-//   }
-//   catch(err){
-//     console.log(err)
-//   }
-// }
-// const fetchGetAdminsYzels = async () =>{
-//   setUsers([]);
-//   try{
-//     const responce = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/GetNodeAdmins/', {
-//     method: "get"
-//     });
-//     const q = await responce.json()
-//     setUsers(q);
-//    // console.log(Users)
-//   }
-//   catch(err){
-//     console.log(err)
-//   }
-// }
 const fetchGetOperators = async () =>{
   setUsers([]);
   try{
@@ -99,6 +70,7 @@ const fetchGetOperators = async () =>{
   }
   catch(err){
    console.log(err)
+   alert('список операторов не доступен')
   }
 }
 const fetchGetInfoUsers = async () =>{
@@ -109,10 +81,12 @@ const fetchGetInfoUsers = async () =>{
     });
     const q = await responce.json()
     setUsers(q);
+    
    // console.log(Users)
   }
   catch(err){
-    console.log(err)
+    console.log(err);
+    console.log('список информационный пользователей не доступен')
   }
 }
 

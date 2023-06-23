@@ -19,7 +19,8 @@ import '../styles/Header.css';
 import '../styles/Table.css';
 import '../styles/PersonalCardSystem.css';
 import '../styles/mediaAdminSystem.css';
-import { fetchPOO, fetchPause, fetchNO, fetchSparvka, fetchBranch, fetchOne, fetchOptions, fetchCurrentVznosi } from "../components/fetchs.js";
+import { fetchPOO, fetchPause, fetchNO, fetchSparvka, fetchOne, fetchOptions, fetchCurrentVznosi,
+fetchPOOWord, fetchPausedWord, fetchNOWord, fetchPOOExcel,fetchPausedExcel, fetchNOExcel } from "../components/fetchs.js";
 
 
 export function AdminSystemPage(){
@@ -57,7 +58,10 @@ export function AdminSystemPage(){
   const [a,seta] = useState(JSON.parse(localStorage.getItem("LoginPassword")) )
   const [selectYzelVznos, setSelectYzelVznos] = useState(false)
   const [openBranchVznos, setOpenBranchVznos] =useState(false)
-  const [labelYzelVznos, setLabelYzelVznos] = useState('')
+  const [labelYzelVznos, setLabelYzelVznos] = useState({
+    nodeId: 0,
+    nazva: ''
+  })
   // useEffect(() => {
   //   const loggedInUser = localStorage.getItem("LoginPassword");
   //   console.log(loggedInUser)
@@ -92,7 +96,7 @@ export function AdminSystemPage(){
       setTableHideNO(true);
       setTableHideBranch(true);
       setSelectYzelVznos(false);
-      fetchPOO({setb});
+     // fetchPOO({setb});
     }
     else if (cols == 'col1') {
       
@@ -243,11 +247,12 @@ export function AdminSystemPage(){
       setOpenBranchVznos(true);
       setSelectYzelVznos(!selectYzelVznos);
       fetchYzelRespublic();
+      setLabelYzelVznos({...labelYzelVznos, nodeId: 0, nazva: ''});
     }
     else if (cols == 'col7a'){
                
       //  fetchBranch({setb});
-      fetchCurrentVznosi({setFoundUsers});
+      fetchCurrentVznosi({setFoundUsers, setInputDate, inputDate});
       setTableHideBranch(!tablehideBranch);
       setOpenBranchVznos(false);
     }
@@ -311,6 +316,7 @@ export function AdminSystemPage(){
           setTableHideNO(true);
           setTableHideBranch(true);
           setSelectYzelVznos(false);
+          fetchOptions({setOptions});
     }
     else if ( cols == 'col11') {
       setcol_0(false);
@@ -331,6 +337,7 @@ export function AdminSystemPage(){
           setTableHideNO(true);
           setTableHideBranch(true);
           setSelectYzelVznos(false);
+          fetchOptions({setOptions});
     }
    }
 
@@ -343,49 +350,7 @@ export function AdminSystemPage(){
    };
  
 
-//fetch
-
-   const fetchPOOWord = async () =>{
-    try{
-        await fetch('',{
-      method: 'get'
-    });
-    alert('Файл успешно скачан')
-    }
-    catch(err){
-      console.log(err)
-      alert('Повторите попытку')
-    }
-   }
-   const fetchPausedWord = async () =>{
-    await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedWord/',{
-      method: 'get'
-    });
-   }
-   const fetchNOWord = async () =>{
-     await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetKickedWord/',{
-      method: 'get'
-    });
-   }
-
-   const fetchPausedExcel = async () =>{
-    await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedExel/',{
-      method: 'get'
-    });
-   }
-   const fetchPOOExcel = async () =>{
-    await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedExel/',{
-      method: 'get'
-    });
-   }
-   const fetchNOExcel = async () =>{
-    await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetKickedExel/',{
-      method: 'get'
-    });
-   }
-
    const fetchYzelRespublic = async ()=>{
-    
       try{
      const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/getFirstNode/`, {
        method: "get",
@@ -418,10 +383,7 @@ export function AdminSystemPage(){
     console.log(err);
     alert('Данные не сохранились')
    }
-    
   }
-  
-//fetch
 
 
 //вывод таблиц
@@ -459,15 +421,15 @@ export function AdminSystemPage(){
    </tr>
  });
 
-let chec = true;
+
 
  let tableBranch = foundUsers.sort((a,b)=>a.surname.localeCompare(b.surname)).map(function(item,index) {
   return <tr key={item.id}>
     <td> {index+1}</td>
      <td className="table__surname"><p onClick={()=>{ fetchOne(item.id, {setInfoCard}); setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
      <td>{item.name}</td>
-       <td>{item.parent}</td>
-       <td><input type="checkbox" name="name1" checked={chec}  /*onChange={this.toggleChange} */ /></td>
+       <td>{item.patronymic}</td>
+       <td><input type="checkbox" name="name1" checked={item.isPaid}  onChange={()=>{}} /></td>
   </tr>
 });
 //вывод таблиц
@@ -487,6 +449,8 @@ const getInputSearch = () =>{
   }
   setInputSearch('')
 }
+
+console.log(foundUsers)
 
   return (
     <div className="adminSystem_page">
@@ -556,10 +520,10 @@ const getInputSearch = () =>{
         <p onClick={()=>fetchNOExcel()}>Отчет в Excel</p>
       </div>
 
-      {!tablehideBranch ? <p className="span_YzelVznos">{labelYzelVznos}</p> : null}
+      {!tablehideBranch ? <p className="span_YzelVznos">{labelYzelVznos.nazva}{labelYzelVznos.nodeId}</p> : null}
       <div className={`OtchetBranch ${(tablehideBranch ) ? 'hide' : ''}`}>
       <span style={{marginRight: '1%', marginTop: '3px', cursor:'pointer'}} onClick={()=> setFoundUsers(b)}><img src={Repeat} alt='☺' width='20px'/></span>
-          <div className="adminnode__Button" onClick={()=> {}}>
+          <div className="adminnode__Button" onClick={()=> {alert('add function')}}> 
             <button >Сохранить</button>
           </div>
           <div className="otchetbranch_input__search_icon" onClick={()=>{getInputSearch()}}><img src={Search} alt='о'/></div>
@@ -669,9 +633,10 @@ const getInputSearch = () =>{
      { (col_6) ? <EditCardSystem infoCard={infoCard} options={options} /> : null}
      { (col_8) ? <BranchsSystem  respublic={respublic}/> : null}
      { (col_9) ? <SpisokUsersSystem col={col} infoRegUser={infoRegUser} setInfoRegUser={setInfoRegUser} /> : null}
-     { (col_10) ? <LogPassUserSystem /> : null}
-     { (col_11) ? <LogPassUserSystemEdit infoRegUser={infoRegUser} setInfoRegUser={setInfoRegUser}/> : null}
-     { (openBranchVznos && selectYzelVznos) ? <BranchsSystemVznos col={col} respublic={respublic} setLabelYzelVznos={setLabelYzelVznos}/> : null}
+     { (col_10) ? <LogPassUserSystem options={options}/> : null}
+     { (col_11) ? <LogPassUserSystemEdit options={options} infoRegUser={infoRegUser} setInfoRegUser={setInfoRegUser}/> : null}
+     { (openBranchVznos && selectYzelVznos) ? <BranchsSystemVznos col={col} 
+     labelYzelVznos={labelYzelVznos} setLabelYzelVznos={setLabelYzelVznos}/> : null}
      </div> 
 
     </main>

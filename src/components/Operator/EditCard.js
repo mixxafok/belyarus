@@ -14,7 +14,6 @@ export function EditCard ({infoCard, options}){
   let date_Issue= `${data2.getFullYear()}-${('0' + data2.getMonth()).slice(-2)}-${('0' + data2.getDate()).slice(-2)}`//в гггг-мм-дд для input[date]
 
     const [formInput, setFormInput] = useState({
-      Id:infoCard[0].id,
       // Login: '',
       // Password: '',
       // Rule: '',
@@ -49,17 +48,10 @@ export function EditCard ({infoCard, options}){
 //console.log(formInput.DateBirth)
 
 
-
-const handleForm = () =>{
+const fetchEditCard = async ()=>{
   console.log(formInput);
-  fetchEditCard(infoCard[0].id);
-  alert('Изменения успешно сохранены')
-
-}
-
-const fetchEditCard = async (itemid)=>{
   try{
-    const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/changeUser?id=${itemid}`, {
+    const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/changeUser?id=${infoCard[0].id}`, {
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -71,9 +63,11 @@ const fetchEditCard = async (itemid)=>{
 
     let q = await response.json();
     await console.log(JSON.stringify(q));
+    alert('Изменения успешно сохранены')
   }
   catch(err){
     console.log(err)
+    alert('Изменения не сохранены')
   }
 };//запрос fetch POST
 
@@ -143,7 +137,7 @@ for (let key in options){
   return (
     <div className='registration'>
      
-          <div className="reg__Button" onClick={()=>handleForm()}>
+          <div className="reg__Button" onClick={()=>fetchEditCard()}>
             <button >Сохранить</button>
           </div>
 

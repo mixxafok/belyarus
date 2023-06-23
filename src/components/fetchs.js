@@ -1,4 +1,4 @@
-
+//fetch TABLES
 export  const fetchPOO = async ({setb}) =>{
   try{
     setb([]);
@@ -8,7 +8,7 @@ export  const fetchPOO = async ({setb}) =>{
     });
     let q = await response.json();
     await setb(q);
-    console.log(q)
+   // console.log(q)
   }
   catch(err){
     console.log(err)
@@ -60,21 +60,7 @@ export const fetchOne = async (itemid, {setInfoCard})=>{
   }
   };
 
-export const fetchBranch = async ({setb})=>{
-  try{
-    setb([])
-    const response = await fetch("http://secondsin-001-site1.dtempurl.com/UserPage/tablePOO/", {
-    method: "get",
-    });
-    let q = await response.json();
-    await setb(q);
-  }
-  catch(err){
-    console.log(err)
-    alert('Не удалось загрузить список Организаций')
-  }
-};
-
+//fetch OPTIONS
 export const fetchOptions = async ({setOptions})=>{
   try{
      const response = await fetch("http://secondsin-001-site1.dtempurl.com/UserPage/GetOptions", {
@@ -89,13 +75,27 @@ export const fetchOptions = async ({setOptions})=>{
   }
   };
 
-export const fetchCurrentVznosi = async({setFoundUsers}) => {
+ // fetch VZNOSI 
+export const fetchCurrentVznosi = async({setFoundUsers, setInputDate, inputDate}) => {
   try {
-    const response = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/CurrentVznosi/', {
+    const response = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/GetCurrentContributions/', {
     method: "get"
   });
     const q = await response.json();
-    setFoundUsers(q);
+    setFoundUsers(q.users);
+    setInputDate({...inputDate, VznosMonth: q.period.month, VznosYear: q.period.year});
+    
+    // for (let key in q){
+  
+    //   if(key == 'users'){
+    //     for (let ked of q['users']){
+    //       users.push( ked)
+    //       continue
+    //       }
+    //       console.log(users)
+    //   }
+    // }
+    
   }
   catch(err){
     console.log(err)
@@ -104,6 +104,8 @@ export const fetchCurrentVznosi = async({setFoundUsers}) => {
   
 }
 
+
+//fetch OTCHETS
 export const fetchSparvka = async () =>{
   try{
     const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetHelp/', {
@@ -117,6 +119,44 @@ export const fetchSparvka = async () =>{
     alert('Повторите попытку')
   }
  }
+export const fetchPOOWord = async () =>{
+  try{
+      await fetch('',{
+    method: 'get'
+  });
+  alert('Файл успешно скачан')
+  }
+  catch(err){
+    console.log(err)
+    alert('Повторите попытку')
+  }
+ }
+export const fetchPausedWord = async () =>{
+  await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedWord/',{
+    method: 'get'
+  });
 
+ }
+export const fetchNOWord = async () =>{
+  await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetKickedWord/',{
+    method: 'get'
+  });
+ }
+
+export const fetchPausedExcel = async () =>{
+  await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedExel/',{
+    method: 'get'
+  });
+ }
+ export const fetchPOOExcel = async () =>{
+  await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedExel/',{
+    method: 'get'
+  });
+ }
+ export const fetchNOExcel = async () =>{
+  await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetKickedExel/',{
+    method: 'get'
+  });
+ }
 
 

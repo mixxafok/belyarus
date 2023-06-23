@@ -5,7 +5,8 @@ import {PersonalCard} from '../components/PersonalCard';
 import Icon from '../icons/partIcon.js';
 import question from '../icons/question.png';
 import Up from '../icons/up.png';
-import { fetchPOO, fetchPause, fetchNO, fetchOne, fetchOptions, fetchSparvka } from "../components/fetchs.js";
+import { fetchPOO, fetchPause, fetchNO, fetchOne, fetchOptions, fetchSparvka,
+  fetchPOOWord, fetchPausedWord, fetchNOWord, fetchPOOExcel,fetchPausedExcel, fetchNOExcel } from "../components/fetchs.js";
 import '../styles/UserPage.css';
 import '../styles/Header.css'; 
 import '../styles/Table.css';
@@ -99,47 +100,6 @@ export function UserPage(){
      }
        
    };
- 
-//fetch
-   const fetchPOOWord = async () =>{
-    try{
-      const response = await fetch('',{
-      method: 'get'
-    });
-    alert('Файл успешно скачан')
-    }
-    catch(err){
-      console.log(err)
-      alert('Повторите попытку')
-    }
-   }
-   const fetchPausedWord = async () =>{
-    const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedWord/',{
-      method: 'get'
-    });
-   }
-   const fetchNOWord = async () =>{
-    const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetKickedWord/',{
-      method: 'get'
-    });
-   }
-
-   const fetchPausedExcel = async () =>{
-    const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedExel/',{
-      method: 'get'
-    });
-   }
-   const fetchPOOExcel = async () =>{
-    const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedExel/',{
-      method: 'get'
-    });
-   }
-   const fetchNOExcel = async () =>{
-    const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetKickedExel/',{
-      method: 'get'
-    });
-   }
-//fetch
 
 //вывод таблиц
    let tablePOO = b.map(function(item,index) {

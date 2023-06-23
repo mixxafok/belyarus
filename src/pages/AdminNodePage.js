@@ -7,6 +7,7 @@ import question from '../icons/question.png';
 import {Registration} from '../components/Registration.js';
 import {EditCardNode} from '../components/AdminNode/EditCardNode.js';
 import { Branchs } from "../components/AdminNode/Branchs.js";
+import { BranchsSystemVznos } from "../components/AdminSystem/BranchsSystemVznos.js";
 import { SpisokUsersNode } from "../components/AdminNode/SpisokUsersNode.js";
 import { LogPassUserNodeEdit} from "../components/AdminNode/LogPassUserNodeEdit.js"
 import { LogPassUserNode } from "../components/AdminNode/LogPassUserNode.js";
@@ -18,11 +19,13 @@ import '../styles/Header.css';
 import '../styles/Table.css';
 import '../styles/PersonalCardSystem.css';
 import '../styles/mediaAdminNode.css';
-import { fetchPOO, fetchPause, fetchNO, fetchSparvka, fetchOne, fetchBranch, fetchOptions } from "../components/fetchs.js";
+import { fetchPOO, fetchPause, fetchNO, fetchSparvka, fetchOne, fetchOptions, fetchCurrentVznosi,
+  fetchPOOWord, fetchPausedWord, fetchNOWord, fetchPOOExcel,fetchPausedExcel, fetchNOExcel } from "../components/fetchs.js";
 
 
 export function AdminNodePage(){
   const [infoCard,setInfoCard] = useState([]) // для персональной карточки
+  const [infoRegUser, setInfoRegUser] = useState([]) // для изменения данных пользователя LogPass
   const [col_1, setcol_1] = useState(false)
   const [col_2, setcol_2] = useState(false)
   const [col_3, setcol_3] = useState(false)
@@ -51,17 +54,13 @@ export function AdminNodePage(){
   })
   const[foundUsers, setFoundUsers] = useState(b)
   const [a,seta] = useState(JSON.parse(localStorage.getItem("LoginPassword")) )
+  const [selectYzelVznos, setSelectYzelVznos] = useState(false)
+  const [openBranchVznos, setOpenBranchVznos] =useState(false)
+  const [labelYzelVznos, setLabelYzelVznos] = useState({
+    nodeId: 0,
+    nazva: ''
+  })
 
-  useEffect(() => {
-    const loggedInUser = localStorage.getItem("LoginPassword");
-    console.log(loggedInUser)
-    if (loggedInUser) {
-      const foundUser = JSON.parse(loggedInUser);
-      seta(foundUser);
-      console.log(foundUser)
-    }
-    
-  }, []);
   //нажатие на меню
   function col (cols){
     if (cols == 'col0') {
@@ -81,7 +80,8 @@ export function AdminNodePage(){
       setTableHidePause(true);
       setTableHideNO(true);
       setTableHideBranch(true);
-      fetchPOO({setb});
+      setSelectYzelVznos(false);
+    //  fetchPOO({setb});
 }
    else if (cols == 'col1') {
       
@@ -101,6 +101,7 @@ export function AdminNodePage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
+          setSelectYzelVznos(false);
           fetchPOO({setb});
     }
    else if (cols == 'col2'){
@@ -121,6 +122,7 @@ export function AdminNodePage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
+          setSelectYzelVznos(false);
           fetchPOO({setb});
           fetchOptions({setOptions});
           // подгрузка таблицы РОО
@@ -143,6 +145,7 @@ export function AdminNodePage(){
           setTableHidePause(!tablehidePause);
           setTableHideNO(true);
           setTableHideBranch(true);
+          setSelectYzelVznos(false);
           fetchPause({setb});
         
         }
@@ -164,6 +167,7 @@ export function AdminNodePage(){
           setTableHidePause(true);
           setTableHideNO(!tablehideNO);
           setTableHideBranch(true);
+          setSelectYzelVznos(false);
           fetchNO({setb});
         }
     else if ( cols == 'col5') {
@@ -183,6 +187,7 @@ export function AdminNodePage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
+          setSelectYzelVznos(false);
           fetchOptions({setOptions});
     }
     else if ( cols == 'col6') {
@@ -202,28 +207,39 @@ export function AdminNodePage(){
       setTableHidePause(true);
       setTableHideNO(true);
       setTableHideBranch(true);
+      setSelectYzelVznos(false);
       fetchOptions({setOptions});
 }
     else if ( cols == 'col7') {
       setcol_0(false);
-          setcol_1(false); 
-          setcol_2(false); 
-          setcol_3(false); 
-          setcol_4(false);
-          setcol_5(false);
-          setcol_6(false);
-          setcol_7(!col_7);
-          setcol_8(false);
-          setcol_9(false);
-          setcol_10(false);
-          setcol_11(false);
-          setTableHidePOO(true);
-          setTableFindFilter(true);
-          setTableHidePause(true);
-          setTableHideNO(true);
-          setTableHideBranch(!tablehideBranch);
-        //  fetchBranch({setb});
-}
+      setcol_1(false); 
+      setcol_2(false); 
+      setcol_3(false); 
+      setcol_4(false);
+      setcol_5(false);
+      setcol_6(false);
+      setcol_7(!col_7);
+      setcol_8(false);
+      setcol_9(false);
+      setcol_10(false);
+      setcol_11(false);
+      setTableHidePOO(true);
+      setTableFindFilter(true);
+      setTableHidePause(true);
+      setTableHideNO(true); 
+      setTableHideBranch(true);
+      setOpenBranchVznos(true);
+      setSelectYzelVznos(!selectYzelVznos);
+    //  fetchYzelRespublic();
+      setLabelYzelVznos({...labelYzelVznos, nodeId: 0, nazva: ''});
+  }
+    else if (cols == 'col7a'){
+           
+  //  fetchBranch({setb});
+      fetchCurrentVznosi({setFoundUsers});
+      setTableHideBranch(!tablehideBranch);
+      setOpenBranchVznos(false);
+  }
     else if ( cols == 'col8') {
       setcol_0(false);
           setcol_1(false); 
@@ -242,6 +258,7 @@ export function AdminNodePage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
+          setSelectYzelVznos(false);
         //  fetchBranch({setb});
 }
     else if ( cols == 'col9') {
@@ -262,6 +279,7 @@ export function AdminNodePage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
+          setSelectYzelVznos(false);
           fetchOptions({setOptions});
     }
     else if ( cols == 'col10') {
@@ -282,6 +300,7 @@ export function AdminNodePage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
+          setSelectYzelVznos(false);
           fetchOptions({setOptions});
     }
     else if ( cols == 'col11') {
@@ -302,6 +321,7 @@ export function AdminNodePage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(true);
+          setSelectYzelVznos(false);
     }
    }
 
@@ -313,55 +333,6 @@ export function AdminNodePage(){
      }
    };
  
-
-//fetch
-// const fetchSparvka = async () =>{
-//   const pesponse = await fetch('', {
-//     method: 'get'
-//   });
-//  }
-
- const fetchPOOWord = async () =>{
-  try{
-    await fetch('',{
-    method: 'get'
-  });
-  alert('Файл успешно скачан')
-  }
-  catch(err){
-    console.log(err)
-    alert('Повторите попытку')
-  }
- }
- const fetchPausedWord = async () =>{
-  await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedWord/',{
-    method: 'get'
-  });
- }
- const fetchNOWord = async () =>{
-  await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetKickedWord/',{
-    method: 'get'
-  });
- }
-
- const fetchPausedExcel = async () =>{
-  await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedExel/',{
-    method: 'get'
-  });
- }
- const fetchPOOExcel = async () =>{
-   await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedExel/',{
-    method: 'get'
-  });
- }
- const fetchNOExcel = async () =>{
-     await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetKickedExel/',{
-    method: 'get'
-  });
- }
-
-//fetch
-
 
 //вывод таблиц
    let tablePOO = b.map(function(item,index) {
@@ -406,15 +377,14 @@ let chec = true;
      <td className="table__surname"><p onClick={()=>{ fetchOne(item.id, {setInfoCard}); setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
      <td>{item.name}</td>
        <td>{item.parent}</td>
-       <td><input type="checkbox" name="name1" checked={chec}  /*onChange={this.toggleChange} */ /></td>
+       <td><input type="checkbox" name="name1" /*checked={chec}  onChange={this.toggleChange} */ /></td>
   </tr>
 });
 //вывод таблиц
 
 
 const getInputSearch = () =>{
-  console.log(inputDate)
-
+  
   if ( inputSearch != '' ) {
     const results = b.filter((result) => {
      return(result.surname.toLowerCase().startsWith(inputSearch.toLowerCase()) 
@@ -497,9 +467,10 @@ const getInputSearch = () =>{
         <p onClick={()=>fetchNOExcel()}>Отчет в Excel</p>
       </div>
 
+      {!tablehideBranch ? <p className="span_YzelVznos">{labelYzelVznos.nazva}{labelYzelVznos.nodeId}</p> : null}
       <div className={`OtchetBranch ${(tablehideBranch ) ? 'hide' : ''}`}>
       <span style={{marginRight: '1%', marginTop: '3px', cursor:'pointer'}} onClick={()=> setFoundUsers(b)}><img src={Repeat} alt='☺' width='20px'/></span>
-          <div className="adminnode__Button" onClick={()=> {}}>
+          <div className="adminnode__Button" onClick={()=> {alert('add feunction')}}>
             <button >Сохранить</button>
           </div>
           <div className="otchetbranch_input__search_icon" onClick={()=>{getInputSearch()}}><img src={Search} alt='о'/></div>
@@ -609,9 +580,11 @@ const getInputSearch = () =>{
      {/* { (col_6) ? <EditCard infoCard={infoCard} options={options} /> : null} */}
      { (col_6) ? <EditCardNode infoCard={infoCard} options={options} /> : null}
      { (col_8) ? <Branchs /> : null}
-     { (col_9) ? <SpisokUsersNode col={col}/> : null}
+     { (col_9) ? <SpisokUsersNode col={col} infoRegUser={infoRegUser} setInfoRegUser={setInfoRegUser}/> : null}
      { (col_10) ? <LogPassUserNode /> : null}
-     { (col_11) ? <LogPassUserNodeEdit  /> : null}
+     { (col_11) ? <LogPassUserNodeEdit  infoRegUser={infoRegUser} setInfoRegUser={setInfoRegUser}/> : null}
+     { (openBranchVznos && selectYzelVznos) ? <BranchsSystemVznos col={col} 
+     labelYzelVznos={labelYzelVznos} setLabelYzelVznos={setLabelYzelVznos}/> : null}
      </div>
 
     </main>

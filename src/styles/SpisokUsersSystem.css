@@ -53,7 +53,10 @@
  /* background-color: #04AA6D;*/
   background-color:rgb(218, 173, 83);
   color: white;
-  
+}
+
+.SpisokUsersSystem .spisokUser_img_close:hover{
+  cursor: pointer;
 }
 
 @-moz-document url-prefix() {

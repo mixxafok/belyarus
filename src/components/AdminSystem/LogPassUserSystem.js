@@ -2,19 +2,30 @@ import React, {useState} from 'react'
 import '../../styles/LogPassUser.css'
 import { BranchsSystemLog } from './BranchsSystemLog'
 
-export  function LogPassUserSystem() {
+export  function LogPassUserSystem({options}) {
   const [hidden, setHidden] = useState(true)
   const [formInput, setFormInput] = useState({
     surname: '',
     name: '',
     patronymic: '',
     login: '',
-    roleId: '1',
+    roleId: 0,
     password: '',
     RepeatPassword: '',
-    nodeId: '',
+    nodeId: 0,
     Yzel: ''
   })
+
+  const role = [];
+  for (let key in options){
+
+    if(key == 'roles'){
+      for (let ked of options['roles']){
+        role.push( ked)
+        continue
+        }
+    }
+  }
 
   const fetchLogPassUser = async () =>{
     const response = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/RegUser/',{
@@ -39,7 +50,7 @@ export  function LogPassUserSystem() {
       alert('Пароли не совпадают')
     }
   }
-
+console.log(role)
   return (
     <div className='LogPassUser'>
 
@@ -77,10 +88,8 @@ export  function LogPassUserSystem() {
           />
           <label>Роль в системе</label>
           <select  value={formInput.roleId} onChange={e=>setFormInput({...formInput, roleId: e.target.value})} className='LogPassUser_select' >
-            <option selected value={1} >Информационный пользователь</option>
-            <option value={2}>Оператор</option>
-            <option value={3}>Администратор узла</option>
-            <option value={4}>Администратор системы</option>
+            <option  ></option> 
+            {role.map((item)=>{ return <option value={item.id}>{item.val}</option>})}
           </select>
           <label>Подконтрольный узел</label>
           <input disabled

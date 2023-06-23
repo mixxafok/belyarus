@@ -7,6 +7,10 @@
   .oper_page .main__ul{
     font-size: 20px;
   }
+  .oper_page .span_YzelVznos{
+    text-align: center;
+    font-size: 20px;
+  }
   .oper_page  .main__span:hover{
     /* letter-spacing: 0.020em; */
     font-size: 21px;
@@ -130,6 +134,10 @@
 
 @media screen and (min-width: 2400px) {
   .oper_page .main__ul{
+    font-size: 28px;
+  }
+  .oper_page .span_YzelVznos{
+    text-align: center;
     font-size: 28px;
   }
   .oper_page  .main__span:hover{
@@ -272,6 +280,10 @@
 
 @media screen and (max-width: 1300px) {
   .oper_page .main__ul{
+    font-size: 14px;
+  }
+  .oper_page .span_YzelVznos{
+    text-align: center;
     font-size: 14px;
   }
   .oper_page  .main__span:hover{
@@ -448,8 +460,11 @@
   .oper_page .main__ul{
     font-size: 12px;
   }
+  .oper_page .span_YzelVznos{
+    text-align: center;
+    font-size: 12px;
+  }
   .oper_page  .main__span:hover{
-    /* letter-spacing: 0.020em; */
     font-size: 13px;
     transition-duration: 300ms;
   }
@@ -515,6 +530,10 @@
 
 @media screen and (max-width: 900px){
   .oper_page .main__ul{
+    font-size: 10px;
+  }
+  .oper_page .span_YzelVznos{
+    text-align: center;
     font-size: 10px;
   }
   .oper_page  .main__span:hover{
@@ -684,6 +703,10 @@
   .oper_page .main__ul{
     font-size: 9px;
   }
+  .oper_page .span_YzelVznos{
+    text-align: center;
+    font-size: 9px;
+  }
   .oper_page  .main__span:hover{
     /* letter-spacing: 0.020em; */
     font-size: 10px;
@@ -846,6 +869,10 @@
 
 @media screen and (max-width: 640px){
   .oper_page .main__ul{
+    font-size: 8px;
+  }
+  .oper_page .span_YzelVznos{
+    text-align: center;
     font-size: 8px;
   }
   .oper_page  .main__span:hover{

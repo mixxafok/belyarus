@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import '../../styles/SpisokUsersSystem.css'
 import Up from '../../icons/up.png'
+import Close from '../../icons/close.png'
 
 
 export  function SpisokUsersSystem({col, setInfoRegUser}) {
@@ -52,12 +53,27 @@ export  function SpisokUsersSystem({col, setInfoRegUser}) {
       <td> {index+1}</td>
         <td className="table__surname"><p onClick={()=>{col('col11'); setInfoRegUser(item); }} className="table_span__surname">{item.surname}</p></td>
         <td>{item.name}</td>
-        <td>{item.patronymic}</td>
+        <td>{item.parent}</td>
         <td> {item.node}</td>
         <td>{item.lastdate}</td>
+        <td onClick={()=>{RemoveUser(item.id )}}><img className='spisokUser_img_close' src={Close} alt='X' width='30%'/></td>
     </tr>
   });
 
+  const RemoveUser = async(itemid) =>{
+    //setUsers([]);
+    try{
+      const responce = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/DeleteRegUser?id=${itemid}`, {
+      method: "get"
+      });
+      const q = await responce.json()
+     
+     // console.log(Users)
+    }
+    catch(err){
+      console.log(err)
+    }
+  }
 
 const fetchGetAdminsSystem = async () =>{
   setUsers([]);
@@ -133,8 +149,9 @@ const fetchGetInfoUsers = async () =>{
               <td>Фамилия</td>
               <td>Имя</td>
               <td>Отчество</td>
-              <td >Подконтрольный узел</td>
+              <td>Подконтрольный узел</td>
               <td>Последняя дата входа</td>
+              <td>&nbsp;&nbsp;</td>
            </tr>
         </thead>
         <tbody>

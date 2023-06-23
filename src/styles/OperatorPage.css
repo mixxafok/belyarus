@@ -83,12 +83,12 @@
 }
 
 .oper_page .main__span:hover{
-  letter-spacing: 0.020em;
+  letter-spacing: 0.000em;
   transition-duration: 300ms;
 }
 
 .oper_page .main__span:active{
-  letter-spacing: 0.020em;
+  letter-spacing: 0.000em;
   color: rgb(50, 43, 30);
 }
 
@@ -225,6 +225,10 @@
   width: 20px;
 }
 
+.oper_page .span_YzelVznos{
+  text-align: center;
+  font-size: 16px;
+}
 /* .otchetbranch_input input[type=date] {
   width: 35%;
   height: calc(1.3rem + 2px);

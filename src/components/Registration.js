@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import '../styles/Registration.css';
 import Ava from '../img/ava.png';
-import { upload } from '@testing-library/user-event/dist/upload';
+
 
 export function Registration ({options}){
 

@@ -77,6 +77,10 @@
   .adminNode_page .main__ul{
     font-size: 28px;
   }
+  .adminNode_page .span_YzelVznos{
+    text-align: center;
+    font-size: 28px;
+  }
   .adminNode_page  .main__span:hover{
     /* letter-spacing: 0.020em; */
     font-size: 29px;
@@ -143,6 +147,10 @@
   .adminNode_page .main__ul{
     font-size: 14px;
   }
+  .adminNode_page .span_YzelVznos{
+    text-align: center;
+    font-size: 14px;
+  }
   .adminNode_page  .main__span:hover{
     /* letter-spacing: 0.020em; */
     font-size: 15px;
@@ -166,6 +174,10 @@
 
 @media screen and (max-width: 1130px) {
   .adminNode_page .main__ul{
+    font-size: 13px;
+  }
+  .adminNode_page .span_YzelVznos{
+    text-align: center;
     font-size: 13px;
   }
   .adminNode_page  .main__span:hover{
@@ -216,6 +228,10 @@
   .adminNode_page .main__ul{
     font-size: 12px;
   }
+  .adminNode_page .span_YzelVznos{
+    text-align: center;
+    font-size: 12px;
+  }
   .adminNode_page  .main__span:hover{
     /* letter-spacing: 0.020em; */
     font-size: 13px;
@@ -239,6 +255,10 @@
 
 @media screen and (max-width: 900px){
   .adminNode_page .main__ul{
+    font-size: 10px;
+  }
+  .adminNode_page .span_YzelVznos{
+    text-align: center;
     font-size: 10px;
   }
   .adminNode_page  .main__ul div li .main__span{
@@ -291,6 +311,10 @@
 
 @media screen and (max-width: 790px){
   .adminNode_page .main__ul{
+    font-size: 9px;
+  }
+  .adminNode_page .span_YzelVznos{
+    text-align: center;
     font-size: 9px;
   }
   .adminNode_page  .main__ul div li .main__span{
@@ -347,6 +371,10 @@
 
 @media screen and (max-width: 640px){
   .adminNode_page .main__ul{
+    font-size: 8px;
+  }
+  .adminNode_page .span_YzelVznos{
+    text-align: center;
     font-size: 8px;
   }
   .adminNode_page  .main__ul div li .main__span{

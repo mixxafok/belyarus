@@ -14,7 +14,8 @@ import '../styles/Header.css';
 import '../styles/Table.css';
 import '../styles/PersonalCardSystem.css';
 import '../styles/mediaOper.css';
-import { fetchPOO, fetchPause, fetchNO, fetchBranch, fetchOptions, fetchSparvka, fetchOne } from "../components/fetchs.js";
+import { fetchPOO, fetchPause, fetchNO, fetchOptions, fetchSparvka, fetchOne,
+  fetchPOOWord, fetchPausedWord, fetchNOWord, fetchPOOExcel,fetchPausedExcel, fetchNOExcel } from "../components/fetchs.js";
 
 export function OperatorPage(){ 
   const [b,setb] = useState([])
@@ -42,17 +43,10 @@ export function OperatorPage(){
   })
   const[foundUsers, setFoundUsers] = useState(b)
   const [a,seta] = useState(JSON.parse(localStorage.getItem("LoginPassword")) )
-
-  useEffect(() => {
-    const loggedInUser = localStorage.getItem("LoginPassword");
-    console.log(loggedInUser)
-    if (loggedInUser) {
-      const foundUser = JSON.parse(loggedInUser);
-      seta(foundUser);
-      console.log(foundUser)
-    }
-    
-  }, []);
+  const [labelYzelVznos, setLabelYzelVznos] = useState({
+    nodeId: a.id,
+    nazva: a.name
+  })
   //нажатие на меню
   function col (cols){
     if (cols == 'col1') {
@@ -146,7 +140,6 @@ export function OperatorPage(){
           setTableHidePause(true);
           setTableHideNO(true);
           setTableHideBranch(!tablehideBranch);
-          fetchBranch({setb});
 
 }
     else if ( cols == 'col6') {
@@ -174,49 +167,7 @@ export function OperatorPage(){
      }
    };
  
-//fetch
- const fetchPOOWord = async () =>{
-  try{
-    await fetch('',{
-    method: 'get'
-  });
-  alert('Файл успешно скачан')
-  }
-  catch(err){
-    console.log(err)
-    alert('Повторите попытку')
-  }
- }
- const fetchPausedWord = async () =>{
-    await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedWord/',{
-    method: 'get'
-  });
- }
- const fetchNOWord = async () =>{
-    await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetKickedWord/',{
-    method: 'get'
-  });
- }
-
- const fetchPausedExcel = async () =>{
-    await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedExel/',{
-    method: 'get'
-  });
- }
- const fetchPOOExcel = async () =>{
-    await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedExel/',{
-    method: 'get'
-  });
- }
- const fetchNOExcel = async () =>{
-    await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetKickedExel/',{
-    method: 'get'
-  });
- }
-
-//fetch
-
-
+   
 //вывод таблиц
    let tablePOO = b.map(function(item,index) {
      return <tr key={item.id}>
@@ -336,6 +287,7 @@ const getInputSearch = () =>{
         <p onClick={()=>fetchNOExcel()}>Отчет в Excel</p>
       </div>
 
+      {!tablehideBranch ? <p className="span_YzelVznos">{labelYzelVznos.nazva}{labelYzelVznos.nodeId}</p> : null}
       <div className={` ${(tablehideBranch ) ? 'OtchetBranchHide' : 'OtchetBranch'}`}>
       <span className="otchetbranch_img_repeat"  onClick={()=> setFoundUsers(b)}><img src={Repeat} alt='☺'/></span>
           <div className="adminnode__Button" onClick={()=> {}}>

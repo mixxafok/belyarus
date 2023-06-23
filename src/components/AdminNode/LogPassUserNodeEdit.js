@@ -2,21 +2,23 @@ import React, {useState} from 'react'
 import '../../styles/LogPassUser.css'
 import { BranchsSystemLog } from '../AdminSystem/BranchsSystemLog'
 
-export  function LogPassUserNodeEdit() {
+export  function LogPassUserNodeEdit({infoRegUser}) {
   const [hidden, setHidden] = useState(true)
   const [formInput, setFormInput] = useState({
-    Surname: '',
-    Name: '',
-    Parent: '',
-    Login: '',
-    Rule: '1',
-    Password: '',
-    RepeatPassword: '',
-    Yzel: ''
+    id: infoRegUser.id,
+    Surname: infoRegUser.surname,
+    Name: infoRegUser.name,
+    patronymic: infoRegUser.patronymic,
+    Login: infoRegUser.login,
+    Rule: infoRegUser.roleId,
+    Password: infoRegUser.password,
+    RepeatPassword: infoRegUser.password,
+  //  NodeId: '',
+    Yzel: infoRegUser.node
   })
 
   const fetchLogPassUser = async () =>{
-    const response = await fetch('',{
+    const response = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/UpdateRegUser/',{
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -31,7 +33,7 @@ export  function LogPassUserNodeEdit() {
   function handleForm (){
     if(formInput.Password === formInput.RepeatPassword){
       console.log(formInput);
-     // fetchLogPassUser();
+      fetchLogPassUser();
       alert('Пользователь успешно зарегистрирован')
     }
     else {
@@ -48,28 +50,28 @@ export  function LogPassUserNodeEdit() {
       <container className='LogPassUser_container'>
         <div className='LogPassUser__div1'>
           <label>Фамилия</label>
-          <input disabled
+          <input required='required'
             className='LogPassUser_input'
             type='text'
             value={formInput.Surname}
             onChange={e=>setFormInput({...formInput, Surname: e.target.value})}
           />
           <label>Имя</label>
-          <input disabled
+          <input 
             className='LogPassUser_input'
             type='text'
             value={formInput.Name}
             onChange={e=>setFormInput({...formInput, Name: e.target.value})}
           />
           <label>Отчество</label>
-          <input disabled
+          <input 
             className='LogPassUser_input'
             type='text'
-            value={formInput.Parent}
-            onChange={e=>setFormInput({...formInput, Parent: e.target.value})}
+            value={formInput.patronymic}
+            onChange={e=>setFormInput({...formInput, patronymic: e.target.value})}
           />
           <label>Логин</label>
-          <input disabled
+          <input 
             className='LogPassUser_input'
             type='text'
             value={formInput.Login}
@@ -87,26 +89,26 @@ export  function LogPassUserNodeEdit() {
             value={formInput.Yzel}
           />
           <label>Пароль</label>
-          <input disabled
+          <input 
             className='LogPassUser_input'
             type={hidden ? 'password' : 'text'}
             value={formInput.Password}
             onChange={e=>setFormInput({...formInput, Password: e.target.value})}
           />
           <label>Повторите пароль</label>
-          <input disabled
+          <input 
             className='LogPassUser_input'
             type={hidden ? 'password' : 'text'}
             value={formInput.RepeatPassword}
             onChange={e=>setFormInput({...formInput, RepeatPassword: e.target.value})}
-          /> 
-            <div>
-              <label>Показать пароль</label>
-              <input
-                type='checkbox'
-                onClick={()=>setHidden(!hidden)}
-              />
-            </div>
+          />
+          <div>
+            <label>Показать пароль</label>
+          <input
+            type='checkbox'
+            onClick={()=>setHidden(!hidden)}
+          />
+          </div>
           </div>
 
           <div className='LogPassUser__div2'>
