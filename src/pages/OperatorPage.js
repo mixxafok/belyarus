@@ -45,7 +45,7 @@ export function OperatorPage(){
   const [a,seta] = useState(JSON.parse(localStorage.getItem("LoginPassword")) )
   const [labelYzelVznos, setLabelYzelVznos] = useState({
     nodeId: a.id,
-    nazva: a.name
+    nazva: a.obl
   })
   //нажатие на меню
   function col (cols){
@@ -176,7 +176,7 @@ export function OperatorPage(){
         <td>{item.name}</td>
         <td>{item.parent}</td>
         <td>{item.numBilet}</td>
-        <td>{item.dateStart}</td>
+        <td>{item.dateIssue}</td>
         <td>{item.place}</td>
      </tr>
   });
@@ -198,7 +198,7 @@ export function OperatorPage(){
       <td>{item.name}</td>
         <td>{item.parent}</td>
         <td>{item.numBilet}</td>
-        <td>{item.dateStart}</td>
+        <td>{item.dateIssue}</td>
         <td>{item.datePause}</td>
    </tr>
  });
@@ -230,6 +230,28 @@ const getInputSearch = () =>{
   }
   setInputSearch('')
 }
+
+const fetchPostCurrentVznosi = async() =>{
+  try{
+     const response = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/GetContributions/',{
+    method: "post",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json;charset=utf-8',  
+    },
+    body:JSON.stringify({month: inputDate.VznosMonth, year: inputDate.VznosYear, nodeId: labelYzelVznos.nodeId}) 
+  });
+  const q = await response.json();
+  setFoundUsers(q.users);
+//  setInputDate({...inputDate, VznosMonth: q.period.month, VznosYear: q.period.year});
+  console.log(foundUsers)
+  }
+ catch(err){
+  console.log(err);
+  alert('Выберите другую дату. Данных за данный период нет')
+ }
+}
+
 
   return (
     <div className="oper_page">
@@ -289,8 +311,8 @@ const getInputSearch = () =>{
 
       {!tablehideBranch ? <p className="span_YzelVznos">{labelYzelVznos.nazva}{labelYzelVznos.nodeId}</p> : null}
       <div className={` ${(tablehideBranch ) ? 'OtchetBranchHide' : 'OtchetBranch'}`}>
-      <span className="otchetbranch_img_repeat"  onClick={()=> setFoundUsers(b)}><img src={Repeat} alt='☺'/></span>
-          <div className="adminnode__Button" onClick={()=> {}}>
+      <span className="otchetbranch_img_repeat"  onClick={()=> {setFoundUsers(b); fetchPostCurrentVznosi();}}><img src={Repeat} alt='☺'/></span>
+          <div className="adminnode__Button" onClick={()=> alert('add function')}>
             <button >Сохранить</button>
           </div>
           <div className="otchetbranch_input__search_icon" onClick={()=>{getInputSearch()}}><img src={Search} alt='о'/></div>

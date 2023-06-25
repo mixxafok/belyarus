@@ -27,6 +27,8 @@ export  function BranchsSystemVznos({col, labelYzelVznos, setLabelYzelVznos}) {
     nazva: ''
   }]);
 
+  const startNode = JSON.parse(localStorage.getItem('LoginPassword'))
+
   function openCloseYzel (open) {
     if(open == 'world'){
       setOpenRespublic(false)
@@ -40,7 +42,7 @@ export  function BranchsSystemVznos({col, labelYzelVznos, setLabelYzelVznos}) {
       setOpenOblast(false)
       setOpenRaion(false)
       setOpenOtdel(false)
-      fetchYzel(3002, false)
+      fetchYzel(startNode.oblId, false)
       setLabelYzelOblast('')
     }
     if(open == 'oblasti'){
@@ -219,14 +221,14 @@ export  function BranchsSystemVznos({col, labelYzelVznos, setLabelYzelVznos}) {
                 <img src={Arrow} alt='←' width='14px' style={{display: 'inline', marginRight: '1%'}}/>
               </span>
               :
-              <span onClick={()=>{ openCloseYzel('respublic'); setLabelYzel('Республика Беларусь');
-              ar.push({Id: 3002, nazva: 'Республика Беларусь'}); setLabelYzelVznos({...labelYzelVznos, nodeId: ar[ar.length-1].Id, nazva: ar[ar.length-1].nazva});
+              <span onClick={()=>{ openCloseYzel('respublic'); setLabelYzel(startNode.obl);
+              ar.push({Id: startNode.oblId, nazva: startNode.obl}); setLabelYzelVznos({...labelYzelVznos, nodeId: ar[ar.length-1].Id, nazva: ar[ar.length-1].nazva});
                }}>
                 <img src={Plus} alt='+' width='14px' style={{display: 'inline', marginRight: '1%'}}/>
               </span>
             }
             
-          <span className='branchs__span__cursor_default'> Республика Беларусь</span> 
+          <span className='branchs__span__cursor_default'> {startNode.obl}</span> 
           <span className='branchs__span__cursor_default'> {LabelYzelOblast}</span> 
           <span className='branchs__span__cursor_default'> {LabelYzelRaion}</span> 
           <span className='branchs__span__cursor_default'> {LabelYzelOtdel}</span> 

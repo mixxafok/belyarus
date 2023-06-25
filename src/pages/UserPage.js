@@ -109,7 +109,7 @@ export function UserPage(){
         <td>{item.name}</td>
         <td>{item.parent}</td>
         <td>{item.numBilet}</td>
-        <td>{item.dateStart}</td>
+        <td>{item.dateIssue}</td>
         <td>{item.place}</td>
      </tr>
   });
@@ -131,7 +131,7 @@ export function UserPage(){
       <td>{item.name}</td>
         <td>{item.parent}</td>
         <td>{item.numBilet}</td>
-        <td>{item.dateStart}</td>
+        <td>{item.dateIssue}</td>
         <td>{item.datePause}</td>
    </tr>
  });
@@ -238,7 +238,7 @@ export function UserPage(){
              {tableNO}
           </tbody>
        </table>
-       { (col_2) ? <FindFilter tablefindfilter={tablefindfilter} b={b} options={options} /> : null}
+       { (col_2) ? <FindFilter b={b} options={options} col={col} infoCard={infoCard} setInfoCard={setInfoCard} /> : null}
        </div>
       </main>
     

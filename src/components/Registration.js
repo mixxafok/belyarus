@@ -68,18 +68,11 @@ export function Registration ({options}){
 //обработка options
 
   const [formInput, setFormInput] = useState({
-   // Login: '',
-   // Password: '',
-   // RepeatPassword: '',
-   // Rule: '',
-   // Vznos: '',
     Surname: '', 
     Name: '',
     Parent: '',
     NumBilet: 0,
-   // DateStart: '',
-   // DateFinish: '',
-    dateIssue: '',
+    DateIssue: '',
     StatusBilet: '',
     StatusMember: '',
     Sex: '',
@@ -95,7 +88,8 @@ export function Registration ({options}){
     RegistrationAddress:'',
     LivingAddress:'',
     TelephoneNumber:'',
-    Place: '' 
+    Place: '' ,
+    file: null
   })
 
 
@@ -109,19 +103,13 @@ const handleForm = () =>{
    && formInput.StatusMember !== '' && formInput.Education !== '' && formInput.SocialGroup !== ''
    && formInput.SphereActivity !== '' && formInput.StatusPart !== '' && formInput.Deputat !== '' )
    {
-    fetchRegistration(); 
+    handleUpload(); 
+    console.log(formInput)
     setFormInput({
-      // Login: '',
-      // Password: '',
-      // RepeatPassword: '',
-      // Rule: '',
-      // Vznos: '',
        Surname: '', 
        Name: '',
        Parent: '',
        NumBilet: 0,
-      // DateStart: '',
-      // DateFinish: '',
        dateIssue: '',
        StatusBilet: '',
        StatusMember: '',
@@ -138,82 +126,99 @@ const handleForm = () =>{
        RegistrationAddress:'',
        LivingAddress:'',
        TelephoneNumber:'',
-       Place: '' 
+       Place: '' ,
+       file: null
      });
-     alert('Член партии зарегистрирован')
+     
+     
    } 
   else {
     alert('Не все поля заполнены')
   }
-  
-
-  // ДОБАВИТЬ ОЧИТСКУ forminput
 }
 
 //запрос fetch POST
-const fetchRegistration = async ()=>{
-  try{
-    const response = await fetch("http://secondsin-001-site1.dtempurl.com/UserPage/addCard/", {
-      method: 'post',
-      headers: {
-        'Accept': 'application/json',
-      'Content-Type': 'application/json;charset=utf-8',
+// const fetchRegistration = async ()=>{
+//   try{
+//     const response = await fetch("http://secondsin-001-site1.dtempurl.com/UserPage/addCard/", {
+//       method: 'post',
+//       headers: {
+//         'Accept': 'application/json',
+//       'Content-Type': 'application/json;charset=utf-8',
 
-      },
-      body: JSON.stringify(formInput)
-    });
+//       },
+//       body: JSON.stringify(formInput)
+//     });
 
-    let q = await response.json();
-    await console.log(JSON.stringify(q));
+//     let q = await response.json();
+//     await console.log(JSON.stringify(q));
+//     alert('Член партии зарегистрирован')
+//   }
+//   catch(err){
+//     console.log(err) 
+//    }
+// };//запрос fetch POST
 
-  }
-  catch(err){
-    console.log(err) 
-   }
-};//запрос fetch POST
 
-
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [uploaded, setUploaded] = useState({
-    filePath:''
-  });
+  const [selectedFile, setSelectedFile] = useState(null); //выбранная картика
+  const [selectedFileload, setSelectedFileload] = useState(null); // выбранная картинка для отправки
+ // const [uploaded, setUploaded] = useState([]); // ответ от fetch
+  let formData = new FormData();
 
   const handleChange = (event) => {
     console.log(event.target.files);
-    const [file] = event.target.files;
-   // setSelectedFile(event.target.files[0]);
-    setSelectedFile(URL.createObjectURL(file))
+    setSelectedFileload(event.target.files[0]); // записать картинку
+    setSelectedFile(URL.createObjectURL(event.target.files[0]))
   }
 
  const handleUpload = async () =>{
-    if(!selectedFile){
-      alert('please');
+    if(!selectedFile){ 
+      alert('Выберите фотографию');
       return;
-    };
-    const formData = new FormData();
-    formData.append('uploadFile', selectedFile);
-   const res = await fetch('https://www.example.com/uploadFile.php',{
+    }; 
+    formData.append('file', selectedFileload);
+    formData.append('Name', formInput.Name);
+    formData.append('Surname', formInput.Surname);
+    formData.append('Parent', formInput.Parent);
+    formData.append('DateBirth', formInput.DateBirth);
+    formData.append('DateIssue', formInput.DateIssue);
+    formData.append('Sex', formInput.Sex);
+    formData.append('Education', formInput.Education);
+    formData.append('SocialGroup', formInput.SocialGroup);
+    formData.append('SphereActivity', formInput.SphereActivity);
+    formData.append('StatusBilet', formInput.StatusBilet);
+    formData.append('StatusPart', formInput.StatusPart);
+    formData.append('StatusMember', formInput.StatusMember);
+    formData.append('TelephoneNumber', formInput.TelephoneNumber);
+    formData.append('LivingAddress', formInput.LivingAddress);
+    formData.append('RegistrationAddress', formInput.RegistrationAddress);
+    formData.append('PlaceIssue', formInput.PlaceIssue);
+    formData.append('Place', formInput.Place);
+    formData.append('PlaceJob', formInput.PlaceJob);
+    formData.append('PostJob', formInput.PostJob);
+    formData.append('NumBilet', formInput.NumBilet);
+
+   const res = await fetch('http://localhost:80/UserPage/addCard/',{
     method: "post",
-    headers: {
-      "Content-Type": "multipart/form-data"
-    },
-    body: formData
+    body: formData,
    })
    const data = await res.json()
-   setUploaded(data);
+  //  for (var key of formData.entries()) {
+  //   console.log(key[0] + ', ' + key[1]);
+  //   }
   };
+
 
   return (
     <div className='registration'>
-    
-          <div className="reg__Button" onClick={()=>handleForm()}>
+
+          <div className="reg__Button" onClick={()=>{ handleForm();}}>
             <button >Сохранить</button>
           </div>
-
         <container className="Img_Fio">
           <div className='reg__form_input_img'>
             <img src={selectedFile} alt='' width='23.3mm' height='31mm' className='reg__img'></img>
-            <input type="file" onChange={handleChange}  className='file' accept='image/*,.png,.jpg' />
+              <input type="file" onChange={handleChange} name='uploadFile' className='file' accept='image/*,.png,.jpg' />
             {/* <button onClick={handleUpload}>upload</button> */}
           </div>
 
@@ -271,20 +276,6 @@ const fetchRegistration = async ()=>{
           </container>
          </container>
         </container>
-       
-    
-        {/* <div className="reg__form_input_1">
-          <label>Номер билета</label>
-          <input
-            type="search"
-            onChange={(e) => setFormInput({ ...formInput, NumBilet: e.target.value })}
-            value={formInput.NumBilet }
-            className="reg__input"
-            placeholder=""
-          />
-          </div>
-          */}
-          
 
         <container className="Statusts">
           <div className="reg__form_input_combobox__places">
@@ -349,8 +340,8 @@ const fetchRegistration = async ()=>{
           <div className="reg__form_input_date">
             <label >Дата вступления</label>
             <input 
-              value={formInput.dateIssue}
-              onChange={(e) => setFormInput({ ...formInput, dateIssue: e.target.value })} 
+              value={formInput.DateIssue}
+              onChange={(e) => setFormInput({ ...formInput, DateIssue: e.target.value })} 
               type="date" 
               min="2023-01-01"/>
           </div>

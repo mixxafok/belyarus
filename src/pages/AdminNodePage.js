@@ -236,7 +236,7 @@ export function AdminNodePage(){
     else if (cols == 'col7a'){
            
   //  fetchBranch({setb});
-      fetchCurrentVznosi({setFoundUsers});
+      fetchCurrentVznosi({setFoundUsers, setInputDate, inputDate});
       setTableHideBranch(!tablehideBranch);
       setOpenBranchVznos(false);
   }
@@ -342,7 +342,7 @@ export function AdminNodePage(){
         <td>{item.name}</td>
         <td>{item.parent}</td>
         <td>{item.numBilet}</td>
-        <td>{item.dateStart}</td>
+        <td>{item.dateIssue}</td>
         <td>{item.place}</td>
      </tr>
   });
@@ -364,7 +364,7 @@ export function AdminNodePage(){
       <td>{item.name}</td>
         <td>{item.parent}</td>
         <td>{item.numBilet}</td>
-        <td>{item.dateStart}</td>
+        <td>{item.dateIssue}</td>
         <td>{item.datePause}</td>
    </tr>
  });
@@ -397,6 +397,26 @@ const getInputSearch = () =>{
   setInputSearch('')
 }
 
+const fetchPostCurrentVznosi = async() =>{
+  try{
+     const response = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/GetContributions/',{
+    method: "post",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json;charset=utf-8',  
+    },
+    body:JSON.stringify({month: inputDate.VznosMonth, year: inputDate.VznosYear, nodeId: labelYzelVznos.nodeId}) 
+  });
+  const q = await response.json();
+  setFoundUsers(q.users);
+//  setInputDate({...inputDate, VznosMonth: q.period.month, VznosYear: q.period.year});
+  console.log(foundUsers)
+  }
+ catch(err){
+  console.log(err);
+  alert('Выберите другую дату. Данных за данный период нет')
+ }
+}
 
 
   return (
@@ -469,7 +489,7 @@ const getInputSearch = () =>{
 
       {!tablehideBranch ? <p className="span_YzelVznos">{labelYzelVznos.nazva}{labelYzelVznos.nodeId}</p> : null}
       <div className={`OtchetBranch ${(tablehideBranch ) ? 'hide' : ''}`}>
-      <span style={{marginRight: '1%', marginTop: '3px', cursor:'pointer'}} onClick={()=> setFoundUsers(b)}><img src={Repeat} alt='☺' width='20px'/></span>
+      <span style={{marginRight: '1%', marginTop: '3px', cursor:'pointer'}} onClick={()=>{ setFoundUsers(b); fetchPostCurrentVznosi();}}><img src={Repeat} alt='☺' width='20px'/></span>
           <div className="adminnode__Button" onClick={()=> {alert('add feunction')}}>
             <button >Сохранить</button>
           </div>

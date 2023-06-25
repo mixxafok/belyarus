@@ -55,24 +55,30 @@ export  function SpisokUsersSystem({col, setInfoRegUser}) {
         <td>{item.name}</td>
         <td>{item.parent}</td>
         <td> {item.node}</td>
-        <td>{item.lastdate}</td>
-        <td onClick={()=>{RemoveUser(item.id )}}><img className='spisokUser_img_close' src={Close} alt='X' width='30%'/></td>
+        <td>{item.lastLoginDate}</td>
+        <td onClick={()=>{RemoveUser(item.id )}}><span><img className='spisokUser_img_close' src={Close} alt='X' width='14px'/></span></td>
     </tr>
   });
 
   const RemoveUser = async(itemid) =>{
-    //setUsers([]);
-    try{
+    //setUsers([])
+    // setUsers(Users.filter(item => item.id != itemid));
+    if(window.confirm('Вы точно хотите удалить этого пользователя?')){
+      try{
       const responce = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/DeleteRegUser?id=${itemid}`, {
       method: "get"
       });
-      const q = await responce.json()
-     
+      if(seletedLi1) fetchGetAdminsSystem();
+      if(seletedLi2) fetchGetAdminsYzels();
+      if(seletedLi3) fetchGetOperators();
+      if(seletedLi4) fetchGetInfoUsers();
      // console.log(Users)
     }
     catch(err){
       console.log(err)
     }
+    }
+    
   }
 
 const fetchGetAdminsSystem = async () =>{

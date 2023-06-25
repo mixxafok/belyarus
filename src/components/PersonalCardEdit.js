@@ -19,11 +19,11 @@ export function PersonalCardEdit({setPersoncardEdit,col, infoCard } ){
        <li> <span className="adminspan2">Статус билета:</span>  {item.statusBilet}</li>
        <li> <span className="adminspan2">Пол:</span>  {item.sex}</li>
        <li> <span className="adminspan2">Дата рождения:</span>  {item.dateBirth}</li>
-       <li> <span className="adminspan2">Дата вступления:</span>  {item.dateStart}</li>
+       <li> <span className="adminspan2">Дата вступления:</span>  {item.dateIssue}</li>
        <li> <span className="adminspan2">Место вступления:</span>  {item.placeIssue}</li>
        <li> <span className="adminspan2">Статус членства:</span>  {item.statusMember}</li>
        <li> <span className="adminspan2">Место постановки на учет:</span>  {item.uchetPlace} </li>
-       <li> <span className="adminspan2">Образование: </span> {item.educarion}</li>
+       <li> <span className="adminspan2">Образование: </span> {item.education}</li>
        <li> <span className="adminspan2">Социальная категория:</span>  {item.socialGroup}</li>
        <li> <span className="adminspan2">Сфера деятельности:</span>  {item.sphereActivity}</li>
        <li> <span className="adminspan2">Место работы:</span>  {item.placeJob} </li>
@@ -32,7 +32,7 @@ export function PersonalCardEdit({setPersoncardEdit,col, infoCard } ){
        <li> <span className="adminspan2">Избирался ли депутатом:</span>  {item.deputat}</li>
        <li> <span className="adminspan2">Адрес проживания:</span>  {item.livingAddress} </li>
        <li> <span className="adminspan2">Номер телефона:</span>  {item.telephoneNumber} </li>
-       <li> <span className="adminspan2">Взносы: </span>  </li>
+       <li> <span className="adminspan2">Взносы: {item.vznos}</span>  </li>
     </ul>
   });
 

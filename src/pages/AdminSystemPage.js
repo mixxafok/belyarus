@@ -50,8 +50,8 @@ export function AdminSystemPage(){
   const[personcardEdit, setPersoncardEdit] = useState(false)
   const[inputSearch, setInputSearch] = useState('')
   const[inputDate, setInputDate] = useState({
-    VznosMonth:'',
-    VznosYear:''
+    VznosMonth: 0,
+    VznosYear: 0
   })
   const[foundUsers, setFoundUsers] = useState([])
   const [respublic, setRuspublic] = useState([])
@@ -246,13 +246,14 @@ export function AdminSystemPage(){
       setTableHideBranch(true);
       setOpenBranchVznos(true);
       setSelectYzelVznos(!selectYzelVznos);
-      fetchYzelRespublic();
+    //  fetchYzelRespublic();
       setLabelYzelVznos({...labelYzelVznos, nodeId: 0, nazva: ''});
     }
     else if (cols == 'col7a'){
                
       //  fetchBranch({setb});
-      fetchCurrentVznosi({setFoundUsers, setInputDate, inputDate});
+     
+     // fetchCurrentVznosi({setFoundUsers, setInputDate, inputDate});
       setTableHideBranch(!tablehideBranch);
       setOpenBranchVznos(false);
     }
@@ -275,7 +276,7 @@ export function AdminSystemPage(){
           setTableHideNO(true);
           setTableHideBranch(true);
           setSelectYzelVznos(false);
-          fetchYzelRespublic();
+        //  fetchYzelRespublic();
     }
     else if ( cols == 'col9') {
       setcol_0(false);
@@ -348,43 +349,63 @@ export function AdminSystemPage(){
       localStorage.clear()
      }
    };
- 
-
-   const fetchYzelRespublic = async ()=>{
-      try{
-     const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/getFirstNode/`, {
-       method: "get",
-      "content-type" : "application/json; charset=utf-8"
-     });
-     let q = await response.json();
-     await setRuspublic(q);
-     // console.log(q[0].isEndNode)
-    }
-    catch(err){
-      console.log(err)
-      
-    }
-  }
 
   const fetchPostCurrentVznosi = async() =>{
     try{
-       const response = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/CurrentVznosi/',{
+       const response = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/GetContributions/',{
       method: "post",
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json;charset=utf-8',  
       },
-      body:JSON.stringify(foundUsers) 
+      body:JSON.stringify({month: inputDate.VznosMonth, year: inputDate.VznosYear, nodeId: labelYzelVznos.nodeId}) 
     });
     const q = await response.json();
+    setFoundUsers(q.users);
+  //  setInputDate({...inputDate, VznosMonth: q.period.month, VznosYear: q.period.year});
     console.log(foundUsers)
     }
    catch(err){
     console.log(err);
-    alert('Данные не сохранились')
+    alert('Выберите другую дату. Данных за данный период нет')
    }
   }
 
+  const fetchPostSaveVznosi = async() =>{
+    try{
+       const response = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/AddContributions/',{
+      method: "post",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json;charset=utf-8',  
+      },
+      body: foundUsers
+    });
+    const q = await response.json();
+   // setFoundUsers(q.users);
+  //  setInputDate({...inputDate, VznosMonth: q.period.month, VznosYear: q.period.year});
+    console.log(q)
+    }
+   catch(err){
+    console.log(err);
+    alert('Выберите другую дату. Данных за данный период нет')
+   }
+  }
+
+  const getInputSearch = () =>{
+    console.log(inputDate)
+  
+    if ( inputSearch != '' ) {
+      const results = b.filter((result) => {
+       return(result.surname.toLowerCase().startsWith(inputSearch.toLowerCase()) 
+      )
+      });
+      setFoundUsers(results);
+    } else {
+      setFoundUsers(b);
+    }
+    setInputSearch('')
+  }
 
 //вывод таблиц
    let tablePOO = b.map(function(item,index) {
@@ -394,7 +415,7 @@ export function AdminSystemPage(){
         <td>{item.name}</td>
         <td>{item.parent}</td>
         <td>{item.numBilet}</td>
-        <td>{item.dateStart}</td>
+        <td>{item.dateIssue}</td>
         <td>{item.place}</td>
      </tr>
   });
@@ -416,41 +437,34 @@ export function AdminSystemPage(){
       <td>{item.name}</td>
         <td>{item.parent}</td>
         <td>{item.numBilet}</td>
-        <td>{item.dateStart}</td>
+        <td>{item.dateIssue}</td>
         <td>{item.datePause}</td>
    </tr>
  });
 
+const [f, setf] = useState({
+  id: 0,
+  Is: false
+})
 
+function s(itemispaid){
+  return !itemispaid;
+}
 
  let tableBranch = foundUsers.sort((a,b)=>a.surname.localeCompare(b.surname)).map(function(item,index) {
+
   return <tr key={item.id}>
     <td> {index+1}</td>
-     <td className="table__surname"><p onClick={()=>{ fetchOne(item.id, {setInfoCard}); setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
+     <td className="table__surname"><p>{item.surname}</p></td>
      <td>{item.name}</td>
        <td>{item.patronymic}</td>
-       <td><input type="checkbox" name="name1" checked={item.isPaid}  onChange={()=>{}} /></td>
+       <td><input type="checkbox" name="name1" checked={item.isPaid}  onClick={()=>{return !item.isPaid}} /></td>
   </tr>
 });
 //вывод таблиц
 
 
-const getInputSearch = () =>{
-  console.log(inputDate)
-
-  if ( inputSearch != '' ) {
-    const results = b.filter((result) => {
-     return(result.surname.toLowerCase().startsWith(inputSearch.toLowerCase()) 
-    )
-    });
-    setFoundUsers(results);
-  } else {
-    setFoundUsers(b);
-  }
-  setInputSearch('')
-}
-
-console.log(foundUsers)
+//console.log(foundUsers)
 
   return (
     <div className="adminSystem_page">
@@ -522,8 +536,10 @@ console.log(foundUsers)
 
       {!tablehideBranch ? <p className="span_YzelVznos">{labelYzelVznos.nazva}{labelYzelVznos.nodeId}</p> : null}
       <div className={`OtchetBranch ${(tablehideBranch ) ? 'hide' : ''}`}>
-      <span style={{marginRight: '1%', marginTop: '3px', cursor:'pointer'}} onClick={()=> setFoundUsers(b)}><img src={Repeat} alt='☺' width='20px'/></span>
-          <div className="adminnode__Button" onClick={()=> {alert('add function')}}> 
+      <span style={{marginRight: '1%', marginTop: '3px', cursor:'pointer'}} onClick={()=>{ fetchPostCurrentVznosi();}}>
+        <img className="vznos_img_repeat" src={Repeat} alt='☺' width='20px'/>
+      </span>
+          <div className="adminnode__Button" onClick={()=> {fetchPostSaveVznosi()}}> 
             <button >Сохранить</button>
           </div>
           <div className="otchetbranch_input__search_icon" onClick={()=>{getInputSearch()}}><img src={Search} alt='о'/></div>
@@ -535,7 +551,7 @@ console.log(foundUsers)
           placeholder="Введите фамилию"
           />
           <select className='month' value={inputDate.VznosMonth} onChange={(e) => setInputDate({ ...inputDate, VznosMonth: e.target.value })}>
-             <option value='' disabled selected>Месяц</option> 
+             <option value=''  >Месяц</option> 
              <option value={1}>Январь</option>
              <option value={2}>Февраль</option>
              <option value={3}>Март</option>
@@ -550,7 +566,7 @@ console.log(foundUsers)
              <option value={12}>Декабрь</option>
             </select>
             <select className='year' value={inputDate.VznosYear} onChange={(e) => setInputDate({ ...inputDate, VznosYear: e.target.value })}>
-              <option value='' disabled selected>год</option> 
+              <option value=''  >год</option> 
              <option value={2023}>2023</option>
              <option value={2024}>2024</option>
             </select>
@@ -631,7 +647,7 @@ console.log(foundUsers)
      { (col_5) ? <Registration options={options}/> : null}
      {/* { (col_6) ? <EditCard infoCard={infoCard} options={options} /> : null} */}
      { (col_6) ? <EditCardSystem infoCard={infoCard} options={options} /> : null}
-     { (col_8) ? <BranchsSystem  respublic={respublic}/> : null}
+     { (col_8) ? <BranchsSystem  /> : null}
      { (col_9) ? <SpisokUsersSystem col={col} infoRegUser={infoRegUser} setInfoRegUser={setInfoRegUser} /> : null}
      { (col_10) ? <LogPassUserSystem options={options}/> : null}
      { (col_11) ? <LogPassUserSystemEdit options={options} infoRegUser={infoRegUser} setInfoRegUser={setInfoRegUser}/> : null}

@@ -182,8 +182,10 @@
   width: 15%;
   border-radius: 8px;
   text-align: center;
+  vertical-align: middle;
   transition: 50ms;
   margin-right: 50%;
+  margin-top: auto;
 }
 
 .adminnode__Button:active {
@@ -199,6 +201,7 @@
   display: flex;
   flex-flow: row;
   justify-content: space-between;
+  
   font-size: 14px;
   float: right;
   margin-top: 1%;

@@ -2,13 +2,12 @@ import React, {useState} from "react";
 import '../styles/Table.css';
 import '../styles/Findfilter.css';
 import {PersonalCard} from './PersonalCard.js';
+import { fetchOne } from "./fetchs";
 
-export function FindFilter({b,tablefindfilter, options}){
+export function FindFilter({b,tablefindfilter, options, col, infoCard,setInfoCard}){
 
   const[personcard, setPersoncard] = useState(false);
-  const [infoCard,setInfoCard] = useState([])
-  const [foundUsers, setFoundUsers] = useState(b);
-  
+  const [foundUsers, setFoundUsers] = useState([]);
   const [formInput, setFormInput] = useState({
     Surname: '', 
     Name: '',
@@ -35,9 +34,10 @@ export function FindFilter({b,tablefindfilter, options}){
       console.log(formInput)
      if( formInput.Surname !== '' || formInput.Name !== '' || formInput.Parent !== ''
       || formInput.NumBilet !== '' || formInput.StatusBilet !== '' || formInput.Sex !== ''
-      || formInput.DateBirth !== '' || formInput.DateIssue !== '' || formInput.PlaceIssue !== ''
-      || formInput.StatusMember !== '' || formInput.Education !== '' || formInput.SocialGroup !== ''
-      || formInput.SphereActivity !== '' || formInput.StatusPart !== '' || formInput.Deputat !== '' )  fetchPost();
+      || formInput.DateBirthTo !== '' || formInput.DateIssueTo !== '' || formInput.PlaceIssue !== ''
+      || formInput.DateBirthFrom !== '' || formInput.DateIssueFrom !== '' || formInput.StatusMember !== ''
+      || formInput.Education !== '' || formInput.SocialGroup !== ''|| formInput.SphereActivity !== ''
+      || formInput.StatusPart !== '' || formInput.Deputat !== '' )  fetchPost();
      else setFoundUsers(b);
       // if ( formInput.Name !== '' || formInput.Surname !== '' || formInput.Parent !== '' || formInput.NumBilet !== ''|| formInput.StatusBilet !== '') {
       //   const results = b.filter((result) => {
@@ -75,15 +75,6 @@ export function FindFilter({b,tablefindfilter, options}){
   
     }
 
-// get одного пользователя
-    const fetchOne = async (itemid)=>{
-      const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/GetOne?id=${itemid}`, {
-        method: "get",
-      });
-      let q = await response.json();
-      await setInfoCard([q]);
-    };
-
 // post для поиска
     const fetchPost = async () => {
       try{
@@ -97,28 +88,30 @@ export function FindFilter({b,tablefindfilter, options}){
         })
         let q = await responce.json();
         await setFoundUsers(q);
-        console.log(foundUsers)
+       console.log([q])
       }
       catch(err){
         console.log(err);
       }
     };
 
+
   let filt = foundUsers && foundUsers.length > 0 ? (
     foundUsers.map((user,index) => (
       <tr key={user.id}>
       <td> {index+1}</td>
-       <td className="table__surname"><p onClick={()=>{fetchOne(user.id); setPersoncard(!personcard);}} className="table_span__surname">{user.surname}</p></td>
+       <td className="table__surname"><p onClick={()=>{fetchOne(user.id, {setInfoCard}); setPersoncard(!personcard);}} className="table_span__surname">{user.surname}</p></td>
        <td>{user.name}</td>
-         <td>{user.parent}</td>
-         <td>{user.numBilet}</td>
-         <td>{user.dateStart}</td>
-         <td>{user.place}</td>
+       <td>{user.parent}</td>
+       <td>{user.numBilet}</td>
+       <td>{user.dateStart}</td>
+       <td>{user.place}</td>
     </tr>
     ))
   ) : (
     <h1>Результаты не найдены!</h1>
   )
+
 
 //обработка options
     const educ = [];
@@ -181,6 +174,7 @@ export function FindFilter({b,tablefindfilter, options}){
     }
   //обработка options
 
+
   return (
     
   <div className="filter">
@@ -237,8 +231,8 @@ export function FindFilter({b,tablefindfilter, options}){
         
         <div className="form_input_combobox">
         <label>Статус билета</label>
-        <select className="select" value={formInput.StatusBilet} onChange={(e) => setFormInput({ ...formInput, StatusBilet: e.target.value })}> 
-          <option disabled hidden></option>
+        <select  className="select" value={formInput.StatusBilet} onChange={(e) => setFormInput({ ...formInput, StatusBilet: e.target.value })}> 
+          <option  ></option>
           {crdSt.map((item)=>{ return <option value={item.id}>{item.val}</option>})} 
         </select>
         </div>
@@ -246,7 +240,7 @@ export function FindFilter({b,tablefindfilter, options}){
         <div className="form_input_combobox">
         <label>Пол</label>
         <select className="select" value={formInput.Sex} onChange={(e) => setFormInput({ ...formInput, Sex: e.target.value })}> 
-          <option disabled hidden></option>
+          <option  ></option>
           <option value={true}>Мужской</option>
           <option value={false}>Женский</option>
         </select>
@@ -319,7 +313,7 @@ export function FindFilter({b,tablefindfilter, options}){
         <div className="form_input_combobox">
         <label>Образование</label>
         <select className="select" value={formInput.Education} onChange={(e) => setFormInput({ ...formInput, Education: e.target.value })}>
-          <option  ></option> 
+          <option ></option> 
           {educ.map((item)=>{ return <option value={item.id}>{item.val}</option>})} 
         </select>
         </div>
@@ -359,7 +353,7 @@ export function FindFilter({b,tablefindfilter, options}){
     </div>
 
     <div className="table">
-    <div className={` ${(tablefindfilter) ? 'OtchetFilterHide' : 'OtchetFilter'}`}>
+    <div className={`OtchetFilter ${(tablefindfilter) ? 'hide' : ''}`}>
           <p>Отчет в Word</p>
           <p>Отчет в Excel</p>
         </div>
@@ -379,7 +373,7 @@ export function FindFilter({b,tablefindfilter, options}){
        {filt}
     </tbody>
     </table>
-    {personcard ? <PersonalCard setPersoncard={setPersoncard}  infoCard={infoCard} setInfoCard={setInfoCard}/> : null}
+    {personcard ? <PersonalCard setPersoncard={setPersoncard} col={col} infoCard={infoCard}/> : null}
     </div>
   </div>
   )

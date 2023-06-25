@@ -14,24 +14,24 @@ export function PersonalCard({setPersoncard, infoCard} ){
   let uli = infoCard.map((item) => {
     return <ul className="admindiv_2__ul">
        <li>Номер партийного билета: <span className="adminspan1">{item.numBilet}</span> </li>
-       <li>Дата выдачи билета: {item.dateStart}</li>
-       <li>Статус билета: {item.statusBilet}</li>
-       <li>Пол: {item.sex}</li>
-       <li>Дата рождения: {item.dateBirth}</li>
-       <li>Дата вступления: {item.dateStart}</li>
-       <li>Место вступления: {item.placeIssue}</li>
-       <li>Статус членства: {item.statusMember}</li>
-       <li>Место постановки на учет: {item.uchetPlace}</li>
-       <li>Образование: {item.educarion}</li>
-       <li>Социальная категория: {item.socialGroup}</li>
-       <li>Сфера деятельности: {item.sphereActivity}</li>
-       <li>Место работы: {item.placeJob} </li>
-       <li>Должность: {item.postJob} </li>
-       <li>Статус в партии: {item.statusPart}</li>
-       <li>Избирался ли депутатом: {item.deputat}</li>
-       <li>Адрес проживания: {item.livingAddress} </li>
-       <li>Номер телефона: {item.telephoneNumber} </li>
-       <li>Взносы:  </li>
+       <li> <span className="adminspan2">Дата выдачи билета:</span>  {item.dateStart}</li>
+       <li> <span className="adminspan2">Статус билета:</span>  {item.statusBilet}</li>
+       <li> <span className="adminspan2">Пол:</span>  {item.sex}</li>
+       <li> <span className="adminspan2">Дата рождения:</span>  {item.dateBirth}</li>
+       <li> <span className="adminspan2">Дата вступления:</span>  {item.dateIssue}</li>
+       <li> <span className="adminspan2">Место вступления:</span>  {item.placeIssue}</li>
+       <li> <span className="adminspan2">Статус членства:</span>  {item.statusMember}</li>
+       <li> <span className="adminspan2">Место постановки на учет:</span>  {item.uchetPlace} </li>
+       <li> <span className="adminspan2">Образование: </span> {item.education}</li>
+       <li> <span className="adminspan2">Социальная категория:</span>  {item.socialGroup}</li>
+       <li> <span className="adminspan2">Сфера деятельности:</span>  {item.sphereActivity}</li>
+       <li> <span className="adminspan2">Место работы:</span>  {item.placeJob} </li>
+       <li> <span className="adminspan2">Должность:</span>  {item.postJob} </li>
+       <li> <span className="adminspan2">Статус в партии:</span>  {item.statusPart}</li>
+       <li> <span className="adminspan2">Избирался ли депутатом:</span>  {item.deputat}</li>
+       <li> <span className="adminspan2">Адрес проживания:</span>  {item.livingAddress} </li>
+       <li> <span className="adminspan2">Номер телефона:</span>  {item.telephoneNumber} </li>
+       <li> <span className="adminspan2">Взносы: {item.vznos}</span>  </li>
     </ul>
   });
 

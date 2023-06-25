@@ -2,7 +2,7 @@
 export  const fetchPOO = async ({setb}) =>{
   try{
     setb([]);
-    const response = await fetch("http://secondsin-001-site1.dtempurl.com/UserPage/tablePOO/", {
+    const response = await fetch("http://localhost:80/UserPage/tablePOO/", {
      method: "get",
     "content-type" : "application/json; charset=utf-8"
     });
@@ -19,7 +19,7 @@ export  const fetchPOO = async ({setb}) =>{
 export const fetchPause = async ({setb})=>{
   try{
     setb([]);
-    const response = await fetch("http://secondsin-001-site1.dtempurl.com/UserPage/tablePause/", {
+    const response = await fetch("http://localhost:80/UserPage/tablePause/", {
       method: "get",
     });
     let q = await response.json();
@@ -34,7 +34,7 @@ export const fetchPause = async ({setb})=>{
 export const fetchNO = async ({setb})=>{
   try{
     setb([])
-    const response = await fetch("http://secondsin-001-site1.dtempurl.com/UserPage/tableNO/", {
+    const response = await fetch("http://localhost:80/UserPage/tableNO/", {
     method: "get",
     });
     let q = await response.json();
@@ -48,7 +48,7 @@ export const fetchNO = async ({setb})=>{
 
 export const fetchOne = async (itemid, {setInfoCard})=>{
   try{
-    const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/GetOne?id=${itemid}`, {
+    const response = await fetch(`http://localhost:80/UserPage/GetOne?id=${itemid}`, {
       method: "get",
     });
     let q = await response.json();
@@ -63,7 +63,7 @@ export const fetchOne = async (itemid, {setInfoCard})=>{
 //fetch OPTIONS
 export const fetchOptions = async ({setOptions})=>{
   try{
-     const response = await fetch("http://secondsin-001-site1.dtempurl.com/UserPage/GetOptions", {
+     const response = await fetch("http://localhost:80/UserPage/GetOptions", {
       method: "get",
     });
     let q = await response.json();
@@ -84,18 +84,6 @@ export const fetchCurrentVznosi = async({setFoundUsers, setInputDate, inputDate}
     const q = await response.json();
     setFoundUsers(q.users);
     setInputDate({...inputDate, VznosMonth: q.period.month, VznosYear: q.period.year});
-    
-    // for (let key in q){
-  
-    //   if(key == 'users'){
-    //     for (let ked of q['users']){
-    //       users.push( ked)
-    //       continue
-    //       }
-    //       console.log(users)
-    //   }
-    // }
-    
   }
   catch(err){
     console.log(err)
@@ -132,13 +120,13 @@ export const fetchPOOWord = async () =>{
   }
  }
 export const fetchPausedWord = async () =>{
-  await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedWord/',{
+  await fetch('http://localhost:80/api/Otchet/GetPausedWord/',{
     method: 'get'
   });
 
  }
 export const fetchNOWord = async () =>{
-  await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetKickedWord/',{
+  await fetch('http://localhost:80/api/Otchet/GetKickedWord/',{
     method: 'get'
   });
  }

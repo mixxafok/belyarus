@@ -8,7 +8,7 @@ export  function LogPassUserSystemEdit({infoRegUser, options}) {
     id: infoRegUser.id,
     Surname: infoRegUser.surname,
     Name: infoRegUser.name,
-    Parent: infoRegUser.parent,
+    Patronymic: infoRegUser.parent,
     Login: infoRegUser.login,
     Rule: infoRegUser.roleId,
     Password: infoRegUser.password,
@@ -78,8 +78,8 @@ export  function LogPassUserSystemEdit({infoRegUser, options}) {
           <input 
             className='LogPassUser_input'
             type='text'
-            value={formInput.Parent}
-            onChange={e=>setFormInput({...formInput, Parent: e.target.value})}
+            value={formInput.Patronymic}
+            onChange={e=>setFormInput({...formInput, Patronymic: e.target.value})}
           />
           <label>Логин</label>
           <input 

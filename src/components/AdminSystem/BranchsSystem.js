@@ -7,7 +7,7 @@ import Arrow from '../../icons/arrow.png'
 import Plus from '../../icons/more.png'
 import Save from '../../icons/save.png'
 
-export  function BranchsSystem({respublic}) {
+export  function BranchsSystem() {
   const [openOtdel, setOpenOtdel] = useState(false);
   const [openRaion, setOpenRaion] = useState(false);
   const [openOblast, setOpenOblast] = useState(false);
@@ -40,6 +40,8 @@ export  function BranchsSystem({respublic}) {
     nazva: ''
   }]);
 
+  const startNode = JSON.parse(localStorage.getItem('LoginPassword'))
+
   function openCloseYzel (open) {
     if(open == 'world'){
       setOpenRespublic(false)
@@ -53,7 +55,7 @@ export  function BranchsSystem({respublic}) {
       setOpenOblast(false)
       setOpenRaion(false)
       setOpenOtdel(false)
-      fetchYzel(respublic.id, false)
+      fetchYzel(startNode.oblId, false)
       setLabelYzelOblast('')
     }
     if(open == 'oblasti'){
@@ -79,7 +81,7 @@ export  function BranchsSystem({respublic}) {
   }
 
   //открытие выпадающего списка
-console.log(InputYzel)
+console.log(InputEditYzel)
   const oblast = yzels.map((item) => { {
     return <li key={item.id} >
            <span onClick={()=>{openCloseYzel('oblasti'); fetchRaionYzel(item.id, item.isEndNode); 
@@ -321,6 +323,7 @@ console.log(InputYzel)
    if(openRespublic) fetchYzel(InputYzel.parentId)
    if(openOblast) fetchRaionYzel(InputYzel.parentId)
    if(openRaion) fetchOtdelYzel(InputYzel.parentId)
+   
   // setInputYzel({...InputEditYzel, title: ''})
    console.log(InputEditYzel)
   }
@@ -345,13 +348,13 @@ console.log(InputYzel)
                 <img src={Arrow} alt='←' width='14px' style={{display: 'inline', marginRight: '1%'}}/>
               </span>
               :
-              <span onClick={()=>{ openCloseYzel('respublic'); setLabelYzel('Республика Беларусь');
-              ar.push({Id: 3002, nazva: 'Республика Беларусь'}); setInputYzel({...InputYzel, parentId: (ar[ar.length-1].Id)}) }}>
+              <span onClick={()=>{ openCloseYzel('respublic'); setLabelYzel(startNode.obl);
+              ar.push({Id: startNode.oblId, nazva: startNode.obl}); setInputYzel({...InputYzel, parentId: (ar[ar.length-1].Id)}) }}>
                 <img src={Plus} alt='+' width='14px' style={{display: 'inline', marginRight: '1%'}}/>
               </span>
             }
             
-          <span className='branchs__span__cursor_default'> Республика Беларусь</span> 
+          <span className='branchs__span__cursor_default'> {startNode.obl}</span> 
           <span className='branchs__span__cursor_default'> {LabelYzelOblast}</span> 
           <span className='branchs__span__cursor_default'> {LabelYzelRaion}</span> 
           <span className='branchs__span__cursor_default'> {LabelYzelOtdel}</span> 
