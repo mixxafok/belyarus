@@ -136,14 +136,13 @@
 
 .admindiv_2__edits span {
   cursor: pointer;
-  transition: 200ms;
+  transition: 300ms;
 }
 
 .admindiv_2__edits span:hover {
-  transition: 200ms;
+  transition: 300ms;
   color:rgb(218, 173, 83);
   font-size: 15px;
-  
 }
 .adminspan1 {
 color: rgb(218, 173, 83);

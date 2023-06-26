@@ -65,7 +65,7 @@ export  function SpisokUsersSystem({col, setInfoRegUser}) {
     // setUsers(Users.filter(item => item.id != itemid));
     if(window.confirm('Вы точно хотите удалить этого пользователя?')){
       try{
-      const responce = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/DeleteRegUser?id=${itemid}`, {
+      const responce = await fetch(`http://partiyabase.by:5000/UserPage/DeleteRegUser?id=${itemid}`, {
       method: "get"
       });
       if(seletedLi1) fetchGetAdminsSystem();
@@ -84,7 +84,7 @@ export  function SpisokUsersSystem({col, setInfoRegUser}) {
 const fetchGetAdminsSystem = async () =>{
   setUsers([]);
   try{
-    const responce = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/GetSystemAdmins/', {
+    const responce = await fetch('http://partiyabase.by:5000/UserPage/GetSystemAdmins/', {
     method: "get"
     });
     const q = await responce.json()
@@ -98,7 +98,7 @@ const fetchGetAdminsSystem = async () =>{
 const fetchGetAdminsYzels = async () =>{
   setUsers([]);
   try{
-    const responce = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/GetNodeAdmins/', {
+    const responce = await fetch('http://partiyabase.by:5000/UserPage/GetNodeAdmins/', {
     method: "get"
     });
     const q = await responce.json()
@@ -112,7 +112,7 @@ const fetchGetAdminsYzels = async () =>{
 const fetchGetOperators = async () =>{
   setUsers([]);
   try{
-    const responce = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/GetOperators/', {
+    const responce = await fetch('http://partiyabase.by:5000/UserPage/GetOperators/', {
     method: "get"
     });
     const q = await responce.json()
@@ -126,7 +126,7 @@ const fetchGetOperators = async () =>{
 const fetchGetInfoUsers = async () =>{
   setUsers([]);
   try{
-    const responce = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/GetInfoUsers/', {
+    const responce = await fetch('http://partiyabase.by:5000/UserPage/GetInfoUsers/', {
     method: "get"
     });
     const q = await responce.json()

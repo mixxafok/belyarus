@@ -97,7 +97,7 @@ console.log(InputEditYzel)
               <input className='input_openIditYzel' type='text' placeholder={item.title}
              onChange={e=>setInputEditYzel ({...InputEditYzel, id: item.id, title: e.target.value})}/>
             </span>    ) : null}
-            <span onClick={()=>{RemoveYzel(item.title, item.isEndNode, item.id )}}> 
+            <span onClick={()=>{RemoveYzel( item.isEndNode, item.id )}}> 
               <img src={Close} alt='X' width='9px' style={{display: 'inline', marginLeft: '2%'}}/>
             </span>
           </li>
@@ -119,7 +119,7 @@ console.log(InputEditYzel)
               <input className='input_openIditYzel' type='text' placeholder={item.title}
              onChange={e=>setInputEditYzel ({...InputEditYzel, id: item.id, title: e.target.value})}/>
             </span>    ) : null}
-            <span onClick={()=>{RemoveYzel(item.title, item.isEndNode, item.id )}}> 
+            <span onClick={()=>{RemoveYzel( item.isEndNode, item.id )}}> 
               <img src={Close} alt='X' width='9px' style={{display: 'inline', marginLeft: '2%'}}/>
             </span>
           </li>
@@ -141,7 +141,7 @@ console.log(InputEditYzel)
               <input className='input_openIditYzel' type='text' placeholder={item.title}
              onChange={e=>setInputEditYzel ({...InputEditYzel, id: item.id, title: e.target.value})}/>
             </span>    ) : null}
-            <span onClick={()=>{RemoveYzel(item.title, item.isEndNode, item.id )}}> 
+            <span onClick={()=>{RemoveYzel( item.isEndNode, item.id )}}> 
               <img src={Close} alt='X' width='9px' style={{display: 'inline', marginLeft: '2%'}}/>
             </span>
           </li>
@@ -163,7 +163,7 @@ console.log(InputEditYzel)
               <input className='input_openIditYzel' type='text' placeholder={item.title}
              onChange={e=>setInputEditYzel ({...InputEditYzel, id: item.id, title: e.target.value})}/>
             </span>    ) : null}
-            <span onClick={()=>{RemoveYzel(item.title, item.isEndNode, item.id )}}> 
+            <span onClick={()=>{RemoveYzel( item.isEndNode, item.id )}}> 
               <img src={Close} alt='X' width='9px' style={{display: 'inline', marginLeft: '2%'}}/>
             </span>
           </li>
@@ -174,7 +174,7 @@ console.log(InputEditYzel)
   const fetchYzel = async (itemid, itemisEndNode)=>{
     if(!itemisEndNode){
       try{
-     const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/getChildrens?id=${itemid}`, {
+     const response = await fetch(`http://partiyabase.by:5000/UserPage/getChildrens?id=${itemid}`, {
        method: "get",
       "content-type" : "application/json; charset=utf-8"
      });
@@ -196,7 +196,7 @@ console.log(InputEditYzel)
   const fetchRaionYzel = async (itemid, itemisEndNode)=>{
     if(!itemisEndNode){
       try{
-     const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/getChildrens?id=${itemid}`, {
+     const response = await fetch(`http://partiyabase.by:5000/UserPage/getChildrens?id=${itemid}`, {
        method: "get",
       "content-type" : "application/json; charset=utf-8"
      });
@@ -218,7 +218,7 @@ console.log(InputEditYzel)
   const fetchOtdelYzel = async (itemid, itemisEndNode)=>{
     if(!itemisEndNode){
       try{
-     const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/getChildrens?id=${itemid}`, {
+     const response = await fetch(`http://partiyabase.by:5000/UserPage/getChildrens?id=${itemid}`, {
        method: "get",
       "content-type" : "application/json; charset=utf-8"
      });
@@ -240,7 +240,7 @@ console.log(InputEditYzel)
   const fetchThenOtdelYzel = async (itemid, itemisEndNode)=>{
     if(!itemisEndNode){
       try{
-     const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/getChildrens?id=${itemid}`, {
+     const response = await fetch(`http://partiyabase.by:5000/UserPage/getChildrens?id=${itemid}`, {
        method: "get",
       "content-type" : "application/json; charset=utf-8"
      });
@@ -264,8 +264,8 @@ console.log(InputEditYzel)
       if( window.confirm('Вы точно хотите удалить этот узел?')){
       // setYzels(yzels.filter(tem => tem.title != titleYzel));
        try{
-        await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/DeleteNode?id=${itemid}`, {
-        method: 'post',
+        await fetch(`http://partiyabase.by:5000/UserPage/DeleteNode?id=${itemid}`, {
+        method: 'get',
         headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json;charset=utf-8',  
@@ -289,7 +289,7 @@ console.log(InputEditYzel)
   const fetchAddYzel = async ()=>{
   
       try{
-      await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/addEndNode/`, {
+      await fetch(`http://partiyabase.by:5000/UserPage/addEndNode/`, {
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -312,7 +312,7 @@ console.log(InputEditYzel)
   const fetchEditYzel = async ()=>{
     
     try{
-    await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/ChangeNode/`, {
+    await fetch(`http://partiyabase.by:5000/UserPage/ChangeNode/`, {
     method: 'post',
     headers: {
       'Accept': 'application/json',

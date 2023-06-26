@@ -369,7 +369,10 @@ export function AdminNodePage(){
    </tr>
  });
 
-let chec = true;
+ const [f, setf] = useState({
+  id: 0,
+  Is: false
+})
 
  let tableBranch = foundUsers.sort((a,b)=>a.surname.localeCompare(b.surname)).map(function(item,index) {
   return <tr key={item.id}>
@@ -377,7 +380,8 @@ let chec = true;
      <td className="table__surname"><p onClick={()=>{ fetchOne(item.id, {setInfoCard}); setPersoncardEdit(!personcardEdit)}} className="table_span__surname">{item.surname}</p></td>
      <td>{item.name}</td>
        <td>{item.parent}</td>
-       <td><input type="checkbox" name="name1" /*checked={chec}  onChange={this.toggleChange} */ /></td>
+       <td><input type="checkbox" name="UserId" onClick={()=>{setf({...f, id: item.id, Is: !item.isPaid})}}
+        checked={item.isPaid} onChange={e=>item.isPaid =  e.target.checked} /></td>
   </tr>
 });
 //вывод таблиц
@@ -399,7 +403,7 @@ const getInputSearch = () =>{
 
 const fetchPostCurrentVznosi = async() =>{
   try{
-     const response = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/GetContributions/',{
+     const response = await fetch('http://partiyabase.by:5000/UserPage/GetContributions/',{
     method: "post",
     headers: {
       'Accept': 'application/json',
@@ -418,6 +422,28 @@ const fetchPostCurrentVznosi = async() =>{
  }
 }
 
+const fetchPostSaveVznosi = async() =>{
+  let d = foundUsers.filter(item => {if(item.isPaid == true)return item})
+ console.log(d)
+  try{
+     const response = await fetch('http://partiyabase.by:5000/UserPage/AddContributions/',{
+    method: "post",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json;charset=utf-8',  
+    },
+    body: JSON.stringify(d)
+  });
+  const q = await response.json();
+ // setFoundUsers(q.users);
+//  setInputDate({...inputDate, VznosMonth: q.period.month, VznosYear: q.period.year});
+  console.log(q)
+  }
+ catch(err){
+  console.log(err);
+  alert('Данные не сохранились')
+ }
+}
 
   return (
     <div className="adminNode_page">
@@ -487,10 +513,10 @@ const fetchPostCurrentVznosi = async() =>{
         <p onClick={()=>fetchNOExcel()}>Отчет в Excel</p>
       </div>
 
-      {!tablehideBranch ? <p className="span_YzelVznos">{labelYzelVznos.nazva}{labelYzelVznos.nodeId}</p> : null}
+      {!tablehideBranch ? <p className="span_YzelVznos">{labelYzelVznos.nazva}</p> : null}
       <div className={`OtchetBranch ${(tablehideBranch ) ? 'hide' : ''}`}>
-      <span style={{marginRight: '1%', marginTop: '3px', cursor:'pointer'}} onClick={()=>{ setFoundUsers(b); fetchPostCurrentVznosi();}}><img src={Repeat} alt='☺' width='20px'/></span>
-          <div className="adminnode__Button" onClick={()=> {alert('add feunction')}}>
+      <span style={{marginRight: '1%', marginTop: '3px', cursor:'pointer'}} onClick={()=>{fetchPostCurrentVznosi();}}><img src={Repeat} alt='☺' width='20px'/></span>
+          <div className="adminnode__Button" onClick={()=> {fetchPostSaveVznosi()}}>
             <button >Сохранить</button>
           </div>
           <div className="otchetbranch_input__search_icon" onClick={()=>{getInputSearch()}}><img src={Search} alt='о'/></div>
@@ -518,8 +544,27 @@ const fetchPostCurrentVznosi = async() =>{
             </select>
             <select className='year' value={inputDate.VznosYear} onChange={(e) => setInputDate({ ...inputDate, VznosYear: e.target.value })}>
               <option value='' disabled selected>год</option> 
-             <option value={2023}>2023</option>
+              <option value={2023}>2023</option>
              <option value={2024}>2024</option>
+             <option value={2025}>2025</option>
+             <option value={2026}>2026</option>
+             <option value={2027}>2027</option>
+             <option value={2028}>2028</option>
+             <option value={2029}>2029</option>
+             <option value={2030}>2030</option>
+             <option value={2031}>2031</option>
+             <option value={2032}>2032</option>
+             <option value={2033}>2033</option>
+             <option value={2034}>2034</option>
+             <option value={2035}>2035</option>
+             <option value={2036}>2036</option>
+             <option value={2037}>2037</option>
+             <option value={2038}>2038</option>
+             <option value={2039}>2039</option>
+             <option value={2040}>2040</option>
+             <option value={2041}>2041</option>
+             <option value={2042}>2042</option>
+             <option value={2043}>2043</option>
             </select>
           </div>
           <div className="otchetbranch_word">
@@ -601,8 +646,8 @@ const fetchPostCurrentVznosi = async() =>{
      { (col_6) ? <EditCardNode infoCard={infoCard} options={options} /> : null}
      { (col_8) ? <Branchs /> : null}
      { (col_9) ? <SpisokUsersNode col={col} infoRegUser={infoRegUser} setInfoRegUser={setInfoRegUser}/> : null}
-     { (col_10) ? <LogPassUserNode /> : null}
-     { (col_11) ? <LogPassUserNodeEdit  infoRegUser={infoRegUser} setInfoRegUser={setInfoRegUser}/> : null}
+     { (col_10) ? <LogPassUserNode options={options}/> : null}
+     { (col_11) ? <LogPassUserNodeEdit options={options} infoRegUser={infoRegUser} setInfoRegUser={setInfoRegUser}/> : null}
      { (openBranchVznos && selectYzelVznos) ? <BranchsSystemVznos col={col} 
      labelYzelVznos={labelYzelVznos} setLabelYzelVznos={setLabelYzelVznos}/> : null}
      </div>

@@ -2,23 +2,34 @@ import React, {useState} from 'react'
 import '../../styles/LogPassUser.css'
 import { BranchsSystemLog } from '../AdminSystem/BranchsSystemLog'
 
-export  function LogPassUserNodeEdit({infoRegUser}) {
+export  function LogPassUserNodeEdit({infoRegUser, options}) {
   const [hidden, setHidden] = useState(true)
   const [formInput, setFormInput] = useState({
     id: infoRegUser.id,
-    Surname: infoRegUser.surname,
-    Name: infoRegUser.name,
-    patronymic: infoRegUser.patronymic,
-    Login: infoRegUser.login,
-    Rule: infoRegUser.roleId,
-    Password: infoRegUser.password,
+    surname: infoRegUser.surname,
+    name: infoRegUser.name,
+    patronymic: infoRegUser.parent,
+    login: infoRegUser.login,
+    roleId: infoRegUser.roleId,
+    password: infoRegUser.password,
     RepeatPassword: infoRegUser.password,
-  //  NodeId: '',
+    nodeId: infoRegUser.nodeId,
     Yzel: infoRegUser.node
   })
 
+  const role = [];
+  for (let key in options){
+
+    if(key == 'roles'){
+      for (let ked of options['roles']){
+        role.push( ked)
+        continue
+        }
+    }
+  }
+console.log(role)
   const fetchLogPassUser = async () =>{
-    const response = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/UpdateRegUser/',{
+    const response = await fetch('http://partiyabase.by:5000/UserPage/UpdateRegUser/',{
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -26,12 +37,12 @@ export  function LogPassUserNodeEdit({infoRegUser}) {
       },
       body: JSON.stringify(formInput)
     });
-    const q = await response.json();
-    await console.log(q);
+   // const q = await response.json();
+   // await console.log(q);
   }
 
   function handleForm (){
-    if(formInput.Password === formInput.RepeatPassword){
+    if(formInput.password === formInput.RepeatPassword){
       console.log(formInput);
       fetchLogPassUser();
       alert('Пользователь успешно зарегистрирован')
@@ -53,15 +64,15 @@ export  function LogPassUserNodeEdit({infoRegUser}) {
           <input required='required'
             className='LogPassUser_input'
             type='text'
-            value={formInput.Surname}
-            onChange={e=>setFormInput({...formInput, Surname: e.target.value})}
+            value={formInput.surname}
+            onChange={e=>setFormInput({...formInput, surname: e.target.value})}
           />
           <label>Имя</label>
           <input 
             className='LogPassUser_input'
             type='text'
-            value={formInput.Name}
-            onChange={e=>setFormInput({...formInput, Name: e.target.value})}
+            value={formInput.name}
+            onChange={e=>setFormInput({...formInput, name: e.target.value})}
           />
           <label>Отчество</label>
           <input 
@@ -74,13 +85,15 @@ export  function LogPassUserNodeEdit({infoRegUser}) {
           <input 
             className='LogPassUser_input'
             type='text'
-            value={formInput.Login}
-            onChange={e=>setFormInput({...formInput, Login: e.target.value})}
+            value={formInput.login}
+            onChange={e=>setFormInput({...formInput, login: e.target.value})}
           />
           <label>Роль в системе</label>
-          <select  value={formInput.Rule} onChange={e=>setFormInput({...formInput, Rule: e.target.value})} className='LogPassUser_select' >
-            <option selected value={1} >Информационный пользователь</option>
-            <option value={2}>Оператор</option>
+          <select  value={formInput.roleId} onChange={e=>setFormInput({...formInput, roleId: e.target.value})} className='LogPassUser_select' >
+          <option  ></option> 
+            {/* {role.map((item)=>{ return <option value={item.id}>{item.val}</option>})} */}
+            <option value={role[2].id}>{role[2].val}</option>
+            <option value={role[3].id}>{role[3].val}</option>
           </select>
           <label>Подконтрольный узел</label>
           <input disabled
@@ -92,8 +105,8 @@ export  function LogPassUserNodeEdit({infoRegUser}) {
           <input 
             className='LogPassUser_input'
             type={hidden ? 'password' : 'text'}
-            value={formInput.Password}
-            onChange={e=>setFormInput({...formInput, Password: e.target.value})}
+            value={formInput.password}
+            onChange={e=>setFormInput({...formInput, password: e.target.value})}
           />
           <label>Повторите пароль</label>
           <input 

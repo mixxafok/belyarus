@@ -73,7 +73,7 @@ export  function BranchsSystemLog({formInput, setFormInput}) {
     return <li key={item.id} >
            <span onClick={()=>{openCloseYzel('oblasti'); fetchRaionYzel(item.id, item.isEndNode); 
             setLabelYzel(item.title); setLabelYzelOblast(' - ' + item.title); ar.push({ Id: item.id, nazva: item.title});
-            setFormInput({...formInput, nodeId: (ar[ar.length-1].Id), Yzel: (ar[ar.length-1].nazva)})}}>
+            }}>
             {item.title}
             </span> 
           </li>
@@ -84,7 +84,7 @@ export  function BranchsSystemLog({formInput, setFormInput}) {
     return <li key={item.id} >
            <span onClick={()=> {openCloseYzel('raion'); fetchOtdelYzel(item.id, item.isEndNode);
             setLabelYzel(item.title); setLabelYzelRaion(' - ' + item.title); ar.push({ Id: item.id, nazva: item.title});
-            setFormInput({...formInput, nodeId: (ar[ar.length-1].Id), Yzel: (ar[ar.length-1].nazva)}) }}>
+             }}>
             {item.title}
             </span> 
           </li>
@@ -95,7 +95,7 @@ export  function BranchsSystemLog({formInput, setFormInput}) {
     return <li key={item.id} >
            <span onClick={()=> {openCloseYzel('otdel'); fetchThenOtdelYzel(item.id, item.isEndNode);
             setLabelYzel(item.title); setLabelYzelOtdel(' - ' + item.title); ar.push({ Id: item.id, nazva: item.title});
-            setFormInput({...formInput, nodeId: (ar[ar.length-1].Id), Yzel: (ar[ar.length-1].nazva)}) }}>
+             }}>
             {item.title}
             </span> 
           </li>
@@ -106,7 +106,7 @@ export  function BranchsSystemLog({formInput, setFormInput}) {
     return <li key={item.id} >
            <span onClick={()=> {openCloseYzel('otdel'); fetchThenOtdelYzel(item.id, item.isEndNode);
             setLabelYzel(item.title); setLabelYzelOtdel(' - ' + item.title); ar.push({ Id: item.id, nazva: item.title});
-            setFormInput({...formInput, nodeId: (ar[ar.length-1].Id), Yzel: (ar[ar.length-1].nazva)}) }}>
+             }}>
             {item.title}
             </span> 
           </li>
@@ -116,7 +116,7 @@ export  function BranchsSystemLog({formInput, setFormInput}) {
   const fetchYzel = async (itemid, itemisEndNode)=>{
     if(!itemisEndNode){
       try{
-     const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/getChildrens?id=${itemid}`, {
+     const response = await fetch(`http://partiyabase.by:5000/UserPage/getChildrens?id=${itemid}`, {
        method: "get",
       "content-type" : "application/json; charset=utf-8"
      });
@@ -138,7 +138,7 @@ export  function BranchsSystemLog({formInput, setFormInput}) {
   const fetchRaionYzel = async (itemid, itemisEndNode)=>{
     if(!itemisEndNode){
       try{
-     const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/getChildrens?id=${itemid}`, {
+     const response = await fetch(`http://partiyabase.by:5000/UserPage/getChildrens?id=${itemid}`, {
        method: "get",
       "content-type" : "application/json; charset=utf-8"
      });
@@ -160,7 +160,7 @@ export  function BranchsSystemLog({formInput, setFormInput}) {
   const fetchOtdelYzel = async (itemid, itemisEndNode)=>{
     if(!itemisEndNode){
       try{
-     const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/getChildrens?id=${itemid}`, {
+     const response = await fetch(`http://partiyabase.by:5000/UserPage/getChildrens?id=${itemid}`, {
        method: "get",
       "content-type" : "application/json; charset=utf-8"
      });
@@ -182,7 +182,7 @@ export  function BranchsSystemLog({formInput, setFormInput}) {
   const fetchThenOtdelYzel = async (itemid, itemisEndNode)=>{
     if(!itemisEndNode){
       try{
-     const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/getChildrens?id=${itemid}`, {
+     const response = await fetch(`http://partiyabase.by:5000/UserPage/getChildrens?id=${itemid}`, {
        method: "get",
       "content-type" : "application/json; charset=utf-8"
      });
@@ -207,17 +207,16 @@ export  function BranchsSystemLog({formInput, setFormInput}) {
         <div>
             {(openRespublic || openOblast || openRaion || openOtdel) ? 
               <span onClick={()=>{
-                if(openOtdel){openCloseYzel('raion'); ar.pop(); setFormInput({...formInput, nodeId: (ar[ar.length-1].Id), Yzel: (ar[ar.length-1].nazva)}) }
-                else if(openRaion){openCloseYzel('oblasti'); ar.pop(); setFormInput({...formInput, nodeId: (ar[ar.length-1].Id), Yzel: (ar[ar.length-1].nazva)}) }
-                else if (openOblast){openCloseYzel('respublic'); ar.pop();setFormInput({...formInput, nodeId: (ar[ar.length-1].Id), Yzel: (ar[ar.length-1].nazva)})}
-                else {openCloseYzel('world'); ar.pop();setFormInput({...formInput, nodeId: (ar[ar.length-1].Id), Yzel: (ar[ar.length-1].nazva)})}
+                if(openOtdel){openCloseYzel('raion'); ar.pop(); }
+                else if(openRaion){openCloseYzel('oblasti'); ar.pop();  }
+                else if (openOblast){openCloseYzel('respublic'); ar.pop();}
+                else {openCloseYzel('world'); ar.pop();}
                 }}>
                 <img src={Arrow} alt='←' width='14px' style={{display: 'inline', marginRight: '1%'}}/>
               </span>
               :
               <span onClick={()=>{ openCloseYzel('respublic'); setLabelYzel(startNode.obl);
-              ar.push({Id: startNode.oblId, nazva: startNode.obl});
-              setFormInput({...formInput, nodeId: (ar[ar.length-1].Id), Yzel: (ar[ar.length-1].nazva)}) }}>
+              ar.push({Id: startNode.oblId, nazva: startNode.obl});}}>
                 <img src={Plus} alt='+' width='14px' style={{display: 'inline', marginRight: '1%'}}/>
               </span>
             }
@@ -234,6 +233,17 @@ export  function BranchsSystemLog({formInput, setFormInput}) {
           <span className= {openOtdel ? 'Placemargin1' : 'PlacemarginHide'}>{thenOtdel}</span>
         </div>
       </div>
+      <div className='branchs_input'>
+          <label >Выбран узел &lt;&lt; <span style={{color: 'brown'}}>{ar[ar.length-1].nazva}</span>  &gt;&gt; </label>
+          {/* <input className='input_addYzel'
+            type='search'
+            value={InputYzel.nazva}
+            onChange={e=>setInputYzel({...InputYzel, nazva: e.target.value})}
+          /> */}
+          <button className='BranchsAdd_button' onClick={()=>{setFormInput({...formInput, nodeId: (ar[ar.length-1].Id), Yzel: (ar[ar.length-1].nazva)})}}>
+              Выбрать
+          </button>
+        </div>
       
     </div>
   )

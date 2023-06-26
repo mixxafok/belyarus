@@ -4,8 +4,8 @@ import Ava from '../../img/ava.png';
 
 export function EditCard ({infoCard, options}){
 
-  let data =new Date( infoCard[0].dateStart) //перевод даты из дд.мм.гггг 
-  let date_Start = `${data.getFullYear()}-${('0' + data.getMonth()).slice(-2)}-${('0' + data.getDate()).slice(-2)}`//в гггг-мм-дд для input[date]
+//  let data =new Date( infoCard[0].dateStart) //перевод даты из дд.мм.гггг 
+//  let date_Start = `${data.getFullYear()}-${('0' + data.getMonth()).slice(-2)}-${('0' + data.getDate()).slice(-2)}`//в гггг-мм-дд для input[date]
 
   let data1 =new Date( infoCard[0].dateBirth) //перевод даты из дд.мм.гггг 
   let date_Birth= `${data1.getFullYear()}-${('0' + data1.getMonth()).slice(-2)}-${('0' + data1.getDate()).slice(-2)}`//в гггг-мм-дд для input[date]
@@ -23,7 +23,7 @@ export function EditCard ({infoCard, options}){
       Name: infoCard[0].name,
       Parent: infoCard[0].parent,
       NumBilet: infoCard[0].numBilet,
-      DateStart: `${date_Start}`,
+    //  DateStart: `${date_Start}`,
      // DateFinish: ``,
       DateIssue: `${date_Issue}`,
       StatusBilet: infoCard[0].statusBiletId,
@@ -51,7 +51,7 @@ export function EditCard ({infoCard, options}){
 const fetchEditCard = async ()=>{
   console.log(formInput);
   try{
-    const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/changeUser?id=${infoCard[0].id}`, {
+    const response = await fetch(`http://partiyabase.by:5000/UserPage/changeUser?id=${infoCard[0].id}`, {
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -142,10 +142,10 @@ for (let key in options){
           </div>
 
         <container className="Img_Fio">
-          <div className='reg__form_input_img'>
+          {/* <div className='reg__form_input_img'>
             <img src={Ava} alt='no' width='23.3mm' height='31mm' className='reg__img'></img>
             <input type="file" name="file" className='file'/>
-          </div>
+          </div> */}
 
 
           <container className="Img_Fio_SexBirthday">

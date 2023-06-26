@@ -4,6 +4,10 @@ import Ava from '../img/ava.png';
 
 
 export function Registration ({options}){
+  const [selectedFile, setSelectedFile] = useState(null); //выбранная картика
+  const [selectedFileload, setSelectedFileload] = useState(null); // выбранная картинка для отправки
+ // const [uploaded, setUploaded] = useState([]); // ответ от fetch
+  let formData = new FormData();
 
   //обработка options
   const educ = [];
@@ -101,7 +105,7 @@ const handleForm = () =>{
    && formInput.NumBilet !== '' && formInput.StatusBilet !== '' && formInput.Sex !== ''
    && formInput.DateBirth !== '' && formInput.DateIssue !== '' && formInput.PlaceIssue !== ''
    && formInput.StatusMember !== '' && formInput.Education !== '' && formInput.SocialGroup !== ''
-   && formInput.SphereActivity !== '' && formInput.StatusPart !== '' && formInput.Deputat !== '' )
+   && formInput.SphereActivity !== '' && formInput.StatusPart !== '' && formInput.Deputat !== '' && selectedFileload )
    {
     handleUpload(); 
     console.log(formInput)
@@ -110,7 +114,7 @@ const handleForm = () =>{
        Name: '',
        Parent: '',
        NumBilet: 0,
-       dateIssue: '',
+       DateIssue: '',
        StatusBilet: '',
        StatusMember: '',
        Sex: '',
@@ -129,8 +133,6 @@ const handleForm = () =>{
        Place: '' ,
        file: null
      });
-     
-     
    } 
   else {
     alert('Не все поля заполнены')
@@ -160,10 +162,7 @@ const handleForm = () =>{
 // };//запрос fetch POST
 
 
-  const [selectedFile, setSelectedFile] = useState(null); //выбранная картика
-  const [selectedFileload, setSelectedFileload] = useState(null); // выбранная картинка для отправки
- // const [uploaded, setUploaded] = useState([]); // ответ от fetch
-  let formData = new FormData();
+
 
   const handleChange = (event) => {
     console.log(event.target.files);
@@ -172,10 +171,7 @@ const handleForm = () =>{
   }
 
  const handleUpload = async () =>{
-    if(!selectedFile){ 
-      alert('Выберите фотографию');
-      return;
-    }; 
+
     formData.append('file', selectedFileload);
     formData.append('Name', formInput.Name);
     formData.append('Surname', formInput.Surname);
@@ -198,7 +194,7 @@ const handleForm = () =>{
     formData.append('PostJob', formInput.PostJob);
     formData.append('NumBilet', formInput.NumBilet);
 
-   const res = await fetch('http://localhost:80/UserPage/addCard/',{
+   const res = await fetch('http://partiyabase.by:5000/UserPage/addCard/',{
     method: "post",
     body: formData,
    })

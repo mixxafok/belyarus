@@ -78,7 +78,7 @@ export function FindFilter({b,tablefindfilter, options, col, infoCard,setInfoCar
 // post для поиска
     const fetchPost = async () => {
       try{
-        const responce = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/Search/', {
+        const responce = await fetch('http://partiyabase.by:5000/UserPage/Search/', {
           method: 'post',
           headers: {
             'Accept': 'application/json',
@@ -104,7 +104,7 @@ export function FindFilter({b,tablefindfilter, options, col, infoCard,setInfoCar
        <td>{user.name}</td>
        <td>{user.parent}</td>
        <td>{user.numBilet}</td>
-       <td>{user.dateStart}</td>
+       <td>{user.dateIssue}</td>
        <td>{user.place}</td>
     </tr>
     ))

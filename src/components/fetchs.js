@@ -2,7 +2,7 @@
 export  const fetchPOO = async ({setb}) =>{
   try{
     setb([]);
-    const response = await fetch("http://localhost:80/UserPage/tablePOO/", {
+    const response = await fetch("http://partiyabase.by:5000/UserPage/tablePOO/", {
      method: "get",
     "content-type" : "application/json; charset=utf-8"
     });
@@ -19,7 +19,7 @@ export  const fetchPOO = async ({setb}) =>{
 export const fetchPause = async ({setb})=>{
   try{
     setb([]);
-    const response = await fetch("http://localhost:80/UserPage/tablePause/", {
+    const response = await fetch("http://partiyabase.by:5000/UserPage/tablePause/", {
       method: "get",
     });
     let q = await response.json();
@@ -34,7 +34,7 @@ export const fetchPause = async ({setb})=>{
 export const fetchNO = async ({setb})=>{
   try{
     setb([])
-    const response = await fetch("http://localhost:80/UserPage/tableNO/", {
+    const response = await fetch("http://partiyabase.by:5000/UserPage/tableNO/", {
     method: "get",
     });
     let q = await response.json();
@@ -48,7 +48,7 @@ export const fetchNO = async ({setb})=>{
 
 export const fetchOne = async (itemid, {setInfoCard})=>{
   try{
-    const response = await fetch(`http://localhost:80/UserPage/GetOne?id=${itemid}`, {
+    const response = await fetch(`http://partiyabase.by:5000/UserPage/GetOne?id=${itemid}`, {
       method: "get",
     });
     let q = await response.json();
@@ -63,7 +63,7 @@ export const fetchOne = async (itemid, {setInfoCard})=>{
 //fetch OPTIONS
 export const fetchOptions = async ({setOptions})=>{
   try{
-     const response = await fetch("http://localhost:80/UserPage/GetOptions", {
+     const response = await fetch("http://partiyabase.by:5000/UserPage/GetOptions", {
       method: "get",
     });
     let q = await response.json();
@@ -78,7 +78,7 @@ export const fetchOptions = async ({setOptions})=>{
  // fetch VZNOSI 
 export const fetchCurrentVznosi = async({setFoundUsers, setInputDate, inputDate}) => {
   try {
-    const response = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/GetCurrentContributions/', {
+    const response = await fetch('http://partiyabase.by:5000/UserPage/GetCurrentContributions/', {
     method: "get"
   });
     const q = await response.json();
@@ -96,7 +96,7 @@ export const fetchCurrentVznosi = async({setFoundUsers, setInputDate, inputDate}
 //fetch OTCHETS
 export const fetchSparvka = async () =>{
   try{
-    const response = await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetHelp/', {
+    const response = await fetch('http://partiyabase.by:5000/api/Otchet/GetHelp/', {
     method: 'get'
   });
     let q = response.json()
@@ -120,29 +120,29 @@ export const fetchPOOWord = async () =>{
   }
  }
 export const fetchPausedWord = async () =>{
-  await fetch('http://localhost:80/api/Otchet/GetPausedWord/',{
+  await fetch('http://partiyabase.by:5000/api/Otchet/GetPausedWord/',{
     method: 'get'
   });
 
  }
 export const fetchNOWord = async () =>{
-  await fetch('http://localhost:80/api/Otchet/GetKickedWord/',{
+  await fetch('http://partiyabase.by:5000/api/Otchet/GetKickedWord/',{
     method: 'get'
   });
  }
 
 export const fetchPausedExcel = async () =>{
-  await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedExel/',{
+  await fetch('http://partiyabase.by:5000/api/Otchet/GetPausedExel/',{
     method: 'get'
   });
  }
  export const fetchPOOExcel = async () =>{
-  await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedExel/',{
+  await fetch('http://partiyabase.by:5000/api/Otchet/GetPausedExel/',{
     method: 'get'
   });
  }
  export const fetchNOExcel = async () =>{
-  await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetKickedExel/',{
+  await fetch('http://partiyabase.by:5000/api/Otchet/GetKickedExel/',{
     method: 'get'
   });
  }

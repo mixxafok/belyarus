@@ -28,7 +28,7 @@ export  function LogPassUserSystem({options}) {
   }
 
   const fetchLogPassUser = async () =>{
-    const response = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/RegUser/',{
+    const response = await fetch('http://partiyabase.by:5000/UserPage/RegUser/',{
       method: 'post',
       headers: {
         'Accept': 'application/json',
