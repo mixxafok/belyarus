@@ -50,7 +50,7 @@ export function EditCardSystem ({infoCard, options}){
 const fetchEditCard = async ()=>{
   console.log(formInput);
   try{
-    const response = await fetch(`http://partiyabase.by:5000/UserPage/changeUser?id=${infoCard[0].id}`, {
+    const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/changeUser?id=${infoCard[0].id}`, {
       method: 'post',
       headers: {
         'Accept': 'application/json',

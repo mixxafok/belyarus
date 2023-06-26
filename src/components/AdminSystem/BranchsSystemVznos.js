@@ -122,7 +122,7 @@ export  function BranchsSystemVznos({col, labelYzelVznos, setLabelYzelVznos}) {
   const fetchYzel = async (itemid, itemisEndNode)=>{
     if(!itemisEndNode){
       try{
-     const response = await fetch(`http://partiyabase.by:5000/UserPage/getChildrens?id=${itemid}`, {
+     const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/getChildrens?id=${itemid}`, {
        method: "get",
       "content-type" : "application/json; charset=utf-8"
      });
@@ -144,7 +144,7 @@ export  function BranchsSystemVznos({col, labelYzelVznos, setLabelYzelVznos}) {
   const fetchRaionYzel = async (itemid, itemisEndNode)=>{
     if(!itemisEndNode){
       try{
-     const response = await fetch(`http://partiyabase.by:5000/UserPage/getChildrens?id=${itemid}`, {
+     const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/getChildrens?id=${itemid}`, {
        method: "get",
       "content-type" : "application/json; charset=utf-8"
      });
@@ -166,7 +166,7 @@ export  function BranchsSystemVznos({col, labelYzelVznos, setLabelYzelVznos}) {
   const fetchOtdelYzel = async (itemid, itemisEndNode)=>{
     if(!itemisEndNode){
       try{
-     const response = await fetch(`http://partiyabase.by:5000/UserPage/getChildrens?id=${itemid}`, {
+     const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/getChildrens?id=${itemid}`, {
        method: "get",
       "content-type" : "application/json; charset=utf-8"
      });
@@ -188,7 +188,7 @@ export  function BranchsSystemVznos({col, labelYzelVznos, setLabelYzelVznos}) {
   const fetchThenOtdelYzel = async (itemid, itemisEndNode)=>{
     if(!itemisEndNode){
       try{
-     const response = await fetch(`http://partiyabase.by:5000/UserPage/getChildrens?id=${itemid}`, {
+     const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/getChildrens?id=${itemid}`, {
        method: "get",
       "content-type" : "application/json; charset=utf-8"
      });

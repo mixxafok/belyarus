@@ -174,7 +174,7 @@ console.log(InputYzel)
   const fetchYzel = async (itemid, itemisEndNode)=>{
     if(!itemisEndNode){
       try{
-     const response = await fetch(`http://partiyabase.by:5000/UserPage/getChildrens?id=${itemid}`, {
+     const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/getChildrens?id=${itemid}`, {
        method: "get",
       "content-type" : "application/json; charset=utf-8"
      });
@@ -196,7 +196,7 @@ console.log(InputYzel)
   const fetchRaionYzel = async (itemid, itemisEndNode)=>{
     if(!itemisEndNode){
       try{
-     const response = await fetch(`http://partiyabase.by:5000/UserPage/getChildrens?id=${itemid}`, {
+     const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/getChildrens?id=${itemid}`, {
        method: "get",
       "content-type" : "application/json; charset=utf-8"
      });
@@ -218,7 +218,7 @@ console.log(InputYzel)
   const fetchOtdelYzel = async (itemid, itemisEndNode)=>{
     if(!itemisEndNode){
       try{
-     const response = await fetch(`http://partiyabase.by:5000/UserPage/getChildrens?id=${itemid}`, {
+     const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/getChildrens?id=${itemid}`, {
        method: "get",
       "content-type" : "application/json; charset=utf-8"
      });
@@ -240,7 +240,7 @@ console.log(InputYzel)
   const fetchThenOtdelYzel = async (itemid, itemisEndNode)=>{
     if(!itemisEndNode){
       try{
-     const response = await fetch(`http://partiyabase.by:5000/UserPage/getChildrens?id=${itemid}`, {
+     const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/getChildrens?id=${itemid}`, {
        method: "get",
       "content-type" : "application/json; charset=utf-8"
      });
@@ -264,7 +264,7 @@ console.log(InputYzel)
       if( window.confirm('Вы точно хотите удалить этот узел?')){
       // setYzels(yzels.filter(tem => tem.title != titleYzel));
        try{
-        await fetch(`http://partiyabase.by:5000/UserPage/DeleteNode?id=${itemid}`, {
+        await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/DeleteNode?id=${itemid}`, {
         method: 'get',
         headers: {
         'Accept': 'application/json',
@@ -289,7 +289,7 @@ console.log(InputYzel)
   const fetchAddYzel = async ()=>{
   
       try{
-      await fetch(`http://partiyabase.by:5000/UserPage/addEndNode/`, {
+      await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/addEndNode/`, {
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -312,7 +312,7 @@ console.log(InputYzel)
   const fetchEditYzel = async ()=>{
     
     try{
-    await fetch(`http://partiyabase.by:5000/UserPage/ChangeNode/`, {
+    await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/ChangeNode/`, {
     method: 'post',
     headers: {
       'Accept': 'application/json',

@@ -27,7 +27,7 @@ export  function Login({LoginPassword,setLoginPassword}) {
   const fetchLoginPassword = async () => {
 
     try{
-      const responce = await fetch('http://178.172.250.98:5000/UserPage/Login/', {
+      const responce = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/Login/', {
         method: 'post',
         headers: {
           'Accept': 'application/json',

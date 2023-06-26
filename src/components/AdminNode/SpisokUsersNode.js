@@ -43,7 +43,7 @@ export  function SpisokUsersNode({col, setInfoRegUser}) {
 
     if(window.confirm('Вы точно хотите удалить этого пользователя?')){
       try{
-      const responce = await fetch(`http://partiyabase.by:5000/UserPage/DeleteRegUser?id=${itemid}`, {
+      const responce = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/DeleteRegUser?id=${itemid}`, {
       method: "get"
       });
       if(seletedLi3) fetchGetOperators();
@@ -61,7 +61,7 @@ export  function SpisokUsersNode({col, setInfoRegUser}) {
 const fetchGetOperators = async () =>{
   setUsers([]);
   try{
-    const responce = await fetch('http://partiyabase.by:5000/UserPage/GetOperators/', {
+    const responce = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/GetOperators/', {
     method: "get"
     });
     const q = await responce.json()
@@ -75,7 +75,7 @@ const fetchGetOperators = async () =>{
 const fetchGetInfoUsers = async () =>{
   setUsers([]);
   try{
-    const responce = await fetch('http://partiyabase.by:5000/UserPage/GetInfoUsers/', {
+    const responce = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/GetInfoUsers/', {
     method: "get"
     });
     const q = await responce.json()

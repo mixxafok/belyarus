@@ -29,7 +29,7 @@ export  function LogPassUserNodeEdit({infoRegUser, options}) {
   }
 console.log(role)
   const fetchLogPassUser = async () =>{
-    const response = await fetch('http://partiyabase.by:5000/UserPage/UpdateRegUser/',{
+    const response = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/UpdateRegUser/',{
       method: 'post',
       headers: {
         'Accept': 'application/json',

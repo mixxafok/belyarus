@@ -78,7 +78,7 @@ export function FindFilterEdit({b,tablefindfilter, options, col, infoCard,setInf
 // post для поиска
     const fetchPost = async () => {
       try{
-        const responce = await fetch('http://partiyabase.by:5000/UserPage/Search/', {
+        const responce = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/Search/', {
           method: 'post',
           headers: {
             'Accept': 'application/json',

@@ -403,7 +403,7 @@ const getInputSearch = () =>{
 
 const fetchPostCurrentVznosi = async() =>{
   try{
-     const response = await fetch('http://partiyabase.by:5000/UserPage/GetContributions/',{
+     const response = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/GetContributions/',{
     method: "post",
     headers: {
       'Accept': 'application/json',
@@ -426,7 +426,7 @@ const fetchPostSaveVznosi = async() =>{
   let d = foundUsers.filter(item => {if(item.isPaid == true)return item})
  console.log(d)
   try{
-     const response = await fetch('http://partiyabase.by:5000/UserPage/AddContributions/',{
+     const response = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/AddContributions/',{
     method: "post",
     headers: {
       'Accept': 'application/json',

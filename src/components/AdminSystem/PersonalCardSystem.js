@@ -37,7 +37,7 @@ export function PersonalCardSystem({setPersoncardEdit,col, infoCard } ){
 
   const fetchBilet = async (id) =>{
     try{
-      const responce = await fetch(`http://partiyabase.by:5000/api/Otchet/GetUserCard?id=${id}`,{
+      const responce = await fetch(`http://secondsin-001-site1.dtempurl.com/api/Otchet/GetUserCard?id=${id}`,{
       method: 'get'
     })
     alert('Файл успешно скачан')
@@ -50,7 +50,7 @@ export function PersonalCardSystem({setPersoncardEdit,col, infoCard } ){
   }
   const fetchPersonWord = async (id) =>{
     try{
-    const responce = await fetch(`http://partiyabase.by:5000/api/Otchet/GetPersonWord?id=${id}`,{
+    const responce = await fetch(`http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPersonWord?id=${id}`,{
       method: 'get'
     })
     await alert('Файл успешно скачан')
@@ -63,7 +63,7 @@ export function PersonalCardSystem({setPersoncardEdit,col, infoCard } ){
   }
   const fetchPersonExcel = async (id) =>{
     try{
-    const responce = await fetch(`http://partiyabase.by:5000/api/Otchet/GetPersonExel?id=${id}`,{
+    const responce = await fetch(`http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPersonExel?id=${id}`,{
       method: 'get'
     })
    await alert('Файл успешно скачан')

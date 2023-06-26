@@ -194,7 +194,7 @@ const handleForm = () =>{
     formData.append('PostJob', formInput.PostJob);
     formData.append('NumBilet', formInput.NumBilet);
 
-   const res = await fetch('http://partiyabase.by:5000/UserPage/addCard/',{
+   const res = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/addCard/',{
     method: "post",
     body: formData,
    })
