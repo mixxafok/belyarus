@@ -208,9 +208,6 @@ const handleForm = () =>{
   return (
     <div className='registration'>
 
-          <div className="reg__Button" onClick={()=>{ handleForm();}}>
-            <button >Сохранить</button>
-          </div>
         <container className="Img_Fio">
           <div className='reg__form_input_img'>
             <img src={selectedFile} alt='' width='23.3mm' height='31mm' className='reg__img'></img>
@@ -416,6 +413,13 @@ const handleForm = () =>{
               className="reg__input"
               placeholder=""
             />
+          </div>
+
+<br/>
+<hr id='hr_reg_button'/>  
+       
+          <div className="reg__Button" onClick={()=>{ handleForm();}}>
+            <button >Сохранить</button>
           </div>
       </div>
       

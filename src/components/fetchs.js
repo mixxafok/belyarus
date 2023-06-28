@@ -109,7 +109,7 @@ export const fetchSparvka = async () =>{
  }
 export const fetchPOOWord = async () =>{
   try{
-      await fetch('',{
+      await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetActiveWord',{
     method: 'get'
   });
   alert('Файл успешно скачан')

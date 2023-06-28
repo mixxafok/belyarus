@@ -19,7 +19,7 @@ import '../styles/Header.css';
 import '../styles/Table.css';
 import '../styles/PersonalCardSystem.css';
 import '../styles/mediaAdminSystem.css';
-import { fetchPOO, fetchPause, fetchNO, fetchSparvka, fetchOne, fetchOptions, fetchCurrentVznosi,
+import { fetchPOO, fetchPause, fetchNO, fetchSparvka, fetchOne, fetchOptions, 
 fetchPOOWord, fetchPausedWord, fetchNOWord, fetchPOOExcel,fetchPausedExcel, fetchNOExcel } from "../components/fetchs.js";
 
 
@@ -62,16 +62,16 @@ export function AdminSystemPage(){
     nodeId: 0,
     nazva: ''
   })
-  // useEffect(() => {
-  //   const loggedInUser = localStorage.getItem("LoginPassword");
-  //   console.log(loggedInUser)
-  //   if (loggedInUser) {
-  //     const foundUser = JSON.parse(loggedInUser);
-  //     seta(foundUser);
-  //     console.log(foundUser)
-  //   }
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("LoginPassword");
+    console.log(loggedInUser)
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      seta(foundUser);
+      console.log(foundUser)
+    }
     
-  // }, []);
+  }, []);
   
   
   //нажатие на меню
@@ -370,12 +370,13 @@ export function AdminSystemPage(){
     alert('Выберите другую дату. Данных за данный период нет')
    }
   }
-  const [r,setr] = useState({
-    "usersId": 52
-  })
+
+
   const fetchPostSaveVznosi = async() =>{
-    let d = foundUsers.filter(item => {if(item.isPaid == true)return item})
-   console.log(d)
+   // let d = foundUsers.filter(item => {if(item.isPaid == true)return item})
+   let isVznos=[]
+    let isNoVznos = foundUsers.map(item => {if(item.isPaid == true)return isVznos.push(item.memberId)})
+   console.log(b)
     try{
        const response = await fetch('http://secondsin-001-site1.dtempurl.com/UserPage/AddContributions/',{
       method: "post",
@@ -383,7 +384,7 @@ export function AdminSystemPage(){
         'Accept': 'application/json',
         'Content-Type': 'application/json;charset=utf-8',  
       },
-      body: JSON.stringify(d)
+      body: JSON.stringify(isVznos)
     });
     const q = await response.json();
    // setFoundUsers(q.users);
@@ -458,7 +459,7 @@ const [f, setf] = useState({
      <td className="table__surname"><p>{item.surname}</p></td>
      <td>{item.name}</td>
        <td>{item.patronymic}</td>
-       <td><input type="checkbox" name="UserId" onClick={()=>{setf({...f, id: item.id, Is: !item.isPaid})}}
+       <td><input type="checkbox" name="UserId" onClick={()=>{setf({...f, id: item.id, Is: !item.isPaid});}}
         checked={item.isPaid} onChange={e=>item.isPaid =  e.target.checked} /></td>
   </tr>
 });

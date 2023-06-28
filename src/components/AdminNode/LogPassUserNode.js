@@ -91,7 +91,6 @@ console.log(role)
             <option></option> 
             {/* {role.map((item)=>{ return <option value={item.id}>{item.val}</option>})} */}
             <option value={role[2].id}>{role[2].val}</option>
-            <option value={role[3].id}>{role[3].val}</option>
           </select>
           <label>Подконтрольный узел</label>
           <input disabled

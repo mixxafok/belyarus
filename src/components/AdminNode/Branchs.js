@@ -82,7 +82,7 @@ export  function Branchs() {
 
   //открытие выпадающего списка
 console.log(InputYzel)
-  const oblast = yzels.map((item) => { {
+  const oblast = yzels.sort((a,b)=>a.title.localeCompare(b.title)).map((item) => { {
     return <li key={item.id} >
            <span onClick={()=>{openCloseYzel('oblasti'); fetchRaionYzel(item.id, item.isEndNode); 
             setLabelYzel(item.title); setInputYzel({...InputYzel, parentId: item.id}); setLabelYzelOblast(' - ' + item.title);
@@ -104,7 +104,7 @@ console.log(InputYzel)
    }
   })
 
-  const raion = raionYzels.map((item) => { {
+  const raion = raionYzels.sort((a,b)=>a.title.localeCompare(b.title)).map((item) => { {
     return <li key={item.id} >
            <span onClick={()=> {openCloseYzel('raion'); fetchOtdelYzel(item.id, item.isEndNode);
             setLabelYzel(item.title); setInputYzel({...InputYzel, parentId: item.id}); setLabelYzelRaion(' - ' + item.title);
@@ -126,7 +126,7 @@ console.log(InputYzel)
    }
   })
 
-  const otdel = otdelYzels.map((item) => { {
+  const otdel = otdelYzels.sort((a,b)=>a.title.localeCompare(b.title)).map((item) => { {
     return <li key={item.id} >
            <span onClick={()=> {openCloseYzel('otdel'); fetchThenOtdelYzel(item.id, item.isEndNode);
             setLabelYzel(item.title); setInputYzel({...InputYzel, parentId: item.id}); setLabelYzelOtdel(' - ' + item.title);
@@ -148,7 +148,7 @@ console.log(InputYzel)
    }
   })
 
-  const thenOtdel = thenOtdelYzels.map((item) => { {
+  const thenOtdel = thenOtdelYzels.sort((a,b)=>a.title.localeCompare(b.title)).map((item) => { {
     return <li key={item.id} >
            <span onClick={()=> {openCloseYzel('otdel'); fetchThenOtdelYzel(item.id, item.isEndNode);
             setLabelYzel(item.title); setInputYzel({...InputYzel, parentId: item.id}); setLabelYzelOtdel(' - ' + item.title);
@@ -175,7 +175,7 @@ console.log(InputYzel)
     if(!itemisEndNode){
       try{
      const response = await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/getChildrens?id=${itemid}`, {
-       method: "get",
+       method: "post",
       "content-type" : "application/json; charset=utf-8"
      });
      let q = await response.json();

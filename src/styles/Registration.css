@@ -407,12 +407,13 @@ label {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 } */
 
-
+#hr_reg_button{
+  width: 20%;
+}
 .reg__Button{
-  background-color:rgba(218, 173, 83, 0.746);
+  background-color:rgb(238, 187, 78);
   width: 15%;
   border-radius: 8px;
-  margin: auto;
   margin-top: 2%;
   text-align: center;
   transition: 50ms;

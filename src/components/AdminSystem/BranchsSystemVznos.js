@@ -70,7 +70,7 @@ export  function BranchsSystemVznos({col, labelYzelVznos, setLabelYzelVznos}) {
 
   //открытие выпадающего списка
 
-  const oblast = yzels.map((item) => { {
+  const oblast = yzels.sort((a,b)=>a.title.localeCompare(b.title)).map((item) => { {
     return <li key={item.id} >
            <span onClick={()=>{openCloseYzel('oblasti'); fetchRaionYzel(item.id, item.isEndNode); 
             setLabelYzelVznos({...labelYzelVznos, nodeId: item.id, nazva: item.title}); 
@@ -82,7 +82,7 @@ export  function BranchsSystemVznos({col, labelYzelVznos, setLabelYzelVznos}) {
    }
   })
 
-  const raion = raionYzels.map((item) => { {
+  const raion = raionYzels.sort((a,b)=>a.title.localeCompare(b.title)).map((item) => { {
     return <li key={item.id} >
            <span onClick={()=> {openCloseYzel('raion'); fetchOtdelYzel(item.id, item.isEndNode);
             setLabelYzelVznos({...labelYzelVznos, nodeId: item.id, nazva: item.title}); 
@@ -94,7 +94,7 @@ export  function BranchsSystemVznos({col, labelYzelVznos, setLabelYzelVznos}) {
    }
   })
 
-  const otdel = otdelYzels.map((item) => { {
+  const otdel = otdelYzels.sort((a,b)=>a.title.localeCompare(b.title)).map((item) => { {
     return <li key={item.id} >
            <span onClick={()=> {openCloseYzel('otdel'); fetchThenOtdelYzel(item.id, item.isEndNode);
             setLabelYzelVznos({...labelYzelVznos, nodeId: item.id, nazva: item.title});
@@ -106,7 +106,7 @@ export  function BranchsSystemVznos({col, labelYzelVznos, setLabelYzelVznos}) {
    }
   })
 
-  const thenOtdel = thenOtdelYzels.map((item) => { {
+  const thenOtdel = thenOtdelYzels.sort((a,b)=>a.title.localeCompare(b.title)).map((item) => { {
     return <li key={item.id} >
            <span onClick={()=> {openCloseYzel('otdel'); fetchThenOtdelYzel(item.id, item.isEndNode);
             setLabelYzelVznos({...labelYzelVznos, nodeId: item.id, nazva: item.title}); 

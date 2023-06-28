@@ -5,7 +5,7 @@ import Arrow from '../../icons/arrow.png'
 import Plus from '../../icons/more.png'
 
 
-export  function BranchsSystemLog({formInput, setFormInput}) {
+export  function BranchsSystemLog({formInput, setFormInput, infUser}) {
   const [openOtdel, setOpenOtdel] = useState(false);
   const [openRaion, setOpenRaion] = useState(false);
   const [openOblast, setOpenOblast] = useState(false);
@@ -18,6 +18,7 @@ export  function BranchsSystemLog({formInput, setFormInput}) {
   const [LabelYzelOblast,setLabelYzelOblast] = useState('') ;
   const [LabelYzelRaion,setLabelYzelRaion] = useState('');
   const [LabelYzelOtdel,setLabelYzelOtdel] = useState('');
+
   //console.log(respublic[0].id)
 
   const [ar,setAr] = useState([{
@@ -69,7 +70,7 @@ export  function BranchsSystemLog({formInput, setFormInput}) {
 
   //открытие выпадающего списка
 
-  const oblast = yzels.map((item) => { {
+  const oblast = yzels.sort((a,b)=>a.title.localeCompare(b.title)).map((item) => { {
     return <li key={item.id} >
            <span onClick={()=>{openCloseYzel('oblasti'); fetchRaionYzel(item.id, item.isEndNode); 
             setLabelYzel(item.title); setLabelYzelOblast(' - ' + item.title); ar.push({ Id: item.id, nazva: item.title});
@@ -80,7 +81,7 @@ export  function BranchsSystemLog({formInput, setFormInput}) {
    }
   })
 
-  const raion = raionYzels.map((item) => { {
+  const raion = raionYzels.sort((a,b)=>a.title.localeCompare(b.title)).map((item) => { {
     return <li key={item.id} >
            <span onClick={()=> {openCloseYzel('raion'); fetchOtdelYzel(item.id, item.isEndNode);
             setLabelYzel(item.title); setLabelYzelRaion(' - ' + item.title); ar.push({ Id: item.id, nazva: item.title});
@@ -91,7 +92,7 @@ export  function BranchsSystemLog({formInput, setFormInput}) {
    }
   })
 
-  const otdel = otdelYzels.map((item) => { {
+  const otdel = otdelYzels.sort((a,b)=>a.title.localeCompare(b.title)).map((item) => { {
     return <li key={item.id} >
            <span onClick={()=> {openCloseYzel('otdel'); fetchThenOtdelYzel(item.id, item.isEndNode);
             setLabelYzel(item.title); setLabelYzelOtdel(' - ' + item.title); ar.push({ Id: item.id, nazva: item.title});
@@ -102,7 +103,7 @@ export  function BranchsSystemLog({formInput, setFormInput}) {
    }
   })
 
-  const thenOtdel = thenOtdelYzels.map((item) => { {
+  const thenOtdel = thenOtdelYzels.sort((a,b)=>a.title.localeCompare(b.title)).map((item) => { {
     return <li key={item.id} >
            <span onClick={()=> {openCloseYzel('otdel'); fetchThenOtdelYzel(item.id, item.isEndNode);
             setLabelYzel(item.title); setLabelYzelOtdel(' - ' + item.title); ar.push({ Id: item.id, nazva: item.title});

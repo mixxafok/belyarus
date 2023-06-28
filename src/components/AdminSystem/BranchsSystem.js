@@ -82,7 +82,7 @@ export  function BranchsSystem() {
 
   //открытие выпадающего списка
 console.log(InputEditYzel)
-  const oblast = yzels.map((item) => { {
+  const oblast = yzels.sort((a,b)=>a.title.localeCompare(b.title)).map((item) => { {
     return <li key={item.id} >
            <span onClick={()=>{openCloseYzel('oblasti'); fetchRaionYzel(item.id, item.isEndNode); 
             setLabelYzel(item.title); setInputYzel({...InputYzel, parentId: item.id}); setLabelYzelOblast(' - ' + item.title);
@@ -104,7 +104,7 @@ console.log(InputEditYzel)
    }
   })
 
-  const raion = raionYzels.map((item) => { {
+  const raion = raionYzels.sort((a,b)=>a.title.localeCompare(b.title)).map((item) => { {
     return <li key={item.id} >
            <span onClick={()=> {openCloseYzel('raion'); fetchOtdelYzel(item.id, item.isEndNode);
             setLabelYzel(item.title); setInputYzel({...InputYzel, parentId: item.id}); setLabelYzelRaion(' - ' + item.title);
@@ -126,7 +126,7 @@ console.log(InputEditYzel)
    }
   })
 
-  const otdel = otdelYzels.map((item) => { {
+  const otdel = otdelYzels.sort((a,b)=>a.title.localeCompare(b.title)).map((item) => { {
     return <li key={item.id} >
            <span onClick={()=> {openCloseYzel('otdel'); fetchThenOtdelYzel(item.id, item.isEndNode);
             setLabelYzel(item.title); setInputYzel({...InputYzel, parentId: item.id}); setLabelYzelOtdel(' - ' + item.title);
@@ -148,7 +148,7 @@ console.log(InputEditYzel)
    }
   })
 
-  const thenOtdel = thenOtdelYzels.map((item) => { {
+  const thenOtdel = thenOtdelYzels.sort((a,b)=>a.title.localeCompare(b.title)).map((item) => { {
     return <li key={item.id} >
            <span onClick={()=> {openCloseYzel('otdel'); fetchThenOtdelYzel(item.id, item.isEndNode);
             setLabelYzel(item.title); setInputYzel({...InputYzel, parentId: item.id}); setLabelYzelOtdel(' - ' + item.title);
@@ -265,7 +265,7 @@ console.log(InputEditYzel)
       // setYzels(yzels.filter(tem => tem.title != titleYzel));
        try{
         await fetch(`http://secondsin-001-site1.dtempurl.com/UserPage/DeleteNode?id=${itemid}`, {
-        method: 'get',
+        method: 'post',
         headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json;charset=utf-8',  

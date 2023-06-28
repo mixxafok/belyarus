@@ -21,6 +21,13 @@
 
 }
 
+#LogPassUser__div2__span_isInfUser{
+  font-family: Montserrat-SemiBold;
+  font-size: 0.9rem;
+  padding-left: 3%;
+  padding-right: 3%;
+}
+
 .LogPassUser_container{
   display: flex;
   flex-direction: row;

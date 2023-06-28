@@ -4,6 +4,7 @@ import { BranchsSystemLog } from './BranchsSystemLog'
 
 export  function LogPassUserSystem({options}) {
   const [hidden, setHidden] = useState(true)
+  const [infUser, setInfUser] = useState(false)
   const [formInput, setFormInput] = useState({
     surname: '',
     name: '',
@@ -25,6 +26,13 @@ export  function LogPassUserSystem({options}) {
         continue
         }
     }
+  }
+
+  function isInfUser(roleid){
+    role.map(item=>{if(item.id == roleid && item.val == 'Информационный пользователь'){
+      setInfUser(true) 
+    }
+  else {setInfUser(false)}})
   }
 
   const fetchLogPassUser = async () =>{
@@ -87,7 +95,7 @@ console.log(role)
             onChange={e=>setFormInput({...formInput, login: e.target.value})}
           />
           <label>Роль в системе</label>
-          <select  value={formInput.roleId} onChange={e=>setFormInput({...formInput, roleId: e.target.value})} className='LogPassUser_select' >
+          <select  value={formInput.roleId} onChange={e=>{setFormInput({...formInput, roleId: e.target.value});isInfUser(e.target.value)}} className='LogPassUser_select' >
             <option  ></option> 
             {role.map((item)=>{ return <option value={item.id}>{item.val}</option>})}
           </select>
@@ -121,7 +129,8 @@ console.log(role)
           </div>
 
           <div className='LogPassUser__div2'>
-          <BranchsSystemLog formInput={formInput} setFormInput={setFormInput}/>
+          {infUser ? <p id='LogPassUser__div2__span_isInfUser'>Информационному пользователю нельзя назначть подконтрольный узел</p>
+           : <BranchsSystemLog formInput={formInput} setFormInput={setFormInput} />}
         </div>
       </container>
     </div>

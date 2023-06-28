@@ -8,11 +8,11 @@ export function EditCardSystem ({infoCard, options}){
 //  let date_Start = `${data.getFullYear()}-${('0' + data.getMonth()).slice(-2)}-${('0' + data.getDate()).slice(-2)}`//в гггг-мм-дд для input[date]
 
   let data1 =new Date( infoCard[0].dateBirth) //перевод даты из дд.мм.гггг 
-  let date_Birth= `${data1.getFullYear()}-${('0' + data1.getMonth()).slice(-2)}-${('0' + data1.getDate()).slice(-2)}`//в гггг-мм-дд для input[date]
+  let date_Birth= `${data1.getFullYear()}-${('0' + (data1.getMonth() + 1)).slice(-2)}-${('0' + data1.getDate()).slice(-2)}`//в гггг-мм-дд для input[date]
   
   let data2 =new Date( infoCard[0].dateIssue) //перевод даты из дд.мм.гггг 
-  let date_Issue= `${data2.getFullYear()}-${('0' + data2.getMonth()).slice(-2)}-${('0' + data2.getDate()).slice(-2)}`//в гггг-мм-дд для input[date]
-
+  let date_Issue= `${data2.getFullYear()}-${('0' + (data2.getMonth() + 1)).slice(-2)}-${('0' + data2.getDate()).slice(-2)}`//в гггг-мм-дд для input[date]
+  console.log(date_Issue, date_Birth)
     const [formInput, setFormInput] = useState({
       // Login: '',
       // Password: '',
@@ -135,15 +135,13 @@ for (let key in options){
   return (
     <div className='registration'>
      
-          <div className="reg__Button" onClick={()=>fetchEditCard()}>
-            <button >Сохранить</button>
-          </div>
+          
 
         <container className="Img_Fio">
-          {/* <div className='reg__form_input_img'>
+          <div className='reg__form_input_img'>
             <img src={Ava} alt='no' width='23.3mm' height='31mm' className='reg__img'></img>
-            <input type="file" name="file" className='file'/>
-          </div> */}
+            {/* <input type="file" name="file" className='file'/> */}
+          </div>
 
 
           <container className="Img_Fio_SexBirthday">
@@ -400,6 +398,13 @@ for (let key in options){
               className="reg__input"
               placeholder=""
             />
+          </div>
+
+<br/>
+<hr id='hr_reg_button'/>
+
+          <div className="reg__Button" onClick={()=>fetchEditCard()}>
+            <button >Сохранить</button>
           </div>
       </div>
     
