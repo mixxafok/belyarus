@@ -130,6 +130,11 @@ export const fetchNOWord = async () =>{
     method: 'get'
   });
  }
+ export const fetchSearchWord = async () =>{
+  await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetSearchWord/',{
+    method: 'get'
+  });
+ }
 
 export const fetchPausedExcel = async () =>{
   await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetPausedExel/',{
@@ -146,5 +151,12 @@ export const fetchPausedExcel = async () =>{
     method: 'get'
   });
  }
+
+//  export const fetchSearchExcel = async () =>{
+//   await fetch('http://secondsin-001-site1.dtempurl.com/api/Otchet/GetSearchExcel/',{
+//     method: 'get'
+//   });
+//  }
+
 
 

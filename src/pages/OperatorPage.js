@@ -14,7 +14,7 @@ import '../styles/Header.css';
 import '../styles/Table.css';
 import '../styles/PersonalCardSystem.css';
 import '../styles/mediaOper.css';
-import { fetchPOO, fetchPause, fetchNO, fetchOptions, fetchSparvka, fetchOne,
+import { fetchPOO, fetchPause, fetchNO, fetchOptions, fetchSparvka, fetchOne,  
   fetchPOOWord, fetchPausedWord, fetchNOWord, fetchPOOExcel,fetchPausedExcel, fetchNOExcel } from "../components/fetchs.js";
 
 export function OperatorPage(){ 

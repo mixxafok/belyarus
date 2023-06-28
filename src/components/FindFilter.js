@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import '../styles/Table.css';
 import '../styles/Findfilter.css';
 import {PersonalCard} from './PersonalCard.js';
-import { fetchOne } from "./fetchs";
+import { fetchOne, fetchSearchWord, fetchSearchExcel } from "./fetchs";
 
 export function FindFilter({b,tablefindfilter, options, col, infoCard,setInfoCard}){
 
@@ -354,8 +354,8 @@ export function FindFilter({b,tablefindfilter, options, col, infoCard,setInfoCar
 
     <div className="table">
     <div className={`OtchetFilter ${(tablefindfilter) ? 'hide' : ''}`}>
-          <p>Отчет в Word</p>
-          <p>Отчет в Excel</p>
+            <p onClick={()=>fetchSearchWord()}>Отчет в Word</p>
+            <p onClick={()=>fetchSearchExcel()}>Отчет в Excel</p>
         </div>
     <table className={`tablePOO `}> 
     <thead>

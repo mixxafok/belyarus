@@ -593,8 +593,8 @@ console.log(foundUsers)
             </select>
           </div>
           <div className="otchetbranch_word">
-            <p>Отчет в Word</p>
-            <p>Отчет в Excel</p>
+            <p onClick={()=>fetchSearchWord()}>Отчет в Word</p>
+            <p onClick={()=>fetchSearchExcel()}>Отчет в Excel</p>
           </div>
       </div>
 

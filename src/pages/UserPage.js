@@ -5,7 +5,7 @@ import {PersonalCard} from '../components/PersonalCard';
 import Icon from '../icons/partIcon.js';
 import question from '../icons/question.png';
 import Up from '../icons/up.png';
-import { fetchPOO, fetchPause, fetchNO, fetchOne, fetchOptions, fetchSparvka,
+import { fetchPOO, fetchPause, fetchNO, fetchOne, fetchOptions, fetchSparvka, 
   fetchPOOWord, fetchPausedWord, fetchNOWord, fetchPOOExcel,fetchPausedExcel, fetchNOExcel } from "../components/fetchs.js";
 import '../styles/UserPage.css';
 import '../styles/Header.css'; 

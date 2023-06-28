@@ -19,7 +19,7 @@ import '../styles/Header.css';
 import '../styles/Table.css';
 import '../styles/PersonalCardSystem.css';
 import '../styles/mediaAdminNode.css';
-import { fetchPOO, fetchPause, fetchNO, fetchSparvka, fetchOne, fetchOptions, fetchCurrentVznosi,
+import { fetchPOO, fetchPause, fetchNO, fetchSparvka, fetchOne, fetchOptions, fetchCurrentVznosi, 
   fetchPOOWord, fetchPausedWord, fetchNOWord, fetchPOOExcel,fetchPausedExcel, fetchNOExcel } from "../components/fetchs.js";
 
 
